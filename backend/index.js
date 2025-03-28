@@ -1,4 +1,24 @@
 const { chromium } = require("playwright");
+const mysql = require("mysql2/promise");
+
+let db;
+(async () => {
+  try {
+    db = await mysql.createPool({
+      host: "localhost",
+      user: "root",
+      password: "root",
+      database: "mydb",
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+    });
+    console.log("✅ Connected to MySQL database.");
+  } catch (error) {
+    console.error("❌ MySQL Connection Error:", error.message);
+    process.exit(1); // Exit the process if DB connection fails
+  }
+})();
 
 (async () => {
   try {
@@ -54,6 +74,17 @@ const { chromium } = require("playwright");
           services,
           extendedDescription,
         };
+
+        // Save to MySQL
+        try {
+          await db.execute(
+            "INSERT INTO partners (name, link, tagline, description, expertise, industries, services, extendedDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [name, link, tagline, description, expertise, industries, services, extendedDescription]
+          );
+          console.log("✅ Stored in DB:");
+        } catch (dbError) {
+          console.error("❌ Database Insert Error:", dbError.message);
+        }
 
         extractedDetails.push(partnerDetails);
 
