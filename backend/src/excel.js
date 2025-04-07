@@ -16,6 +16,7 @@ const exportToExcel = (data, fileName = "partners.xlsx") => {
   XLSX.writeFile(workbook, filePath);
 
   console.log(`✅ Excel file created at: ${filePath}`);
+  return filePath; // ✅ Return the path so it can be sent
 };
 
 module.exports = exportToExcel;

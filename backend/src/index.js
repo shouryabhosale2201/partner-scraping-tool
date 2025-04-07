@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const db = require("./db"); 
 const scrapeData = require("./scraper");
-const XLSX = require("xlsx");
+const exportToExcel = require("./excel");
 
 const app = express();
 const PORT = 5000;
@@ -37,20 +37,19 @@ app.get("/fetch", async (req, res) => {
 app.get("/downloadExcel", async (req, res) => {
   try {
     const [rows] = await db.execute("SELECT * FROM partners");
+
     if (!rows || rows.length === 0) {
       return res.status(404).json({ success: false, error: "No data available to export." });
     }
 
-    const worksheet = XLSX.utils.json_to_sheet(rows);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Partners");
+    const filePath = exportToExcel(rows); // Excel file path
 
-    const buffer = XLSX.write(workbook, { type: "buffer", bookType: "xlsx" });
-
-    res.setHeader("Content-Disposition", "attachment; filename=partners.xlsx");
-    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
-    res.send(buffer);
+    res.download(filePath, "partners.xlsx", (err) => {
+      if (err) {
+        console.error("❌ File Download Error:", err.message);
+        res.status(500).json({ success: false, error: "Failed to send Excel file." });
+      }
+    });
   } catch (error) {
     console.error("❌ Excel Export Error:", error.message);
     res.status(500).json({ success: false, error: "Failed to generate Excel file." });

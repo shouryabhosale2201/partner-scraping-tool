@@ -37,12 +37,11 @@ export default function ScraperApp() {
 
   const handleDownloadExcel = async () => {
     try {
-      const response = await fetch("http://localhost:5000/downloadExcel");
-      if (!response.ok) throw new Error("Failed to download file.");
+      const response = await axios.get("http://localhost:5000/downloadExcel", {
+        responseType: "blob",
+      });
 
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-
+      const url = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement("a");
       a.href = url;
       a.download = "partners.xlsx";
