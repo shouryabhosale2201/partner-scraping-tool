@@ -1,5 +1,5 @@
 const { chromium } = require("playwright");
-const db = require("./db");
+const db = require("../../../db");
 
 const scrapeData = async (url) => {
     if (!url) throw new Error("URL is required for scraping.");

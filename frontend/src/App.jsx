@@ -11,7 +11,7 @@ export default function ScraperApp() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post("http://localhost:5000/scrape", { url });
+      const response = await axios.post("http://localhost:5000/api/v1/salesforce/scrape", { url });
       if (response.data.success) setData(response.data.data);
       else throw new Error(response.data.error);
     } catch (err) {
@@ -24,7 +24,7 @@ export default function ScraperApp() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://localhost:5000/fetch");
+      const response = await axios.get("http://localhost:5000/api/v1/salesforce/fetch");
       if (response.data.success) setData(response.data.data);
 
       else throw new Error(response.data.error);
@@ -37,7 +37,7 @@ export default function ScraperApp() {
 
   const handleDownloadExcel = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/downloadExcel", {
+      const response = await axios.get("http://localhost:5000/api/v1/salesforce/downloadExcel", {
         responseType: "blob",
       });
 
