@@ -11,7 +11,7 @@ export default function ScraperApp() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/salesforce/scrape");
+      const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`);
       if (response.data.success) setData(response.data.data);
       else throw new Error(response.data.error);
     } catch (err) {
@@ -24,7 +24,7 @@ export default function ScraperApp() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/salesforce/fetch");
+      const response = await axios.get(`http://localhost:5000/api/v1/${url}/fetch`);
       if (response.data.success) setData(response.data.data);
 
       else throw new Error(response.data.error);
@@ -37,13 +37,13 @@ export default function ScraperApp() {
 
   const handleDownloadExcel = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/salesforce/downloadExcel", {
+      const response = await axios.get(`http://localhost:5000/api/v1/${url}/downloadExcel`, {
         responseType: "blob",
       });
-
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+  
+      const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement("a");
-      a.href = url;
+      a.href = downloadUrl;
       a.download = "partners.xlsx";
       document.body.appendChild(a);
       a.click();
@@ -53,18 +53,20 @@ export default function ScraperApp() {
     }
   };
 
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Web Scraper</h1>
-        <input
-          type="text"
-          placeholder="Enter URL"
+        <select
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
-        />
+        >
+          <option value="">Select a source</option>
+          <option value="salesforce">Salesforce</option>
+          <option value="oracle">Oracle</option>
+        </select>
+
         <div className="flex space-x-3 justify-center">
           <button
             onClick={handleScrape}
