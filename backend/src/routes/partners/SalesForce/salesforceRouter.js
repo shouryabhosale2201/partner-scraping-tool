@@ -5,9 +5,9 @@ const db = require("../../../db");
 const router = express.Router();
 
 // API to Scrape Data and Store in Database
-router.post("/scrape", async (req, res) => {
+router.get("/scrape", async (req, res) => {
     try {
-        console.log("🔄 Scraping fresh data...");
+        console.log("🔄 Scraping fresh data...", url);
         const data = await scrapeData();
         res.json({ success: true, data });
     } catch (error) {
@@ -19,7 +19,7 @@ router.post("/scrape", async (req, res) => {
 // API to Fetch Data from Database
 router.get("/fetch", async (req, res) => {
     try {
-        const [rows] = await db.execute("SELECT * FROM partners");
+        const [rows] = await db.execute("SELECT * FROM salesforce");
         res.json({ success: true, data: rows });
     } catch (error) {
         console.error("❌ Database Fetch Error:", error.message);
@@ -30,7 +30,7 @@ router.get("/fetch", async (req, res) => {
 // Download Excel
 router.get("/downloadExcel", async (req, res) => {
     try {
-        const [rows] = await db.execute("SELECT * FROM partners");
+        const [rows] = await db.execute("SELECT * FROM salesforce");
 
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });

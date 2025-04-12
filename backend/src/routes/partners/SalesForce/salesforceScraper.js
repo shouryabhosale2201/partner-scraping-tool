@@ -1,8 +1,9 @@
 const { chromium } = require("playwright");
 const db = require("../../../db");
 
-const scrapeData = async (url) => {
-    if (!url) throw new Error("URL is required for scraping.");
+const scrapeData = async () => {
+    // if (!url) throw new Error("URL is required for scraping.");
+    const url = "https://appexchange.salesforce.com/consulting";
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
@@ -28,7 +29,7 @@ const scrapeData = async (url) => {
 
     //CLEAR DATABASE BEFORE INSERTING NEW DATA
     try {
-        await db.execute("DELETE FROM partners");
+        await db.execute("DELETE FROM salesforce");
         console.log("Database cleared. Storing fresh data...");
     } catch (dbError) {
         console.error("Database Deletion Error:", dbError.message);
@@ -54,7 +55,7 @@ const scrapeData = async (url) => {
             // Save to MySQL
             try {
                 await db.execute(
-                    "INSERT INTO partners (name, link, tagline, description, expertise, industries, services, extendedDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO salesforce (name, link, tagline, description, expertise, industries, services, extendedDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                     [name, link, tagline, description, expertise, industries, services, extendedDescription]
                 );
                 console.log("✅ Stored in DB:", name);
