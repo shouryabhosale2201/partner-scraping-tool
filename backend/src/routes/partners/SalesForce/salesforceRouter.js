@@ -38,7 +38,7 @@ router.get("/downloadExcel", async (req, res) => {
 
         const filePath = exportToExcel(rows); // Excel file path
 
-        res.download(filePath, "partners.xlsx", (err) => {
+        res.download(filePath, "salesforce_partners.xlsx", (err) => {
             if (err) {
                 console.error("❌ File Download Error:", err.message);
                 res.status(500).json({ success: false, error: "Failed to send Excel file." });

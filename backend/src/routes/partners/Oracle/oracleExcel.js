@@ -2,7 +2,7 @@ const XLSX = require("xlsx");
 const fs = require("fs");
 const path = require("path");
 
-const exportToExcel = (data, fileName = "salesforce_partners.xlsx") => {
+const exportToExcel = (data, fileName = "oracle_partners.xlsx") => {
   if (!Array.isArray(data) || data.length === 0) {
     throw new Error("No data provided for Excel export.");
   }
