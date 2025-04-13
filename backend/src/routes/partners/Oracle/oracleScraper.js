@@ -9,24 +9,25 @@ const scrapeData = async () => {
 
     console.log(`Navigating to Oracle partners website`);
     await page.goto(url, { waitUntil: "domcontentloaded" });
-    
+
     // Wait for the partner list to load
     await page.waitForSelector("ul.o-partners--list li.o-partner", { timeout: 60000 });
-    
-    // Get all partner list items
-    const partnerItems = await page.locator("ul.o-partners--list li.o-partner div.o-partner--info").all();
-    
-    for (const partner of partnerItems) {
-      try {
-        // Only get the <a> inside the o-partner--info block
-        const link = await partner.locator("a:has(h6)").getAttribute("href");
-        // const name = await partner.locator("h6").first().innerText({ timeout: 5000 });
 
-        console.log(link);
-      } catch (error) {
-        console.error("❌ Failed to extract main link:", error);
-      }
-    }
+    const partnerItems = await page.locator("ul.o-partners--list li.o-partner").all();
+
+    const partnerData = await Promise.all(
+        partnerItems.map(async (partner) => {
+            try {
+                const infoBlock = partner.locator("div.o-partner--info");
+                const linkElement = infoBlock.locator("a:has(h6)");
+                const link = await linkElement.getAttribute("href");
+                return { link };
+            } catch (error) {
+                console.error("Failed to extract partner data : ", error);
+                return null;
+            }
+        })
+    );
 
     // //CLEAR DATABASE BEFORE INSERTING NEW DATA
     // try {
@@ -36,35 +37,71 @@ const scrapeData = async () => {
     //     console.error("Database Deletion Error:", dbError.message);
     // }
 
-    // let extractedDetails = [];
+    let extractedDetails = [];
 
-    // for (const { name, link } of partnerData.filter(Boolean)) {
-    //     try {
-    //         await page.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
+    for (const { link } of partnerData.filter(Boolean)) {
+        try {
+            await page.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
+            console.log("reached website");
 
-    //         await page.waitForSelector("", { timeout: 15000 });
+            const nameLocator = page.locator(".o-partner-businesscard--details h1");
+            await nameLocator.waitFor({ state: "visible", timeout: 100000 });
+            const name = (await nameLocator.textContent())?.trim();
+            // console.log("Extracted name:", name);
 
-    //         const partnerDetails = {};
+            // Oracle Expertise Description
+            const oracleExpertiseP = await page.locator("h4:text('Oracle Expertise') + p").textContent();
+            // console.log("oracle expertise p : ", oracleExpertiseP);
 
-    //         // Save to MySQL
-    //         try {
-    //             await db.execute(
-    //                 "INSERT INTO oracle () VALUES ()",
-    //                 []
-    //             );
-    //             console.log("✅ Stored in DB:", name);
-    //         } catch (dbError) {
-    //             console.error("❌ Database Insert Error:", dbError.message);
-    //         }
+            // Oracle Expertise Details (List Items)
+            const expertiseDetails = await page
+                .locator("h4:text('Oracle Expertise') + p + ul.bulleted-list li")
+                .allTextContents();
+            // console.log("oracle expertise : ", expertiseDetails);
 
-    //         extractedDetails.push(partnerDetails);
-    //     } catch (error) {
-    //         console.error(`Error extracting details for ${name}:`, error);
-    //     }
-    // }
+            // Company Overview
+            const companyOverviewLocator = page.locator("#PartnerSummary");
+            await companyOverviewLocator.waitFor({ state: "visible", timeout: 10000 });
+            const companyOverview = await companyOverviewLocator.innerText();
+            // console.log("company overview:", companyOverview);            
 
-    // await browser.close();
-    // return extractedDetails;
+            // Extract Solutions (Title + URL)
+            const solutions = await page.evaluate(() => {
+                return Array.from(document.querySelectorAll("ul.o-paragraph-list li a.o-link-heading"))
+                    .map(el => ({
+                        title: el.textContent.trim(),
+                        url: el.href
+                    }));
+            });
+
+            const partnerDetails = {
+                partner_name: name,
+                oracle_expertise_description: oracleExpertiseP?.trim() || "",
+                oracle_expertise_areas: expertiseDetails.join(", "), // join list for a single text column
+                company_overview: companyOverview,
+                solution_titles: solutions.map(s => s.title).join(", "), // flatten to comma-separated string
+                solution_links: solutions.map(s => s.url).join(", ") // same for URLs
+            };
+
+            console.log(partnerDetails);
+            extractedDetails.push(partnerDetails);
+
+            try {
+                await db.execute(
+                    `INSERT INTO oracle (name,oracle_expertise_description,oracle_expertise_areas, company_overview,solution_titles,solution_links) VALUES (?, ?, ?, ?, ?, ?)`,
+                    [name, oracleExpertiseP?.trim() || "", expertiseDetails.join(", "), companyOverview, solutions.map(s => s.title).join(", "), solutions.map(s => s.url).join(", ")]
+                );
+                console.log("Stored in DB : ", name);
+            } catch (dbError) {
+                console.error("Database Insert Error : ", dbError.message);
+            }
+        } catch (error) {
+            console.error(`Error extracting details for ${link}:`, error);
+        }
+    }
+
+    await browser.close();
+    return extractedDetails;
 };
 
 module.exports = scrapeData;

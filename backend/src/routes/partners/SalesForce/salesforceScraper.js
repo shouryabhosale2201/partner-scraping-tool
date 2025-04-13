@@ -2,7 +2,6 @@ const { chromium } = require("playwright");
 const db = require("../../../db");
 
 const scrapeData = async () => {
-    // if (!url) throw new Error("URL is required for scraping.");
     const url = "https://appexchange.salesforce.com/consulting";
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
@@ -27,13 +26,13 @@ const scrapeData = async () => {
         })
     );
 
-    //CLEAR DATABASE BEFORE INSERTING NEW DATA
-    try {
-        await db.execute("DELETE FROM salesforce");
-        console.log("Database cleared. Storing fresh data...");
-    } catch (dbError) {
-        console.error("Database Deletion Error:", dbError.message);
-    }
+    // //CLEAR DATABASE BEFORE INSERTING NEW DATA
+    // try {
+    //     await db.execute("DELETE FROM salesforce");
+    //     console.log("Database cleared. Storing fresh data...");
+    // } catch (dbError) {
+    //     console.error("Database Deletion Error:", dbError.message);
+    // }
 
     let extractedDetails = [];
 
