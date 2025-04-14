@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
 import OracleTable from "./components/OracleTable";
+import ShopifyTable from "./components/ShopifyTable";
 
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
@@ -67,26 +68,27 @@ export default function ScraperApp() {
           <option value="">Select a source</option>
           <option value="salesforce">Salesforce</option>
           <option value="oracle">Oracle</option>
+          <option value="shopify">Shopify</option>
         </select>
 
         <div className="flex space-x-3 justify-center">
           <button
             onClick={handleScrape}
             disabled={loading}
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400"
+            className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400"
           >
             Scrape Data
           </button>
           <button
             onClick={handleFetch}
             disabled={loading}
-            className="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-green-400"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-green-700 disabled:bg-green-400"
           >
             Fetch Stored Data
           </button>
           <button
             onClick={handleDownloadExcel}
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 ml-4"
+            className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-700"
           >
             Download Excel
           </button>
@@ -97,6 +99,7 @@ export default function ScraperApp() {
       <div>
       {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
       {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
+      {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ const cors = require("cors");
 // const db = require("./db"); 
 // const scrapeData = require("./routes/partners/SalesForce/salesforceScraper");
 // const exportToExcel = require("./routes/partners/SalesForce/salesforceExcel");
-const mainRouter = require("./routes/mainRouter")
+const mainRouter = require("./src/routes/mainRouter")
 
 const app = express();
 const PORT = 5000;

@@ -12,9 +12,7 @@ const SalesforceTable = ({ data }) => {
             <th>Name</th>
             <th>Tagline</th>
             <th>Description</th>
-            <th>Expertise</th>
-            <th>Industries</th>
-            <th>Services</th>
+            <th>Highlights</th>
             <th>Extended Description</th>
             <th>Link</th>
           </tr>
@@ -32,13 +30,13 @@ const SalesforceTable = ({ data }) => {
                 <div className="max-h-[100px] overflow-y-auto">{item.description}</div>
               </td>
               <td className="py-2">
-                <div className="max-h-[100px] overflow-y-auto">{item.expertise}</div>
-              </td>
-              <td className="py-2">
-                <div className="max-h-[100px] overflow-y-auto">{item.industries}</div>
-              </td>
-              <td className="py-2">
-                <div className="max-h-[100px] overflow-y-auto">{item.services}</div>
+                <div className="max-h-[100px] overflow-y-auto whitespace-pre-line">
+                  {item.expertise || "N/A"}{"\n"}
+                  <br></br>
+                  {item.industries || "N/A"}{"\n"}
+                  <br></br>
+                  {item.services || "N/A"}
+                </div>
               </td>
               <td className="py-2">
                 <div className="max-h-[100px] overflow-y-auto">{item.extendedDescription}</div>
@@ -62,9 +60,7 @@ const SalesforceTable = ({ data }) => {
             <th>Name</th>
             <th>Tagline</th>
             <th>Description</th>
-            <th>Expertise</th>
-            <th>Industries</th>
-            <th>Services</th>
+            <th>Highlights</th>
             <th>Extended Description</th>
             <th>Link</th>
           </tr>
@@ -72,6 +68,7 @@ const SalesforceTable = ({ data }) => {
       </table>
     </div>
   );
+  
 };
 
 export default SalesforceTable;

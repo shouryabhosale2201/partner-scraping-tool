@@ -10,7 +10,6 @@ const OracleTable = ({ data }) => {
                     <tr>
                         <th>#</th>
                         <th>Partner Name</th>
-                        <th>Expertise Description</th>
                         <th>Expertise Areas</th>
                         <th>Company Overview</th>
                         <th>Solutions</th>
@@ -24,11 +23,6 @@ const OracleTable = ({ data }) => {
                         >
                             <th className="py-2">{index + 1}</th>
                             <td className="py-2">{item.name}</td>
-                            <td className="py-2">
-                                <div className="max-h-[100px] overflow-y-auto whitespace-pre-line">
-                                    {item.oracle_expertise_description}
-                                </div>
-                            </td>
                             <td className="py-2">
                                 <div className="max-h-[100px] overflow-y-auto">{item.oracle_expertise_areas}</div>
                             </td>
@@ -61,7 +55,6 @@ const OracleTable = ({ data }) => {
                     <tr>
                         <th>#</th>
                         <th>Partner Name</th>
-                        <th>Expertise Description</th>
                         <th>Expertise Areas</th>
                         <th>Company Overview</th>
                         <th>Solutions</th>

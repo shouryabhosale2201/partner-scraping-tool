@@ -1,13 +1,13 @@
 const express = require("express");
-const scrapeData = require("./salesforceScraper");
-const exportToExcel = require("./salesforceExcel");
+const scrapeData = require("./shopifyScraper");
+const exportToExcel = require("./shopifyExcel");
 const db = require("../../../db");
 const router = express.Router();
 
 // API to Scrape Data and Store in Database
 router.get("/scrape", async (req, res) => {
     try {
-        console.log("🔄 Scraping fresh data...");
+        console.log("🔄 Scraping fresh data from shopify");
         const data = await scrapeData();
         res.json({ success: true, data });
     } catch (error) {
@@ -19,7 +19,7 @@ router.get("/scrape", async (req, res) => {
 // API to Fetch Data from Database
 router.get("/fetch", async (req, res) => {
     try {
-        const [rows] = await db.execute("SELECT * FROM salesforce");
+        const [rows] = await db.execute("SELECT * FROM shopify");
         res.json({ success: true, data: rows });
     } catch (error) {
         console.error("❌ Database Fetch Error:", error.message);
@@ -30,7 +30,7 @@ router.get("/fetch", async (req, res) => {
 // Download Excel
 router.get("/downloadExcel", async (req, res) => {
     try {
-        const [rows] = await db.execute("SELECT * FROM salesforce");
+        const [rows] = await db.execute("SELECT * FROM shopify");
 
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
@@ -38,7 +38,7 @@ router.get("/downloadExcel", async (req, res) => {
 
         const filePath = exportToExcel(rows); // Excel file path
 
-        res.download(filePath, "salesforce_partners.xlsx", (err) => {
+        res.download(filePath, "shopify_partners.xlsx", (err) => {
             if (err) {
                 console.error("❌ File Download Error:", err.message);
                 res.status(500).json({ success: false, error: "Failed to send Excel file." });
