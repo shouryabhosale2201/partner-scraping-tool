@@ -2,35 +2,55 @@ const { chromium } = require("playwright");
 const db = require("../../../db");
 
 const scrapeData = async () => {
-
-    const url = "https://www.shopify.com/partners/directory/services/store-setup/customize-design";
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
 
-    console.log(`Navigating to Shopify partners website`);
-    await page.goto(url, { waitUntil: "domcontentloaded" });
+    const baseUrl = "https://www.shopify.com/partners/directory/services";
+    let currentPage = 1;
+    const allPartnerData = [];
 
-    // Wait for partner cards to load
-    await page.waitForSelector('a[href^="/partners/directory/partner/"]', { timeout: 60000 });
+    while (currentPage < 4) {
+        const url = `${baseUrl}?page=${currentPage}`;
+        console.log(`Navigating to ${url}`);
+        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
 
-    // Get all partner link elements
-    const partnerItems = await page.locator('a[href^="/partners/directory/partner/"]').all();
+        // Wait for the partner cards to load
+        const partnerSelector = 'a[href^="/partners/directory/partner/"]';
+        try {
+            await page.waitForSelector(partnerSelector, { timeout: 10000 });
+        } catch {
+            console.log(`No partner cards found on page ${currentPage}. Ending scrape.`);
+            break;
+        }
 
-    const partnerData = await Promise.all(
-        partnerItems.map(async (partner) => {
-            try {
-                const href = await partner.getAttribute('href');
-                const name = await partner.locator('h3').textContent();
-                return {
-                    name: name?.trim() || '',
-                    link: `https://www.shopify.com${href}`
-                };
-            } catch (error) {
-                console.error("Failed to extract partner data:", error);
-                return null;
-            }
-        })
-    );
+        const partnerItems = await page.locator(partnerSelector).all();
+
+        if (partnerItems.length === 0) {
+            console.log(`No partners found on page ${currentPage}. Stopping.`);
+            break;
+        }
+
+        const partnerData = await Promise.all(
+            partnerItems.map(async (partner) => {
+                try {
+                    const href = await partner.getAttribute('href');
+                    // const name = await partner.locator('h3').textContent();
+                    return {
+                        // name: name?.trim() || '',
+                        link: `https://www.shopify.com${href}`
+                    };
+                } catch (error) {
+                    console.error("Failed to extract partner data:", error);
+                    return null;
+                }
+            })
+        );
+
+        allPartnerData.push(...partnerData.filter(Boolean));
+
+        console.log(`Page ${currentPage} done, partners found: ${partnerData.length}`);
+        currentPage++;
+    }
 
     // const filteredData = partnerData.filter(Boolean); // remove nulls
     // return filteredData;
@@ -45,10 +65,13 @@ const scrapeData = async () => {
 
     let extractedDetails = [];
 
-    for (const { name, link } of partnerData.filter(Boolean)) {
+    for (const { link } of allPartnerData.filter(Boolean)) {
         try {
             await page.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
             console.log("Reached website:", link);
+
+            const name = await page.locator('div.grid.gap-y-3 h1.richtext.text-t4').innerText();
+            console.log("Name:", name);            
 
             const businessDescription = await page.$eval(
                 'pre.text-body-base.font-sans.whitespace-pre-wrap.opacity-70.pb-4',
