@@ -1,5 +1,5 @@
 const { chromium } = require('playwright');
-const db = require("../../../db");
+const {db, initializeDatabase} = require("../../../db");
 
 const scrapeData = async () => {
     const scrapePage = async (browser, pageNum) => {
@@ -37,6 +37,7 @@ const scrapeData = async () => {
     };
 
     (async () => {
+        initializeDatabase();
         const browser = await chromium.launch({ headless: true });
         const totalPages = 221;
         const batchSize = 10;
@@ -106,25 +107,34 @@ const scrapeData = async () => {
                     return null;
                 }
             }));
-        
+
             for (const partnerDetails of batchResults.filter(Boolean)) {
                 try {
+                    // Step 1: Insert into `shopify` table
+                    const [result] = await db.execute(
+                        `INSERT INTO shopify (name) VALUES (?)`,
+                        [partnerDetails.name]
+                    );
+                    const shopifyId = result.insertId;
+            
+                    // Step 2: Insert into `shopify_details` table
                     await db.execute(
-                        `INSERT INTO shopify (name, link, business_description, specialized_services, featured_work) VALUES (?, ?, ?, ?, ?)`,
+                        `INSERT INTO shopify_details (id, link, business_description, specialized_services, featured_work) VALUES (?, ?, ?, ?, ?)`,
                         [
-                            partnerDetails.name,
+                            shopifyId,
                             partnerDetails.link,
                             partnerDetails.businessDescription,
                             JSON.stringify(partnerDetails.specializedServices),
-                            JSON.stringify(partnerDetails.featuredWork)
+                            JSON.stringify(partnerDetails.featuredWork),
                         ]
                     );
-                    console.log("Stored in DB : ", partnerDetails.name);
+            
+                    console.log("✅ Stored in DB:", partnerDetails.name);
                     extractedDetails.push(partnerDetails);
                 } catch (dbError) {
-                    console.error("Database Insert Error : ", dbError.message);
+                    console.error("❌ Database Insert Error:", dbError.message);
                 }
-            }
+            }       
         }
         
         console.log(`Scraped total ${allPartnerData.length} partner links from ${totalPages} pages`);
