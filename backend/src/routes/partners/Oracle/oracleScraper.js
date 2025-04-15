@@ -1,7 +1,8 @@
 const { chromium } = require("playwright");
-const db = require("../../../db");
+const {db, initializeDatabase} = require("../../../db");
 
 const scrapeData = async () => {
+    initializeDatabase();
     const url = "https://partner-finder.oracle.com/catalog/?search=%5B%7B%221%22%3A%22filter-location%22%2C%222%22%3A%22%22%2C%223%22%3A%5B%22location4205%22%5D%2C%224%22%3A%22%22%7D%5D";
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
@@ -156,14 +157,38 @@ const scrapeData = async () => {
             extractedDetails.push(partnerDetails);
 
             try {
-                await db.execute(
-                    `INSERT INTO oracle (name,oracle_expertise_description,oracle_expertise_areas, company_overview,solution_titles,solution_links) VALUES (?, ?, ?, ?, ?, ?)`,
-                    [name, oracleExpertiseP?.trim() || "", expertiseDetails.join(", "), companyOverview, solutions.map(s => s.title).join(", "), solutions.map(s => s.url).join(", ")]
+                // Step 1: Insert into `oracle` table (name only)
+                const [result] = await db.execute(
+                    `INSERT INTO oracle (name) VALUES (?)`,
+                    [name]
                 );
-                console.log("Stored in DB : ", name);
+                const oracleId = result.insertId;
+            
+                // Step 2: Insert into `oracle_details` table using the oracle ID
+                await db.execute(
+                    `INSERT INTO oracle_details (
+                        id,
+                        oracle_expertise_description,
+                        oracle_expertise_areas,
+                        company_overview,
+                        solution_titles,
+                        solution_links
+                    ) VALUES (?, ?, ?, ?, ?, ?)`,
+                    [
+                        oracleId,
+                        oracleExpertiseP?.trim() || "",
+                        expertiseDetails.join(", "),
+                        companyOverview,
+                        solutions.map(s => s.title).join(", "),
+                        solutions.map(s => s.url).join(", ")
+                    ]
+                );
+            
+                console.log("✅ Stored in DB:", name);
             } catch (dbError) {
-                console.error("Database Insert Error : ", dbError.message);
+                console.error("❌ Database Insert Error:", dbError.message);
             }
+            
         } catch (error) {
             console.error(`Error extracting details for ${link}:`, error);
         }
