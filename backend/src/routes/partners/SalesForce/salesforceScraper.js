@@ -1,7 +1,10 @@
 const { chromium } = require("playwright");
-const db = require("../../../db");
+// import {db} from '../../../db';
+const {db, initializeDatabase} = require("../../../db");
 
 const scrapeData = async () => {
+    await initializeDatabase();
+    const url = "https://appexchange.salesforce.com/consulting";
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     const scrapedMap = new Map();
