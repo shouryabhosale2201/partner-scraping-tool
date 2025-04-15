@@ -62,7 +62,11 @@ export default function ScraperApp() {
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Web Scraper</h1>
         <select
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => {
+            setUrl(e.target.value)
+            setData([]);
+            }
+          }
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
         >
           <option value="">Select a source</option>

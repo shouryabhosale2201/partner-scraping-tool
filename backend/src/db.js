@@ -9,15 +9,16 @@ const db = mysql.createPool({
   waitForConnections: true,
   connectionLimit: parseInt(process.env.DB_CONN_LIMIT || "10"),
   queueLimit: 0,
-});
-
+}).promise();
 
 db.getConnection()
-  .then(() => console.log("✅ Connected to MySQL database."))
+  .then((conn) => {
+    console.log("✅ Connected to MySQL database.");
+    conn.release();
+  })
   .catch((error) => {
     console.error("❌ MySQL Connection Error:", error.message);
     process.exit(1);
   });
 
 module.exports = db;
-
