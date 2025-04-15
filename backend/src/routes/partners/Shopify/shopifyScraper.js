@@ -1,130 +1,135 @@
-const { chromium } = require("playwright");
+const { chromium } = require('playwright');
 const db = require("../../../db");
 
 const scrapeData = async () => {
-    const browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-
-    const baseUrl = "https://www.shopify.com/partners/directory/services";
-    let currentPage = 1;
-    const allPartnerData = [];
-
-    while (currentPage < 4) {
-        const url = `${baseUrl}?page=${currentPage}`;
+    const scrapePage = async (browser, pageNum) => {
+        const page = await browser.newPage();
+        const url = `https://www.shopify.com/partners/directory/services?page=${pageNum}`;
         console.log(`Navigating to ${url}`);
-        await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
-
-        // Wait for the partner cards to load
-        const partnerSelector = 'a[href^="/partners/directory/partner/"]';
         try {
+            await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+
+            const partnerSelector = 'a[href^="/partners/directory/partner/"]';
             await page.waitForSelector(partnerSelector, { timeout: 10000 });
-        } catch {
-            console.log(`No partner cards found on page ${currentPage}. Ending scrape.`);
-            break;
-        }
 
-        const partnerItems = await page.locator(partnerSelector).all();
+            const partnerItems = await page.locator(partnerSelector).all();
 
-        if (partnerItems.length === 0) {
-            console.log(`No partners found on page ${currentPage}. Stopping.`);
-            break;
-        }
-
-        const partnerData = await Promise.all(
-            partnerItems.map(async (partner) => {
-                try {
-                    const href = await partner.getAttribute('href');
-                    // const name = await partner.locator('h3').textContent();
-                    return {
-                        // name: name?.trim() || '',
-                        link: `https://www.shopify.com${href}`
-                    };
-                } catch (error) {
-                    console.error("Failed to extract partner data:", error);
-                    return null;
-                }
-            })
-        );
-
-        allPartnerData.push(...partnerData.filter(Boolean));
-
-        console.log(`Page ${currentPage} done, partners found: ${partnerData.length}`);
-        currentPage++;
-    }
-
-    // const filteredData = partnerData.filter(Boolean); // remove nulls
-    // return filteredData;
-
-    // //CLEAR DATABASE BEFORE INSERTING NEW DATA
-    // try {
-    //     await db.execute("DELETE FROM oracle");
-    //     console.log("Database cleared. Storing fresh data...");
-    // } catch (dbError) {
-    //     console.error("Database Deletion Error:", dbError.message);
-    // }
-
-    let extractedDetails = [];
-
-    for (const { link } of allPartnerData.filter(Boolean)) {
-        try {
-            await page.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
-            console.log("Reached website:", link);
-
-            const name = await page.locator('div.grid.gap-y-3 h1.richtext.text-t4').innerText();
-            console.log("Name:", name);            
-
-            const businessDescription = await page.$eval(
-                'pre.text-body-base.font-sans.whitespace-pre-wrap.opacity-70.pb-4',
-                (el) => el.innerText.trim()
+            const data = await Promise.all(
+                partnerItems.map(async (partner) => {
+                    try {
+                        const href = await partner.getAttribute('href');
+                        return {
+                            link: `https://www.shopify.com${href}`,
+                        };
+                    } catch (err) {
+                        return null;
+                    }
+                })
             );
 
-            const services = await page.$$eval('div[aria-labelledby^="header-"]', (sections) => {
-                return sections.map((section) => {
-                    const title = section.querySelector('h3')?.innerText || '';
-                    const price = section.querySelector('p.opacity-70')?.innerText || '';
-                    const description = section.querySelector('pre')?.innerText || '';
-                    return { title, price, description };
-                });
-            });
+            return data.filter(Boolean);
+        } catch (error) {
+            console.error(`Error on page ${pageNum}:`, error.message);
+            return [];
+        } finally {
+            await page.close();
+        }
+    };
 
-            // Featured Work
-            const featuredWork = await page.$$eval('div.pt-4 > div.flex.flex-col', (entries) => {
-                return entries.map((entry) => {
-                    const title = entry.querySelector('h3')?.innerText.trim() || '';
-                    const description = entry.querySelector('pre')?.innerText.trim() || '';
-                    const linkElement = entry.querySelector('a');
-                    const link = linkElement ? linkElement.href : '';
-                    return { title, description, link };
-                });
-            });
+    (async () => {
+        const browser = await chromium.launch({ headless: true });
+        const totalPages = 221;
+        const batchSize = 10;
+        const allPartnerData = [];
 
-            const partnerDetails = {name,link,businessDescription,specializedServices: services,featuredWork: featuredWork
-            };
-
-            try {
-                await db.execute(
-                    `INSERT INTO shopify (name, link, business_description, specialized_services, featured_work) VALUES (?, ?, ?, ?, ?)`,
-                    [
-                        partnerDetails.name,
-                        partnerDetails.link,
-                        partnerDetails.businessDescription,
-                        JSON.stringify(partnerDetails.specializedServices),
-                        JSON.stringify(partnerDetails.featuredWork)
-                    ]
-                );
-                console.log("Stored in DB : ", name);
-            } catch (dbError) {
-                console.error("Database Insert Error : ", dbError.message);
+        for (let i = 1; i <= totalPages; i += batchSize) {
+            const currentBatch = [];
+            for (let j = i; j < i + batchSize && j <= totalPages; j++) {
+                currentBatch.push(scrapePage(browser, j));
             }
 
-            // console.log(partnerDetails);
-            extractedDetails.push(partnerDetails);
-        } catch (error) {
-            console.error(`Error extracting details for ${link}:`, error);
-        }
-    }
-    await browser.close();
-    return extractedDetails;
-}
+            const batchResults = await Promise.all(currentBatch);
+            for (const result of batchResults) {
+                allPartnerData.push(...result);
+            }
 
+            console.log(`✅ Completed batch ${i}–${Math.min(i + batchSize - 1, totalPages)} (${allPartnerData.length} links so far)`);
+        }
+
+        let extractedDetails = [];
+
+        const detailBatchSize = 10;
+        for (let i = 0; i < allPartnerData.length; i += detailBatchSize) {
+            const batch = allPartnerData.slice(i, i + detailBatchSize);
+        
+            const batchResults = await Promise.all(batch.map(async ({ link }) => {
+                try {
+                    const page = await browser.newPage();
+                    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
+                    console.log("Reached website:", link);
+        
+                    const name = await page.locator('div.grid.gap-y-3 h1.richtext.text-t4').innerText();
+                    console.log("Name:", name);
+        
+                    const businessDescription = await page.$eval(
+                        'pre.text-body-base.font-sans.whitespace-pre-wrap.opacity-70.pb-4',
+                        (el) => el.innerText.trim()
+                    );
+        
+                    const services = await page.$$eval('div[aria-labelledby^="header-"]', (sections) => {
+                        return sections.map((section) => {
+                            const title = section.querySelector('h3')?.innerText || '';
+                            const price = section.querySelector('p.opacity-70')?.innerText || '';
+                            const description = section.querySelector('pre')?.innerText || '';
+                            return { title, price, description };
+                        });
+                    });
+        
+                    const featuredWork = await page.$$eval('div.pt-4 > div.flex.flex-col', (entries) => {
+                        return entries.map((entry) => {
+                            const title = entry.querySelector('h3')?.innerText.trim() || '';
+                            const description = entry.querySelector('pre')?.innerText.trim() || '';
+                            const linkElement = entry.querySelector('a');
+                            const link = linkElement ? linkElement.href : '';
+                            return { title, description, link };
+                        });
+                    });
+        
+                    const partnerDetails = {
+                        name, link, businessDescription, specializedServices: services, featuredWork: featuredWork
+                    };
+        
+                    await page.close();
+                    return partnerDetails;
+                } catch (error) {
+                    console.error(`Error extracting details for ${link}:`, error);
+                    return null;
+                }
+            }));
+        
+            for (const partnerDetails of batchResults.filter(Boolean)) {
+                try {
+                    await db.execute(
+                        `INSERT INTO shopify (name, link, business_description, specialized_services, featured_work) VALUES (?, ?, ?, ?, ?)`,
+                        [
+                            partnerDetails.name,
+                            partnerDetails.link,
+                            partnerDetails.businessDescription,
+                            JSON.stringify(partnerDetails.specializedServices),
+                            JSON.stringify(partnerDetails.featuredWork)
+                        ]
+                    );
+                    console.log("Stored in DB : ", partnerDetails.name);
+                    extractedDetails.push(partnerDetails);
+                } catch (dbError) {
+                    console.error("Database Insert Error : ", dbError.message);
+                }
+            }
+        }
+        
+        console.log(`Scraped total ${allPartnerData.length} partner links from ${totalPages} pages`);
+        await browser.close();
+        return extractedDetails;
+    })();
+}
 module.exports = scrapeData;
