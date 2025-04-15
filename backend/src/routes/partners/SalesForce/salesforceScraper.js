@@ -57,13 +57,37 @@ const scrapeData = async () => {
                 };
                 // Save to MySQL
                 try {
-                    await db.execute(
-                        "INSERT INTO salesforce (name, link, tagline, description, expertise, industries, services, extendedDescription) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                        [name, link, tagline, description, expertise, industries, services, extendedDescription]
+                    // Step 1: Insert into basic salesforce table and AWAIT the result
+                    // The result object contains insertId
+                    const [insertResult] = await db.execute( // <-- Added await
+                        "INSERT INTO salesforce (name) VALUES (?)",
+                        [name]
                     );
-                    console.log("✅ Stored in DB:", name);
+                    // Get the ID directly from the result of the INSERT query
+                    const salesforceId = insertResult.insertId;
+                    // Check if an ID was actually generated (it should be if AUTO_INCREMENT is set up)
+                    if (!salesforceId) {
+                        throw new Error(`Insert into salesforce table for "${name}" did not return an ID.`);
+                    }
+                    // Step 2: Insert details into salesforce_details table and AWAIT completion
+                    await db.execute( // <-- Added await
+                        `INSERT INTO salesforce_details (
+                        id, link, tagline, description, expertise, industries, services, extendedDescription
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+                        [
+                            salesforceId, // Use the ID obtained from the first insert
+                            link,
+                            tagline,
+                            description,
+                            expertise,
+                            industries,
+                            services,
+                            extendedDescription,
+                        ]
+                    );
+                    console.log(`:white_check_mark: Stored in DB (ID: ${salesforceId}):`, name);
                 } catch (dbError) {
-                    console.error("❌ Database Insert Error:", dbError.message);
+                    console.error(`:x: Database Insert Error for "${name}":`, dbError.message);
                 }
 
                 scrapedMap.set(link, details);
