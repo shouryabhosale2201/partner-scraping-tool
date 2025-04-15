@@ -1,7 +1,7 @@
 const express = require("express");
 const scrapeData = require("./microsoftScraper");
 const exportToExcel = require("./microsoftExcel");
-const db = require("../../../db");
+const {db, initializeDatabase} = require("../../../db");
 const router = express.Router();
 
 // API to Scrape Data and Store in Database
@@ -18,8 +18,20 @@ router.get("/scrape", async (req, res) => {
 
 // API to Fetch Data from Database
 router.get("/fetch", async (req, res) => {
+    initializeDatabase();
     try {
-        const [rows] = await db.execute("SELECT * FROM microsoft");
+        const [rows] = await db.execute(`
+            SELECT 
+                m.id, 
+                m.name, 
+                d.description, 
+                d.industryFocus, 
+                d.product, 
+                d.solutions, 
+                d.serviceType 
+            FROM microsoft m
+            LEFT JOIN microsoft_details d ON m.id = d.id
+        `);
         res.json({ success: true, data: rows });
     } catch (error) {
         console.error("❌ Database Fetch Error:", error.message);
@@ -29,8 +41,20 @@ router.get("/fetch", async (req, res) => {
 
 // Download Excel
 router.get("/downloadExcel", async (req, res) => {
+    initializeDatabase();
     try {
-        const [rows] = await db.execute("SELECT * FROM microsoft");
+        const [rows] = await db.execute(`
+            SELECT 
+                m.id, 
+                m.name, 
+                d.description, 
+                d.industryFocus, 
+                d.product, 
+                d.solutions, 
+                d.serviceType 
+            FROM microsoft m
+            LEFT JOIN microsoft_details d ON m.id = d.id
+        `);
 
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
