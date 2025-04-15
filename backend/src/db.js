@@ -105,6 +105,21 @@ async function createTables(pool) { // Accept the pool as argument
       featured_work JSON,
       FOREIGN KEY (id) REFERENCES shopify(id) ON DELETE CASCADE
     )`, // Added ON DELETE CASCADE
+
+    //Microsoft
+    `CREATE TABLE IF NOT EXISTS microsoft (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(255) NOT NULL
+    )`,
+    `CREATE TABLE IF NOT EXISTS microsoft_details (
+      id INT PRIMARY KEY,
+      description TEXT,
+      industryFocus JSON,
+      product JSON,
+      solutions JSON,
+      serviceType JSON,
+      FOREIGN KEY (id) REFERENCES microsoft(id) ON DELETE CASCADE
+    )`,
   ];
 
   try {

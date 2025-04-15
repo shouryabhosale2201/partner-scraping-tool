@@ -1,7 +1,7 @@
 const express = require("express");
 const scrapeData = require("./microsoftScraper");
 const exportToExcel = require("./microsoftExcel");
-const db = require("../../../db");
+const {db, initializeDatabase} = require("../../../db");
 const router = express.Router();
 
 // API to Scrape Data and Store in Database

@@ -1,10 +1,10 @@
 const axios = require('axios');
-const db = require("../../../db");
+const {db, initializeDatabase} = require("../../../db");
 
 const scrapeData = async () => {
   const pageOffsets = [0,18,36,54,72,90];  // You can extend this later for pagination
   const extractedDetails = [];  
-
+    initializeDatabase();
   for (const pageOffset of pageOffsets) {
     try {
       const response = await axios.get(
@@ -35,21 +35,33 @@ const scrapeData = async () => {
         };
 
         try {
-          await db.execute(
-            `INSERT INTO microsoft (name, description, industryFocus, product, solutions, serviceType) VALUES (?, ?, ?, ?, ?, ?)`,
-            [
-              details.name,
-              details.description,
-              JSON.stringify(details.industryFocus),
-              JSON.stringify(details.product),
-              JSON.stringify(details.solutions),
-              JSON.stringify(details.serviceType)
-            ]
-          );
-          console.log(`✅ Inserted into DB: ${details.name}`);
-        } catch (dbError) {
-          console.error(`❌ DB Insert Error for ${details.name}:`, dbError.message);
-        }
+            // Step 1: Insert into 'microsoft' to get the generated ID
+            const [result] = await db.execute(
+              `INSERT INTO microsoft (name) VALUES (?)`,
+              [details.name]
+            );
+          
+            const insertedId = result.insertId;  // Auto-generated ID from the first insert
+          
+            // Step 2: Insert the rest of the details using that ID into 'microsoft_details'
+            await db.execute(
+              `INSERT INTO microsoft_details (id, description, industryFocus, product, solutions, serviceType) VALUES (?, ?, ?, ?, ?, ?)`,
+              [
+                insertedId,
+                details.description,
+                JSON.stringify(details.industryFocus),
+                JSON.stringify(details.product),
+                JSON.stringify(details.solutions),
+                JSON.stringify(details.serviceType)
+              ]
+            );
+          
+            console.log(`✅ Inserted into DB: ${details.name} (ID: ${insertedId})`);
+          
+          } catch (dbError) {
+            console.error(`❌ DB Insert Error for ${details.name}:`, dbError.message);
+          }
+          
 
         extractedDetails.push(details);
       }
