@@ -3,6 +3,7 @@ import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
 import OracleTable from "./components/OracleTable";
 import ShopifyTable from "./components/ShopifyTable";
+import MicrosoftTable from "./components/MicrosoftTable";
 
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
@@ -62,13 +63,18 @@ export default function ScraperApp() {
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Web Scraper</h1>
         <select
           value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          onChange={(e) => {
+            setUrl(e.target.value)
+            setData([]);
+            }
+          }
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
         >
           <option value="">Select a source</option>
           <option value="salesforce">Salesforce</option>
           <option value="oracle">Oracle</option>
           <option value="shopify">Shopify</option>
+          <option value="microsoft">Microsoft</option>
         </select>
 
         <div className="flex space-x-3 justify-center">
@@ -100,6 +106,7 @@ export default function ScraperApp() {
       {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
       {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
       {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
+      {data.length > 0 && url === "microsoft" && <MicrosoftTable data={data} />}
       </div>
     </div>
   );
