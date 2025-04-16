@@ -76,6 +76,11 @@ async function createTables(pool) { // Accept the pool as argument
       extendedDescription TEXT,
       FOREIGN KEY (id) REFERENCES salesforce(id) ON DELETE CASCADE
     )`, // Added ON DELETE CASCADE
+    `CREATE TABLE IF NOT EXISTS salesforce_filters (
+      id INT PRIMARY KEY,
+      filters JSON,
+      FOREIGN KEY (id) REFERENCES salesforce(id) ON DELETE CASCADE
+    )`,
 
     // Oracle
     `CREATE TABLE IF NOT EXISTS oracle (
