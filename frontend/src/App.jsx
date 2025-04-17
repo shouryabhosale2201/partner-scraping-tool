@@ -48,7 +48,8 @@ export default function ScraperApp() {
       const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement("a");
       a.href = downloadUrl;
-      a.download = "partners.xlsx";
+      a.download = `${url || "Partners"}.xlsx`;
+
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -66,7 +67,7 @@ export default function ScraperApp() {
           onChange={(e) => {
             setUrl(e.target.value)
             setData([]);
-            }
+          }
           }
           className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
         >
@@ -103,10 +104,10 @@ export default function ScraperApp() {
         {error && <p className="text-red-500 text-center mt-4">Error: {error}</p>}
       </div>
       <div>
-      {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
-      {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
-      {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
-      {data.length > 0 && url === "microsoft" && <MicrosoftTable data={data} />}
+        {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
+        {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
+        {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
+        {data.length > 0 && url === "microsoft" && <MicrosoftTable data={data} />}
       </div>
     </div>
   );

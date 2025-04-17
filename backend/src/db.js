@@ -124,12 +124,16 @@ async function createTables(pool) { // Accept the pool as argument
     `CREATE TABLE IF NOT EXISTS microsoft_details (
       id INT PRIMARY KEY,
       description TEXT,
-      industryFocus JSON,
       product JSON,
       solutions JSON,
       serviceType JSON,
       FOREIGN KEY (id) REFERENCES microsoft(id) ON DELETE CASCADE
     )`,
+    `CREATE TABLE IF NOT EXISTS microsoft_filters (
+      id INT PRIMARY KEY,
+      industry JSON,
+      FOREIGN KEY (id) REFERENCES microsoft(id) ON DELETE CASCADE
+    )`
   ];
 
   try {
