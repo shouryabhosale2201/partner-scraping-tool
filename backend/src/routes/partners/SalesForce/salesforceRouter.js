@@ -1,7 +1,7 @@
 const express = require("express");
 const scrapeData = require("./salesforceScraper");
 const exportToExcel = require("./salesforceExcel");
-const {db, initializeDatabase} = require("../../../db");
+const { db, initializeDatabase } = require("../../../db");
 const router = express.Router();
 
 // API to Scrape Data and Store in Database
@@ -46,6 +46,7 @@ router.get("/fetch", async (req, res) => {
 router.get("/downloadExcel", async (req, res) => {
     initializeDatabase();
     try {
+        // Get main data joined with details
         const [rows] = await db.execute(`
             SELECT 
                 s.id,
@@ -60,21 +61,42 @@ router.get("/downloadExcel", async (req, res) => {
             FROM salesforce s
             LEFT JOIN salesforce_details d ON s.id = d.id
         `);
-
+        
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
         }
-
-        const filePath = exportToExcel(rows); // Excel file path
-
+        
+        // Get filters data
+        const [filtersRows] = await db.execute(`
+            SELECT id, filters 
+            FROM salesforce_filters
+        `);
+        
+        // Create a map of id -> filters for easier lookup
+        const filtersMap = {};
+        filtersRows.forEach(row => {
+            filtersMap[row.id] = row.filters;
+        });
+        
+        // Create Excel file with data and filters
+        const filePath = await exportToExcel(rows, filtersMap);
+        
+        // Send the file as download
         res.download(filePath, "salesforce_partners.xlsx", (err) => {
             if (err) {
                 console.error("❌ File Download Error:", err.message);
                 res.status(500).json({ success: false, error: "Failed to send Excel file." });
+            } else {
+                console.log("✅ Excel file downloaded successfully");
+                // Optionally clean up the file after sending
+                // setTimeout(() => {
+                //     fs.unlinkSync(filePath);
+                //     console.log("✅ Temporary Excel file deleted");
+                // }, 5000);
             }
         });
     } catch (error) {
-        console.error("❌ Excel Export Error:", error.message);
+        console.error("❌ Excel Export Error:", error.message || error);
         res.status(500).json({ success: false, error: "Failed to generate Excel file." });
     }
 });

@@ -11,7 +11,7 @@ const MicrosoftTable = ({ data }) => {
                         <th className="w-[4%]">#</th>
                         <th className="w-[12%]">Partner Name</th>
                         <th className="w-[30%]">Description</th>
-                        <th className="w-[30%]">Industry Focus</th>
+                        {/* <th className="w-[30%]">Industry Focus</th> */}
                         <th className="w-[30%]">Products</th>
                         <th className="w-[30%]">Solutions</th>
                         <th className="w-[30%]">Service Types</th>
@@ -30,13 +30,13 @@ const MicrosoftTable = ({ data }) => {
                                     {item.description}
                                 </div>
                             </td>
-                            <td className="py-2 w-[12rem]">
+                            {/* <td className="py-2 w-[12rem]">
                                 <div className="max-h-[100px] overflow-y-auto">
                                     {Array.isArray(item.industryFocus)
                                         ? item.industryFocus.join(", ")
                                         : item.industryFocus}
                                 </div>
-                            </td>
+                            </td> */}
                             <td className="py-2 w-[12rem]">
                                 <div className="max-h-[100px] overflow-y-auto">
                                     {Array.isArray(item.product)
@@ -66,7 +66,7 @@ const MicrosoftTable = ({ data }) => {
                         <th>#</th>
                         <th>Partner Name</th>
                         <th>Description</th>
-                        <th>Industry Focus</th>
+                        {/* <th>Industry Focus</th> */}
                         <th>Products</th>
                         <th>Solutions</th>
                         <th>Service Types</th>
