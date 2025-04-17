@@ -3,6 +3,7 @@ const scrapeData = require("./microsoftScraper");
 const exportToExcel = require("./microsoftExcel");
 const {db, initializeDatabase} = require("../../../db");
 const router = express.Router();
+const fs = require("fs");
 
 // API to Scrape Data and Store in Database
 router.get("/scrape", async (req, res) => {
@@ -109,6 +110,13 @@ router.get("/downloadExcel", async (req, res) => {
             if (err) {
                 console.error("❌ File Download Error:", err.message);
                 res.status(500).json({ success: false, error: "Failed to send Excel file." });
+            } else {
+                // Clean up the file after sending
+                setTimeout(() => {
+                    fs.unlink(filePath, (err) => {
+                        if (err) console.error("Error deleting temporary Excel file:", err);
+                    });
+                }, 1000);
             }
         });
     } catch (error) {
