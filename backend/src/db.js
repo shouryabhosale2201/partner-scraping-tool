@@ -95,7 +95,12 @@ async function createTables(pool) { // Accept the pool as argument
       solution_titles TEXT,
       solution_links TEXT,
       FOREIGN KEY (id) REFERENCES oracle(id) ON DELETE CASCADE
-    )`, // Added ON DELETE CASCADE
+    )`,
+    `CREATE TABLE IF NOT EXISTS oracle_filters (
+      id INT PRIMARY KEY,
+      filters JSON,
+      FOREIGN KEY (id) REFERENCES oracle(id) ON DELETE CASCADE
+    )`,
 
     // Shopify
     `CREATE TABLE IF NOT EXISTS shopify (
