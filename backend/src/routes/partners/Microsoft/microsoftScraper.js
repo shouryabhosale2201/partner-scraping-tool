@@ -4,7 +4,7 @@ const {db, initializeDatabase} = require("../../../db");
 const scrapeData = async () => {
   const pageOffsets = [0,18,36,54,72,90];  // You can extend this later for pagination
   const extractedDetails = [];  
-    initializeDatabase();
+  initializeDatabase();
   for (const pageOffset of pageOffsets) {
     try {
       const response = await axios.get(
@@ -86,58 +86,3 @@ const scrapeData = async () => {
 };
 
 module.exports = scrapeData;
-
-
-
-
-
-//  https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DEducation%3Bsort%3D0%3BpageSize%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-//  https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DAgriculture%3Bsort%3D0%3BpageSize%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-// https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DAgriculture%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-// https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DAgriculture%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D36%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-//  https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DPublic%2520Safety%2520and%2520National%2520Security%3Bsort%3D0%3BpageSize%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-/* 
-Agriculture : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DAgriculture%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Distribution : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DDistribution%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Education : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DEducation%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Financial Services : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DFinancial%2520Services%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Government : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DGovernment%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Healthcare : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DHealthcare%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Hospitality & Travel : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DHospitality%2520%2520%2526%2520Travel%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Manufacturing & Resources : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DManufacturing%2520%2526%2520Resources%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Media & Communications : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DMedia%2520%2526%2520Communications%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Nonprofit & IGO : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DNonprofit%2520%2526%2520IGO%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Power & Utilities : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DPower%2520and%2520utilities%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Professional Services : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DProfessional%2520services%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Public Safety & National Security : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DPublic%2520Safety%2520and%2520National%2520Security%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Retail & Consumer Goods : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DPublic%2520Safety%2520and%2520National%2520Security%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-Transportation : https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=industries%3DTransportation%3Bsort%3D0%3BpageSize%3D18%3BpageOffset%3D18%3Bcountry%3Dus%3Bradius%3D100%3Blocname%3DUnited%2520States%3BlocationNotRequired%3Dtrue
-
-
-
-
-
-
-
-
-
-*/

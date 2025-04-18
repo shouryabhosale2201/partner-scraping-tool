@@ -1,13 +1,20 @@
 const express = require("express");
 const scrapeData = require("./microsoftScraper");
 const exportToExcel = require("./microsoftExcel");
-const {db, initializeDatabase} = require("../../../db");
+const { db, initializeDatabase } = require("../../../db");
 const router = express.Router();
 const fs = require("fs");
 
 // API to Scrape Data and Store in Database
 router.get("/scrape", async (req, res) => {
     try {
+        await db.execute("DELETE FROM microsoft_filters WHERE id >= 0");
+        await db.execute("DELETE FROM microsoft_details WHERE id >= 0");
+        await db.execute("DELETE FROM microsoft WHERE id >= 0");
+        await db.execute("ALTER TABLE microsoft AUTO_INCREMENT = 1");
+        await db.execute("ALTER TABLE microsoft_details AUTO_INCREMENT = 1");
+        await db.execute("ALTER TABLE microsoft_filters AUTO_INCREMENT = 1");
+        console.log("🧹 Microsoft tables cleared!");
         console.log("🔄 Scraping fresh data from microsoft");
         const data = await scrapeData();
         res.json({ success: true, data });
@@ -56,11 +63,11 @@ router.get("/downloadExcel", async (req, res) => {
             LEFT JOIN microsoft_details d ON m.id = d.id
             LEFT JOIN microsoft_filters f ON m.id = f.id
         `);
-        
+
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
         }
-        
+
         // Process rows to handle JSON fields
         const processedRows = rows.map(row => {
             const processedRow = {
@@ -68,7 +75,7 @@ router.get("/downloadExcel", async (req, res) => {
                 name: row.name,
                 description: row.description || ""
             };
-            
+
             // Safely process JSON fields
             ['product', 'solutions', 'serviceType'].forEach(field => {
                 if (row[field]) {
@@ -84,7 +91,7 @@ router.get("/downloadExcel", async (req, res) => {
                     processedRow[field] = "";
                 }
             });
-            
+
             // Special handling for industry field as it's an array
             if (row.industry) {
                 try {
@@ -100,12 +107,12 @@ router.get("/downloadExcel", async (req, res) => {
             } else {
                 processedRow.industry = "";
             }
-            
+
             return processedRow;
         });
-        
+
         const filePath = exportToExcel(processedRows); // Excel file path
-        
+
         res.download(filePath, "microsoft_partners.xlsx", (err) => {
             if (err) {
                 console.error("❌ File Download Error:", err.message);

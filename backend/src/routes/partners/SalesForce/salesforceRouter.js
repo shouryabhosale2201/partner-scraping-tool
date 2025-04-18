@@ -7,6 +7,13 @@ const router = express.Router();
 // API to Scrape Data and Store in Database
 router.get("/scrape", async (req, res) => {
     try {
+        await db.execute("DELETE FROM salesforce_filters WHERE id >= 0");
+        await db.execute("DELETE FROM salesforce_details WHERE id >= 0");
+        await db.execute("DELETE FROM salesforce WHERE id >= 0");
+        await db.execute("ALTER TABLE salesforce AUTO_INCREMENT = 1");
+        await db.execute("ALTER TABLE salesforce_details AUTO_INCREMENT = 1");
+        await db.execute("ALTER TABLE salesforce_filters AUTO_INCREMENT = 1");
+        console.log("🧹 Salesforce tables cleared!");
         console.log("🔄 Scraping fresh data from salesforce");
         const data = await scrapeData();
         res.json({ success: true, data });
