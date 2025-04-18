@@ -89,11 +89,11 @@ async function createTables(pool) { // Accept the pool as argument
     )`,
     `CREATE TABLE IF NOT EXISTS oracle_details (
       id INT PRIMARY KEY,
-      oracle_expertise_description TEXT,
       oracle_expertise_areas TEXT,
       company_overview TEXT,
       solution_titles TEXT,
       solution_links TEXT,
+      link TEXT,
       FOREIGN KEY (id) REFERENCES oracle(id) ON DELETE CASCADE
     )`,
     `CREATE TABLE IF NOT EXISTS oracle_filters (

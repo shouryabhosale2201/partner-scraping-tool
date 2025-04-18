@@ -62,7 +62,7 @@ const scrapeData = async () => {
                                         level4Items.push({
                                             ucm_column,
                                             id: level4.id,
-                                            name: level4.name,
+                                            filterName: level4.name,
                                         });
                                     });
                                 }
@@ -105,7 +105,7 @@ const scrapeData = async () => {
     for (const { ucm_column, id, filterName } of level4Items) {
 
         let currentPage = 1;
-        let totalPages = 3;
+        let totalPages = 2;
 
         while (currentPage <= totalPages) {
             console.log("sending request to : ", filterName, id, ucm_column);
@@ -154,6 +154,24 @@ const scrapeData = async () => {
 
             await Promise.all(chunk.map(async (link, idx) => {
                 try {
+                    if (scrapedMap.has(link)) {
+                        const existingDetails = scrapedMap.get(link);
+
+                        // Ensure 'filter' is an array
+                        if (!Array.isArray(existingDetails.filter)) {
+                            existingDetails.filter = [];
+                        }
+
+                        // Append new filter, avoiding duplicates
+                        if (!existingDetails.filter.includes(filterName)) {
+                            existingDetails.filter.push(filterName);
+                        }
+
+                        // Update the map entry
+                        scrapedMap.set(link, existingDetails);
+                        return;
+                    }
+
                     const detailPage = await browser.newPage();
                     await detailPage.goto(link, { waitUntil: "domcontentloaded", timeout: 100000 });
                     console.log(`🌐 [${i + idx + 1}/${allPartners.length}] Opening: ${link}`);
@@ -162,7 +180,6 @@ const scrapeData = async () => {
                     await nameLocator.waitFor({ state: "visible", timeout: 100000 });
                     const name = (await nameLocator.textContent())?.trim();
 
-                    const oracleExpertiseP = await detailPage.locator("h4:text('Oracle Expertise') + p").textContent();
                     const expertiseDetails = await detailPage
                         .locator("h4:text('Oracle Expertise') + p + ul.bulleted-list li")
                         .allTextContents();
@@ -179,52 +196,18 @@ const scrapeData = async () => {
                             }));
                     });
 
-                    // Step 1: Insert into `oracle` table
-                    const [result] = await db.execute(
-                        `INSERT INTO oracle (name) VALUES (?)`,
-                        [name]
-                    );
-                    const oracleId = result.insertId;
-
-                    // Step 2: Insert into `oracle_details` table
-                    try {
-                        await db.execute(
-                            `INSERT INTO oracle_details (
-                            id, oracle_expertise_description, oracle_expertise_areas,
-                            company_overview, solution_titles, solution_links
-                        ) VALUES (?, ?, ?, ?, ?, ?)`,
-                            [
-                                oracleId,
-                                oracleExpertiseP?.trim() || "",
-                                expertiseDetails.join(", "),
-                                companyOverview,
-                                solutions.map(s => s.title).join(", "),
-                                solutions.map(s => s.url).join(", ")
-                            ]
-                        );
-    
-                        await db.execute(
-                            `INSERT INTO oracle_filters (id, filters)
-                             VALUES (?, ?)
-                             ON DUPLICATE KEY UPDATE
-                               filters = JSON_MERGE_PRESERVE(filters, VALUES(filters))`,
-                            [oracleId, filterName]
-                          );
-                          
-                    } catch (dbError) {
-                        console.log("error inserting into db : ", dbError, " for : ", )
-                    }
+                    const filters = Array.isArray(filterName) ? filterName : [];
 
                     const details = {
                         name,
                         link,
-                        oracleExpertiseP,
                         expertiseDetails,
                         companyOverview,
-                        solutions
+                        solutions,
+                        filter: [...filters]
                     };
                     scrapedMap.set(link, details);
-                    console.log(`✅ Extracted and Stored: ${name}`);
+                    console.log(`✅ Extracted : ${name} Filters : ${details.filter}`);
 
                     await detailPage.close();
                 } catch (error) {
@@ -314,6 +297,39 @@ const scrapeData = async () => {
     // }
 
     const extractedDetails = Array.from(scrapedMap.values());
+    for (const [link, details] of scrapedMap.entries()) {
+        try {
+            // Step 1: Insert into `oracle` table
+            const [result] = await db.execute(
+                `INSERT INTO oracle (name) VALUES (?)`,
+                [details.name]
+            );
+            const oracleId = result.insertId;
+
+            // Step 2: Insert into `oracle_details` table
+            await db.execute(
+                `INSERT INTO oracle_details (
+                id, oracle_expertise_areas, company_overview, solution_titles, solution_links, link
+                ) VALUES (?, ?, ?, ?, ?, ?)`,
+                [
+                    oracleId,
+                    details.expertiseDetails.join(", "),
+                    details.companyOverview,
+                    details.solutions.map(s => s.title).join(", "),
+                    details.solutions.map(s => s.url).join(", "),
+                    link
+                ]
+            );
+
+            await db.execute(
+                `INSERT INTO oracle_filters (id, filters) VALUES (?, ?)`,
+                [oracleId, JSON.stringify(details.filter)]
+            );
+            console.log(`✅ Extracted : ${details.name}`)
+        } catch (dbError) {
+            console.log("error inserting into db : ", dbError, " for : ",)
+        }
+    }
     return extractedDetails;
 };
 

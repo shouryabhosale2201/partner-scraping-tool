@@ -14,6 +14,7 @@ export default function ScraperApp() {
   const handleScrape = async () => {
     setLoading(true);
     setError(null);
+    setData([]);
     try {
       const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`);
       if (response.data.success) setData(response.data.data);
@@ -27,12 +28,12 @@ export default function ScraperApp() {
   const handleFetch = async () => {
     setLoading(true);
     setError(null);
+    setData([]);
     try {
       const response = await axios.get(`http://localhost:5000/api/v1/${url}/fetch`);
       if (response.data.success) setData(response.data.data);
-
       else throw new Error(response.data.error);
-      console.log(data);
+
     } catch (err) {
       setError(err.message);
     }
@@ -60,16 +61,30 @@ export default function ScraperApp() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Web Scraper</h1>
+      <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl w-full">
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Avalara's Web Scraper</h1>
+        <h2 className="text-xl font-bold text-center text-gray-600 mb-4">What is our product?</h2>
+        <p className="text-l text-center text-gray-600 mb-4">​Our solution offers real-time data scraping of partners associated with Oracle, Microsoft, Salesforce, and Shopify, supplying essential details to those who need them.</p>
+        <h2 className="text-xl font-bold text-center text-gray-600 mb-4">Why use our product?</h2>
+        <p className="text-l text-center text-gray-600 mb-4">Our product swiftly delivers data on thousands of partners, complete with relevant filters, within seconds, eliminating the need for days or even months of manual searching and significantly enhancing team productivity. Additionally, the capability to download all data, along with filters, in Excel format adds further convenience.</p>
+        <h2 className="text-xl font-bold text-center text-gray-600 mb-4">How to use it?</h2>
+        <p className="text-base text-left text-gray-600 mb-2">Step 1: Select the company whose partners' data is required.</p>
+
+        <p className="text-base text-left text-gray-600 mb-2">Step 2: You'll have 3 options:</p>
+
+        <ul className="list-disc pl-6 text-base text-gray-600 space-y-2">
+          <li>Scrape live data present on the websites at that moment (this takes some time).</li>
+          <li>Fetch data present already in our database (which can be automatically updated on a daily/weekly basis).</li>
+          <li>Download the necessary data in Excel.</li>
+        </ul>
+
         <select
           value={url}
           onChange={(e) => {
-            setUrl(e.target.value)
+            setUrl(e.target.value);
             setData([]);
-          }
-          }
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+          }}
+          className="w-1/2 flex mx-auto p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 mb-4 mt-4"
         >
           <option value="">Select a source</option>
           <option value="salesforce">Salesforce</option>
@@ -82,20 +97,20 @@ export default function ScraperApp() {
           <button
             onClick={handleScrape}
             disabled={loading}
-            className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
             Scrape Data
           </button>
           <button
             onClick={handleFetch}
             disabled={loading}
-            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-green-700 disabled:bg-green-400"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
             Fetch Stored Data
           </button>
           <button
             onClick={handleDownloadExcel}
-            className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-700"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
             Download Excel
           </button>
