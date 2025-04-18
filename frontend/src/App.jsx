@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
 import OracleTable from "./components/OracleTable";
 import ShopifyTable from "./components/ShopifyTable";
 import MicrosoftTable from "./components/MicrosoftTable";
+import ProductInfo from "./components/ProductInfo";
 
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const tableRef = useRef(null);
+  useEffect(() => {
+    if (data.length > 0 && tableRef.current) {
+      tableRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [data, url]);
 
   const handleScrape = async () => {
     setLoading(true);
@@ -25,19 +32,31 @@ export default function ScraperApp() {
     setLoading(false);
   };
 
-  const handleFetch = async () => {
+  const handleFetch = async (selectedFilters = []) => {
     setLoading(true);
     setError(null);
-    setData([]);
     try {
-      const response = await axios.get(`http://localhost:5000/api/v1/${url}/fetch`);
+      let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
+
+      // Add industry filters as query parameters if there are any
+      if (selectedFilters && selectedFilters.length > 0) {
+        endpoint += `?industries=${encodeURIComponent(JSON.stringify(selectedFilters))}`;
+      }
+
+      const response = await axios.get(endpoint);
       if (response.data.success) setData(response.data.data);
       else throw new Error(response.data.error);
-
     } catch (err) {
       setError(err.message);
     }
     setLoading(false);
+  };
+
+  // Handle filter changes for Microsoft table
+  const handleMicrosoftFilterChange = (selectedFilters) => {
+    if (url === 'microsoft') {
+      handleFetch(selectedFilters);
+    }
   };
 
   const handleDownloadExcel = async () => {
@@ -61,23 +80,9 @@ export default function ScraperApp() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
+
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl w-full">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Avalara's Web Scraper</h1>
-        <h2 className="text-xl font-bold text-center text-gray-600 mb-4">What is our product?</h2>
-        <p className="text-l text-center text-gray-600 mb-4">​Our solution offers real-time data scraping of partners associated with Oracle, Microsoft, Salesforce, and Shopify, supplying essential details to those who need them.</p>
-        <h2 className="text-xl font-bold text-center text-gray-600 mb-4">Why use our product?</h2>
-        <p className="text-l text-center text-gray-600 mb-4">Our product swiftly delivers data on thousands of partners, complete with relevant filters, within seconds, eliminating the need for days or even months of manual searching and significantly enhancing team productivity. Additionally, the capability to download all data, along with filters, in Excel format adds further convenience.</p>
-        <h2 className="text-xl font-bold text-center text-gray-600 mb-4">How to use it?</h2>
-        <p className="text-base text-left text-gray-600 mb-2">Step 1: Select the company whose partners' data is required.</p>
-
-        <p className="text-base text-left text-gray-600 mb-2">Step 2: You'll have 3 options:</p>
-
-        <ul className="list-disc pl-6 text-base text-gray-600 space-y-2">
-          <li>Scrape live data present on the websites at that moment (this takes some time).</li>
-          <li>Fetch data present already in our database (which can be automatically updated on a daily/weekly basis).</li>
-          <li>Download the necessary data in Excel.</li>
-        </ul>
-
+        <ProductInfo />
         <select
           value={url}
           onChange={(e) => {
@@ -102,7 +107,7 @@ export default function ScraperApp() {
             Scrape Data
           </button>
           <button
-            onClick={handleFetch}
+            onClick={() => handleFetch()}
             disabled={loading}
             className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
@@ -114,15 +119,22 @@ export default function ScraperApp() {
           >
             Download Excel
           </button>
-
         </div>
+        {loading && <p className="text-center mt-4">Loading...</p>}
         {error && <p className="text-red-500 text-center mt-4">Error: {error}</p>}
       </div>
-      <div>
+
+
+      <div ref={tableRef}>
         {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
         {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
         {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
-        {data.length > 0 && url === "microsoft" && <MicrosoftTable data={data} />}
+        {data.length > 0 && url === "microsoft" && (
+          <MicrosoftTable
+            data={data}
+            onFilterChange={handleMicrosoftFilterChange}
+          />
+        )}
       </div>
     </div>
   );

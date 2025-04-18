@@ -127,6 +127,7 @@ async function createTables(pool) { // Accept the pool as argument
       product JSON,
       solutions JSON,
       serviceType JSON,
+      industryFocus JSON,
       FOREIGN KEY (id) REFERENCES microsoft(id) ON DELETE CASCADE
     )`,
     `CREATE TABLE IF NOT EXISTS microsoft_filters (

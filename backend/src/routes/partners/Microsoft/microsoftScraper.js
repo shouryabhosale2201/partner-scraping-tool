@@ -45,14 +45,14 @@ const scrapeData = async () => {
           
             // Step 2: Insert the rest of the details using that ID into 'microsoft_details'
             await db.execute(
-              `INSERT INTO microsoft_details (id, description, product, solutions, serviceType) VALUES (?, ?, ?, ?, ?)`,
+              `INSERT INTO microsoft_details (id, description, product, solutions, serviceType, industryFocus) VALUES (?, ?, ?, ?, ?, ?)`,
               [
                 insertedId,
                 details.description,
-                // JSON.stringify(details.industryFocus),
                 JSON.stringify(details.product),
                 JSON.stringify(details.solutions),
-                JSON.stringify(details.serviceType)
+                JSON.stringify(details.serviceType),
+                JSON.stringify(details.industryFocus)
               ]
             );
 

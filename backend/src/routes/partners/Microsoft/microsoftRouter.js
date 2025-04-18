@@ -28,17 +28,53 @@ router.get("/scrape", async (req, res) => {
 router.get("/fetch", async (req, res) => {
     initializeDatabase();
     try {
-        const [rows] = await db.execute(`
+        let query = `
             SELECT 
                 m.id, 
                 m.name, 
                 d.description,  
                 d.product, 
                 d.solutions, 
-                d.serviceType 
+                d.serviceType,
+                d.industryFocus
             FROM microsoft m
             LEFT JOIN microsoft_details d ON m.id = d.id
-        `);
+        `;
+        
+        // Check if industries filter is provided
+        if (req.query.industries) {
+            const selectedIndustries = JSON.parse(req.query.industries);
+            
+            if (selectedIndustries.length > 0) {
+                // Add JOIN with filters table and WHERE clause for filtering
+                query = `
+                    SELECT 
+                        m.id, 
+                        m.name, 
+                        d.description,  
+                        d.product, 
+                        d.solutions, 
+                        d.serviceType,
+                        d.industryFocus
+                    FROM microsoft m
+                    LEFT JOIN microsoft_details d ON m.id = d.id
+                    JOIN microsoft_filters f ON m.id = f.id
+                    WHERE 
+                `;
+                
+                // Create conditions for each selected industry
+                const conditions = selectedIndustries.map(industry => 
+                    `JSON_CONTAINS(f.industry, '"${industry}"')`
+                );
+                
+                query += conditions.join(' AND ');
+                
+                // Group by to avoid duplicates
+                query += ` GROUP BY m.id`;
+            }
+        }
+        
+        const [rows] = await db.execute(query);
         res.json({ success: true, data: rows });
     } catch (error) {
         console.error("❌ Database Fetch Error:", error.message);
