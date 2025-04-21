@@ -40,11 +40,11 @@ router.get("/fetch", async (req, res) => {
             FROM microsoft m
             LEFT JOIN microsoft_details d ON m.id = d.id
         `;
-        
+
         // Check if industries filter is provided
         if (req.query.industries) {
             const selectedIndustries = JSON.parse(req.query.industries);
-            
+
             if (selectedIndustries.length > 0) {
                 // Add JOIN with filters table and WHERE clause for filtering
                 query = `
@@ -61,24 +61,69 @@ router.get("/fetch", async (req, res) => {
                     JOIN microsoft_filters f ON m.id = f.id
                     WHERE 
                 `;
-                
+
                 // Create conditions for each selected industry
-                const conditions = selectedIndustries.map(industry => 
+                const conditions = selectedIndustries.map(industry =>
                     `JSON_CONTAINS(f.industry, '"${industry}"')`
                 );
-                
+
                 query += conditions.join(' AND ');
-                
+
                 // Group by to avoid duplicates
                 query += ` GROUP BY m.id`;
             }
         }
-        
+
         const [rows] = await db.execute(query);
         res.json({ success: true, data: rows });
     } catch (error) {
         console.error("❌ Database Fetch Error:", error.message);
         res.status(500).json({ success: false, error: "Failed to fetch data." });
+    }
+});
+
+router.get("/filters", async (req, res) => {
+    try {
+        const [rows] = await db.query(
+            `SELECT product, solutions, serviceType, industryFocus FROM microsoft_details`
+        );
+
+        const extractUnique = (key) => {
+            const all = rows.flatMap(row => {
+                const value = row[key];
+                if (!value) return [];
+
+                // If it's already an array, return it directly
+                if (Array.isArray(value)) return value;
+
+                // If it's a stringified array, try parsing it
+                try {
+                    const parsed = JSON.parse(value);
+                    return Array.isArray(parsed) ? parsed : [];
+                } catch {
+                    return [];
+                }
+            });
+
+            return [...new Set(all)].filter(Boolean);
+        };
+
+        // Extract unique values for each filter type
+        const filters = {
+            product: extractUnique("product"),
+            solution: extractUnique("solutions"),
+            services: extractUnique("serviceType"),
+            industry: extractUnique("industryFocus"),
+        };
+
+        // Log filters for debugging purposes
+        console.log("Returned filters:", filters);
+
+        // Send filters as JSON response
+        res.json(filters);
+    } catch (err) {
+        console.error("Error fetching filters:", err);
+        res.status(500).json({ error: "Failed to fetch filter data" });
     }
 });
 
