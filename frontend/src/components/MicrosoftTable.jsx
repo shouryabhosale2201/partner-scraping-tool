@@ -71,27 +71,55 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             </div>
         );
     };
-
     return (
-        <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4 overflow-y-auto mt-6">
-            <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
+        <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4">
+            {/* Sticky Apply Filters and Search */}
+            <div className="sticky p-2">
+                <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
 
-            <div className="mb-4">
-                <input
-                    type="text"
-                    placeholder="Search filters..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search filters..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+                <div className="mb-4">
+                    <button
+                        onClick={() => {
+                            setSelectedFilters({
+                                industry: [],
+                                services: [],
+                                product: [],
+                                solution: []
+                            });
+                            onFilterChange({
+                                industry: [],
+                                services: [],
+                                product: [],
+                                solution: []
+                            });
+                            setSearchTerm("");  // optional: reset the search bar too
+                        }}
+                        className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-500 text-white text-sm"
+                    >
+                        Reset
+                    </button>
+                </div>
             </div>
 
-            {renderFilterSection("Industry", filters.industry, "industry")}
-            {renderFilterSection("Services", filters.services, "services")}
-            {renderFilterSection("Product", filters.product, "product")}
-            {renderFilterSection("Solution", filters.solution, "solution")}
+            {/* Scrollable Filters */}
+            <div className="overflow-y-auto mt-2 max-h-[calc(100vh-180px)]">
+                {renderFilterSection("Industry", filters.industry, "industry")}
+                {renderFilterSection("Services", filters.services, "services")}
+                {renderFilterSection("Product", filters.product, "product")}
+                {renderFilterSection("Solution", filters.solution, "solution")}
+            </div>
         </div>
     );
+
 };
 
 export default function MicrosoftTable({ data, onFilterChange }) {
