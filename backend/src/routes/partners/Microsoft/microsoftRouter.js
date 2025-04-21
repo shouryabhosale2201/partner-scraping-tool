@@ -24,60 +24,72 @@ router.get("/scrape", async (req, res) => {
     }
 });
 
-// API to Fetch Data from Database
 router.get("/fetch", async (req, res) => {
-    initializeDatabase();
+    initializeDatabase(); // Ensure the database connection is initialized
     try {
         let query = `
-            SELECT 
-                m.id, 
-                m.name, 
-                d.description,  
-                d.product, 
-                d.solutions, 
+            SELECT
+                m.id,
+                m.name,
+                d.description,
+                d.product,
+                d.solutions,
                 d.serviceType,
                 d.industryFocus
             FROM microsoft m
             LEFT JOIN microsoft_details d ON m.id = d.id
         `;
-
+        const conditions = [];
         // Check if industries filter is provided
         if (req.query.industries) {
             const selectedIndustries = JSON.parse(req.query.industries);
-
             if (selectedIndustries.length > 0) {
-                // Add JOIN with filters table and WHERE clause for filtering
-                query = `
-                    SELECT 
-                        m.id, 
-                        m.name, 
-                        d.description,  
-                        d.product, 
-                        d.solutions, 
-                        d.serviceType,
-                        d.industryFocus
-                    FROM microsoft m
-                    LEFT JOIN microsoft_details d ON m.id = d.id
-                    JOIN microsoft_filters f ON m.id = f.id
-                    WHERE 
-                `;
-
-                // Create conditions for each selected industry
-                const conditions = selectedIndustries.map(industry =>
-                    `JSON_CONTAINS(f.industry, '"${industry}"')`
+                const industryConditions = selectedIndustries.map(industry =>
+                    `JSON_CONTAINS(d.industryFocus, '"${industry}"')`
                 );
-
-                query += conditions.join(' AND ');
-
-                // Group by to avoid duplicates
-                query += ` GROUP BY m.id`;
+                conditions.push(`(${industryConditions.join(' AND ')})`);
             }
         }
-
+        // Check if products filter is provided
+        if (req.query.products) {
+            const selectedProducts = JSON.parse(req.query.products);
+            if (selectedProducts.length > 0) {
+                const productConditions = selectedProducts.map(product =>
+                    `JSON_CONTAINS(d.product, '"${product}"')`
+                );
+                conditions.push(`(${productConditions.join(' AND ')})`);
+            }
+        }
+        // Check if solutions filter is provided
+        if (req.query.solutions) {
+            const selectedSolutions = JSON.parse(req.query.solutions);
+            if (selectedSolutions.length > 0) {
+                const solutionConditions = selectedSolutions.map(solution =>
+                    `JSON_CONTAINS(d.solutions, '"${solution}"')`
+                );
+                conditions.push(`(${solutionConditions.join(' AND ')})`);
+            }
+        }
+        // Check if services filter is provided
+        if (req.query.services) {
+            const selectedServices = JSON.parse(req.query.services);
+            if (selectedServices.length > 0) {
+                const serviceConditions = selectedServices.map(service =>
+                    `JSON_CONTAINS(d.serviceType, '"${service}"')`
+                );
+                conditions.push(`(${serviceConditions.join(' AND ')})`);
+            }
+        }
+        // If any filters are applied, append the WHERE clause
+        if (conditions.length > 0) {
+            query += ` WHERE ${conditions.join(' AND ')}`;
+        }
+        console.log(query);
+        // Execute the query
         const [rows] = await db.execute(query);
         res.json({ success: true, data: rows });
     } catch (error) {
-        console.error("❌ Database Fetch Error:", error.message);
+        console.error(":x: Database Fetch Error:", error.message);
         res.status(500).json({ success: false, error: "Failed to fetch data." });
     }
 });

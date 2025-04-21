@@ -31,16 +31,34 @@ export default function ScraperApp() {
     }
     setLoading(false);
   };
-
-  const handleFetch = async (selectedFilters = []) => {
+  
+  const handleFetch = async (selectedFilters = {}) => {
     setLoading(true);
     setError(null);
     try {
       let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
 
-      // Add industry filters as query parameters if there are any
-      if (selectedFilters && selectedFilters.length > 0) {
-        endpoint += `?industries=${encodeURIComponent(JSON.stringify(selectedFilters))}`;
+      // Create query parameters matching backend expectations
+      const params = new URLSearchParams();
+
+      if (selectedFilters.industry?.length > 0) {
+        params.append('industries', JSON.stringify(selectedFilters.industry));
+      }
+
+      if (selectedFilters.product?.length > 0) {
+        params.append('products', JSON.stringify(selectedFilters.product));
+      }
+
+      if (selectedFilters.solution?.length > 0) {
+        params.append('solutions', JSON.stringify(selectedFilters.solution));
+      }
+
+      if (selectedFilters.services?.length > 0) {
+        params.append('services', JSON.stringify(selectedFilters.services));
+      }
+
+      if (params.toString()) {
+        endpoint += `?${params.toString()}`;
       }
 
       const response = await axios.get(endpoint);
@@ -51,7 +69,6 @@ export default function ScraperApp() {
     }
     setLoading(false);
   };
-
   // Handle filter changes for Microsoft table
   const handleMicrosoftFilterChange = (selectedFilters) => {
     if (url === 'microsoft') {
@@ -131,8 +148,8 @@ export default function ScraperApp() {
         {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
         {data.length > 0 && url === "microsoft" && (
           <MicrosoftTable
-            data={data}
-            onFilterChange={handleMicrosoftFilterChange}
+          data={data} 
+          onFilterChange={handleMicrosoftFilterChange} 
           />
         )}
       </div>
