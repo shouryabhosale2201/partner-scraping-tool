@@ -16,7 +16,6 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                 if (!res.ok) throw new Error("Failed to fetch filters");
                 const data = await res.json();
                 setFilters(data);
-                console.log(data);
             } catch (error) {
                 console.error("Error fetching filters:", error);
                 setFilters({

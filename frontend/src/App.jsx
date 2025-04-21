@@ -31,46 +31,78 @@ export default function ScraperApp() {
     }
     setLoading(false);
   };
-  
+
   const handleFetch = async (selectedFilters = {}) => {
     setLoading(true);
     setError(null);
-    try {
-      let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
+    if (url === "microsoft") {
+      try {
+        let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
 
-      // Create query parameters matching backend expectations
-      const params = new URLSearchParams();
+        // Create query parameters matching backend expectations
+        const params = new URLSearchParams();
 
-      if (selectedFilters.industry?.length > 0) {
-        params.append('industries', JSON.stringify(selectedFilters.industry));
+        if (selectedFilters.industry?.length > 0) {
+          params.append('industries', JSON.stringify(selectedFilters.industry));
+        }
+
+        if (selectedFilters.product?.length > 0) {
+          params.append('products', JSON.stringify(selectedFilters.product));
+        }
+
+        if (selectedFilters.solution?.length > 0) {
+          params.append('solutions', JSON.stringify(selectedFilters.solution));
+        }
+
+        if (selectedFilters.services?.length > 0) {
+          params.append('services', JSON.stringify(selectedFilters.services));
+        }
+
+        if (params.toString()) {
+          endpoint += `?${params.toString()}`;
+        }
+
+        const response = await axios.get(endpoint);
+        if (response.data.success) setData(response.data.data);
+        else throw new Error(response.data.error);
+      } catch (err) {
+        setError(err.message);
       }
-
-      if (selectedFilters.product?.length > 0) {
-        params.append('products', JSON.stringify(selectedFilters.product));
-      }
-
-      if (selectedFilters.solution?.length > 0) {
-        params.append('solutions', JSON.stringify(selectedFilters.solution));
-      }
-
-      if (selectedFilters.services?.length > 0) {
-        params.append('services', JSON.stringify(selectedFilters.services));
-      }
-
-      if (params.toString()) {
-        endpoint += `?${params.toString()}`;
-      }
-
-      const response = await axios.get(endpoint);
-      if (response.data.success) setData(response.data.data);
-      else throw new Error(response.data.error);
-    } catch (err) {
-      setError(err.message);
     }
+
+    if (url === "salesforce") {
+      try {
+        const endpoint = "http://localhost:5000/api/v1/salesforce/fetch";
+
+        const params = new URLSearchParams();
+
+        // Salesforce filters are a single array (not sectioned)
+        if (selectedFilters.length > 0) {
+          params.append("filters", JSON.stringify(selectedFilters));
+        }
+
+        const response = await axios.get(`${endpoint}?${params.toString()}`);
+
+        if (response.data.success) {
+          setData(response.data.data);
+        } else {
+          throw new Error(response.data.error);
+        }
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+
     setLoading(false);
   };
   // Handle filter changes for Microsoft table
   const handleMicrosoftFilterChange = (selectedFilters) => {
+    if (url === 'microsoft') {
+      handleFetch(selectedFilters);
+    }
+  };
+
+  const handleSalesforceFilterChange = (selectedFilters) => {
     if (url === 'microsoft') {
       handleFetch(selectedFilters);
     }
@@ -143,13 +175,18 @@ export default function ScraperApp() {
 
 
       <div ref={tableRef}>
-        {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
+        {data.length > 0 && url === "salesforce" && (
+          <SalesforceTable
+            data={data}
+            onFilterChange={handleSalesforceFilterChange}
+          />
+        )}
         {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
         {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
         {data.length > 0 && url === "microsoft" && (
           <MicrosoftTable
-          data={data} 
-          onFilterChange={handleMicrosoftFilterChange} 
+            data={data}
+            onFilterChange={handleMicrosoftFilterChange}
           />
         )}
       </div>

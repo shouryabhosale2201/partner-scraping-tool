@@ -24,10 +24,38 @@ router.get("/scrape", async (req, res) => {
 });
 
 // API to Fetch Data from Database
+// router.get("/fetch", async (req, res) => {
+//     initializeDatabase();
+//     try {
+//         const [rows] = await db.execute(`
+//             SELECT 
+//                 s.id,
+//                 s.name,
+//                 d.link,
+//                 d.tagline,
+//                 d.description,
+//                 d.expertise,
+//                 d.industries,
+//                 d.services,
+//                 d.extendedDescription
+//             FROM salesforce s
+//             LEFT JOIN salesforce_details d ON s.id = d.id
+//         `);
+
+//         res.json({ success: true, data: rows });
+//     } catch (error) {
+//         console.error("❌ Database Fetch Error:", error.message);
+//         res.status(500).json({ success: false, error: "Failed to fetch data." });
+//     }
+// });
+
 router.get("/fetch", async (req, res) => {
     initializeDatabase();
+
     try {
-        const [rows] = await db.execute(`
+        const filters = req.query.filters ? JSON.parse(req.query.filters) : [];
+
+        let query = `
             SELECT 
                 s.id,
                 s.name,
@@ -40,14 +68,70 @@ router.get("/fetch", async (req, res) => {
                 d.extendedDescription
             FROM salesforce s
             LEFT JOIN salesforce_details d ON s.id = d.id
-        `);
+            LEFT JOIN salesforce_filters f ON s.id = f.id
+        `;
 
+        const queryParams = [];
+
+        if (filters.length > 0) {
+            query += `
+                WHERE EXISTS (
+                    SELECT 1
+                    FROM JSON_TABLE(f.filters, '$[*]' COLUMNS(
+                        filterList JSON PATH '$.filters'
+                    )) AS ft
+                    WHERE JSON_CONTAINS(ft.filterList, JSON_ARRAY(?))
+                )
+            `;
+            // We use the first value of filters just to satisfy JSON_ARRAY(?)
+            // and will dynamically build JSON_ARRAY('A', 'B', 'C') from your filter list
+            query = query.replace("JSON_ARRAY(?)", `JSON_ARRAY(${filters.map(() => '?').join(', ')})`);
+            queryParams.push(...filters);
+        }
+
+        const [rows] = await db.execute(query, queryParams);
         res.json({ success: true, data: rows });
+
     } catch (error) {
-        console.error("❌ Database Fetch Error:", error.message);
-        res.status(500).json({ success: false, error: "Failed to fetch data." });
+        console.error("❌ Salesforce Filter Fetch Error:", error.message);
+        res.status(500).json({ success: false, error: "Failed to fetch filtered Salesforce data." });
     }
 });
+
+router.get("/filters", async (req, res) => {
+    try {
+        const [rows] = await db.query(`SELECT filters FROM salesforce_filters`);
+
+        const allFilters = rows.flatMap(row => {
+            if (!row.filters) return [];
+
+            try {
+                const parsed = typeof row.filters === "string"
+                    ? JSON.parse(row.filters)
+                    : row.filters;
+
+                return parsed.flatMap(entry => entry.filters || []);
+            } catch (err) {
+                console.error("Error parsing filters JSON:", err);
+                return [];
+            }
+        });
+
+        const uniqueFilters = [...new Set(allFilters)].filter(Boolean);
+        console.log(uniqueFilters);
+        // Send in the frontend-friendly format
+        res.json([
+            {
+                section: "Salesforce Expertise",
+                filters: uniqueFilters
+            }
+        ]);
+    } catch (err) {
+        console.error("❌ Error fetching Salesforce filters:", err);
+        res.status(500).json({ error: "Failed to fetch Salesforce filter data" });
+    }
+});
+
 
 // Download Excel
 router.get("/downloadExcel", async (req, res) => {
@@ -68,26 +152,26 @@ router.get("/downloadExcel", async (req, res) => {
             FROM salesforce s
             LEFT JOIN salesforce_details d ON s.id = d.id
         `);
-        
+
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
         }
-        
+
         // Get filters data
         const [filtersRows] = await db.execute(`
             SELECT id, filters 
             FROM salesforce_filters
         `);
-        
+
         // Create a map of id -> filters for easier lookup
         const filtersMap = {};
         filtersRows.forEach(row => {
             filtersMap[row.id] = row.filters;
         });
-        
+
         // Create Excel file with data and filters
         const filePath = await exportToExcel(rows, filtersMap);
-        
+
         // Send the file as download
         res.download(filePath, "salesforce_partners.xlsx", (err) => {
             if (err) {
