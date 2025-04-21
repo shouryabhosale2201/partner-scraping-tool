@@ -110,7 +110,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
               onFilterChange({});
               setSearchTerm("");
             }}
-            className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-500 text-white text-sm"
+            className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
           >
             Reset
           </button>
