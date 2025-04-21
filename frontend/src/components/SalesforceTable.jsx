@@ -126,9 +126,11 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
 
 const SalesforceTable = () => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [tableSearchTerm, setTableSearchTerm] = useState("");
 
   const handleFilterChange = async (filters) => {
     setIsLoading(true);
@@ -158,16 +160,49 @@ const SalesforceTable = () => {
       
       if (json.success) {
         setData(json.data);
+        setFilteredData(json.data);
+        // Apply any existing table search term to the new data
+        if (tableSearchTerm) {
+          handleTableSearch(tableSearchTerm, json.data);
+        }
       } else {
         setError(json.error || "Unknown error");
         setData([]);
+        setFilteredData([]);
       }
     } catch (err) {
       setError(err.message);
       setData([]);
+      setFilteredData([]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Function to handle table search
+  const handleTableSearch = (searchTerm, dataToSearch = data) => {
+    setTableSearchTerm(searchTerm);
+    
+    if (!searchTerm.trim()) {
+      setFilteredData(dataToSearch);
+      return;
+    }
+    
+    const term = searchTerm.toLowerCase();
+    const filtered = dataToSearch.filter(item => {
+      // Check all text fields in the item
+      return (
+        (item.name && item.name.toLowerCase().includes(term)) ||
+        (item.tagline && item.tagline.toLowerCase().includes(term)) ||
+        (item.description && item.description.toLowerCase().includes(term)) ||
+        (item.expertise && item.expertise.toLowerCase().includes(term)) ||
+        (item.industries && item.industries.toLowerCase().includes(term)) ||
+        (item.services && item.services.toLowerCase().includes(term)) ||
+        (item.extendedDescription && item.extendedDescription.toLowerCase().includes(term))
+      );
+    });
+    
+    setFilteredData(filtered);
   };
 
   // Fetch initial data when component mounts
@@ -183,7 +218,7 @@ const SalesforceTable = () => {
         onFilterChange={handleFilterChange}
       />
 
-      <div className="flex-1 overflow-auto px-4">
+      <div className="flex-1 overflow-auto p-4">
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             <strong className="font-bold">Error:</strong>
@@ -191,80 +226,96 @@ const SalesforceTable = () => {
           </div>
         )}
         
+        {/* Table Search Bar */}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search in table"
+            value={tableSearchTerm}
+            onChange={(e) => handleTableSearch(e.target.value)}
+            className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
         ) : (
-          <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
-            <thead className="bg-base-200 text-base font-semibold sticky top-0 z-10">
-              <tr>
-                <th className="w-[4%]">#</th>
-                <th className="w-[12%]">Name</th>
-                <th className="w-[18%]">Tagline</th>
-                <th className="w-[25%]">Description</th>
-                <th className="w-[30%]">Highlights</th>
-                <th className="w-[30%]">Extended Description</th>
-                <th className="w-[10%]">Link</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.length > 0 ? (
-                data.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
-                  >
-                    <th className="py-2">{index + 1}</th>
-                    <td className="py-2">{item.name}</td>
-                    <td className="py-2">{item.tagline}</td>
-                    <td className="py-2">
-                      <div className="max-h-[100px] overflow-y-auto">{item.description}</div>
-                    </td>
-                    <td className="py-2 whitespace-pre-line">
-                      <div className="max-h-[100px] overflow-y-auto">
-                        {item.expertise || "N/A"}
-                        {"\n\n"}
-                        {item.industries || "N/A"}
-                        {"\n\n"}
-                        {item.services || "N/A"}
-                      </div>
-                    </td>
-                    <td className="py-2">
-                      <div className="max-h-[100px] overflow-y-auto">{item.extendedDescription}</div>
-                    </td>
-                    <td className="py-2">
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline"
-                      >
-                        Visit
-                      </a>
+          <>
+            <div className="mb-2 text-sm text-gray-600">
+              Showing {filteredData.length} of {data.length} entries
+            </div>
+            <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
+              <thead className="bg-base-200 text-base font-semibold sticky top-0 z-10">
+                <tr>
+                  <th className="w-[4%]">#</th>
+                  <th className="w-[12%]">Name</th>
+                  <th className="w-[18%]">Tagline</th>
+                  <th className="w-[25%]">Description</th>
+                  <th className="w-[30%]">Highlights</th>
+                  <th className="w-[30%]">Extended Description</th>
+                  <th className="w-[10%]">Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.length > 0 ? (
+                  filteredData.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+                    >
+                      <th className="py-2">{index + 1}</th>
+                      <td className="py-2">{item.name}</td>
+                      <td className="py-2">{item.tagline}</td>
+                      <td className="py-2">
+                        <div className="max-h-[100px] overflow-y-auto">{item.description}</div>
+                      </td>
+                      <td className="py-2 whitespace-pre-line">
+                        <div className="max-h-[100px] overflow-y-auto">
+                          {item.expertise || "N/A"}
+                          {"\n\n"}
+                          {item.industries || "N/A"}
+                          {"\n\n"}
+                          {item.services || "N/A"}
+                        </div>
+                      </td>
+                      <td className="py-2">
+                        <div className="max-h-[100px] overflow-y-auto">{item.extendedDescription}</div>
+                      </td>
+                      <td className="py-2">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
+                          Visit
+                        </a>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="7" className="text-center py-4">
+                      No data available
                     </td>
                   </tr>
-                ))
-              ) : (
+                )}
+              </tbody>
+              <tfoot>
                 <tr>
-                  <td colSpan="7" className="text-center py-4">
-                    No data available
-                  </td>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Tagline</th>
+                  <th>Description</th>
+                  <th>Highlights</th>
+                  <th>Extended Description</th>
+                  <th>Link</th>
                 </tr>
-              )}
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Tagline</th>
-                <th>Description</th>
-                <th>Highlights</th>
-                <th>Extended Description</th>
-                <th>Link</th>
-              </tr>
-            </tfoot>
-          </table>
+              </tfoot>
+            </table>
+          </>
         )}
       </div>
     </div>

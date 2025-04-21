@@ -72,14 +72,13 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     };
     return (
         <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4">
-            {/* Sticky Apply Filters and Search */}
             <div className="sticky p-2">
                 <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
 
                 <div className="mb-4">
                     <input
                         type="text"
-                        placeholder="Search filters..."
+                        placeholder="Search filters"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -100,16 +99,15 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                                 product: [],
                                 solution: []
                             });
-                            setSearchTerm("");  // optional: reset the search bar too
+                            setSearchTerm("");
                         }}
-                        className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-500 text-white text-sm"
+                        className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
                     >
                         Reset
                     </button>
                 </div>
             </div>
 
-            {/* Scrollable Filters */}
             <div className="overflow-y-auto mt-2 max-h-[calc(100vh-180px)]">
                 {renderFilterSection("Industry", filters.industry, "industry")}
                 {renderFilterSection("Services", filters.services, "services")}
@@ -118,7 +116,6 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             </div>
         </div>
     );
-
 };
 
 export default function MicrosoftTable({ data, onFilterChange }) {
@@ -129,13 +126,23 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         solution: []
     });
 
+    const [tableSearchTerm, setTableSearchTerm] = useState("");
+
     const handleFilterChange = (updatedFilters) => {
         setSelectedFilters(updatedFilters);
-        // Call the parent component's filter change handler
         if (onFilterChange) {
             onFilterChange(updatedFilters);
         }
     };
+
+    const filteredData = data?.filter(item =>
+        item.name.toLowerCase().includes(tableSearchTerm.toLowerCase()) ||
+        item.description?.toLowerCase().includes(tableSearchTerm.toLowerCase()) ||
+        (Array.isArray(item.product) ? item.product.join(", ").toLowerCase() : item.product?.toLowerCase()).includes(tableSearchTerm.toLowerCase()) ||
+        (Array.isArray(item.solutions) ? item.solutions.join(", ").toLowerCase() : item.solutions?.toLowerCase()).includes(tableSearchTerm.toLowerCase()) ||
+        (Array.isArray(item.serviceType) ? item.serviceType.join(", ").toLowerCase() : item.serviceType?.toLowerCase()).includes(tableSearchTerm.toLowerCase()) ||
+        (Array.isArray(item.industryFocus) ? item.industryFocus.join(", ").toLowerCase() : item.industryFocus?.toLowerCase()).includes(tableSearchTerm.toLowerCase())
+    ) || [];
 
     return (
         <div className="flex h-screen overflow-hidden mt-6">
@@ -145,7 +152,18 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                 onFilterChange={handleFilterChange}
             />
 
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-auto p-4">
+                {/* Search Field Above Table */}
+                <div className="mb-4">
+                    <input
+                        type="text"
+                        placeholder="Search in table"
+                        value={tableSearchTerm}
+                        onChange={(e) => setTableSearchTerm(e.target.value)}
+                        className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                </div>
+
                 <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
                     <thead className="bg-base-200 text-base font-semibold sticky top-0 z-10">
                         <tr>
@@ -159,8 +177,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {data && data.length > 0 ? (
-                            data.map((item, index) => (
+                        {filteredData.length > 0 ? (
+                            filteredData.map((item, index) => (
                                 <tr
                                     key={index}
                                     className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
