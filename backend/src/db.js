@@ -95,8 +95,8 @@ async function createTables(pool) { // Accept the pool as argument
       solution_titles TEXT,
       solution_links TEXT,
       FOREIGN KEY (id) REFERENCES oracle(id) ON DELETE CASCADE
-    )`, // Added ON DELETE CASCADE
-
+    )`,
+    // Added ON DELETE CASCADE
     // Shopify
     `CREATE TABLE IF NOT EXISTS shopify (
       id INT PRIMARY KEY AUTO_INCREMENT,
@@ -109,7 +109,15 @@ async function createTables(pool) { // Accept the pool as argument
       specialized_services JSON,
       featured_work JSON,
       FOREIGN KEY (id) REFERENCES shopify(id) ON DELETE CASCADE
-    )`, // Added ON DELETE CASCADE
+    )`, 
+
+    `CREATE TABLE IF NOT EXISTS shopify_filters (
+     id INT PRIMARY KEY,
+     filters JSON,
+     FOREIGN KEY (id) REFERENCES shopify(id) ON DELETE CASCADE
+      )`,
+    
+    // Added ON DELETE CASCADE
 
     //Microsoft
     `CREATE TABLE IF NOT EXISTS microsoft (
