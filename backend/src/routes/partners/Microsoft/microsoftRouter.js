@@ -8,6 +8,7 @@ const fs = require("fs");
 // API to Scrape Data and Store in Database
 router.get("/scrape", async (req, res) => {
     try {
+        initializeDatabase();
         await db.execute("DELETE FROM microsoft_filters WHERE id >= 0");
         await db.execute("DELETE FROM microsoft_details WHERE id >= 0");
         await db.execute("DELETE FROM microsoft WHERE id >= 0");
@@ -84,7 +85,6 @@ router.get("/fetch", async (req, res) => {
         if (conditions.length > 0) {
             query += ` WHERE ${conditions.join(' AND ')}`;
         }
-        console.log(query);
         // Execute the query
         const [rows] = await db.execute(query);
         res.json({ success: true, data: rows });
@@ -127,9 +127,6 @@ router.get("/filters", async (req, res) => {
             services: extractUnique("serviceType"),
             industry: extractUnique("industryFocus"),
         };
-
-        // Log filters for debugging purposes
-        console.log("Returned filters:", filters);
 
         // Send filters as JSON response
         res.json(filters);

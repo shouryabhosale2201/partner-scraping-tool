@@ -1,8 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-// const db = require("./db"); 
-// const scrapeData = require("./routes/partners/SalesForce/salesforceScraper");
-// const exportToExcel = require("./routes/partners/SalesForce/salesforceExcel");
 const mainRouter = require("./src/routes/mainRouter")
 
 const app = express();
