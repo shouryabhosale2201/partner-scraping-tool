@@ -24,11 +24,11 @@ router.get("/fetch", async (req, res) => {
             SELECT 
             o.id,
             o.name,
-            d.oracle_expertise_description,
             d.oracle_expertise_areas,
             d.company_overview,
             d.solution_titles,
-            d.solution_links
+            d.solution_links,
+            d.link
             FROM oracle o
             LEFT JOIN oracle_details d ON o.id = d.id;
         `);

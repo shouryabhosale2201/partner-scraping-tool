@@ -1,13 +1,20 @@
 const express = require("express");
 const scrapeData = require("./microsoftScraper");
 const exportToExcel = require("./microsoftExcel");
-const {db, initializeDatabase} = require("../../../db");
+const { db, initializeDatabase } = require("../../../db");
 const router = express.Router();
 const fs = require("fs");
 
 // API to Scrape Data and Store in Database
 router.get("/scrape", async (req, res) => {
     try {
+        await db.execute("DELETE FROM microsoft_filters WHERE id >= 0");
+        await db.execute("DELETE FROM microsoft_details WHERE id >= 0");
+        await db.execute("DELETE FROM microsoft WHERE id >= 0");
+        await db.execute("ALTER TABLE microsoft AUTO_INCREMENT = 1");
+        await db.execute("ALTER TABLE microsoft_details AUTO_INCREMENT = 1");
+        await db.execute("ALTER TABLE microsoft_filters AUTO_INCREMENT = 1");
+        console.log("🧹 Microsoft tables cleared!");
         console.log("🔄 Scraping fresh data from microsoft");
         const data = await scrapeData();
         res.json({ success: true, data });
@@ -21,17 +28,53 @@ router.get("/scrape", async (req, res) => {
 router.get("/fetch", async (req, res) => {
     initializeDatabase();
     try {
-        const [rows] = await db.execute(`
+        let query = `
             SELECT 
                 m.id, 
                 m.name, 
                 d.description,  
                 d.product, 
                 d.solutions, 
-                d.serviceType 
+                d.serviceType,
+                d.industryFocus
             FROM microsoft m
             LEFT JOIN microsoft_details d ON m.id = d.id
-        `);
+        `;
+        
+        // Check if industries filter is provided
+        if (req.query.industries) {
+            const selectedIndustries = JSON.parse(req.query.industries);
+            
+            if (selectedIndustries.length > 0) {
+                // Add JOIN with filters table and WHERE clause for filtering
+                query = `
+                    SELECT 
+                        m.id, 
+                        m.name, 
+                        d.description,  
+                        d.product, 
+                        d.solutions, 
+                        d.serviceType,
+                        d.industryFocus
+                    FROM microsoft m
+                    LEFT JOIN microsoft_details d ON m.id = d.id
+                    JOIN microsoft_filters f ON m.id = f.id
+                    WHERE 
+                `;
+                
+                // Create conditions for each selected industry
+                const conditions = selectedIndustries.map(industry => 
+                    `JSON_CONTAINS(f.industry, '"${industry}"')`
+                );
+                
+                query += conditions.join(' AND ');
+                
+                // Group by to avoid duplicates
+                query += ` GROUP BY m.id`;
+            }
+        }
+        
+        const [rows] = await db.execute(query);
         res.json({ success: true, data: rows });
     } catch (error) {
         console.error("❌ Database Fetch Error:", error.message);
@@ -56,11 +99,11 @@ router.get("/downloadExcel", async (req, res) => {
             LEFT JOIN microsoft_details d ON m.id = d.id
             LEFT JOIN microsoft_filters f ON m.id = f.id
         `);
-        
+
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
         }
-        
+
         // Process rows to handle JSON fields
         const processedRows = rows.map(row => {
             const processedRow = {
@@ -68,7 +111,7 @@ router.get("/downloadExcel", async (req, res) => {
                 name: row.name,
                 description: row.description || ""
             };
-            
+
             // Safely process JSON fields
             ['product', 'solutions', 'serviceType'].forEach(field => {
                 if (row[field]) {
@@ -84,7 +127,7 @@ router.get("/downloadExcel", async (req, res) => {
                     processedRow[field] = "";
                 }
             });
-            
+
             // Special handling for industry field as it's an array
             if (row.industry) {
                 try {
@@ -100,12 +143,12 @@ router.get("/downloadExcel", async (req, res) => {
             } else {
                 processedRow.industry = "";
             }
-            
+
             return processedRow;
         });
-        
+
         const filePath = exportToExcel(processedRows); // Excel file path
-        
+
         res.download(filePath, "microsoft_partners.xlsx", (err) => {
             if (err) {
                 console.error("❌ File Download Error:", err.message);

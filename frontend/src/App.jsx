@@ -1,19 +1,27 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
 import OracleTable from "./components/OracleTable";
 import ShopifyTable from "./components/ShopifyTable";
 import MicrosoftTable from "./components/MicrosoftTable";
+import ProductInfo from "./components/ProductInfo";
 
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const tableRef = useRef(null);
+  useEffect(() => {
+    if (data.length > 0 && tableRef.current) {
+      tableRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [data, url]);
 
   const handleScrape = async () => {
     setLoading(true);
     setError(null);
+    setData([]);
     try {
       const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`);
       if (response.data.success) setData(response.data.data);
@@ -24,19 +32,31 @@ export default function ScraperApp() {
     setLoading(false);
   };
 
-  const handleFetch = async () => {
+  const handleFetch = async (selectedFilters = []) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:5000/api/v1/${url}/fetch`);
-      if (response.data.success) setData(response.data.data);
+      let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
 
+      // Add industry filters as query parameters if there are any
+      if (selectedFilters && selectedFilters.length > 0) {
+        endpoint += `?industries=${encodeURIComponent(JSON.stringify(selectedFilters))}`;
+      }
+
+      const response = await axios.get(endpoint);
+      if (response.data.success) setData(response.data.data);
       else throw new Error(response.data.error);
-      console.log(data);
     } catch (err) {
       setError(err.message);
     }
     setLoading(false);
+  };
+
+  // Handle filter changes for Microsoft table
+  const handleMicrosoftFilterChange = (selectedFilters) => {
+    if (url === 'microsoft') {
+      handleFetch(selectedFilters);
+    }
   };
 
   const handleDownloadExcel = async () => {
@@ -60,16 +80,16 @@ export default function ScraperApp() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Web Scraper</h1>
+
+      <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl w-full">
+        <ProductInfo />
         <select
           value={url}
           onChange={(e) => {
-            setUrl(e.target.value)
+            setUrl(e.target.value);
             setData([]);
-          }
-          }
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+          }}
+          className="w-1/2 flex mx-auto p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 mb-4 mt-4"
         >
           <option value="">Select a source</option>
           <option value="salesforce">Salesforce</option>
@@ -82,32 +102,39 @@ export default function ScraperApp() {
           <button
             onClick={handleScrape}
             disabled={loading}
-            className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-700 disabled:bg-blue-400"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
             Scrape Data
           </button>
           <button
-            onClick={handleFetch}
+            onClick={() => handleFetch()}
             disabled={loading}
-            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-green-700 disabled:bg-green-400"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
             Fetch Stored Data
           </button>
           <button
             onClick={handleDownloadExcel}
-            className="px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-blue-700"
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
           >
             Download Excel
           </button>
-
         </div>
+        {loading && <p className="text-center mt-4">Loading...</p>}
         {error && <p className="text-red-500 text-center mt-4">Error: {error}</p>}
       </div>
-      <div>
+
+
+      <div ref={tableRef}>
         {data.length > 0 && url === "salesforce" && <SalesforceTable data={data} />}
         {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
         {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
-        {data.length > 0 && url === "microsoft" && <MicrosoftTable data={data} />}
+        {data.length > 0 && url === "microsoft" && (
+          <MicrosoftTable
+            data={data}
+            onFilterChange={handleMicrosoftFilterChange}
+          />
+        )}
       </div>
     </div>
   );

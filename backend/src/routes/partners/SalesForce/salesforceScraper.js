@@ -89,6 +89,7 @@ const scrapeData = async () => {
                                 extendedDescription,
                                 foundIn: [{ section, filters: [filter] }]
                             };
+                            scrapedMap.set(link, details);
                             await detailPage.close();
 
                         } catch (error) {
