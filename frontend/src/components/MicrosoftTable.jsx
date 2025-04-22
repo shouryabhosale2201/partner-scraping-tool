@@ -73,8 +73,6 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     return (
         <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4">
             <div className="sticky p-2">
-                <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
-
                 <div className="mb-4">
                     <input
                         type="text"
@@ -106,9 +104,10 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                         Reset
                     </button>
                 </div>
+                <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
             </div>
 
-            <div className="overflow-y-auto mt-2 max-h-[calc(100vh-180px)]">
+            <div className="overflow-y-auto max-h-[calc(100vh-180px)] pl-2">
                 {renderFilterSection("Industry", filters.industry, "industry")}
                 {renderFilterSection("Services", filters.services, "services")}
                 {renderFilterSection("Product", filters.product, "product")}
@@ -152,9 +151,9 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                 onFilterChange={handleFilterChange}
             />
 
-            <div className="flex-1 overflow-auto p-4">
+            <div className="flex-1 overflow-auto">
                 {/* Search Field Above Table */}
-                <div className="mb-4">
+                <div className="mb-4 ml-6 mt-6">
                     <input
                         type="text"
                         placeholder="Search in table"

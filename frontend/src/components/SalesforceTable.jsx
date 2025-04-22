@@ -90,13 +90,11 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
 
   return (
     <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4">
-      <div className="sticky top-0 z-10 p-2 bg-white">
-        <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
-
+      <div className="sticky top-0 z-10 p-2">
         <div className="mb-4">
           <input
             type="text"
-            placeholder="Search filters..."
+            placeholder="Search filters"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -115,9 +113,10 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             Reset
           </button>
         </div>
+        <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
       </div>
 
-      <div className="overflow-y-auto mt-2 max-h-[calc(100vh-180px)]">
+      <div className="overflow-y-auto max-h-[calc(100vh-180px)] pl-2">
         {filtersBySection.map(({ section, filters }) => renderSection(section, filters))}
       </div>
     </div>
@@ -218,7 +217,7 @@ const SalesforceTable = () => {
         onFilterChange={handleFilterChange}
       />
 
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 overflow-auto">
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             <strong className="font-bold">Error:</strong>
@@ -227,7 +226,7 @@ const SalesforceTable = () => {
         )}
         
         {/* Table Search Bar */}
-        <div className="mb-4">
+        <div className="mb-4 ml-6 mt-6">
           <input
             type="text"
             placeholder="Search in table"
@@ -243,11 +242,11 @@ const SalesforceTable = () => {
           </div>
         ) : (
           <>
-            <div className="mb-2 text-sm text-gray-600">
+            <div className="mb-2 text-sm text-gray-600 ml-6">
               Showing {filteredData.length} of {data.length} entries
             </div>
             <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
-              <thead className="bg-base-200 text-base font-semibold sticky top-0 z-10">
+              <thead className="bg-gray-200 font-semibold sticky top-0 z-10">
                 <tr>
                   <th className="w-[4%]">#</th>
                   <th className="w-[12%]">Name</th>
