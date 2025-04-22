@@ -1,3 +1,5 @@
+//App.jsx
+
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
@@ -38,30 +40,30 @@ export default function ScraperApp() {
     if (url === "microsoft") {
       try {
         let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
-
+  
         // Create query parameters matching backend expectations
         const params = new URLSearchParams();
-
+  
         if (selectedFilters.industry?.length > 0) {
           params.append('industries', JSON.stringify(selectedFilters.industry));
         }
-
+  
         if (selectedFilters.product?.length > 0) {
           params.append('products', JSON.stringify(selectedFilters.product));
         }
-
+  
         if (selectedFilters.solution?.length > 0) {
           params.append('solutions', JSON.stringify(selectedFilters.solution));
         }
-
+  
         if (selectedFilters.services?.length > 0) {
           params.append('services', JSON.stringify(selectedFilters.services));
         }
-
+  
         if (params.toString()) {
           endpoint += `?${params.toString()}`;
         }
-
+  
         const response = await axios.get(endpoint);
         if (response.data.success) setData(response.data.data);
         else throw new Error(response.data.error);
@@ -69,20 +71,24 @@ export default function ScraperApp() {
         setError(err.message);
       }
     }
-
+  
     if (url === "salesforce") {
       try {
         const endpoint = "http://localhost:5000/api/v1/salesforce/fetch";
-
+  
         const params = new URLSearchParams();
-
-        // Salesforce filters are a single array (not sectioned)
-        if (selectedFilters.length > 0) {
-          params.append("filters", JSON.stringify(selectedFilters));
+  
+        // Handle Salesforce filters with multiple sections
+        if (selectedFilters.salesforceExpertise?.length > 0) {
+          params.append("salesforceExpertise", JSON.stringify(selectedFilters.salesforceExpertise));
         }
-
+        
+        if (selectedFilters.industryExpertise?.length > 0) {
+          params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
+        }
+  
         const response = await axios.get(`${endpoint}?${params.toString()}`);
-
+  
         if (response.data.success) {
           setData(response.data.data);
         } else {
@@ -92,17 +98,18 @@ export default function ScraperApp() {
         setError(err.message);
       }
     }
-
+  
     setLoading(false);
   };
-  // Handle filter changes for Microsoft table
-  const handleMicrosoftFilterChange = (selectedFilters) => {
-    if (url === 'microsoft') {
+  
+  const handleSalesforceFilterChange = (selectedFilters) => {
+    if (url === 'salesforce') {
       handleFetch(selectedFilters);
     }
   };
-
-  const handleSalesforceFilterChange = (selectedFilters) => {
+  
+  // Handle filter changes for Microsoft table
+  const handleMicrosoftFilterChange = (selectedFilters) => {
     if (url === 'microsoft') {
       handleFetch(selectedFilters);
     }
