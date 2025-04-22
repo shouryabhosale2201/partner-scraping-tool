@@ -71,7 +71,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         );
     };
     return (
-        <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4">
+        <div className="w-1/7 min-w-[250px] border-r border-gray-200 shadow-md p-4">
             <div className="sticky p-2">
                 <div className="mb-4">
                     <input
@@ -152,8 +152,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
             />
 
             <div className="flex-1 overflow-auto">
-                {/* Search Field Above Table */}
-                <div className="mb-4 ml-6 mt-6">
+
+                <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200">
                     <input
                         type="text"
                         placeholder="Search in table"
@@ -163,16 +163,17 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     />
                 </div>
 
-                <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
-                    <thead className="bg-base-200 text-base font-semibold sticky top-0 z-10">
+
+                <table className="min-w-full shadow-md rounded-lg">
+                    <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                         <tr>
-                            <th className="w-[4%]">#</th>
-                            <th className="w-[12%]">Partner Name</th>
-                            <th className="w-[30%]">Description</th>
-                            <th className="w-[30%]">Products</th>
-                            <th className="w-[30%]">Solutions</th>
-                            <th className="w-[30%]">Service Types</th>
-                            <th className="w-[30%]">Industry Focus</th>
+                            <th className="w-[2%] pb-2">#</th>
+                            <th className="w-[12%] pb-2">Partner Name</th>
+                            <th className="w-[25%] pb-2">Description</th>
+                            <th className="w-[15%] pb-2">Products</th>
+                            <th className="w-[15%] pb-2">Solutions</th>
+                            <th className="w-[15%] pb-2">Service Types</th>
+                            <th className="w-[15%] pb-2">Industry Focus</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -180,31 +181,31 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                             filteredData.map((item, index) => (
                                 <tr
                                     key={index}
-                                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+                                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-3 last:border-b-0 hover:bg-gray-50 transition"
                                 >
                                     <th className="py-2">{index + 1}</th>
-                                    <td className="py-2">{item.name}</td>
-                                    <td className="py-2 w-[20rem]">
+                                    <td className="py-2 pr-3">{item.name}</td>
+                                    <td className="py-2 pr-3 w-[20rem]">
                                         <div className="max-h-[100px] overflow-y-auto whitespace-pre-line">
                                             {item.description}
                                         </div>
                                     </td>
-                                    <td className="py-2 w-[12rem]">
+                                    <td className="py-2 pr-3 w-[12rem]">
                                         <div className="max-h-[100px] overflow-y-auto">
                                             {Array.isArray(item.product) ? item.product.join(", ") : item.product}
                                         </div>
                                     </td>
-                                    <td className="py-2 w-[12rem]">
+                                    <td className="py-2 pr-3 w-[12rem]">
                                         <div className="max-h-[100px] overflow-y-auto">
                                             {Array.isArray(item.solutions) && item.solutions.length > 0 ? item.solutions.join(", ") : "N/A"}
                                         </div>
                                     </td>
-                                    <td className="py-2 w-[12rem]">
+                                    <td className="py-2 pr-3 w-[12rem]">
                                         <div className="max-h-[100px] overflow-y-auto">
                                             {Array.isArray(item.serviceType) ? item.serviceType.join(", ") : item.serviceType}
                                         </div>
                                     </td>
-                                    <td className="py-2 w-[12rem]">
+                                    <td className="py-2 pr-3 w-[12rem]">
                                         <div className="max-h-[100px] overflow-y-auto">
                                             {Array.isArray(item.industryFocus) ? item.industryFocus.join(", ") : item.industryFocus || "N/A"}
                                         </div>
@@ -230,6 +231,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     </tfoot>
                 </table>
             </div>
+
         </div>
     );
 }

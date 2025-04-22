@@ -25,18 +25,18 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
 
   const handleFilterChange = (section, value) => {
     // Create normalized section keys
-    const sectionKey = section === "Salesforce Expertise" 
+    const sectionKey = section === "Salesforce Expertise"
       ? "salesforceExpertise"
       : "industryExpertise";
-    
+
     // Create a deep copy of the selectedFilters
     const updatedFilters = { ...selectedFilters };
-    
+
     // Initialize the section array if it doesn't exist
     if (!updatedFilters[sectionKey]) {
       updatedFilters[sectionKey] = [];
     }
-    
+
     // Add or remove the filter value
     if (updatedFilters[sectionKey].includes(value)) {
       updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
@@ -47,7 +47,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     } else {
       updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
     }
-    
+
     // Update selected filters and trigger the filter change
     setSelectedFilters(updatedFilters);
     onFilterChange(updatedFilters);
@@ -55,10 +55,10 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
 
   const renderSection = (section, filters) => {
     // Create normalized section keys
-    const sectionKey = section === "Salesforce Expertise" 
+    const sectionKey = section === "Salesforce Expertise"
       ? "salesforceExpertise"
       : "industryExpertise";
-    
+
     const filteredItems = filters.filter(item =>
       item.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -89,7 +89,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
   };
 
   return (
-    <div className="w-1/5 min-w-[250px] border-r border-gray-200 shadow-md p-4">
+    <div className="w-1/7 min-w-[250px] border-r border-gray-200 shadow-md p-4">
       <div className="sticky top-0 z-10 p-2">
         <div className="mb-4">
           <input
@@ -134,29 +134,29 @@ const SalesforceTable = () => {
   const handleFilterChange = async (filters) => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
       const params = new URLSearchParams();
-      
+
       // Add Salesforce Expertise filters if present
       if (filters.salesforceExpertise?.length > 0) {
         params.append("salesforceExpertise", JSON.stringify(filters.salesforceExpertise));
       }
-      
+
       // Add Industry Expertise filters if present
       if (filters.industryExpertise?.length > 0) {
         params.append("industryExpertise", JSON.stringify(filters.industryExpertise));
       }
 
       const endpoint = `http://localhost:5000/api/v1/salesforce/fetch${params.toString() ? `?${params.toString()}` : ''}`;
-      
+
       const res = await fetch(endpoint);
       if (!res.ok) {
         throw new Error(`Server responded with status: ${res.status}`);
       }
-      
+
       const json = await res.json();
-      
+
       if (json.success) {
         setData(json.data);
         setFilteredData(json.data);
@@ -181,12 +181,12 @@ const SalesforceTable = () => {
   // Function to handle table search
   const handleTableSearch = (searchTerm, dataToSearch = data) => {
     setTableSearchTerm(searchTerm);
-    
+
     if (!searchTerm.trim()) {
       setFilteredData(dataToSearch);
       return;
     }
-    
+
     const term = searchTerm.toLowerCase();
     const filtered = dataToSearch.filter(item => {
       // Check all text fields in the item
@@ -200,7 +200,7 @@ const SalesforceTable = () => {
         (item.extendedDescription && item.extendedDescription.toLowerCase().includes(term))
       );
     });
-    
+
     setFilteredData(filtered);
   };
 
@@ -224,18 +224,18 @@ const SalesforceTable = () => {
             <span className="block sm:inline"> {error}</span>
           </div>
         )}
-        
+
         {/* Table Search Bar */}
-        <div className="mb-4 ml-6 mt-6">
+        <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200">
           <input
             type="text"
             placeholder="Search in table"
             value={tableSearchTerm}
-            onChange={(e) => handleTableSearch(e.target.value)}
+            onChange={(e) => setTableSearchTerm(e.target.value)}
             className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        
+
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
             <span className="loading loading-spinner loading-lg"></span>
@@ -246,15 +246,14 @@ const SalesforceTable = () => {
               Showing {filteredData.length} of {data.length} entries
             </div>
             <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
-              <thead className="bg-gray-200 font-semibold sticky top-0 z-10">
+            <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                 <tr>
-                  <th className="w-[4%]">#</th>
-                  <th className="w-[12%]">Name</th>
-                  <th className="w-[18%]">Tagline</th>
-                  <th className="w-[25%]">Description</th>
-                  <th className="w-[30%]">Highlights</th>
-                  <th className="w-[30%]">Extended Description</th>
-                  <th className="w-[10%]">Link</th>
+                  <th className="w-[2%]">#</th>
+                  <th className="w-[12%] pb-2">Name</th>
+                  <th className="w-[12%] pb-2">Tagline</th>
+                  <th className="w-[25%] pb-2">Description</th>
+                  <th className="w-[25%] pb-2">Highlights</th>
+                  <th className="w-[30%] pb-2">Extended Description</th>
                 </tr>
               </thead>
               <tbody>
@@ -262,15 +261,24 @@ const SalesforceTable = () => {
                   filteredData.map((item, index) => (
                     <tr
                       key={index}
-                      className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+                      className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-2 last:border-b-0 hover:bg-gray-50 transition"
                     >
-                      <th className="py-2">{index + 1}</th>
-                      <td className="py-2">{item.name}</td>
-                      <td className="py-2">{item.tagline}</td>
-                      <td className="py-2">
+                      <th className="py-2 pr-1">{index + 1}</th>
+                      <td className="py-2 pr-2">
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
+                          {item.name}
+                        </a>
+                      </td>
+                      <td className="py-2 pr-2">{item.tagline}</td>
+                      <td className="py-2 pr-2">
                         <div className="max-h-[100px] overflow-y-auto">{item.description}</div>
                       </td>
-                      <td className="py-2 whitespace-pre-line">
+                      <td className="py-2 pr-2 whitespace-pre-line">
                         <div className="max-h-[100px] overflow-y-auto">
                           {item.expertise || "N/A"}
                           {"\n\n"}
@@ -279,18 +287,8 @@ const SalesforceTable = () => {
                           {item.services || "N/A"}
                         </div>
                       </td>
-                      <td className="py-2">
+                      <td className="py-2 pr-2">
                         <div className="max-h-[100px] overflow-y-auto">{item.extendedDescription}</div>
-                      </td>
-                      <td className="py-2">
-                        <a
-                          href={item.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
-                        >
-                          Visit
-                        </a>
                       </td>
                     </tr>
                   ))
@@ -310,7 +308,6 @@ const SalesforceTable = () => {
                   <th>Description</th>
                   <th>Highlights</th>
                   <th>Extended Description</th>
-                  <th>Link</th>
                 </tr>
               </tfoot>
             </table>
