@@ -1,11 +1,9 @@
 require('dotenv').config();
-const mysql = require('mysql2/promise'); // Use the promise wrapper
+const mysql = require('mysql2/promise');
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_CONN_LIMIT } = process.env;
 
-// --- 1. Create and Export the Pool Immediately ---
-// Note: The pool needs the database name to connect directly to it.
-// We'll handle the DB creation check separately.
+// Create and Export the Pool Immediately
 const db = mysql.createPool({
   host: DB_HOST,
   user: DB_USER,
@@ -16,14 +14,10 @@ const db = mysql.createPool({
   queueLimit: 0,
 });
 
-console.log('ℹ️ MySQL Pool created (connection pending setup).'); // Log pool creation
-
-// --- 2. Define Asynchronous Initialization Function ---
 async function initializeDatabase() {
   let initConnection;
   try {
-    // Create a temporary connection *without* specifying the database
-    // to check/create the database itself.
+    // Create a temporary connection to check/create the database itself.
     initConnection = await mysql.createConnection({
       host: DB_HOST,
       user: DB_USER,
@@ -33,15 +27,15 @@ async function initializeDatabase() {
     // Create database if it doesn't exist
     await initConnection.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\``);
     console.log(`✅ Database "${DB_NAME}" check/creation complete.`);
-    await initConnection.end(); // Close the temporary connection
+    await initConnection.end();
 
-    // Test the main pool connection (optional but good practice)
+    // Test the main pool connection
     const connection = await db.getConnection();
     console.log('✅ Connected to MySQL database via pool.');
     connection.release();
 
     // Create tables using the main pool
-    await createTables(db); // Pass the pool to the function
+    await createTables(db);
 
   } catch (error) {
     console.error('❌ Database Initialization Error:', error.message);
@@ -52,13 +46,12 @@ async function initializeDatabase() {
         console.error('❌ Error closing init connection:', endError.message);
       }
     }
-    // Critical error during setup, exiting might be appropriate
     process.exit(1);
   }
 }
 
-// --- 3. Update createTables to be Async ---
-async function createTables(pool) { // Accept the pool as argument
+// Update createTables to be Async 
+async function createTables(pool) {
   const createTableQueries = [
     // Salesforce
     `CREATE TABLE IF NOT EXISTS salesforce (
@@ -75,7 +68,7 @@ async function createTables(pool) { // Accept the pool as argument
       services TEXT,
       extendedDescription TEXT,
       FOREIGN KEY (id) REFERENCES salesforce(id) ON DELETE CASCADE
-    )`, // Added ON DELETE CASCADE
+    )`,
     `CREATE TABLE IF NOT EXISTS salesforce_filters (
       id INT PRIMARY KEY,
       filters JSON,
@@ -89,13 +82,18 @@ async function createTables(pool) { // Accept the pool as argument
     )`,
     `CREATE TABLE IF NOT EXISTS oracle_details (
       id INT PRIMARY KEY,
-      oracle_expertise_description TEXT,
       oracle_expertise_areas TEXT,
       company_overview TEXT,
       solution_titles TEXT,
       solution_links TEXT,
+      link TEXT,
       FOREIGN KEY (id) REFERENCES oracle(id) ON DELETE CASCADE
-    )`, // Added ON DELETE CASCADE
+    )`,
+    `CREATE TABLE IF NOT EXISTS oracle_filters (
+      id INT PRIMARY KEY,
+      filters JSON,
+      FOREIGN KEY (id) REFERENCES oracle(id) ON DELETE CASCADE
+    )`,
 
     // Shopify
     `CREATE TABLE IF NOT EXISTS shopify (
@@ -109,7 +107,7 @@ async function createTables(pool) { // Accept the pool as argument
       specialized_services JSON,
       featured_work JSON,
       FOREIGN KEY (id) REFERENCES shopify(id) ON DELETE CASCADE
-    )`, // Added ON DELETE CASCADE
+    )`,
 
     //Microsoft
     `CREATE TABLE IF NOT EXISTS microsoft (
@@ -122,6 +120,7 @@ async function createTables(pool) { // Accept the pool as argument
       product JSON,
       solutions JSON,
       serviceType JSON,
+      industryFocus JSON,
       FOREIGN KEY (id) REFERENCES microsoft(id) ON DELETE CASCADE
     )`,
     `CREATE TABLE IF NOT EXISTS microsoft_filters (
@@ -139,12 +138,11 @@ async function createTables(pool) { // Accept the pool as argument
     console.log('✅ All tables are ensured.');
   } catch (err) {
     console.error('❌ Error creating tables:', err.message);
-    throw err; // Re-throw the error to be caught by initializeDatabase
+    throw err;
   }
 }
 
-// --- 4. Export both the pool and the initialization function ---
 module.exports = {
-  db, // The pool instance
-  initializeDatabase, // The async function to set things up
+  db,
+  initializeDatabase,
 };
