@@ -1,12 +1,19 @@
+// salesforceScraper.js
+
 const { chromium } = require("playwright");
-// import {db} from '../../../db';
 const { db, initializeDatabase } = require("../../../db");
 
-const scrapeData = async () => {
+const scrapeData = async (fieldsToScrape = ['name', 'link', 'foundIn'], testingMode = true) => {
     await initializeDatabase();
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     const scrapedMap = new Map();
+
+    if (!fieldsToScrape.includes('name')) fieldsToScrape.push('name');
+    if (!fieldsToScrape.includes('link')) fieldsToScrape.push('link');
+    if (!fieldsToScrape.includes('foundIn')) fieldsToScrape.push('foundIn');
+
+    console.log(`🔍 Scraping fields: ${fieldsToScrape.join(', ')}`);
 
     await page.goto("https://appexchange.salesforce.com/consulting", {
         waitUntil: "load",
@@ -30,7 +37,9 @@ const scrapeData = async () => {
 
         console.log(`📌 Found ${filters.length} filters in "${section}"`);
 
-        for (const filter of filters) {
+        const maxFilters = testingMode ? 2 : filters.length;
+        for (const filter of filters.slice(0, maxFilters)) {
+
             console.log(`\n✅ Applying filter: ${filter} [${section}]`);
             try {
                 await applyFilter(page, filter, section);
@@ -38,16 +47,22 @@ const scrapeData = async () => {
 
                 await scrollAndLoadAllListings(page);
 
-                const partnerLinks = await page.$$eval(".appx-tiles-grid-ul a", anchors =>
+                let partnerLinks = await page.$$eval(".appx-tiles-grid-ul a", anchors =>
                     anchors.map(anchor => ({
                         name: anchor.querySelector(".appx-tile-title span")?.innerText.trim() || "No Name",
                         link: anchor.href
                     }))
                 );
 
+                if (testingMode) {
+                    const limit = 10;
+                    console.log(`🧪 TESTING MODE: Limiting to first ${limit} partners.`);
+                    partnerLinks = partnerLinks.slice(0, limit);
+                }
+
                 console.log(`🔗 Found ${partnerLinks.length} links.`);
 
-                const chunkSize = 5;  // adjust based on RAM / network
+                const chunkSize = 5;
                 for (let i = 0; i < partnerLinks.length; i += chunkSize) {
                     const chunk = partnerLinks.slice(i, i + chunkSize);
 
@@ -69,26 +84,42 @@ const scrapeData = async () => {
                             console.log(`🌐 [${i + 1}/${partnerLinks.length}] Opening: ${name} -> ${link}`);
                             const detailPage = await browser.newPage();
                             await detailPage.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
-                            await detailPage.waitForSelector(".appx-headline-details-tagline, .appx-extended-detail-description", { timeout: 15000 });
 
-                            const tagline = await detailPage.locator(".appx-headline-details-tagline").innerText().catch(() => "No tagline");
-                            const description = await detailPage.locator(".appx-headline-details-descr").innerText().catch(() => "No description");
-                            const expertise = await detailPage.locator("#AppxConsultingListingDetail\\:AppxLayout\\:listingDetailOverviewTab\\:appxListingDetailOverviewTabComp\\:ftList\\:0\\:featureItem").innerText().catch(() => "No expertise");
-                            const industries = await detailPage.locator("#AppxConsultingListingDetail\\:AppxLayout\\:listingDetailOverviewTab\\:appxListingDetailOverviewTabComp\\:ftList\\:1\\:featureItem").innerText().catch(() => "No industries");
-                            const services = await detailPage.locator("#AppxConsultingListingDetail\\:AppxLayout\\:listingDetailOverviewTab\\:appxListingDetailOverviewTabComp\\:ftList\\:2\\:featureItem").innerText().catch(() => "No services");
-                            const extendedDescription = await detailPage.locator(".appx-extended-detail-description").innerText().catch(() => "No extended description");
+                            if (fieldsToScrape.some(field =>
+                                ['tagline', 'description', 'expertise', 'industries', 'services', 'extendedDescription'].includes(field))) {
+                                await detailPage.waitForSelector(".appx-headline-details-tagline, .appx-extended-detail-description", { timeout: 15000 });
+                            }
 
                             const details = {
                                 name,
                                 link,
-                                tagline,
-                                description,
-                                expertise,
-                                industries,
-                                services,
-                                extendedDescription,
                                 foundIn: [{ section, filters: [filter] }]
                             };
+
+                            if (fieldsToScrape.includes('tagline')) {
+                                details.tagline = await detailPage.locator(".appx-headline-details-tagline").innerText().catch(() => "No tagline");
+                            }
+
+                            if (fieldsToScrape.includes('description')) {
+                                details.description = await detailPage.locator(".appx-headline-details-descr").innerText().catch(() => "No description");
+                            }
+
+                            if (fieldsToScrape.includes('expertise')) {
+                                details.expertise = await detailPage.locator("#AppxConsultingListingDetail\\:AppxLayout\\:listingDetailOverviewTab\\:appxListingDetailOverviewTabComp\\:ftList\\:0\\:featureItem").innerText().catch(() => "No expertise");
+                            }
+
+                            if (fieldsToScrape.includes('industries')) {
+                                details.industries = await detailPage.locator("#AppxConsultingListingDetail\\:AppxLayout\\:listingDetailOverviewTab\\:appxListingDetailOverviewTabComp\\:ftList\\:1\\:featureItem").innerText().catch(() => "No industries");
+                            }
+
+                            if (fieldsToScrape.includes('services')) {
+                                details.services = await detailPage.locator("#AppxConsultingListingDetail\\:AppxLayout\\:listingDetailOverviewTab\\:appxListingDetailOverviewTabComp\\:ftList\\:2\\:featureItem").innerText().catch(() => "No services");
+                            }
+
+                            if (fieldsToScrape.includes('extendedDescription')) {
+                                details.extendedDescription = await detailPage.locator(".appx-extended-detail-description").innerText().catch(() => "No extended description");
+                            }
+
                             scrapedMap.set(link, details);
                             await detailPage.close();
 
@@ -106,12 +137,9 @@ const scrapeData = async () => {
         }
     }
 
-
-    // At the end, save all filters to the DB
     const extractedDetails = Array.from(scrapedMap.values());
     for (const [link, details] of scrapedMap.entries()) {
         try {
-            // Step 1: Insert into salesforce table
             const [insertResult] = await db.execute(
                 "INSERT INTO salesforce (name) VALUES (?)",
                 [details.name]
@@ -122,24 +150,57 @@ const scrapeData = async () => {
                 throw new Error(`Insert into salesforce table for "${details.name}" did not return an ID.`);
             }
 
-            // Step 2: Insert into salesforce_details table
+            let detailsFields = ["id"];
+            let detailsPlaceholders = ["?"];
+            let detailsValues = [salesforceId];
+
+            if (details.link) {
+                detailsFields.push("link");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.link);
+            }
+
+            if (details.tagline) {
+                detailsFields.push("tagline");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.tagline);
+            }
+
+            if (details.description) {
+                detailsFields.push("description");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.description);
+            }
+
+            if (details.expertise) {
+                detailsFields.push("expertise");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.expertise);
+            }
+
+            if (details.industries) {
+                detailsFields.push("industries");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.industries);
+            }
+
+            if (details.services) {
+                detailsFields.push("services");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.services);
+            }
+
+            if (details.extendedDescription) {
+                detailsFields.push("extendedDescription");
+                detailsPlaceholders.push("?");
+                detailsValues.push(details.extendedDescription);
+            }
+
             await db.execute(
-                `INSERT INTO salesforce_details (
-                    id, link, tagline, description, expertise, industries, services, extendedDescription
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-                [
-                    salesforceId,
-                    link,
-                    details.tagline,
-                    details.description,
-                    details.expertise,
-                    details.industries,
-                    details.services,
-                    details.extendedDescription
-                ]
+                `INSERT INTO salesforce_details (${detailsFields.join(', ')}) VALUES (${detailsPlaceholders.join(', ')})`,
+                detailsValues
             );
 
-            // Step 3: Insert into salesforce_filters table
             await db.execute(
                 `INSERT INTO salesforce_filters (id, filters) VALUES (?, ?)`,
                 [
@@ -177,26 +238,6 @@ async function scrollAndLoadAllListings(page) {
         }
     } catch (error) {
         console.log("⚠️ No 'Show More' button or finished loading.");
-    }
-}
-
-async function scrollAndLoadLimitedListings(page, maxClicks = 2) {
-    try {
-        let clickCount = 0;
-        while (clickCount < maxClicks) {
-            const showMore = await page.locator("button:has-text('Show More')");
-            if (await showMore.isVisible()) {
-                await showMore.scrollIntoViewIfNeeded();
-                await showMore.click();
-                await page.waitForTimeout(2000);
-                clickCount++;
-            } else {
-                break;
-            }
-        }
-        console.log(`🛑 Clicked "Show More" ${clickCount} time(s).`);
-    } catch (error) {
-        console.log("⚠️ Error during limited scrolling:", error.message);
     }
 }
 
