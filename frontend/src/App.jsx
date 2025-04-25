@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
-// import SalesforceFieldSelector from "./components/SalesforceFieldSelector";
+import SalesforceFieldSelector from "./components/SalesforceFieldSelector";
 import OracleTable from "./components/OracleTable";
 import ShopifyTable from "./components/ShopifyTable";
 import MicrosoftTable from "./components/MicrosoftTable";
