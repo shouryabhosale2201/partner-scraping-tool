@@ -17,7 +17,12 @@ router.get("/scrape", async (req, res) => {
         await db.execute("ALTER TABLE microsoft_filters AUTO_INCREMENT = 1");
         console.log("🧹 Microsoft tables cleared!");
         console.log("🔄 Scraping fresh data from microsoft");
-        const data = await scrapeData();
+        
+        // Get selected fields from request query params
+        const selectedFields = req.query.fields ? JSON.parse(req.query.fields) : ['name', 'industryFocus'];
+        
+        // Pass selected fields to scraper
+        const data = await scrapeData(selectedFields);
         res.json({ success: true, data });
     } catch (error) {
         console.error("❌ Scraping Error:", error.message);
@@ -28,18 +33,44 @@ router.get("/scrape", async (req, res) => {
 router.get("/fetch", async (req, res) => {
     initializeDatabase(); // Ensure the database connection is initialized
     try {
+        // Parse the selected fields from query parameters if available
+        const selectedFields = req.query.fields ? JSON.parse(req.query.fields) : null;
+
+        // Build the query with only selected fields from the database
+        // We always need the ID and name fields for proper functioning
         let query = `
             SELECT
                 m.id,
-                m.name,
-                d.description,
-                d.product,
-                d.solutions,
-                d.serviceType,
-                d.industryFocus
+                m.name
+        `;
+        
+        // Get the columns that actually exist in the database
+        const [columns] = await db.execute(`SHOW COLUMNS FROM microsoft_details`);
+        const availableColumns = columns.map(col => col.Field);
+        
+        // Define column mapping for all possible fields
+        const columnMapping = {
+            'description': 'd.description',
+            'product': 'd.product',
+            'solutions': 'd.solutions',
+            'serviceType': 'd.serviceType',
+            'industryFocus': 'd.industryFocus'
+        };
+        
+        // Add each available column to the SELECT clause if it was selected
+        Object.entries(columnMapping).forEach(([key, value]) => {
+            // Only include this field if it exists in the database AND (no specific fields were selected OR this field was selected)
+            if (availableColumns.includes(key) && (!selectedFields || selectedFields.includes(key))) {
+                query += `,\n                ${value}`;
+            }
+        });
+        
+        // Complete the query
+        query += `
             FROM microsoft m
             LEFT JOIN microsoft_details d ON m.id = d.id
         `;
+        
         const conditions = [];
         // Check if industries filter is provided
         if (req.query.industries) {
@@ -85,22 +116,68 @@ router.get("/fetch", async (req, res) => {
         if (conditions.length > 0) {
             query += ` WHERE ${conditions.join(' AND ')}`;
         }
+        
+        console.log("Executing query:", query); // Debugging the query
+        
         // Execute the query
         const [rows] = await db.execute(query);
-        res.json({ success: true, data: rows });
+        
+        // Process rows to ensure consistent data format
+        const processedRows = rows.map(row => {
+            const processed = { ...row };
+            
+            // Process certain fields that might be JSON strings
+            ['product', 'solutions', 'serviceType', 'industryFocus'].forEach(field => {
+                if (processed[field]) {
+                    try {
+                        if (typeof processed[field] === 'string') {
+                            processed[field] = JSON.parse(processed[field]);
+                        }
+                    } catch (e) {
+                        // If parsing fails, keep the original value
+                        console.warn(`Failed to parse JSON for field ${field}:`, e);
+                    }
+                }
+            });
+            
+            return processed;
+        });
+        
+        res.json({ success: true, data: processedRows });
     } catch (error) {
-        console.error(":x: Database Fetch Error:", error.message);
+        console.error("❌ Database Fetch Error:", error.message);
         res.status(500).json({ success: false, error: "Failed to fetch data." });
     }
 });
 
 router.get("/filters", async (req, res) => {
     try {
+        // Get column information first to see what fields are available
+        const [columns] = await db.execute(`SHOW COLUMNS FROM microsoft_details`);
+        const availableColumns = columns.map(col => col.Field);
+        
+        // Build dynamic query with only available columns
+        const columnsToSelect = ['product', 'solutions', 'serviceType', 'industryFocus']
+            .filter(col => availableColumns.includes(col));
+        
+        if (columnsToSelect.length === 0) {
+            return res.json({
+                product: [],
+                solution: [],
+                services: [],
+                industry: []
+            });
+        }
+        
+        const selectClause = columnsToSelect.join(', ');
+        
         const [rows] = await db.query(
-            `SELECT product, solutions, serviceType, industryFocus FROM microsoft_details`
+            `SELECT ${selectClause} FROM microsoft_details`
         );
 
         const extractUnique = (key) => {
+            if (!columnsToSelect.includes(key)) return [];
+            
             const all = rows.flatMap(row => {
                 const value = row[key];
                 if (!value) return [];
@@ -136,23 +213,50 @@ router.get("/filters", async (req, res) => {
     }
 });
 
-// Download Excel
+// Download Excel with only scraped fields
 router.get("/downloadExcel", async (req, res) => {
     initializeDatabase();
     try {
-        const [rows] = await db.execute(`
-            SELECT 
-                m.id,
-                m.name,
-                d.description, 
-                d.product,
-                d.solutions,
-                d.serviceType,
-                f.industry 
-            FROM microsoft m
+        // Get selected fields from query params if provided
+        let selectedFields = req.query.fields ? JSON.parse(req.query.fields) : null;
+        
+        // Build dynamic query based on available fields
+        let query = "SELECT m.id, m.name";
+        
+        // Get the columns that actually exist in the database
+        const [columns] = await db.execute(`SHOW COLUMNS FROM microsoft_details`);
+        const availableColumns = columns.map(col => col.Field);
+        
+        // Map field names to their database column names
+        const fieldToColumn = {
+            "description": "d.description",
+            "product": "d.product",
+            "solutions": "d.solutions",
+            "serviceType": "d.serviceType",
+            "industryFocus": "f.industry"
+        };
+        
+        // If specific fields are requested, include only those fields
+        if (selectedFields && selectedFields.length > 0) {
+            // Always include ID and name
+            Object.entries(fieldToColumn).forEach(([field, column]) => {
+                if (selectedFields.includes(field) && availableColumns.includes(field.replace(/^d\./, ''))) {
+                    query += `, ${column}`;
+                }
+            });
+        } 
+        // Otherwise include all available fields
+        else {
+            Object.values(fieldToColumn).forEach(column => {
+                query += `, ${column}`;
+            });
+        }
+        
+        query += ` FROM microsoft m
             LEFT JOIN microsoft_details d ON m.id = d.id
-            LEFT JOIN microsoft_filters f ON m.id = f.id
-        `);
+            LEFT JOIN microsoft_filters f ON m.id = f.id`;
+
+        const [rows] = await db.execute(query);
 
         if (!rows || rows.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
@@ -162,41 +266,26 @@ router.get("/downloadExcel", async (req, res) => {
         const processedRows = rows.map(row => {
             const processedRow = {
                 id: row.id,
-                name: row.name,
-                description: row.description || ""
+                name: row.name
             };
 
-            // Safely process JSON fields
-            ['product', 'solutions', 'serviceType'].forEach(field => {
-                if (row[field]) {
-                    try {
-                        // Try to parse as JSON if it's a string
-                        const parsed = typeof row[field] === 'string' ? JSON.parse(row[field]) : row[field];
-                        processedRow[field] = typeof parsed === 'object' ? JSON.stringify(parsed) : String(parsed);
-                    } catch (e) {
-                        // If parsing fails, just use the original value as a string
-                        processedRow[field] = String(row[field]);
+            // Process only fields that were selected
+            ['description', 'product', 'solutions', 'serviceType', 'industry'].forEach(field => {
+                if (!selectedFields || selectedFields.includes(field)) {
+                    if (row[field]) {
+                        try {
+                            // Try to parse as JSON if it's a string
+                            const parsed = typeof row[field] === 'string' ? JSON.parse(row[field]) : row[field];
+                            processedRow[field] = Array.isArray(parsed) ? parsed.join(", ") : String(parsed);
+                        } catch (e) {
+                            // If parsing fails, just use the original value as a string
+                            processedRow[field] = String(row[field]);
+                        }
+                    } else {
+                        processedRow[field] = "";
                     }
-                } else {
-                    processedRow[field] = "";
                 }
             });
-
-            // Special handling for industry field as it's an array
-            if (row.industry) {
-                try {
-                    const industryArray = typeof row.industry === 'string' ? JSON.parse(row.industry) : row.industry;
-                    if (Array.isArray(industryArray)) {
-                        processedRow.industry = industryArray.join(", ");
-                    } else {
-                        processedRow.industry = String(row.industry);
-                    }
-                } catch (e) {
-                    processedRow.industry = String(row.industry);
-                }
-            } else {
-                processedRow.industry = "";
-            }
 
             return processedRow;
         });

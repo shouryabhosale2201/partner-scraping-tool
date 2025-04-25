@@ -126,6 +126,32 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     });
 
     const [tableSearchTerm, setTableSearchTerm] = useState("");
+    
+    // Determine which columns are actually available in the data
+    const columnMapping = {
+        'name': { display: 'Partner Name', width: '12%' },
+        'description': { display: 'Description', width: '25%' },
+        'product': { display: 'Products', width: '15%' },
+        'solutions': { display: 'Solutions', width: '15%' },
+        'serviceType': { display: 'Service Types', width: '15%' },
+        'industryFocus': { display: 'Industry Focus', width: '15%' }
+    };
+    
+    // Dynamically generate column list based on what's in the data
+    const getAvailableColumns = () => {
+        if (!data || data.length === 0) return [];
+        
+        const firstRow = data[0];
+        return Object.keys(firstRow)
+            .filter(key => key !== 'id') // Exclude id column
+            .map(key => ({
+                key,
+                display: columnMapping[key]?.display || key,
+                width: columnMapping[key]?.width || '15%'
+            }));
+    };
+    
+    const availableColumns = getAvailableColumns();
 
     const handleFilterChange = (updatedFilters) => {
         setSelectedFilters(updatedFilters);
@@ -134,14 +160,51 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         }
     };
 
-    const filteredData = data?.filter(item =>
-        item.name.toLowerCase().includes(tableSearchTerm.toLowerCase()) ||
-        item.description?.toLowerCase().includes(tableSearchTerm.toLowerCase()) ||
-        (Array.isArray(item.product) ? item.product.join(", ").toLowerCase() : item.product?.toLowerCase()).includes(tableSearchTerm.toLowerCase()) ||
-        (Array.isArray(item.solutions) ? item.solutions.join(", ").toLowerCase() : item.solutions?.toLowerCase()).includes(tableSearchTerm.toLowerCase()) ||
-        (Array.isArray(item.serviceType) ? item.serviceType.join(", ").toLowerCase() : item.serviceType?.toLowerCase()).includes(tableSearchTerm.toLowerCase()) ||
-        (Array.isArray(item.industryFocus) ? item.industryFocus.join(", ").toLowerCase() : item.industryFocus?.toLowerCase()).includes(tableSearchTerm.toLowerCase())
-    ) || [];
+    // Filter data based on search term
+    const filteredData = data?.filter(item => {
+        if (!tableSearchTerm) return true;
+        
+        // Search across all available columns
+        return availableColumns.some(column => {
+            const value = item[column.key];
+            if (!value) return false;
+            
+            if (Array.isArray(value)) {
+                return value.join(", ").toLowerCase().includes(tableSearchTerm.toLowerCase());
+            } else {
+                return String(value).toLowerCase().includes(tableSearchTerm.toLowerCase());
+            }
+        });
+    }) || [];
+
+    // Render cell content properly handling different data types
+    const renderCellContent = (item, column) => {
+        const value = item[column.key];
+        
+        if (!value) return "N/A";
+        
+        // Handle array data (stored as JSON strings or actual arrays)
+        let content;
+        if (Array.isArray(value)) {
+            content = value.join(", ");
+        } else if (typeof value === 'string' && (value.startsWith('[') || value.startsWith('{'))) {
+            // Try to parse JSON strings
+            try {
+                const parsed = JSON.parse(value);
+                content = Array.isArray(parsed) ? parsed.join(", ") : value;
+            } catch {
+                content = value;
+            }
+        } else {
+            content = value;
+        }
+        
+        return (
+            <div className="max-h-[100px] overflow-y-auto whitespace-pre-line">
+                {content}
+            </div>
+        );
+    };
 
     return (
         <div className="flex h-screen overflow-hidden mt-6">
@@ -152,7 +215,6 @@ export default function MicrosoftTable({ data, onFilterChange }) {
             />
 
             <div className="flex-1 overflow-auto">
-
                 <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200">
                     <input
                         type="text"
@@ -163,17 +225,15 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     />
                 </div>
 
-
                 <table className="min-w-full shadow-md rounded-lg">
                     <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                         <tr>
                             <th className="w-[2%] pb-2">#</th>
-                            <th className="w-[12%] pb-2">Partner Name</th>
-                            <th className="w-[25%] pb-2">Description</th>
-                            <th className="w-[15%] pb-2">Products</th>
-                            <th className="w-[15%] pb-2">Solutions</th>
-                            <th className="w-[15%] pb-2">Service Types</th>
-                            <th className="w-[15%] pb-2">Industry Focus</th>
+                            {availableColumns.map((column) => (
+                                <th key={column.key} className={`${column.width} pb-2`}>
+                                    {column.display}
+                                </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
@@ -184,54 +244,31 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                                     className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-3 last:border-b-0 hover:bg-gray-50 transition"
                                 >
                                     <th className="py-2">{index + 1}</th>
-                                    <td className="py-2 pr-3">{item.name}</td>
-                                    <td className="py-2 pr-3 w-[20rem]">
-                                        <div className="max-h-[100px] overflow-y-auto whitespace-pre-line">
-                                            {item.description}
-                                        </div>
-                                    </td>
-                                    <td className="py-2 pr-3 w-[12rem]">
-                                        <div className="max-h-[100px] overflow-y-auto">
-                                            {Array.isArray(item.product) ? item.product.join(", ") : item.product}
-                                        </div>
-                                    </td>
-                                    <td className="py-2 pr-3 w-[12rem]">
-                                        <div className="max-h-[100px] overflow-y-auto">
-                                            {Array.isArray(item.solutions) && item.solutions.length > 0 ? item.solutions.join(", ") : "N/A"}
-                                        </div>
-                                    </td>
-                                    <td className="py-2 pr-3 w-[12rem]">
-                                        <div className="max-h-[100px] overflow-y-auto">
-                                            {Array.isArray(item.serviceType) ? item.serviceType.join(", ") : item.serviceType}
-                                        </div>
-                                    </td>
-                                    <td className="py-2 pr-3 w-[12rem]">
-                                        <div className="max-h-[100px] overflow-y-auto">
-                                            {Array.isArray(item.industryFocus) ? item.industryFocus.join(", ") : item.industryFocus || "N/A"}
-                                        </div>
-                                    </td>
+                                    {availableColumns.map((column) => (
+                                        <td key={column.key} className="py-2 pr-3">
+                                            {renderCellContent(item, column)}
+                                        </td>
+                                    ))}
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan="7" className="text-center py-4">No data available</td>
+                                <td colSpan={availableColumns.length + 1} className="text-center py-4">
+                                    No data available
+                                </td>
                             </tr>
                         )}
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>#</th>
-                            <th>Partner Name</th>
-                            <th>Description</th>
-                            <th>Products</th>
-                            <th>Solutions</th>
-                            <th>Service Types</th>
-                            <th>Industry Focus</th>
+                            {availableColumns.map((column) => (
+                                <th key={column.key}>{column.display}</th>
+                            ))}
                         </tr>
                     </tfoot>
                 </table>
             </div>
-
         </div>
     );
 }
