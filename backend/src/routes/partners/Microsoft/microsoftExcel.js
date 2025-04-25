@@ -29,6 +29,12 @@ const exportToExcel = (data, fileName = "microsoft_partners.xlsx") => {
   
   worksheet['!cols'] = colWidths;
   
+  // Enable autofilter for all columns - use a properly formatted range string
+  // Format: "A1:G100" (example) - from column A row 1 to column G row 100
+  const lastColumn = XLSX.utils.encode_col(Object.keys(data[0]).length - 1);
+  const lastRow = data.length;
+  worksheet['!autofilter'] = { ref: `A1:${lastColumn}${lastRow}` };
+  
   // Create workbook and add worksheet
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Partners");
