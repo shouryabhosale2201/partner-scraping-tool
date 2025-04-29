@@ -9,6 +9,7 @@ export default function FieldSelectionComponent({ selectedFields, onFieldsChange
     { id: "solutions", label: "Solutions", default: false },
     { id: "serviceType", label: "Service Types", default: false },
     { id: "industryFocus", label: "Industry Focus", default: true },
+    { id: "country", label: "Country", default: true },
   ];
 
   // Initialize selection state
