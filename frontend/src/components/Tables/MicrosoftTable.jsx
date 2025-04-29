@@ -72,7 +72,8 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     };
     return (
         <div className="w-1/7 min-w-[250px] border-r border-gray-200 shadow-md p-4">
-            <div className="sticky p-2">
+            <div className="sticky top-0 z-10 p-2">
+
                 <div className="mb-4">
                     <input
                         type="text"
@@ -126,7 +127,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     });
 
     const [tableSearchTerm, setTableSearchTerm] = useState("");
-    
+
     // Determine which columns are actually available in the data
     const columnMapping = {
         'name': { display: 'Partner Name', width: '12%' },
@@ -136,11 +137,11 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         'serviceType': { display: 'Service Types', width: '15%' },
         'industryFocus': { display: 'Industry Focus', width: '15%' }
     };
-    
+
     // Dynamically generate column list based on what's in the data
     const getAvailableColumns = () => {
         if (!data || data.length === 0) return [];
-        
+
         const firstRow = data[0];
         return Object.keys(firstRow)
             .filter(key => key !== 'id') // Exclude id column
@@ -150,7 +151,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                 width: columnMapping[key]?.width || '15%'
             }));
     };
-    
+
     const availableColumns = getAvailableColumns();
 
     const handleFilterChange = (updatedFilters) => {
@@ -163,12 +164,12 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     // Filter data based on search term
     const filteredData = data?.filter(item => {
         if (!tableSearchTerm) return true;
-        
+
         // Search across all available columns
         return availableColumns.some(column => {
             const value = item[column.key];
             if (!value) return false;
-            
+
             if (Array.isArray(value)) {
                 return value.join(", ").toLowerCase().includes(tableSearchTerm.toLowerCase());
             } else {
@@ -180,9 +181,9 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     // Render cell content properly handling different data types
     const renderCellContent = (item, column) => {
         const value = item[column.key];
-        
+
         if (!value) return "N/A";
-        
+
         // Handle array data (stored as JSON strings or actual arrays)
         let content;
         if (Array.isArray(value)) {
@@ -198,7 +199,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         } else {
             content = value;
         }
-        
+
         return (
             <div className="max-h-[100px] overflow-y-auto whitespace-pre-line">
                 {content}
@@ -215,7 +216,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
             />
 
             <div className="flex-1 overflow-auto">
-                <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200">
+                <div className="sticky top-0 z-30 bg-gray-100 px-6 pt-6 pb-4 border-b border-gray-300">
+
                     <input
                         type="text"
                         placeholder="Search in table"
@@ -226,7 +228,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                 </div>
 
                 <table className="min-w-full shadow-md rounded-lg">
-                    <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
+                    <thead className="sticky top-[80px] z-20 bg-gray-100 text-base font-semibold border-b border-gray-300">
+
                         <tr>
                             <th className="w-[2%] pb-2">#</th>
                             {availableColumns.map((column) => (
