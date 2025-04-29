@@ -2,7 +2,6 @@
 const express = require("express");
 const scrapeData = require("./microsoftScraper");
 const exportToExcel = require("./microsoftExcel");
-const { db, initializeDatabase } = require("../../../db");
 const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
