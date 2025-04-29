@@ -1,13 +1,13 @@
 // App.jsx
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import SalesforceTable from "./components/SalesforceTable";
-import SalesforceFieldSelector from "./components/SalesforceFieldSelector";
-import OracleTable from "./components/OracleTable";
-import ShopifyTable from "./components/ShopifyTable";
-import MicrosoftTable from "./components/MicrosoftTable";
+import SalesforceTable from "./components/Tables/SalesforceTable";
+import SalesforceFieldSelector from "./components/Field_Selectors/SalesforceFieldSelector";
+import OracleTable from "./components/Tables/OracleTable";
+import ShopifyTable from "./components/Tables/ShopifyTable";
+import MicrosoftTable from "./components/Tables/MicrosoftTable";
 import ProductInfo from "./components/ProductInfo";
-import MicrosoftFieldSelection from "./components/MicorsoftFieldSelection";
+import MicrosoftFieldSelection from "./components/Field_Selectors/MicorsoftFieldSelection";
 
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
@@ -88,19 +88,17 @@ export default function ScraperApp() {
   const handleFetch = async (selectedFilters = {}) => {
     setLoading(true);
     setError(null);
-    
-    if (url === "microsoft") {
-      try {
-        let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
-        const params = new URLSearchParams();
-        
-        // Add selected fields to the params
+  
+    try {
+      let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
+      const params = new URLSearchParams();
+  
+      if (url === "microsoft") {
+        // Microsoft-specific params
         if (Object.keys(microsoftFields).length > 0) {
           const fieldsToFetch = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
           params.append('fields', JSON.stringify(fieldsToFetch));
         }
-        
-        // Add filter parameters
         if (selectedFilters.industry?.length > 0) {
           params.append('industries', JSON.stringify(selectedFilters.industry));
         }
@@ -120,23 +118,12 @@ export default function ScraperApp() {
         if (params.toString()) {
           endpoint += `?${params.toString()}`;
         }
-
-        const response = await axios.get(endpoint);
-        if (response.data.success) setData(response.data.data);
-        else throw new Error(response.data.error);
-      } catch (err) {
-        setError(err.message);
       }
-    }
-
-    if (url === "salesforce") {
-      try {
-        // Sync pending -> selectedFields now
+  
+      else if (url === "salesforce") {
+        // Salesforce-specific params
         setSalesforceFields(pendingSalesforceFields);
-        
-        const endpoint = "http://localhost:5000/api/v1/salesforce/fetch";
-        const params = new URLSearchParams();
-
+  
         if (pendingSalesforceFields.length > 0) {
           params.append("fields", JSON.stringify(pendingSalesforceFields));
         }
@@ -146,20 +133,28 @@ export default function ScraperApp() {
         if (selectedFilters.industryExpertise?.length > 0) {
           params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
         }
-
-        const response = await axios.get(`${endpoint}?${params.toString()}`);
-        if (response.data.success) {
-          setData(response.data.data);
-        } else {
-          throw new Error(response.data.error);
+  
+        if (params.toString()) {
+          endpoint += `?${params.toString()}`;
         }
-      } catch (err) {
-        setError(err.message);
       }
+      console.log("Fetching from endpoint:", endpoint);
+  
+      const response = await axios.get(endpoint);
+  
+      if (response.data.success) {
+        setData(response.data.data);
+      } else {
+        throw new Error(response.data.error || "Unknown error occurred");
+      }
+  
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
+  
 
   const handleSalesforceFilterChange = (selectedFilters) => {
     if (url === 'salesforce') {

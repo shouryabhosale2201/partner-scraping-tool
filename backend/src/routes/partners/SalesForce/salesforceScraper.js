@@ -1,10 +1,30 @@
-// salesforceScraper.js
-
 const { chromium } = require("playwright");
-const { db, initializeDatabase } = require("../../../db");
+const path = require('path');
+const fs = require('fs').promises;
+
+const DATA_DIR = path.join(__dirname, 'data');
+const Salesforce_File = path.join(DATA_DIR, 'salesforce_partners.json');
+
+async function storeSalesforceDataAsJson(filepath, extractedDetails) {
+    try {
+        // Step 1: Convert the scrapedMap to a plain array
+        // const scrapedArray = Array.from(scrapedMap.values());
+        // const scrapedArray = Array.from(scrapedMap.values());
+
+        // Step 2: Stringify the array
+        const jsonData = JSON.stringify(extractedDetails, null, 2); // Pretty print with 2 spaces
+
+        // Step 3: Write to a file
+        await fs.writeFile(filepath, jsonData, 'utf8');
+
+        console.log('✅ Successfully stored scraped data to salesforce_partners.json');
+    } catch (error) {
+        console.error('❌ Error saving JSON file:', error);
+    }
+}
 
 const scrapeData = async (fieldsToScrape = ['name', 'link', 'foundIn'], testingMode = true) => {
-    await initializeDatabase();
+
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
     const scrapedMap = new Map();
@@ -81,7 +101,7 @@ const scrapeData = async (fieldsToScrape = ['name', 'link', 'foundIn'], testingM
                                 return;
                             }
 
-                            console.log(`🌐 [${i + 1}/${partnerLinks.length}] Opening: ${name} -> ${link}`);
+                            console.log(`Opening: ${name} -> ${link}`);
                             const detailPage = await browser.newPage();
                             await detailPage.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
 
@@ -136,86 +156,9 @@ const scrapeData = async (fieldsToScrape = ['name', 'link', 'foundIn'], testingM
             await resetFilters(page);
         }
     }
-
-    const extractedDetails = Array.from(scrapedMap.values());
-    for (const [link, details] of scrapedMap.entries()) {
-        try {
-            const [insertResult] = await db.execute(
-                "INSERT INTO salesforce (name) VALUES (?)",
-                [details.name]
-            );
-
-            const salesforceId = insertResult.insertId;
-            if (!salesforceId) {
-                throw new Error(`Insert into salesforce table for "${details.name}" did not return an ID.`);
-            }
-
-            let detailsFields = ["id"];
-            let detailsPlaceholders = ["?"];
-            let detailsValues = [salesforceId];
-
-            if (details.link) {
-                detailsFields.push("link");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.link);
-            }
-
-            if (details.tagline) {
-                detailsFields.push("tagline");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.tagline);
-            }
-
-            if (details.description) {
-                detailsFields.push("description");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.description);
-            }
-
-            if (details.expertise) {
-                detailsFields.push("expertise");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.expertise);
-            }
-
-            if (details.industries) {
-                detailsFields.push("industries");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.industries);
-            }
-
-            if (details.services) {
-                detailsFields.push("services");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.services);
-            }
-
-            if (details.extendedDescription) {
-                detailsFields.push("extendedDescription");
-                detailsPlaceholders.push("?");
-                detailsValues.push(details.extendedDescription);
-            }
-
-            await db.execute(
-                `INSERT INTO salesforce_details (${detailsFields.join(', ')}) VALUES (${detailsPlaceholders.join(', ')})`,
-                detailsValues
-            );
-
-            await db.execute(
-                `INSERT INTO salesforce_filters (id, filters) VALUES (?, ?)`,
-                [
-                    salesforceId,
-                    JSON.stringify(details.foundIn)
-                ]
-            );
-
-            console.log(`✅ Stored [ID: ${salesforceId}]: ${details.name}`);
-
-        } catch (dbError) {
-            console.error(`❌ Database Insert Error for "${details.name}":`, dbError.message);
-        }
-    }
     await browser.close();
+    const extractedDetails = Array.from(scrapedMap.values());
+    await storeSalesforceDataAsJson(Salesforce_File, extractedDetails);
     return extractedDetails;
 };
 
