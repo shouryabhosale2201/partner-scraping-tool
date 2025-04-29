@@ -1,3 +1,4 @@
+// App.jsx
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/SalesforceTable";
@@ -111,6 +112,9 @@ export default function ScraperApp() {
         }
         if (selectedFilters.services?.length > 0) {
           params.append('services', JSON.stringify(selectedFilters.services));
+        }
+        if (selectedFilters.country?.length > 0) {
+          params.append('countries', JSON.stringify(selectedFilters.country));
         }
         
         if (params.toString()) {

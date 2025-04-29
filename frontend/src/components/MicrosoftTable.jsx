@@ -1,3 +1,5 @@
+// MicrosoftTable.jsx
+
 import { useState, useEffect } from "react";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
@@ -5,7 +7,8 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         industry: [],
         services: [],
         product: [],
-        solution: []
+        solution: [],
+        country:[],
     });
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -22,7 +25,8 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                     industry: [],
                     services: [],
                     product: [],
-                    solution: []
+                    solution: [],
+                    country: [],
                 });
             }
         };
@@ -89,13 +93,15 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                                 industry: [],
                                 services: [],
                                 product: [],
-                                solution: []
+                                solution: [],
+                                country: []
                             });
                             onFilterChange({
                                 industry: [],
                                 services: [],
                                 product: [],
-                                solution: []
+                                solution: [],
+                                country: []
                             });
                             setSearchTerm("");
                         }}
@@ -112,6 +118,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                 {renderFilterSection("Services", filters.services, "services")}
                 {renderFilterSection("Product", filters.product, "product")}
                 {renderFilterSection("Solution", filters.solution, "solution")}
+                {renderFilterSection("Location", filters.country, "country")}
             </div>
         </div>
     );
@@ -122,7 +129,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         industry: [],
         services: [],
         product: [],
-        solution: []
+        solution: [],
+        country: []
     });
 
     const [tableSearchTerm, setTableSearchTerm] = useState("");
@@ -131,6 +139,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     const columnMapping = {
         'name': { display: 'Partner Name', width: '12%' },
         'description': { display: 'Description', width: '25%' },
+        'country':{display: 'Country', width:'15%'},
         'product': { display: 'Products', width: '15%' },
         'solutions': { display: 'Solutions', width: '15%' },
         'serviceType': { display: 'Service Types', width: '15%' },
@@ -143,7 +152,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         
         const firstRow = data[0];
         return Object.keys(firstRow)
-            .filter(key => key !== 'id') // Exclude id column
+            .filter(key => key !== 'id' && key !== 'link') // Exclude id column
             .map(key => ({
                 key,
                 display: columnMapping[key]?.display || key,
@@ -183,6 +192,15 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         
         if (!value) return "N/A";
         
+        // If the column is 'name', wrap it in a link (anchor tag)
+    if (column.key === 'name' && item.link) {
+        return (
+            <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                {value}
+            </a>
+        );
+    }
+    
         // Handle array data (stored as JSON strings or actual arrays)
         let content;
         if (Array.isArray(value)) {
@@ -225,7 +243,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     />
                 </div>
 
-                <table className="min-w-full shadow-md rounded-lg">
+                <table className="min-w-[1000px] w-full shadow-md rounded-lg">
                     <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                         <tr>
                             <th className="w-[2%] pb-2">#</th>
