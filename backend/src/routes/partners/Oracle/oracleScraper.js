@@ -1,8 +1,10 @@
-const { chromium } = require("playwright");
-const { db, initializeDatabase } = require("../../../db");
-const filterIdApi = require("./filterIdApi");
+const fs = require('fs').promises;
+const expertiseListApi = require("./expertiseListApi");
+const locationListApi = require("./locationListApi")
+const path = require('path');
 
-
+const DATA_DIR = path.join(__dirname, 'data');
+const Oracle_File = path.join(DATA_DIR, 'oracle_partners.json');
 const apiUrl = "https://partner-finder.oracle.com/catalog/opf/partnerList";
 const headers = {
     "Content-Type": "application/json",
@@ -26,225 +28,202 @@ const payloadTemplate = {
     xscProfileType: "Partner Profile"
 };
 
-async function storeOracleDataToDB(scrapedMap) {
-    for (const [link, details] of scrapedMap.entries()) {
-        try {
-            // Step 1: Insert into `oracle` table
-            const [result] = await db.execute(
-                `INSERT INTO oracle (name) VALUES (?)`,
-                [details.name]
-            );
-            const oracleId = result.insertId;
+async function storeOracleDataAsJson(filepath, scrapedMap) {
+    try {
+        // Step 1: Convert the scrapedMap to a plain array
+        const scrapedArray = Array.from(scrapedMap.values());
 
-            // Step 2: Insert into `oracle_details` table
-            await db.execute(
-                `INSERT INTO oracle_details (
-                    id, oracle_expertise_areas, company_overview, solution_titles, solution_links, link
-                ) VALUES (?, ?, ?, ?, ?, ?)`,
-                [
-                    oracleId,
-                    details.expertiseDetails.join(", "),
-                    details.companyOverview,
-                    details.solutions.map(s => s.title).join(", "),
-                    details.solutions.map(s => s.url).join(", "),
-                    link
-                ]
-            );
+        // Step 2: Stringify the array
+        const jsonData = JSON.stringify(scrapedArray, null, 2); // Pretty print with 2 spaces
 
-            // Step 3: Insert filters into `oracle_filters` table
-            await db.execute(
-                `INSERT INTO oracle_filters (id, filters) VALUES (?, ?)`,
-                [oracleId, JSON.stringify(details.filter)]
-            );
+        // Step 3: Write to a file
+        await fs.writeFile(filepath, jsonData, 'utf8');
 
-            console.log(`✅ Stored : ${details.name}`);
-        } catch (dbError) {
-            console.log("❌ Error inserting into DB:", dbError, "for:", details.name);
-        }
+        console.log('✅ Successfully stored scraped data to oracle_partners.json');
+    } catch (error) {
+        console.error('❌ Error saving JSON file:', error);
     }
 }
 
 
 const scrapeData = async () => {
+    const expertiseHierarchy = await expertiseListApi();
+    const apacCountries = await locationListApi();
+    console.log(expertiseHierarchy);
 
-    initializeDatabase();
-    const browser = await chromium.launch({ headless: true });
-
-    const level4Items = await filterIdApi();
-
-    let allPartnerIds = [];
-    let tests = 0;
     const scrapedMap = new Map();
-    for (const { ucm_column, id, filterName } of level4Items) {
-        if (tests > 1) {
-            break;
+
+    for (const level1 of expertiseHierarchy.slice(0, 5)) { 
+        const level1Name = level1.name;
+
+        for (const level2 of (level1.level_2_list || []).slice(0, 2)) {
+            const level2Name = level2.name;
+
+            for (const level3 of (level2.level_3_list || []).slice(0, 2)) {
+                const level3Name = level3.name;
+                const ucm_column = level3.ucm_column;
+
+                for (const level4 of (level3.level_4_list || []).slice(0, 2)) {
+                    const level4Name = level4.name;
+                    const level4Id = level4.id;
+
+                    let currentPage = 1;
+                    let totalPages = 1;
+
+                    while (currentPage <= totalPages) {
+                        try {
+                            const payload = {
+                                ...payloadTemplate,
+                                pageNumber: String(currentPage),
+                                filters: {
+                                    [ucm_column]: [level4Id]
+                                }
+                            };
+
+                            const response = await fetch(apiUrl, {
+                                method: "POST",
+                                headers,
+                                body: JSON.stringify(payload),
+                            });
+
+                            if (!response.ok) {
+                                console.error(`❌ Request failed: ${response.status} ${response.statusText}`);
+                                break;
+                            }
+
+                            const data = await response.json();
+
+                            const partnerList = data?.profiles || [];
+                            console.log("Partners found:", partnerList.length);
+
+                            const baseUrl = "https://partner-finder.oracle.com/catalog/Partner/";
+
+                            for (const partner of partnerList) {
+                                const link = `${baseUrl}${partner.id}`;
+                                const name = partner.name;
+
+                                if (scrapedMap.has(link)) {
+                                    const existingDetails = scrapedMap.get(link);
+
+                                    if (!Array.isArray(existingDetails.filters)) {
+                                        existingDetails.filters = [];
+                                    }
+
+                                    existingDetails.filters.push({
+                                        level1Name,
+                                        level2Name,
+                                        level3Name,
+                                        ucm_column,
+                                        level4Name,
+                                        level4Id
+                                    });
+
+                                    scrapedMap.set(link, existingDetails);
+                                } else {
+                                    const details = {
+                                        id: partner.id,
+                                        name,
+                                        link,
+                                        filters: [{
+                                            level1Name,
+                                            level2Name,
+                                            level3Name,
+                                            ucm_column,
+                                            level4Name,
+                                            level4Id
+                                        }]
+                                    };
+                                    scrapedMap.set(link, details);
+                                }
+                            }
+
+                            currentPage++;
+                        } catch (error) {
+                            console.error(`❌ Error during scraping for ${level4Name} page ${currentPage}:`, error);
+                            break;
+                        }
+                    }
+                }
+            }
         }
-        tests++;
-        console.log("trying : ", filterName, id, ucm_column);
+    }
+
+    // Apply location filter separately
+    for (const country of apacCountries) {
+        const locationFilter = `${country.id}~${country.name}`;
 
         let currentPage = 1;
         let totalPages = 1;
 
         while (currentPage <= totalPages) {
-            console.log("sending request to : ", filterName, id, ucm_column);
-            const payload = {
-                ...payloadTemplate,
-                pageNumber: String(currentPage),
-                filters: {
-                    [ucm_column]: [id]
+            try {
+                const payload = {
+                    ...payloadTemplate,
+                    pageNumber: String(currentPage),
+                    filters: {
+                        xscCompanyLocation: [locationFilter]
+                    }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers,
+                    body: JSON.stringify(payload),
+                });
+
+                if (!response.ok) {
+                    console.error(`❌ Location request failed: ${response.status} ${response.statusText}`);
+                    break;
                 }
-            };
-            const response = await fetch(apiUrl, {
-                method: "POST",
-                headers,
-                body: JSON.stringify(payload),
-                // body: payload,
-            });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            const partnerList = data?.profiles || [];
-            const partnerIds = partnerList.map(p => p.id);
-            console.log(partnerIds);
-            allPartnerIds.push(...partnerIds);
+                const partnerList = data?.profiles || [];
+                console.log(`Partners found in ${country.name}:`, partnerList.length);
 
-            // Update total pages based on 'count' from response
-            // const totalResults = data.count || partnerList.length;
-            // totalPages = Math.ceil(totalResults / parseInt(payloadTemplate.resultCount));
+                const baseUrl = "https://partner-finder.oracle.com/catalog/Partner/";
 
-            currentPage++;
-        }
+                for (const partner of partnerList) {
+                    const link = `${baseUrl}${partner.id}`;
+                    const name = partner.name;
 
-        console.log("Total Partner IDs:", allPartnerIds.length);
+                    if (scrapedMap.has(link)) {
+                        const existingDetails = scrapedMap.get(link);
 
-        const baseUrl = "https://partner-finder.oracle.com/catalog/Partner/";
-        const allPartners = allPartnerIds.map(id => `${baseUrl}${id}`);
+                        if (!Array.isArray(existingDetails.locations)) {
+                            existingDetails.locations = [];
+                        }
 
-        console.log("Generated Links:", allPartners.length);
-        console.log(allPartners);
+                        if (!existingDetails.locations.includes(country.name)) {
+                            existingDetails.locations.push(country.name);
+                        }
 
-        const chunkSize = 4;
-        const failedLinks = [];
-
-        for (let i = 0; i < allPartners.length; i += chunkSize) {
-            const chunk = allPartners.slice(i, i + chunkSize).filter(Boolean);
-
-            await Promise.all(chunk.map(async (link, idx) => {
-                try {
-                    // if (scrapedMap.has(link)) {
-                    //     const existingDetails = scrapedMap.get(link);
-
-                    //     if (!Array.isArray(existingDetails.filter)) {
-                    //         existingDetails.filter = [];
-                    //     }
-
-                    //     if (!existingDetails.filter.includes(filterName)) {
-                    //         existingDetails.filter.push(filterName);
-                    //     }
-
-                    //     scrapedMap.set(link, existingDetails);
-                    // } else {
-                    //     const details = {
-                    //         name,
-                    //         link,
-                    //         expertiseDetails,
-                    //         companyOverview,
-                    //         solutions,
-                    //         filter: [filterName]
-                    //     };
-                    //     scrapedMap.set(link, details);
-                    // }
-
-
-                    const detailPage = await browser.newPage();
-                    await detailPage.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
-                    console.log(`🌐 [${i + idx + 1}/${allPartners.length}] Opening: ${link}`);
-
-                    const nameLocator = detailPage.locator(".o-partner-businesscard--details h1");
-                    await nameLocator.waitFor({ state: "visible", timeout: 60000 });
-                    const name = (await nameLocator.textContent())?.trim();
-
-                    const expertiseDetails = await detailPage
-                        .locator("h4:text('Oracle Expertise') + p + ul.bulleted-list li")
-                        .allTextContents();
-
-                    const companyOverviewLocator = detailPage.locator("#PartnerSummary");
-                    await companyOverviewLocator.waitFor({ state: "visible", timeout: 60000 });
-                    const companyOverview = await companyOverviewLocator.innerText();
-
-                    const solutions = await detailPage.evaluate(() => {
-                        return Array.from(document.querySelectorAll("ul.o-paragraph-list li a.o-link-heading"))
-                            .map(el => ({
-                                title: el.textContent.trim(),
-                                url: el.href
-                            }));
-                    });
-
-                    // const filters = Array.isArray(filterName) ? filterName : [];
-                    const filters = [filterName];
-
-                    const details = {
-                        name,
-                        link,
-                        expertiseDetails,
-                        companyOverview,
-                        solutions,
-                        filter: [...filters]
-                    };
-                    scrapedMap.set(link, details);
-                    console.log(`✅ Extracted : ${name} Filters : ${details.filter}`);
-
-                    await detailPage.close();
-                } catch (error) {
-                    console.error(`❌ Failed to extract ${link}:`, error.message);
-                    failedLinks.push(link);
+                        scrapedMap.set(link, existingDetails);
+                    } else {
+                        const details = {
+                            id: partner.id,
+                            name,
+                            link,
+                            filters: [],
+                            locations: [country.name]
+                        };
+                        scrapedMap.set(link, details);
+                    }
                 }
-            }));
-        }
-    }
-    console.log(scrapedMap);
 
-    for (const [link, details] of scrapedMap.entries()) {
-        console.log("started storing");
-        try {
-            // Step 1: Insert into `oracle` table
-            const [result] = await db.execute(
-                `INSERT INTO oracle (name) VALUES (?)`,
-                [details.name]
-            );
-            const oracleId = result.insertId;
-
-            // Step 2: Insert into `oracle_details` table
-            await db.execute(
-                `INSERT INTO oracle_details (
-                    id, oracle_expertise_areas, company_overview, solution_titles, solution_links, link
-                ) VALUES (?, ?, ?, ?, ?, ?)`,
-                [
-                    oracleId,
-                    details.expertiseDetails.join(", "),
-                    details.companyOverview,
-                    details.solutions.map(s => s.title).join(", "),
-                    details.solutions.map(s => s.url).join(", "),
-                    link
-                ]
-            );
-
-            // Step 3: Insert filters into `oracle_filters` table
-            await db.execute(
-                `INSERT INTO oracle_filters (id, filters) VALUES (?, ?)`,
-                [oracleId, details.filter.map()]
-            );
-
-            console.log(`✅ Stored : ${details.name}`);
-        } catch (dbError) {
-            console.log("❌ Error inserting into DB:", dbError, "for:", details.name);
+                currentPage++;
+            } catch (error) {
+                console.error(`❌ Error during location scraping for ${country.name} page ${currentPage}:`, error);
+                break;
+            }
         }
     }
 
+    await storeOracleDataAsJson(Oracle_File, scrapedMap);
     const extractedDetails = Array.from(scrapedMap.values());
-    // await storeOracleDataToDB(scrapedMap);
-    await browser.close();
     return extractedDetails;
 };
+
+
 
 module.exports = scrapeData;

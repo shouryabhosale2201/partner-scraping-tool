@@ -1,0 +1,3730 @@
+[
+  {
+    "id": "SC2PP-ACCENTURE",
+    "name": "Accenture",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-ACCENTURE",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "China",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "New Zealand",
+      "Philippines",
+      "Singapore",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-INFOSYS",
+    "name": "Infosys Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-INFOSYS",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Solutions Provider Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscServiceCX",
+        "level4Name": "CSPE: B2B/B2C Field Service - Field Service",
+        "level4Id": "1032"
+      },
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Solutions Provider Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscServiceCX",
+        "level4Name": "CSPE: B2B/B2C Field Service - Fusion Service/B2C Service",
+        "level4Id": "1033"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "Hong Kong",
+      "India",
+      "Japan",
+      "Malaysia",
+      "New Zealand",
+      "Philippines",
+      "Singapore"
+    ]
+  },
+  {
+    "id": "SC2PP-TCS",
+    "name": "Tata Consultancy Services Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-TCS",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "Singapore"
+    ]
+  },
+  {
+    "id": "SCPP-DELOITTE-COM5",
+    "name": "Deloitte LLP",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DELOITTE-COM5",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "China",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Korea",
+      "Malaysia",
+      "New Zealand",
+      "Philippines",
+      "Singapore",
+      "Sri Lanka",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-WIPRO",
+    "name": "WIPRO Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-WIPRO",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Autonomous Database Cloud",
+        "level4Id": "274"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "Singapore"
+    ]
+  },
+  {
+    "id": "SC2PP-IBM",
+    "name": "IBM CORPORATION",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-IBM",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "China",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "Pakistan",
+      "Philippines",
+      "Singapore",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-TECHM",
+    "name": "Tech Mahindra Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-TECHM",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "New Zealand",
+      "Philippines",
+      "Singapore",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-COGNIZANT",
+    "name": "Cognizant Technology Solutions U.S. Corporation",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-COGNIZANT",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "China",
+      "Hong Kong",
+      "India",
+      "Malaysia",
+      "New Zealand",
+      "Singapore",
+      "Thailand"
+    ]
+  },
+  {
+    "id": "SC2PP-HCL",
+    "name": "HCL Technologies Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-HCL",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "India",
+      "Malaysia",
+      "New Zealand",
+      "Singapore"
+    ]
+  },
+  {
+    "id": "SC2PP-PELOTONGROUP",
+    "name": "Peloton Group",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-PELOTONGROUP",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: AI / Machine Learning",
+        "level4Id": "1658"
+      },
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: Cloud Native Applications on Oracle Cloud",
+        "level4Id": "1660"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-REPLY",
+    "name": "Reply S.p.A.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-REPLY",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-AYYCOEEH",
+    "name": "Capgemini International B.V.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AYYCOEEH",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      }
+    ],
+    "locations": [
+      "China",
+      "Japan"
+    ]
+  },
+  {
+    "id": "SCPP-NTTDATA",
+    "name": "株式会社ＮＴＴデータグループ (NTT DATA Group Corporation)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NTTDATA",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      }
+    ],
+    "locations": [
+      "Indonesia",
+      "Japan"
+    ]
+  },
+  {
+    "id": "SCPP-NAMOSSOLUTIONS",
+    "name": "Namos Solutions Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NAMOSSOLUTIONS",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-INOAPPS",
+    "name": "Inoapps Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-INOAPPS",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud",
+        "level4Id": "273"
+      },
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-BRIDGECONSULTING",
+    "name": "BRIDGE CONSULTING SRL",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-BRIDGECONSULTING",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Integrated with Oracle Technologies",
+        "ucm_column": "xscBuildIntegratedWith",
+        "level4Name": "Integrated with Oracle Cloud Infrastructure Container Engine for Kubernetes",
+        "level4Id": "1228"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-MORSE",
+    "name": "Logicalis GmbH",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-MORSE",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Autonomous Database Cloud",
+        "level4Id": "274"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-PDUIJTUQ",
+    "name": "Aspire Systems Global Pte. Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PDUIJTUQ",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Autonomous Database Cloud",
+        "level4Id": "274"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-MESTEC",
+    "name": "Mestec Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-MESTEC",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Autonomous Database Cloud",
+        "level4Id": "274"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-PITSS",
+    "name": "PITSS GmbH",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-PITSS",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Autonomous Database Cloud",
+        "level4Id": "274"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-LNTINFOTECH",
+    "name": "LTIMindtree Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-LNTINFOTECH",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: Cloud Native Applications on Oracle Cloud",
+        "level4Id": "1660"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "India",
+      "Singapore"
+    ]
+  },
+  {
+    "id": "SC2PP-CSC",
+    "name": "DXC Technology Services LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-CSC",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "Brunei Darussalam",
+      "China",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "New Zealand",
+      "Philippines",
+      "Singapore",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SCPP-SOIN",
+    "name": "Soin Soluciones Integrales S.a",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SOIN",
+    "filters": [
+      {
+        "level1Name": "Cloud Solution Builders & ISVs",
+        "level2Name": "Select Solution Expertise",
+        "level3Name": "Powered by Oracle Technologies",
+        "ucm_column": "xscBuildPoweredBy",
+        "level4Name": "Powered by Oracle Cloud",
+        "level4Id": "272"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-YWFABRWT",
+    "name": "HRS (Hospitality and Retail Systems) LTD",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-YWFABRWT",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ],
+    "locations": [
+      "Bangladesh",
+      "Cambodia",
+      "Hong Kong",
+      "Indonesia",
+      "Japan",
+      "Korea",
+      "Lao People's Democratic Republic",
+      "Macau",
+      "Maldives",
+      "Myanmar",
+      "Nepal",
+      "New Zealand",
+      "Sri Lanka",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SCPP-OEQDJFKC",
+    "name": "Vaske Computer, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OEQDJFKC",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-RAYASOFTWARE",
+    "name": "Raya International Services",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-RAYASOFTWARE",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-SOPHEAK",
+    "name": "POSITRON MULTIVERSE CO.,LTD",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-SOPHEAK",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-GXMYOHCH",
+    "name": "MIKOS d.o.o.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-GXMYOHCH",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-PROTEL",
+    "name": "Protel Bilgisayar A.S.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PROTEL",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-OOYUEBUS",
+    "name": "Key Information Technology LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OOYUEBUS",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-VANHESSEN-NL",
+    "name": "Van Hessen BV",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-VANHESSEN-NL",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-QEGDSBZK",
+    "name": "杭州绿云软件股份有限公司 (Hangzhou GreenCloud Software Co., Ltd.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-QEGDSBZK",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-DVZACHDY",
+    "name": "Hospitality Technology Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DVZACHDY",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ],
+    "locations": [
+      "Maldives"
+    ]
+  },
+  {
+    "id": "SCPP-AMNFSTJU",
+    "name": "PT Ultima Asia Teknologi",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AMNFSTJU",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-NKGPIWVB",
+    "name": "Specialized Data Systems LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NKGPIWVB",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-LZUYFRWQ",
+    "name": "FO - Data GmbH",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-LZUYFRWQ",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-ALVRTGHX",
+    "name": "PA Infotel Co Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ALVRTGHX",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ],
+    "locations": [
+      "Cambodia",
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-FAQSBDBF",
+    "name": "艾玘信息科技（上海）有限公司 (HRS Technology (Shanghai) Co., Ltd.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FAQSBDBF",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Industry Applications",
+        "ucm_column": "xscServiceIndustry",
+        "level4Name": "CSSE: Food & Beverage",
+        "level4Id": "1672"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-OTCAVOYG",
+    "name": "Grupo Babel Sociedad Anonima",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OTCAVOYG",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: AI / Machine Learning",
+        "level4Id": "1658"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-VERTICECLOUD",
+    "name": "Vertice Integration Services Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-VERTICECLOUD",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: AI / Machine Learning",
+        "level4Id": "1658"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-QUANTIPHI",
+    "name": "Quantiphi, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-QUANTIPHI",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: AI / Machine Learning",
+        "level4Id": "1658"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-NET-BR1",
+    "name": "E-NOVASYS TECNOLOGIA DA INFORMAÇÃO LTDA (E-NOVASYS TECNOLOGIA DA INFORMACAO LTDA)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NET-BR1",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: AI / Machine Learning",
+        "level4Id": "1658"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-WIDELABS",
+    "name": "WIDE LABS TECNOLOGIA DA INFORMACAO LTDA",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-WIDELABS",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: AI / Machine Learning",
+        "level4Id": "1658"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-KTUFKTIW",
+    "name": "深圳敏捷云计算科技有限公司 (Shenzhen Agile Cloud Computing Technology Co., Ltd.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-KTUFKTIW",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: Cloud Native Applications on Oracle Cloud",
+        "level4Id": "1660"
+      }
+    ],
+    "locations": [
+      "China",
+      "Hong Kong"
+    ]
+  },
+  {
+    "id": "SCPP-BHAGTUMM",
+    "name": "Harpo Tecnologia de Dados Ltda",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BHAGTUMM",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: Cloud Native Applications on Oracle Cloud",
+        "level4Id": "1660"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-BENKPLLO",
+    "name": "上海优云网络有限公司 (Shanghai Youyun Network Co., Ltd.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BENKPLLO",
+    "filters": [
+      {
+        "level1Name": "Cloud Services Partners",
+        "level2Name": "Cloud Service Solution Expertise",
+        "level3Name": "Oracle Cloud Infrastructure",
+        "ucm_column": "xscServiceOCP",
+        "level4Name": "CSSE: Cloud Native Applications on Oracle Cloud",
+        "level4Id": "1660"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-RBATAN",
+    "name": "Tech Data Product Management, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-RBATAN",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "India",
+      "Malaysia",
+      "New Zealand",
+      "Singapore",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-PRICEWATERHOUSECOOPERS",
+    "name": "PricewaterhouseCoopers LLP",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-PRICEWATERHOUSECOOPERS",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "China",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Korea",
+      "Malaysia",
+      "Pakistan",
+      "Philippines",
+      "Singapore",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-4IAPPS",
+    "name": "4i Apps Solutions Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-4IAPPS",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "India",
+      "Singapore"
+    ]
+  },
+  {
+    "id": "SCPP-MYTHICS",
+    "name": "Mythics, LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MYTHICS",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-BIRLASOFT2",
+    "name": "Birlasoft Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-BIRLASOFT2",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Malaysia"
+    ]
+  },
+  {
+    "id": "SCPP-KPMG-UK",
+    "name": "KPMG International Services Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-KPMG-UK",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B Marketing",
+        "level4Id": "280"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      }
+    ],
+    "locations": [
+      "China",
+      "Indonesia",
+      "Japan",
+      "Malaysia",
+      "Pakistan",
+      "Philippines",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SCPP-FUJITSU-COM5",
+    "name": "富士通株式会社 (Fujitsu Limited)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FUJITSU-COM5",
+    "filters": [
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "CX",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "B2B/B2C Field Service",
+        "level4Id": "279"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Performance Management",
+        "level4Id": "284"
+      },
+      {
+        "level1Name": "Cloud Resellers",
+        "level2Name": "Select Product Expertise",
+        "level3Name": "ERP",
+        "ucm_column": "xscSellExpertise",
+        "level4Name": "Enterprise Resource Planning",
+        "level4Id": "285"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ],
+    "locations": [
+      "Australia",
+      "China",
+      "Hong Kong",
+      "India",
+      "Indonesia",
+      "Japan",
+      "Korea",
+      "Malaysia",
+      "New Zealand",
+      "Philippines",
+      "Singapore",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SCPP-REVSPRINGINC",
+    "name": "Revspring, Inc",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-REVSPRINGINC",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-ASHA",
+    "name": "American Speech-Language-Hearing Association",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ASHA",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-ANDORHEALTH",
+    "name": "Andor Health",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ANDORHEALTH",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-AUGMEDIX",
+    "name": "Augmedix",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AUGMEDIX",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-FINDHELP",
+    "name": "Aunt Bertha, Public Benefit Corp, dba findhelp",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FINDHELP",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-CARENETHEALTHCARE",
+    "name": "Carenet Health",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-CARENETHEALTHCARE",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-FABRICHEALTH",
+    "name": "Fabric Labs, Inc. dba Fabric",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FABRICHEALTH",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-HEALTHNOTE",
+    "name": "Health Note",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HEALTHNOTE",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-HEALTHASYST",
+    "name": "HealthAsyst LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HEALTHASYST",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-INNOVACCER",
+    "name": "Innovaccer",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-INNOVACCER",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-INSIGHT-RX",
+    "name": "Insight Rx, Inc",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-INSIGHT-RX",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-LEGACYDATAACCESS-COM",
+    "name": "Legacy Data Access Inc",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-LEGACYDATAACCESS-COM",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-LUMAHEALTH",
+    "name": "Luma Health, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-LUMAHEALTH",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-NOTABLEHEALTH",
+    "name": "Notable",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NOTABLEHEALTH",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-PHREESIA",
+    "name": "Phreesia Inc",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PHREESIA",
+    "filters": [
+      {
+        "level1Name": "Industry Healthcare Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscHealthBuild",
+        "level4Name": "Oracle Validated Integration with Oracle Health Millennium Platform",
+        "level4Id": "1732"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-RFGEN",
+    "name": "RFgen Software, A division of the DataMAX Software Group, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-RFGEN",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle E-Business Suite",
+        "level4Id": "253"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-GIL",
+    "name": "Fidelity Information Services, LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-GIL",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle E-Business Suite",
+        "level4Id": "253"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-SOLIX",
+    "name": "Solix Technologies, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-SOLIX",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle E-Business Suite",
+        "level4Id": "253"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-ITESOFT-FRANCE",
+    "name": "Itesoft",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-ITESOFT-FRANCE",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle E-Business Suite",
+        "level4Id": "253"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-RUNNERTECHNOLOGIES",
+    "name": "Runner Enterprise Data Quality",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-RUNNERTECHNOLOGIES",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle E-Business Suite",
+        "level4Id": "253"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-JMRINFOTECH",
+    "name": "JMR Infotech Middle East FZC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-JMRINFOTECH",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle Financial Services",
+        "level4Id": "254"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-FINONYX",
+    "name": "Finonyx Software Solutions Private Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FINONYX",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle Financial Services",
+        "level4Id": "254"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-DZFVFBSB",
+    "name": "Profinch Solutions Private Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DZFVFBSB",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Build Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHBuild",
+        "level4Name": "Validated Integration for Oracle Financial Services",
+        "level4Id": "254"
+      }
+    ]
+  },
+  {
+    "id": "SC2PP-DI",
+    "name": "Data Intensity, LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-DI",
+    "filters": [
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards EnterpriseOne",
+        "level4Id": "289"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Applications",
+        "ucm_column": "xscLHSell",
+        "level4Name": "JD Edwards World",
+        "level4Id": "B11"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Data Warehousing",
+        "level4Id": "B12"
+      },
+      {
+        "level1Name": "License & Hardware Partners",
+        "level2Name": "Sell Expertise",
+        "level3Name": "Database",
+        "ucm_column": "xscLHSell",
+        "level4Name": "Enterprise Manager",
+        "level4Id": "B13"
+      }
+    ]
+  },
+  {
+    "id": "SCPP-OZULQCQX",
+    "name": "Netlinks Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OZULQCQX",
+    "filters": [],
+    "locations": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "SC2PP-NETLINKIN",
+    "name": "Almoayed Netlink Technologies",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-NETLINKIN",
+    "filters": [],
+    "locations": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "SCPP-FQRJLRXP",
+    "name": "ACACIA TECHNOLOGY",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FQRJLRXP",
+    "filters": [],
+    "locations": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "SCPP-BNEWHEHD",
+    "name": "AfghanSkills Group Networking Company",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BNEWHEHD",
+    "filters": [],
+    "locations": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "SCPP-WEBOARNF",
+    "name": "Fast One Technology & Telecommunications Services",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-WEBOARNF",
+    "filters": [],
+    "locations": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "SCPP-GTR",
+    "name": "Grand Technology Resources",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-GTR",
+    "filters": [],
+    "locations": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "id": "SCPP-ZZTLBD",
+    "name": "Zara Zaman Technology Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ZZTLBD",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-FUSIONINFOTECHLTD",
+    "name": "Fusion Infotech Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FUSIONINFOTECHLTD",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-DBL-GROUP",
+    "name": "DBL Digital Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DBL-GROUP",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-TFGCVGJD",
+    "name": "Smart Technologies BD Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-TFGCVGJD",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-TYKRCWTT",
+    "name": "F-Z Technologies Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-TYKRCWTT",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-WLGHSZIY",
+    "name": "Omega Exim Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-WLGHSZIY",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-HTTPSFALCONCOMMUNICATIONL",
+    "name": "Falcon Communication Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HTTPSFALCONCOMMUNICATIONL",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-JPBWOQVR",
+    "name": "Ls Systems Pte. Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JPBWOQVR",
+    "filters": [],
+    "locations": [
+      "Bangladesh",
+      "Nepal",
+      "Pakistan",
+      "Philippines",
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-JSEXPHZX",
+    "name": "AXENTEC PLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JSEXPHZX",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-INFOSONIK",
+    "name": "Infosonik Systems Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-INFOSONIK",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-YISRPNSH",
+    "name": "Tech Novelty Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-YISRPNSH",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-BIOMETRICS-BD-COM",
+    "name": "Biometrics.BD Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BIOMETRICS-BD-COM",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-HTTPSSMART-VOICE",
+    "name": "Smart Voice Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HTTPSSMART-VOICE",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SC2PP-KHALED",
+    "name": "Thakral Information Systems Pvt. Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-KHALED",
+    "filters": [],
+    "locations": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "id": "SCPP-BSGMRSDJ",
+    "name": "NGN Technologies Private Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BSGMRSDJ",
+    "filters": [],
+    "locations": [
+      "Bhutan"
+    ]
+  },
+  {
+    "id": "SC2PP-NCS",
+    "name": "NCS Pte Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-NCS",
+    "filters": [],
+    "locations": [
+      "Brunei Darussalam"
+    ]
+  },
+  {
+    "id": "SCPP-SPRINTVILLE",
+    "name": "Sprintville Technologies Sdn Bhd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SPRINTVILLE",
+    "filters": [],
+    "locations": [
+      "Brunei Darussalam"
+    ]
+  },
+  {
+    "id": "SCPP-OTSQCZVS",
+    "name": "JSY Systems Sdn Bhd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OTSQCZVS",
+    "filters": [],
+    "locations": [
+      "Brunei Darussalam"
+    ]
+  },
+  {
+    "id": "SCPP-ARYWZWTP",
+    "name": "Dynamik Technologies Sdn. Bhd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ARYWZWTP",
+    "filters": [],
+    "locations": [
+      "Brunei Darussalam"
+    ]
+  },
+  {
+    "id": "SCPP-SKXURLKB",
+    "name": "Ishajaya Technology Sdn Bhd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SKXURLKB",
+    "filters": [],
+    "locations": [
+      "Brunei Darussalam"
+    ]
+  },
+  {
+    "id": "SCPP-BMJIVZOZ",
+    "name": "MPS Vietnam Joint Stock Company",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BMJIVZOZ",
+    "filters": [],
+    "locations": [
+      "Cambodia",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SCPP-SUNWEST",
+    "name": "SunFlex (Cambodia) Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SUNWEST",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-MWJNGCSC",
+    "name": "Ecam Solution Co Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MWJNGCSC",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SC2PP-45",
+    "name": "First Cambodia Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-45",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-JZAOTKAO",
+    "name": "Deam Computer International Pte Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JZAOTKAO",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-PROSETHSOLUTIONS",
+    "name": "Proseth Solutions Co Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PROSETHSOLUTIONS",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-ECJBBVFS",
+    "name": "Biplan Global Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ECJBBVFS",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-HTTPSBYTEDC",
+    "name": "ByteDC Solutions Co., Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HTTPSBYTEDC",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-DSS-SERVICE",
+    "name": "DSSG SERVICES (CAMBODIA) CO., LTD.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DSS-SERVICE",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-FRPKBHBK",
+    "name": "RMO Technology Co. Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FRPKBHBK",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-TRUST-GROUPS",
+    "name": "Trust Global Service Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-TRUST-GROUPS",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-UOOKIXMD",
+    "name": "UEF Development Co., Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-UOOKIXMD",
+    "filters": [],
+    "locations": [
+      "Cambodia"
+    ]
+  },
+  {
+    "id": "SCPP-KYNDRYL",
+    "name": "Kyndryl, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-KYNDRYL",
+    "filters": [],
+    "locations": [
+      "China",
+      "Hong Kong",
+      "Japan",
+      "Korea",
+      "New Zealand",
+      "Pakistan",
+      "Philippines",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SCPP-PKEMUKKN",
+    "name": "Retail Consult – KSR, S.A (Retail Consult - KSR, S.A)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PKEMUKKN",
+    "filters": [],
+    "locations": [
+      "China"
+    ]
+  },
+  {
+    "id": "SC2PP-ATAWAY",
+    "name": "Ataway",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-ATAWAY",
+    "filters": [],
+    "locations": [
+      "China"
+    ]
+  },
+  {
+    "id": "SCPP-SOFTWAREONE",
+    "name": "SoftwareONE AG",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SOFTWAREONE",
+    "filters": [],
+    "locations": [
+      "China",
+      "Hong Kong",
+      "Taiwan",
+      "Thailand",
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-ECSCHINA",
+    "name": "上海伟仕佳杰科技有限公司 (VSTECS (SHANGHAI) TECHNOLOGY CO., LTD.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-ECSCHINA",
+    "filters": [],
+    "locations": [
+      "China"
+    ]
+  },
+  {
+    "id": "SCPP-DATEC-FJ",
+    "name": "Datec (Fiji) Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DATEC-FJ",
+    "filters": [],
+    "locations": [
+      "Fiji"
+    ]
+  },
+  {
+    "id": "SCPP-YEUEFKPL",
+    "name": "Telecom Fiji Pte Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-YEUEFKPL",
+    "filters": [],
+    "locations": [
+      "Fiji"
+    ]
+  },
+  {
+    "id": "SCPP-HJISDDVG",
+    "name": "c2I",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HJISDDVG",
+    "filters": [],
+    "locations": [
+      "French Polynesia"
+    ]
+  },
+  {
+    "id": "SCPP-JBCJTIED",
+    "name": "Tahiti Nui Telecom",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JBCJTIED",
+    "filters": [],
+    "locations": [
+      "French Polynesia"
+    ]
+  },
+  {
+    "id": "SCPP-UBSJUYXE",
+    "name": "Simple Systems Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-UBSJUYXE",
+    "filters": [],
+    "locations": [
+      "Hong Kong"
+    ]
+  },
+  {
+    "id": "SCPP-SIGMA-ID",
+    "name": "PT Sigma Cipta Caraka",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SIGMA-ID",
+    "filters": [],
+    "locations": [
+      "Indonesia"
+    ]
+  },
+  {
+    "id": "SCPP-NEC",
+    "name": "日本電気株式会社 (NEC Corporation)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NEC",
+    "filters": [],
+    "locations": [
+      "Indonesia",
+      "Taiwan",
+      "Thailand"
+    ]
+  },
+  {
+    "id": "SC2PP-METRODATA-INDONESIA",
+    "name": "PT Metrodata Electronics Tbk",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-METRODATA-INDONESIA",
+    "filters": [],
+    "locations": [
+      "Indonesia"
+    ]
+  },
+  {
+    "id": "SC2PP-HYKWON",
+    "name": "주식회사 에티버스 (Etevers Co., Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-HYKWON",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SC2PP-UCLICK",
+    "name": "(주)유클릭 (UClick Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-UCLICK",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SC2PP-GTPLUS",
+    "name": "지티플러스 주식회사 (GT Plus Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-GTPLUS",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SC2PP-SDS",
+    "name": "삼성에스디에스주식회사 (Samsung SDS Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-SDS",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SCPP-CLLAVKMS",
+    "name": "메가존소프트 주식회사 (Megazonesoft)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-CLLAVKMS",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SC2PP-AZWELL",
+    "name": "(주)에즈웰플러스 (Azwell Plus Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-AZWELL",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SC2PP-LGCNS",
+    "name": "(주)엘지씨엔에스 (LG CNS Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-LGCNS",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SCPP-EBEST-IT",
+    "name": "(주)이비아이앤씨 (Ebinc Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-EBEST-IT",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SCPP-JHPUJCVQ",
+    "name": "AMDOCS (ISRAEL) LTD.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JHPUJCVQ",
+    "filters": [],
+    "locations": [
+      "Korea",
+      "Philippines"
+    ]
+  },
+  {
+    "id": "SCPP-UGENSSNC",
+    "name": "주식회사 유젠스에스앤씨 (Ugens SNC Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-UGENSSNC",
+    "filters": [],
+    "locations": [
+      "Korea"
+    ]
+  },
+  {
+    "id": "SCPP-OSUTUDZK",
+    "name": "First Lao Solutions Sole Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OSUTUDZK",
+    "filters": [],
+    "locations": [
+      "Lao People's Democratic Republic"
+    ]
+  },
+  {
+    "id": "SCPP-CBKYTXMX",
+    "name": "Tech Zone Solution Sole Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-CBKYTXMX",
+    "filters": [],
+    "locations": [
+      "Lao People's Democratic Republic"
+    ]
+  },
+  {
+    "id": "SCPP-ATOS-COM",
+    "name": "Atos International SAS",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ATOS-COM",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-TFRZKMOV",
+    "name": "NetCraft Information Technology (Macau) Co., Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-TFRZKMOV",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-IKVPWRKY",
+    "name": "GreenCloud S & T (HongKong) Co., Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-IKVPWRKY",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-HKMCI-COMCONTACT-US",
+    "name": "Master Concept Technology (Macao) Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HKMCI-COMCONTACT-US",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-ILDOKEIW",
+    "name": "Atlantrix Technology Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ILDOKEIW",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-MEGADATATECH",
+    "name": "Mega Data Tech Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MEGADATATECH",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-TECH-TRANS",
+    "name": "Tech-Trans Telecom (China) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-TECH-TRANS",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-SABAHOSPITALITY",
+    "name": "SABA Hospitality Technology Solutions Company Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SABAHOSPITALITY",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-MKUJCCGM",
+    "name": "Boardware Information System Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MKUJCCGM",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-NNJCSBUL",
+    "name": "ICTology Information Technology Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NNJCSBUL",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-SZRSKIIN",
+    "name": "Jteam Engineering Company Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SZRSKIIN",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-AANHIJIC",
+    "name": "Mango Messaging Technology Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AANHIJIC",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-PRDJWUKD",
+    "name": "Vastcom Technology Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PRDJWUKD",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SC2PP-YLINK",
+    "name": "深圳市雁联计算系统有限公司 (Shenzhen YLINK Computing System Co.,Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-YLINK",
+    "filters": [],
+    "locations": [
+      "Macau"
+    ]
+  },
+  {
+    "id": "SCPP-ULQKQTUS",
+    "name": "RoseWare Corporation Private Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ULQKQTUS",
+    "filters": [],
+    "locations": [
+      "Maldives"
+    ]
+  },
+  {
+    "id": "SCPP-JYSQTVFX",
+    "name": "Keiretsu Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JYSQTVFX",
+    "filters": [],
+    "locations": [
+      "Maldives"
+    ]
+  },
+  {
+    "id": "SCPP-IATLLVMR",
+    "name": "IT DISTRIBUTION LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-IATLLVMR",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-ORACLE",
+    "name": "GrapeCity Mongolia LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ORACLE",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-GOEFRJKK",
+    "name": "Infosolution LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-GOEFRJKK",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-DCJYBJXV",
+    "name": "ITZone LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DCJYBJXV",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-GPWTNVGN",
+    "name": "Bodi Electronics Co Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-GPWTNVGN",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-LFNXQFFL",
+    "name": "Bellavita",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-LFNXQFFL",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-MOBINET",
+    "name": "Mobinet LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MOBINET",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-SDADZNYV",
+    "name": "Newcompass LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SDADZNYV",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-SUMMIT-MN",
+    "name": "Summit Computer Technology LLC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SUMMIT-MN",
+    "filters": [],
+    "locations": [
+      "Mongolia"
+    ]
+  },
+  {
+    "id": "SCPP-IMPFUBXG",
+    "name": "Myanmar Golden Rock International Co Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-IMPFUBXG",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-WPDJCGYQ",
+    "name": "Access Spectrum Co., Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-WPDJCGYQ",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-ATGSYS",
+    "name": "ATG Systems Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ATGSYS",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-POFLCXLW",
+    "name": "Myanmar Platinum Solutions Co., Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-POFLCXLW",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-XPBPSCXH",
+    "name": "Value Partner Success Co.,Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-XPBPSCXH",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-DCR",
+    "name": "株式会社第一コンピュータリソース (DAIICHI COMPUTER RESOURCE Co.Ltd.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DCR",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-SYPZSHSV",
+    "name": "Mitsuiwa-ACE Engineering Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-SYPZSHSV",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-MIT-MM",
+    "name": "Myanmar Information Technology Pte Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MIT-MM",
+    "filters": [],
+    "locations": [
+      "Myanmar"
+    ]
+  },
+  {
+    "id": "SCPP-THAKRAL-COM1",
+    "name": "Thakral One Nepal Pvt. Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-THAKRAL-COM1",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SC2PP-WDN",
+    "name": "World Distribution Nepal Pvt. Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-WDN",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-LPUQPAIF",
+    "name": "Octacore Solutions Pvt. Ltd.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-LPUQPAIF",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-AISOLUTION",
+    "name": "AI Solution Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AISOLUTION",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-DIGITALNETWORK",
+    "name": "Digital Network Solution Pvt. Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-DIGITALNETWORK",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-MAXNEPAL",
+    "name": "Max International",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-MAXNEPAL",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-NEOSOFTWARE",
+    "name": "Neo Software Pvt. Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NEOSOFTWARE",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-OMWSRONY",
+    "name": "Transgate Tech Private Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OMWSRONY",
+    "filters": [],
+    "locations": [
+      "Nepal"
+    ]
+  },
+  {
+    "id": "SCPP-JEPRPLUE",
+    "name": "Assistance Service Conseil en Ingénierie Informatique (Assistance Service Conseil en Ingenierie Informatique)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-JEPRPLUE",
+    "filters": [],
+    "locations": [
+      "New Caledonia"
+    ]
+  },
+  {
+    "id": "SC2PP-ROBOTRON",
+    "name": "Robotron Datenbank Software GmbH",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-ROBOTRON",
+    "filters": [],
+    "locations": [
+      "New Zealand"
+    ]
+  },
+  {
+    "id": "SCPP-NEXTGENDISTRIBUTION",
+    "name": "Nextgen Distribution Pty Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NEXTGENDISTRIBUTION",
+    "filters": [],
+    "locations": [
+      "New Zealand",
+      "Philippines"
+    ]
+  },
+  {
+    "id": "SC2PP-JAMESANDMONROE",
+    "name": "James & Monroe Pty Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-JAMESANDMONROE",
+    "filters": [],
+    "locations": [
+      "New Zealand"
+    ]
+  },
+  {
+    "id": "SCPP-IDEQA",
+    "name": "Ideqa Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-IDEQA",
+    "filters": [],
+    "locations": [
+      "New Zealand"
+    ]
+  },
+  {
+    "id": "SCPP-KYKKHREV",
+    "name": "Ora-Tech Systems (Pvt) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-KYKKHREV",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-YYVKGTEX",
+    "name": "مؤسسة الحركة الرقمية للا تصلا ت وتقنيه المعلومات (Digital Move IT & Telecom One Person Company)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-YYVKGTEX",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-AWANDISTRIBUTIONPTELTD",
+    "name": "Awan Distribution Pte Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AWANDISTRIBUTIONPTELTD",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-NNYUSYSY",
+    "name": "Pronet (Pvt.) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-NNYUSYSY",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-OJKSENQP",
+    "name": "Jaffer Business Systems Private Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-OJKSENQP",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SC2PP-WAFANKHAN",
+    "name": "Synergy Computers (Pvt) Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-WAFANKHAN",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-TMYVSJXB",
+    "name": "Daz Tech Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-TMYVSJXB",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-BOSICOR",
+    "name": "Premier Systems Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BOSICOR",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SC2PP-SPERIDIAN",
+    "name": "Speridian Technologies",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-SPERIDIAN",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SCPP-LMIEDNJJ",
+    "name": "Business Vision Global",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-LMIEDNJJ",
+    "filters": [],
+    "locations": [
+      "Pakistan"
+    ]
+  },
+  {
+    "id": "SC2PP-DATEC",
+    "name": "Datec PNG Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-DATEC",
+    "filters": [],
+    "locations": [
+      "Papua New Guinea"
+    ]
+  },
+  {
+    "id": "SCPP-PNGDATACO",
+    "name": "PNG DataCo Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PNGDATACO",
+    "filters": [],
+    "locations": [
+      "Papua New Guinea"
+    ]
+  },
+  {
+    "id": "SC2PP-ACTIVEBUSINESS",
+    "name": "Active Business Solutions, Inc.",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-ACTIVEBUSINESS",
+    "filters": [],
+    "locations": [
+      "Philippines"
+    ]
+  },
+  {
+    "id": "SCPP-QUESTRONIX",
+    "name": "Questronix Corporation",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-QUESTRONIX",
+    "filters": [],
+    "locations": [
+      "Philippines"
+    ]
+  },
+  {
+    "id": "SC2PP-REDINGTONINDIALTD",
+    "name": "Redington Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-REDINGTONINDIALTD",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SC2PP-MELANI",
+    "name": "DMS Software Technologies (Pvt) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-MELANI",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SC2PP-MILLENNIUMIT",
+    "name": "Millennium I.T.E.S.P (Private) Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-MILLENNIUMIT",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-BTFRSQQZ",
+    "name": "ITX 360 PVT LTD",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-BTFRSQQZ",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SC2PP-LOIT",
+    "name": "LOLC Technologies Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-LOIT",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-VSIS",
+    "name": "V S Information Systems (Pvt) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-VSIS",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-ZDCMDUOY",
+    "name": "Hospitality Technology Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ZDCMDUOY",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-THEALTRIA",
+    "name": "Altria Consulting (Pvt) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-THEALTRIA",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-AIT-LK",
+    "name": "Adapt Information Technologies Pvt Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-AIT-LK",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-EWYVYYCB",
+    "name": "Melsta Technologies (Pvt) Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-EWYVYYCB",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-N-ABLE",
+    "name": "N-Able (Private) Limited",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-N-ABLE",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SCPP-PHDJCVIM",
+    "name": "South Asian Technologies Pvt Ltd",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-PHDJCVIM",
+    "filters": [],
+    "locations": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "id": "SC2PP-SYSAGE",
+    "name": "邁達特數位股份有限公司 (MetaAge Corporation)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-SYSAGE",
+    "filters": [],
+    "locations": [
+      "Taiwan"
+    ]
+  },
+  {
+    "id": "SC2PP-TAMMI",
+    "name": "精誠資訊股份有限公司 (Systex Corporation)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-TAMMI",
+    "filters": [],
+    "locations": [
+      "Taiwan"
+    ]
+  },
+  {
+    "id": "SC2PP-MPOWER",
+    "name": "倍力資訊股份有限公司 (M-Power Information Co Ltd)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-MPOWER",
+    "filters": [],
+    "locations": [
+      "Taiwan"
+    ]
+  },
+  {
+    "id": "SCPP-ASXLMIBH",
+    "name": "動力安全資訊股份有限公司 (Dynasafe Technologies Inc)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-ASXLMIBH",
+    "filters": [],
+    "locations": [
+      "Taiwan"
+    ]
+  },
+  {
+    "id": "SCPP-HITACHI",
+    "name": "株式会社日立製作所 (Hitachi, Ltd.)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-HITACHI",
+    "filters": [],
+    "locations": [
+      "Thailand"
+    ]
+  },
+  {
+    "id": "SCPP-CTC-G",
+    "name": "伊藤忠テクノソリューションズ株式会社 (ITOCHU Techno-Solutions Corporation)",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-CTC-G",
+    "filters": [],
+    "locations": [
+      "Thailand"
+    ]
+  },
+  {
+    "id": "SCPP-FCUCHNZR",
+    "name": "TECH VIETNAM SOLUTION JOINTSTOCK COMPANY",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SCPP-FCUCHNZR",
+    "filters": [],
+    "locations": [
+      "Vietnam"
+    ]
+  },
+  {
+    "id": "SC2PP-SVTECH",
+    "name": "SV Technologies JSC",
+    "link": "https://partner-finder.oracle.com/catalog/Partner/SC2PP-SVTECH",
+    "filters": [],
+    "locations": [
+      "Vietnam"
+    ]
+  }
+]
