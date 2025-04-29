@@ -192,7 +192,6 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         const value = item[column.key];
 
         if (!value) return "N/A";
-<<<<<<< HEAD:frontend/src/components/MicrosoftTable.jsx
         
         // If the column is 'name', wrap it in a link (anchor tag)
     if (column.key === 'name' && item.link) {
@@ -203,9 +202,6 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         );
     }
     
-=======
-
->>>>>>> 3cdc40549276ee75154e7c2d4c74e234a0ae45c9:frontend/src/components/Tables/MicrosoftTable.jsx
         // Handle array data (stored as JSON strings or actual arrays)
         let content;
         if (Array.isArray(value)) {
@@ -249,14 +245,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     />
                 </div>
 
-<<<<<<< HEAD:frontend/src/components/MicrosoftTable.jsx
                 <table className="min-w-[1000px] w-full shadow-md rounded-lg">
                     <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
-=======
-                <table className="min-w-full shadow-md rounded-lg">
-                    <thead className="sticky top-[80px] z-20 bg-gray-100 text-base font-semibold border-b border-gray-300">
-
->>>>>>> 3cdc40549276ee75154e7c2d4c74e234a0ae45c9:frontend/src/components/Tables/MicrosoftTable.jsx
                         <tr>
                             <th className="w-[2%] pb-2">#</th>
                             {availableColumns.map((column) => (
