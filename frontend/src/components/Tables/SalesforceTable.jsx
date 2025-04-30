@@ -224,7 +224,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
             <div className="mb-2 text-sm text-gray-600 ml-6">
               Showing {filteredData.length} of {data.length} entries
             </div>
-            <table className="min-w-full border border-gray-200 shadow-md rounded-lg">
+            <table className="min-w-[1000px] w-full border border-gray-200 shadow-md rounded-lg">
               <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                 <tr>
                   <th className="w-[2%] pb-2">#</th>

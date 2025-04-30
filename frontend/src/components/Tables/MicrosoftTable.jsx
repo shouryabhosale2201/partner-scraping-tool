@@ -245,7 +245,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     />
                 </div>
 
-                <table className="min-w-[1000px] w-full shadow-md rounded-lg">
+                <table className="max-w-[1470px] w-full shadow-md rounded-lg">
                     <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                         <tr>
                             <th className="w-[2%] pb-2">#</th>
