@@ -1,5 +1,23 @@
 [
   {
+    "name": "BRYSA: PROCESS-FOCUSED SALESFORCE DIGITAL TRANSFORMATION WITH AI AND AUTOMATION",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000RZYdJEAX",
+    "foundIn": [
+      {
+        "section": "Salesforce Expertise",
+        "filters": [
+          "Agency"
+        ]
+      }
+    ],
+    "tagline": "Brysa powers business efficiency and profitability through AI & Automation",
+    "description": "Brysa consultants excel in AI-driven digital transformations across media, green technology, and BFSI. We tailor industry-specific solutions, minimize risks, and employ Agile for efficient and timely implementations, ensuring continuous tech improvements.",
+    "expertise": "Brysa automated email processing into Salesforce for Native.fm, enhancing lead management with ChatGPT for accurate categorization and faster conversion. This significantly reduced lead processing time, ensured no missed opportunities and boosted revenue.",
+    "industries": "Brysa integrated Salesforce with Broadsign for i-media, automating campaign data transfers, enhancing operational efficiency by 40%, and providing real-time insights, which significantly improved decision-making and reduced manual workload.",
+    "services": "Brysa implemented a unified finance system for Escapes Travel, eliminating manual data entry and syncing delays between sales and finance. This integration saved the FinOps team over 30% of their time, reduced month-end reporting to mere hours, not days.",
+    "extendedDescription": "Brysa specializes in Salesforce-driven digital transformation, optimizing processes across media, green technology, and BFSI sectors. Our services include Salesforce consulting, implementation, and maintenance, alongside Media Ops services tailored for digital and outdoor media industries. Key clients include Fraser Group, i-media, Native, The Probst Group, Aegis and more with whom we've successfully minimized transformation risks and enhanced digital capabilities.\n\nFor comprehensive success stories and client testimonials, ourwebsite offers detailed case studies that highlight Brysa's commitment to industry-specific solutions and client satisfaction.\n\nThis approach has positioned us as a leader in integrating advanced technology solutions that drive business growth and operational efficiency."
+  },
+  {
     "name": "JAKALA | SALESFORCE SUMMIT PARTNER",
     "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000OO1eOEAT",
     "foundIn": [
@@ -9,7 +27,31 @@
           "Agency"
         ]
       }
-    ]
+    ],
+    "tagline": "JAKALA is a data, AI and experiences company that creates meaningful impact",
+    "description": "Jakala is a data, AI, and experiences company, with headquarters in Milan and offices in 20 countries worldwide. It combines strategy, technology, creativity, and operations to deliver tailored experiences and transformative solutions with data and AI.",
+    "expertise": "STRATEGY & DESIGN: Design impactful Sales & Marketing business strategies leveraging on deep industry skillset and on a data driven approach based on Advanced analytics and location intelligence",
+    "industries": "TECHNOLOGY & INTEGRATION: Govern digital transformation and customer centricity through the selection, the system integration and the customization of the best of breed technologies in the CDP, CRM, BI, marketing platforms and unified commerce space",
+    "services": "ACTIVATION & ENGAGEMENT: Generate growth designing and implementing end-to-end digital marketing campaigns to acquire new clients and enhance their retention through the complete management of digital engagement programs",
+    "extendedDescription": "Jakala is a data, AI, and experiences company that creates meaningful and lasting impact, globally. Working closely with clients, the company designs growth trajectories grounded in data and impact-driven insights to ensure the delivery of concrete, measurable results.\nJAKALA is a Benefit Company, integrating profit objectives with sustainable principles, pursuing a positive footprint on the ecosystem and all its stakeholders.\nSince Matteo de Brabant established the company in 2000, the company has grown into a multifaceted, highly-skilled, and international team of talents. In 2021, Ardian, the world-leading private investment fund, acquired a majority stake in JAKALA. Today, the company is headquartered in Milan and supported with multiple centers of excellence and offices worldwide.\nThe company combines strategy, technology, creativity, and operations to deliver tailored experiences and transformative solutions with data and AI at the heart.\nData is the compass it uses to get clients where they want to be."
+  },
+  {
+    "name": "ÍLIA",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000ON1RQEA1",
+    "foundIn": [
+      {
+        "section": "Salesforce Expertise",
+        "filters": [
+          "Agency"
+        ]
+      }
+    ],
+    "tagline": "Driving business outcomes with technology, design & data",
+    "description": "A Salesforce partner and specialist in developing digital projects for the financial, insurance, healthcare, and automotive markets, ília has been responsible for implementing the platform at some of the largest companies in these sectors in Brazil.",
+    "expertise": "We provide companies with a 360-degree view of their customers, connected to the company’s digital channels.",
+    "industries": "Over 60 Salesforce implementation projects.",
+    "services": "Partnership between ília and Salesforce allows us to build and evolve digital products using Salesforce solutions to impact our clients' business.",
+    "extendedDescription": "We use Salesforce solutions to create impactful business outcomes for our clients. Our experience has made us specialists in the financial, insurance, healthcare, and automotive markets, providing us with a deep understanding of both the customer perspective and industry dynamics.\n\nWe dive into our clients' businesses and processes to uniquely present the best ways to integrate Salesforce intelligence, as well as contribute to operational improvements and profitability opportunities.\n\nWith innovation, speed, and assertiveness, we offer solutions that enhance the experience for both employees and users.\n\nWe have specialized and trained professionals who can understand our clients' needs in a personalized manner. Our approach goes beyond simply implementing a CRM; we take a consultative stance, adding value and delivering quick and effective solutions that drive positive business outcomes."
   },
   {
     "name": "DOTSOURCE SE",
@@ -28,7 +70,13 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "We digitize Sales, Marketing and Service with Salesforce",
+    "description": "We support businesses in their digital transformation. Whether e-commerce and content platforms, CRM, product data management, digital marketing and AI: our Salesforce based and connected solutions are user-oriented, emotional, targeted, and intelligent.",
+    "expertise": "We offer the full service range from strategic consulting over the implementation till a continuous advancement in a long term partnership with our customers.",
+    "industries": "We are the specialists for multi cloud projects covering B2B and B2C with the Commerce/Sales/Service/Experience/Data/Marketing Cloud & Pardot as well as MuleSoft. We are also an experienced partner for your Classic to Lightning B2B Commerce migration.",
+    "services": "We support our customers in integrating Salesforce solutions into their IT landscape with our extensive integration experience to ERP, CMS and PIM/MDM.",
+    "extendedDescription": "We see ourselves as a partner of our clients, whose special requirements and needs flow into the project straight from the first idea. From strategy consultation to concept creation and UX design, to operation in the cloud – together we develop and implement scalable digital products and solutions. Our approach relies on new work and agile methodologies such as scrum and design thinking. Companies like ESPRIT, KICKZ, Villeroy & Boch, EMP, Britax Römer, Fricke, Walter de Gruyter, Mevaco, Innio, EnviaM, Unitedprint, KWS and Jochen Schweizer trust in our competence.\n\nWith our blog Handelskraft.com, annual Trend Book, and Handelskraft Conference, we network industry knowledge and provide insight into current opportunities and developments of digital brand management. In order to comprehensively prepare professionals and executives for the entrepreneurial challenges of the digital world, we launched Digital Business School together with Steinbeis Technology Group in 2015.\n\nWith our groundbreaking solutions, we have been able to establish ourselves as one of the leading digital agencies in German-speaking market and are now among the top 10 largest companies in the industry."
   },
   {
     "name": "CYNTEXA | SALESFORCE CONSULTANTS | SALESFORCE IMPLEMENTATION & INTEGRATION",
@@ -41,31 +89,13 @@
           "B2C Commerce"
         ]
       }
-    ]
-  },
-  {
-    "name": "BRYSA: PROCESS-FOCUSED SALESFORCE DIGITAL TRANSFORMATION WITH AI AND AUTOMATION",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000RZYdJEAX",
-    "foundIn": [
-      {
-        "section": "Salesforce Expertise",
-        "filters": [
-          "Agency"
-        ]
-      }
-    ]
-  },
-  {
-    "name": "ÍLIA",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000ON1RQEA1",
-    "foundIn": [
-      {
-        "section": "Salesforce Expertise",
-        "filters": [
-          "Agency"
-        ]
-      }
-    ]
+    ],
+    "tagline": "A Trusted Salesforce Summit Consulting Partner",
+    "description": "Cyntexa is a Summit Consulting partner With 400+ experts, Cyntexa provides end-to-end Salesforce services for businesses of all sizes, backed by 174 AI Associates and 100 AI Specialist Certifications to deliver advanced CRM, cloud and AI solutions.",
+    "expertise": "SALESFORCE EXPERTISE & PARTNERSHIPS\n\nSalesforce Summit, Cloud Reseller & PDO Partner\nISV, Datorama, and B2C Commerce Consulting Partner\nManaged Service Provider & Clouds Navigator Specialist II",
+    "industries": "COMPREHENSIVE SALESFORCE SOLUTIONS\n\nDevelopment, Customization, Integration, and Implementation\nConsulting and Managed Services\nAppExchange App Development and Publishing",
+    "services": "GLOBAL REACH & CERTIFIED TEAM\n\nServing 14+ industries in 55+ countries\nPart of Agentforce Partner Network backed by 174 AI Associates &100 AI Specialist Certificate\n400+ certified experts with 30+ Salesforce certification\nConsistently high 4.99 CSAT score",
+    "extendedDescription": "Top Salesforce Consulting Partner in USA, UK, Canada, & Australia. Cyntexa has a team of certified Salesforce developers, architects, consultants, administrators & MVPs.\n\n24/7 SUPPORT\n\nOUTSTANDING DEVELOPMENT PRACTICES\n\nSalesforce Implementation:\nGlobal Salesforce Implementation Partner, having expertise in AI & Data Cloud, B2B & B2C Commerce, Marketing, Sales, Service, Experience, Health, Revenue & Consumer Goods Cloud, Pardot, Einstein, Salesforce Industries(Vlocity) & more.\n\nSalesforce Development:\nWe provide custom Salesforce Development services and Salesforce Application Development services to extend the standard functionality of Salesforce.\nCommerce Cloud Cartridge Development | Platform Development | AppExchange App Development | Salesforce DX | Lightning & Heroku Development.\n\nSalesforce Consulting:\nWe help you to identify the pain points and suggest the right solution to eliminate them. Our Salesforce-certified experts know the best practices of Salesforce and help you to generate the maximum ROI out of Salesforce.\n\nSalesforce Integration:\nIntegration with third-party applications such as Outlook, Gmail, DocuSign, Hubspot, Mailchimp, Jira, and more."
   },
   {
     "name": "VALUEHUB",
@@ -77,7 +107,13 @@
           "Agency"
         ]
       }
-    ]
+    ],
+    "tagline": "One Place for All Your CRM Services",
+    "description": "Valuehub is an emerging consulting and outsourcing company specializing in Salesforce implementations. Backed by Certified Salesforce Cross-Cloud Expert teams, we deliver seamless, scalable solutions that empower businesses to unlock their full potential",
+    "expertise": "Shorter Time to Value - within just 4 weeks, your system goes live. Say goodbye to implementation headaches. We offer quick rollouts with Salesforce Jumpstart packages, end-to-end services, pre-sales expertise, and flat-rate annual billing with Consulting",
+    "industries": "Enterprise-Grade Solutions - Valuehub for Performance Marketing optimizes campaigns in real-time. Valuehub for Real Estate automates operations for realtors. Valuehub for Lawsuit empowers law firms with connected data. Valuehub for Healthcare.",
+    "services": "Core Expertise - Our expertise extends to Salesforce's core products, ensuring your business stays ahead of the curve. From Sales Cloud to Marketing Cloud Engagement, we've got it all covered.",
+    "extendedDescription": "Our mission at Valuehub is simple - to help businesses overcome their challenges. Whether you're looking for guidance from idea to execution or require managed services that won't break the bank, we've got you covered.\n\nWe specialize in various industries, including Pharma, Communication, Energy & Utilities, BFSI, Retail, Public Sector, and Non-Profit organizations.\n\nSalesforce expertise:\n- Salesforce Core Platform\n- Sales Cloud\n- Service Cloud\n- Field Service Lightning\n- Experience Cloud (Customers, Employees & Partners)\n- Revenue Cloud, CPQ, FSL, Industries Cloud (E&U, Telecommunication)\n- Marketing Cloud Engagement, Marketing Cloud Account Engagement (Pardot)\n- Data Cloud, AI, ML, Agentforce\n- Tableau, CRM Analytics\n- Slack\n- Commerce Cloud (B2B, OMS)\n\nIndustries expertise:\n- Health Cloud\n- Public Sector\n- Nonprofit Cloud\n- Education Cloud\n- Manufacturing Cloud\n- Financial Services Cloud\n- Consumer Goods Cloud"
   },
   {
     "name": "HARVEST DIGITAL - SUMMIT CONSULTING PARTNER & MULTI-CLOUD EXPERTS",
@@ -89,19 +125,13 @@
           "Agency"
         ]
       }
-    ]
-  },
-  {
-    "name": "TECHNOLOGY MINDZ",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3A00000G9IHAUA3",
-    "foundIn": [
-      {
-        "section": "Salesforce Expertise",
-        "filters": [
-          "Agency"
-        ]
-      }
-    ]
+    ],
+    "tagline": "ROI-Driven Digital Transformation",
+    "description": "Transform your business with Harvest Digital, trusted Salesforce Summit Partner. We specialize in achieving measurable ROI through Salesforce technology, driving efficiency, automation, and revenue growth. With tailored solutions and multi-cloud expertise",
+    "expertise": "Salesforce Summit Partner: As a top-tier Salesforce partner, we bring unmatched expertise to help you leverage the full power of Salesforce’s ecosystem.",
+    "industries": "ROI-Driven Results: Achieving measurable ROI by leveraging Salesforce technology to drive revenue growth, streamline operations, and implement automation that delivers efficiency and sustainability.",
+    "services": "MuleSoft & Multi-Cloud Expertise: Specialists in MuleSoft integration and Salesforce clouds, including Sales Cloud, Service Cloud, Marketing Cloud, Data Cloud, and more.",
+    "extendedDescription": "Description\n\nHarvest Digital is more than a digital agency—we are your guide to navigating the ever-changing digital landscape. We specialize in transforming your business with solutions that simplify complexity and drive success. From strategy to implementation and beyond, we are with you every step of the way.\n\nOur expertise spans the Salesforce ecosystem, ensuring seamless integration across platforms and delivering maximum value. With our AI-first approach, we help you accelerate transformation, reduce risks, and empower your team to focus on innovation and growth. Our tailored solutions ensure that your unique challenges are met with precision and care.\n\nWhether you’re optimizing customer journeys, unifying your data, or innovating with cutting-edge technology, Harvest Digital provides the guidance and expertise you need to succeed."
   },
   {
     "name": "HYPERLINK INFOSYSTEM | BEST SALESFORCE CONSULTANT FOR DEVELOPMENT & INTEGRATION",
@@ -113,7 +143,13 @@
           "Agency"
         ]
       }
-    ]
+    ],
+    "tagline": "Your Salesforce Consulting Experts for Success",
+    "description": "Founded in 2011, we are a pioneer Software development service provider company. We have provided highly useful, reliable, extensible, customizable, and maintainable Salesforce solutions and various other services to more than 2500+ global clients.",
+    "expertise": "Our Accomplishment\n\n- 13+ Years of Experience\n- 1200+ Developers\n- 2500+ Happy Clients\n- 90+ Salesforce Solutions\n- 4500+ Mobile Apps\n- 2200+ Websites\n- 40+ Salesforce Certified Experts",
+    "industries": "Services We Offer,\n\nSalesforce Service Cloud\nSalesforce Consultancy\nSalesforce Implementation & Integration\nSalesforce Development Customization\nSalesforce E-commerce Implementation\nSalesforce Lightning Development Services\nSalesforce Digital 360",
+    "services": "Industries We Serve,\n\nAutomotive\nCommunications\nConsumer Goods\nEnergy & Utilities\nFinancial Services\nGovernment\nHealthcare & Life Sciences\nManufacturing\nMedia\nNonprofit\nRetail\nTransport & Logistics",
+    "extendedDescription": "Founded in 2011 and being a leading Software development company, we are official Salesforce partner providing optimized Salesforce development services from planning and designing to executing complete Salesforce-based business solutions to businesses to help them deliver good productivity and higher earnings. At Hyperlink InfoSystem, our team of expert Salesforce developers assures that the solutions given are highly useful, reliable, extensible, and maintainable on the Salesforce platform.\n\nOur Salesforce development services transform the way businesses communicate and manage their customers, products, partners, and even employees. The strong Salesforce developer tools like Force, Salesforce Lightning, Salesforce Lightning Inspector, Developer Console, and Workbench build quite a powerful scope for you to grow your versatility. We follow the agile methodology for complete Salesforce development services."
   },
   {
     "name": "JAX CONSULTING: NONPROFIT, EDUCATION, CONSUMER GOODS, MANUFACTURING, AI EXPERTS",
@@ -125,7 +161,31 @@
           "Agency"
         ]
       }
-    ]
+    ],
+    "tagline": "Maximize Your Salesforce Investment",
+    "description": "Jax, named after our veteran founder's loyal service dog, embodies unwavering commitment and service. At Jax Consulting, we carry forward that legacy, delivering a level of dedication that goes above and beyond to ensure your complete satisfaction.",
+    "expertise": "EXPERIENCE THAT MATTERS: Over hundreds of projects, our team of experts has developed an implementation process that delivers fast and successful results with proven ROI.",
+    "industries": "STRATEGIC PLANNING: We analyze how organizations stay competitive and relevant in their industry. By leveraging smart tools and global resources, we strategize with our clients to fully understand the implications of each choice they make.",
+    "services": "SUPPORT: Make sure your Salesforce investment continues to evolve. We can provide extended support services including basic administration, admin training, user support and training, operation documentation, and additional end-user support.",
+    "extendedDescription": "At Jax Consulting, we're dedicated to your success. As your trusted partner, we bring comprehensive capabilities and deep industry knowledge to every project, ensuring that your system delivers the results you need. Our affordable rates and commitment to excellence have earned us a growing list of satisfied clients.\n\nWith our expertise and AGILE project management, we'll guide you through every step of your Salesforce project. We'll accurately measure your ROI and deliver a customized solution that adds value to your organization. And we always follow Salesforce best practices, so you can be confident that your implementation is optimized for success.\n\nReady to get started? Contact us today and let us help you take your Salesforce implementation to the next level."
+  },
+  {
+    "name": "TECHNOLOGY MINDZ",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3A00000G9IHAUA3",
+    "foundIn": [
+      {
+        "section": "Salesforce Expertise",
+        "filters": [
+          "Agency"
+        ]
+      }
+    ],
+    "tagline": "Get The Most Out Of Salesforce",
+    "description": "Technology Mindz and Salesforce are enabling organizations all over the world to augment their customers and employees experiences by harnessing the power of Salesforce solutions.",
+    "expertise": "Our services include Salesforce Audit, Implementation, Consulting, Customization, Re-engineering, Managed services, Integration, Report and dashboard, Support, and Staff augmentation.",
+    "industries": "We bring more out of AI.\nThe combined power of Salesforce Einstein and Technology Mindz makes workflow more efficient, smart, convenient, and more human.",
+    "services": "Our innovative approach assures quantitative business outcomes.\nThe global designers, technical architects, and consulting professionals coupled with agile methodology enable us to drive innovations that produce quantitative business outcomes.",
+    "extendedDescription": "Technology Mindz and Salesforce are enabling organizations all over the world to augment their customers and employees experiences by harnessing the power of Salesforce solutions. We also deliver continuous innovations that create positive and impactful personalized brand experiences for audiences using the Salesforce platform. We help our clients to maximize the value of modern digital technologies for today and the future.\n\nFrom Salesforce strategy and design to implementation, customization, integration, audit, process improvement, data migration, and development, we help clients unlock insights from data and make their businesses smart.\n\nWe use our expertise, methods, and technology to seamlessly integrate data, design business operations, unlock insights with AI and reinvent industry experiences that will help our customers to get the most out of Salesforce. The world-class global delivery and our obsession for innovation, balanced with data-driven results earned us the name of the trusted Salesforce partner.\n\nA decade of experience in designing, implementing, and driving transformational Salesforce experience bagged us 8+ global certificates and awards."
   },
   {
     "name": "OSF DIGITAL - PLATINUM CONSULTING PARTNER & MULTI-CLOUD EXPERTS",
@@ -137,19 +197,13 @@
           "B2C Commerce"
         ]
       }
-    ]
-  },
-  {
-    "name": "SKYLABS",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3A00000FMiQVUA1",
-    "foundIn": [
-      {
-        "section": "Salesforce Expertise",
-        "filters": [
-          "B2C Commerce"
-        ]
-      }
-    ]
+    ],
+    "tagline": "Connect Technology and Strategy to Accelerate Business Value",
+    "description": "OSF Digital, a global AI-powered transformation partner, accelerates business growth worldwide. From strategy to implementation, our solutions ensure a successful go-to-market, drive Customer 360 success, and elevate the Salesforce platform.",
+    "expertise": "As a trusted Salesforce partner since 2010 and with over 70% of our customers using multi-cloud solutions, our focus is on maximizing our clients' Salesforce platforms and roadmaps to deliver exceptional customer experiences.​",
+    "industries": "Our experienced strategists and industry experts develop sound strategies aligned with clients’ business objectives, accelerating time to value and lowering risk. Our IP ensures high-quality and fast delivery.",
+    "services": "Committed to innovation, we've invested in AI for years. Leveraging OpenAI, we infuse our technology with AI and automation for efficient project delivery, enabling clients to focus on business growth while we handle the rest.",
+    "extendedDescription": "OSF Digital is a global AI-powered digital transformation partner that partners with clients worldwide to accelerate business value and innovation. Our roadmap will help you achieve your business goals and guide you through your entire digital transformation journey—from strategy and implementation to services and support. Our proprietary products and solutions accelerate implementation and lower risk, ensuring an efficient and successful go-to-market. Companies rely on our deep technical, industry and market expertise to achieve Customer 360 success and take their business and their Salesforce platform one step further. ​ For details, visit: osf.digital\n\nExperts in consulting and implementing multi-cloud integration projects across Salesforce Commerce, Sales, Service, Experience and Marketing Clouds.\n\nUnifying the commerce experience by providing merchants with a single source of truth. This 360° view empowers sales, service, and marketing teams for quick action and customer delight.\n\nWith extensive experience in Force.com, APEX, VisualForce, Lightning components, and API integrations, OSF develops tailor-made solutions and custom projects."
   },
   {
     "name": "PUBLICIS SAPIENT: DIGITAL FIRST PARTNER",
@@ -161,11 +215,17 @@
           "B2C Commerce"
         ]
       }
-    ]
+    ],
+    "tagline": "We help companies unlock the power of Salesforce to drive digital transform",
+    "description": "Publicis Sapient is a global leader in digital transformation; helping enterprises deliver a connected customer experience through services including strategy, design, implementation and operations.",
+    "expertise": "Our Salesforce solutions are designed to digitally enable organizations to better serve their customers across any combination of Salesforce Clouds. 10+ years of CDP experience and 100s of use-cases as accelerators",
+    "industries": "Consistently the top Commerce Cloud partner in North America, we spearheaded the development of Composable Commerce to produce high -performing, highly personalized, and easier-to-maintain commerce platforms.",
+    "services": "We’re at the forefront of Experience Cloud development—including hybrid-technology portals, Lightning Web Runtime, and AEM integration. Leader in Digital Transformation in the Gartner Magic Quadrant for CRM and Customer Experience Implementation Services",
+    "extendedDescription": "Publicis Sapient is a digital business transformation company. As a Global Top 10 Salesforce Partner, we help Clients maximize their Salesforce investment by providing unique, differentiated and high-value customer-centric solutions for today, with the scalability and flexibility to meet tomorrow's demand.\n\nWe operate across Salesforce Clouds to establish a 360-degree view of your customer and use Strategy, Product, Experience, Engineering and Data (“SPEED”) capabilities to deliver measurable improvements to customer acquisition, conversion, service, loyalty and overall experience.\n\nWe’ve delivered more than 1,800 Salesforce projects globally and are at the forefront of Experience 360 innovation. Our accelerators are designed to speed time-to-value throughout planning and product delivery.\n\nWe bring a product mindset and agile methods to help established companies and the public sector unlock value in ways that delight their customers and improve their operational effectiveness.\n\nLet’s partner to shape what’s next."
   },
   {
-    "name": "CHANGI | SALESFORCE PLATINUM CONSULTING PARTNER IN THE MIDDLE EAST",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000004d0SqEAI",
+    "name": "SKYLABS",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3A00000FMiQVUA1",
     "foundIn": [
       {
         "section": "Salesforce Expertise",
@@ -173,7 +233,13 @@
           "B2C Commerce"
         ]
       }
-    ]
+    ],
+    "tagline": "Growing Technology",
+    "description": "We support companies in every industry throughout their digital lifecycle. We developed the Skylabs Digital Service, which helps our clients at all levels of business. Our approach goes from strategy to implementation, including adoption and training.",
+    "expertise": "No expertise",
+    "industries": "No industries",
+    "services": "No services",
+    "extendedDescription": "As a Business Partner, we support companies in every industry throughout their digital lifecycle. We developed the Skylabs Digital Service, which helps our clients at all levels of business: we offer our expertise to overcome digital challenges and seize new business opportunities. Our approach is customer-oriented and goes from strategy to implementation, including adoption and training."
   },
   {
     "name": "ASTOUND DIGITAL",
@@ -185,7 +251,31 @@
           "B2C Commerce"
         ]
       }
-    ]
+    ],
+    "tagline": "Navigating What's Next in the Digital Space.",
+    "description": "We are a boutique digital consultancy delivering end-to-end, frictionless, customer experiences by leveraging technology, data and AI, design and marketing for the world’s most innovative brands with our proven agile expertise.",
+    "expertise": "Our Purpose:\nWe utilize the power of Salesforce's Customer 360 platform to deliver exceptional outcomes. By integrating Sales, Service, Field Service, Marketing, and Commerce, we can provide a unified customer experience for our customers.",
+    "industries": "Foundation:\nData and AI are at the core of our solutions. By leveraging AI for efficient project delivery, we ensure customers realize value faster from their Salesforce investment while also using AI to create customer-centric digital interactions.",
+    "services": "We Are Customer-Driven:\nWe leverage proven methods, shared risk commercial models and industry specific intellectual property and accelerators provide us with increased differentiation among the Salesforce partner ecosystem.",
+    "extendedDescription": "Astound is deeply committed to the success of our customers. Our primary objective is to ensure businesses harness the immense power of the Salesforce platform.\n\nBacked by global experts with an in-depth knowledge of B2C and B2B consumer behavior;\nAstound delivers transformative digital solutions that fuel revenue growth and enhance brand experiences for our customers.\n\nAstound's deep platform expertise spans across Sales Cloud, Service Cloud, Field Service, Commerce Cloud for both B2B and B2C, Marketing Cloud, Experience Cloud, Data Cloud, Einstein, Tableau, CRM Analytics, and Order Management. We are skilled at integrating systems using MuleSoft and other leading platforms.\n\nAs Salesforce innovators, we also lead the way on cutting-edge capabilities including:\n- Generative AI solutions across various platforms\n- Enterprise Data Strategies and Implementation\n- Composable Commerce - flexibly assembling components\n\nWith mastery across the entire Customer 360 portfolio and bleeding-edge advances in AI, data, and headless commerce, we create integrated experiences with maximum business impact.\n\nAstound is also a proud Enabled partner of Agentforce!"
+  },
+  {
+    "name": "CHANGI | SALESFORCE PLATINUM CONSULTING PARTNER IN THE MIDDLE EAST",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000004d0SqEAI",
+    "foundIn": [
+      {
+        "section": "Salesforce Expertise",
+        "filters": [
+          "B2C Commerce"
+        ]
+      }
+    ],
+    "tagline": "More than 100 customers trust us with their success",
+    "description": "Changi is a Salesforce Platinum partner in the EMEA with HQ in Dubai, offering Salesforce CRM implementations in UAE, Saudi Arabia, Kuwait, Qatar, Oman, Bahrain. Request a demo & let's discuss your Salesforce requirements.",
+    "expertise": "Passion\nWe are passionate about making your customers love you. And we believe in challenging the status quo in everything we do to achieve that goal.",
+    "industries": "Innovation\nOur focus is innovation. We work with the world’s leading solutions to streamline your growth and to help you deliver the best customer experience.",
+    "services": "Customer-centricity\nCustomers always come first, ours and yours. We help you discover your ideal customers, know them well, and amuse them in every interaction.",
+    "extendedDescription": "Changi Consulting, LLC, founded in 2010, is a customer-centric consulting firm & the biggest Salesforce Platinum partner in the EMEA region, with projects in the UAE, Lebanon, Saudi Arabia, Qatar, Jordan, Kuwait, Oman, Bahrain, Malta, & Cyprus.\n\nWith expertise across all main industries & business functions, Changi builds & delivers cloud-based solutions focused on helping businesses accelerate, automate, & optimize their operations.\n\nChangi's 100% Salesforce certified experts come from 12 countries & speak 18 languages. With over 350 projects successfully delivered, Changi has maintained a 5 star customer rating and 10/10 customer satisfaction score."
   },
   {
     "name": "TREMEND SOFTWARE CONSULTING",
@@ -197,7 +287,13 @@
           "B2C Commerce"
         ]
       }
-    ]
+    ],
+    "tagline": "Advanced Software Engineering - Delivered as Intended",
+    "description": "Tremend is a leading IT Consulting Company, with over 800 completed projects and 500 engineers delivering advanced software engineering projects. Listed in the 50 fastest growing technology companies by Deloitte in 2016.",
+    "expertise": "Driving agility into high complexity projects - Consulting partner for Salesforce with successful implementation references in Romania - delivering Sales Cloud, Service Cloud and Marketing Cloud.",
+    "industries": "Software Delivery Factory - Highly scalable and secure, Tremend's solutions serve over 100+ million transactions, through both desktop and mobile channels",
+    "services": "Omnichannel CX\nMicroservices & Cloud\nEnterprise Content Management\neCommerce & Marketplaces\nIoT - End-to-end\nInfotainment\nASIC design & Firmware\nADAS & Functional Safety\nMachine Learning & AI\nAnomaly Detection\nBlockchain\nRPA",
+    "extendedDescription": "Technical Capabilities\n\nEnterprise Solutions\n· Cloud first: AWS · Azure · Google Cloud\n· Enterprise Java · .NET\n· Big Data - SQL & NoSQL · Hadoop · Kafka · BI\n· Microservices · Docker · Kubernetes · OpenShift\n\nDevOps\n· Deployment: tuning & optimization · load balancing · high availability · auto scaling.\n· Infrastructure: public clouds · private clouds · provisioning & containers · 24/7 monitoring\n\nQA & Automation\n· Automated testing · Load testing\n· Usability · Security\n· Backend · API · UI · Mobile · Automotive\n\nASIC Design\n· Front-End Design (Verilog) · Verification\n· FPGA · Analog · Back-End Design\n\nWeb Platforms\n· Python (Django) · Node.js\n· PHP (Symfony) · GoLang\n· Salesforce · Magento · Drupal\n\nUX/UI Design\n· User Experience consulting\n· User Interface design\n\nAutomotive and Embedded\n· Infotainment: Android · Linux · VxWorks\n· Functional safety · Security\n· ECU and Device firmware\n· Connectivity: Bluetooth · NFC · NB-IoT · LoRA\n\nMobile\n· Native apps: Android · iOS\n· Hybrid apps: React Native · Flutter\n· Single Page Applications: Angular · React.js"
   },
   {
     "name": "TQUILA ANZ",
@@ -209,7 +305,13 @@
           "B2C Commerce"
         ]
       }
-    ]
+    ],
+    "tagline": "Making a difference by transforming businesses",
+    "description": "Tquila ANZ is a pure-play multi cloud Platinum Partner committed to building awesome solutions on the Salesforce platform. Through innovation and thought leadership we deliver on what we promise: to our customers, our partners, and our employees.",
+    "expertise": "Dedicated Practices Investment: Enterprise Architecture; Emerging Technologies; Integration; Marketing; Customer Experience; Functional Consulting; Industry Accelerators; Quote-to-Cash.",
+    "industries": "Competencies and Partnerships: 193 Certifications across Sales Cloud, Service Cloud, CPQ, Community Cloud; Marketing Cloud; Pardot Cloud; Einstein Analytics. Partnerships: Telstra; MuleSoft; Datacom; ATG; Tryzens.",
+    "services": "Industry focus: Public Service – State and Local Government; Health – NDIS, Aged Care and Not-for-Profit; Manufacturing Retail and Distribution; Engineering and Construction; Financial Services; Unions and Associations.",
+    "extendedDescription": "Tquila helps organisations transform their businesses to improve operational efficiencies, deliver service excellence to their customers and empower their employees with the best technology. We deliver on business outcomes, create positive experiences for customers and partners and build brand loyalty. We excel at:\n\nSalesforce implementations and integration with complex back-end and legacy systems\nManaging the complexity of your data and providing quick data insight\nGiving you the tools to make better decisions, faster than ever\nChallenging your processes to make them better\nDesigning experiences that users love\nBuilding mobile apps\nMarketing automation and strategy\nDelivering results rapidly, decreasing time to value\n\nTquila’s high-performance culture is underpinned by our core set of values: open, authentic, awesome, passionate and imaginative.\n\nWe aim to attract and retain some of the smartest Salesforce minds. Our technical architects are leaders in their field and familiar with the global governance, security, data management and complex integrations necessary for your success. Our developers and consultants' knowledge spans the entire Salesforce platform."
   },
   {
     "name": "ETG DIGITAL - TRANSFORMING CUSTOMER EXPERIENCES WITH AI",
@@ -221,19 +323,13 @@
           "B2C Commerce"
         ]
       }
-    ]
-  },
-  {
-    "name": "CODE ZERO: SALESFORCE SALES, CPQ AND QUOTE-TO-CASH CONSULTING LEADER",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3A00000EO9RTUA1",
-    "foundIn": [
-      {
-        "section": "Industry Expertise",
-        "filters": [
-          "Agriculture & Mining"
-        ]
-      }
-    ]
+    ],
+    "tagline": "Unlock the Power of Salesforce and AI with ETG Digital's Expertise",
+    "description": "Transforming Customer Engagement with Salesforce & AI - Leading Salesforce Implementation Partner – Certified in Commerce Cloud, Marketing Cloud, Data Cloud, Service Cloud, Sales Cloud, CPQ, and MuleSoft",
+    "expertise": "Our Cloud capabilities include:\nCommerce Cloud (B2C, B2B, D2C)\nExperience Cloud\nOMS\nData Cloud\nRevenue Cloud\nMarketing Cloud\nSales Cloud\nService Cloud\nCPQ & RLM",
+    "industries": "Our Accelerator capabilities include:\nCommerce Cloud Accelerator\nData Cloud Accelerator\nOMS Accelerator\nB2B Accelerator\nPerformance Testing Accelerator\nTest Automation Framework",
+    "services": "Our Services capabilities include:\nSalesforce Managed Services\nSalesforce Integrations & Automation\nQuickStart Packages\nSalesforce Consulting & Implementation\nCustom Salesforce Development & Testing",
+    "extendedDescription": "At ETG Digital, we empower businesses to unlock the full potential of their Salesforce investment. By aligning customized solutions with your unique business goals, we streamline operations, enhance customer engagement, and drive sales growth. Our global team of certified Salesforce professionals ensures that each solution is tailored to fit your needs, driving measurable results while reducing operational complexities.\n\nWe follow a straightforward, result-oriented process:\n\nConsult: Work closely with you to identify the best Salesforce solutions that align with your business objectives.\n\nCreate: Develop strategies and implement Salesforce solutions that are designed for flexibility and future growth.\n\nMaintain: Ensure ongoing support, updates, and optimizations to keep your systems performing at their best.\n\nWhether you're looking for end-to-end implementation, ongoing management, or custom development, ETG Digital has the expertise to help you succeed."
   },
   {
     "name": "VALTECH GLOBAL",
@@ -245,7 +341,31 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "The Experience Innovation Company",
+    "description": "From connected services to commerce platforms, Valtech provides you with the Salesforce expertise you need to emerge as a leader in your industry.",
+    "expertise": "We guide & support our client’s business transformation, and digital transformation as we reimagine the business in the Digital age, through the lens of Salesforce clouds and solutions.",
+    "industries": "From meaningful moments to connected experiences, we design and implement fundamental digital transformation of our client’s relationships with their customers, powered by the Salesforce product suite.",
+    "services": "We leverage Salesforce technologies to build digital platforms that make your digital strategy come true, designing, developing, and maintaining solutions for the internet of everywhere.",
+    "extendedDescription": "STRENGTHENING OUR SALESFORCE OFFERING AND EXPANDING OUR GLOBAL REACH\n\nWe bring you the ultimate Salesforce solution. Valtech is honored to be a Salesforce Summit Partner, representing the highest available level of partnership. We advise and support our clients throughout the entire project lifecycle, from the inicial analysis & discovery phases through to implementation and ongoing operations.\n\nAs Salesforce System Integrator (SI) and Independent Software Vendor (ISV), we cover the entire suite of Salesforce solutions, delivering proven results on the Customer 360 platform.\n\nValtech is a digital agency that designs experiences that span the physical and virtual worlds, leveraging data to deliver maximum customer engagement and ROI, ensuring that we exceed the needs of the businesses with whom we partner."
+  },
+  {
+    "name": "CODE ZERO: SALESFORCE SALES, CPQ AND QUOTE-TO-CASH CONSULTING LEADER",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3A00000EO9RTUA1",
+    "foundIn": [
+      {
+        "section": "Industry Expertise",
+        "filters": [
+          "Agriculture & Mining"
+        ]
+      }
+    ],
+    "tagline": "Salesforce Sales, CPQ, Billing, Channel Management, Financial Integrations",
+    "description": "Code Zero is a Platinum Salesforce Consulting Partner that design solutions that minimize complexity through elegant and scalable architecture. We specialize in transforming our customer's Quote-to-Cash processes into best-of-breed Force.com solutions.",
+    "expertise": "As a Salesforce Partner with depth and breadth of experience, we not only know the tools, we solution in a way that charts a course for the future.",
+    "industries": "We take pride in our ability to work within the intersection between technical feasibility, business viability, and stakeholder desires to deliver fitting solutions that drive real results.",
+    "services": "Our Industry experts apply deep design understanding of your business to transform lead-to-cash processes and get you what you need when you need it; from fully customized CPQ to seamless billing.",
+    "extendedDescription": "We know how to write code, but more importantly, we know when to avoid it. We believe CPQ and Billing solutions should be maintained by a team of business savvy administrators performing configuration, rather than by a team of developers.\n\nWe solve key Quote to Cash Challenges:\n• Process and Data Standardization\n• Customer Experience\n• Account Hierarchy Simplification\n• Organizational Change\n• Product Proliferation\n• Pricing Complexity\n• Customer and Partner Engagement\n• Accurate Quote, Contract, and Order Creation\n\nCode Zero is a Certified Salesforce and Salesforce CPQ Partner with offices in Georgia, North Carolina, and Florida with team members in Ohio, Missouri, Maine, Massachusetts, Northern Virginia, South Carolina, and Colorado\n\nCities include: Atlanta, Jacksonville, Orlando, Tampa, Greenville, Spartanburg, Cincinnati, Columbus, Portland, St. Louis, Raleigh, Charlotte, Washington DC, Boston, Denver, Boulder, Fort Collins\n\nProduct Focus:\nCPQ, Billing, Sales Cloud, Service Cloud, Community Cloud, Conga Contracts. Financial integration accelerators with NetSuite, SAP, Workday, and Oracle."
   },
   {
     "name": "EWAVE: DIGITAL TRANSFORMATION AGENCY",
@@ -257,7 +377,13 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "Reimagine Commerce: Better, Faster & Higher Return Commerce Experiences",
+    "description": "eWave is an award-winning, global full-service agency, specialized in eCommerce. We have helped organisations create world-class digital commerce experiences over the last 13 years.",
+    "expertise": "Strategy & Consulting\nWe’re specialists in industry disruption. Through service design thinking, our unique process methodology is built on the foundations of research, helping brands identify the must win moments for their customers.",
+    "industries": "Solution Delivery\nWe have a customer-centric, clinical approach to solution delivery. Our partners benefit from a digital ecosystem designed to launch global brands into the next level of growth.",
+    "services": "Agency Services\nWe orchestrate compelling experiences. World-class campaign management backed by data-driven market research ensures our brands engage with their customers at every stage of their purchase journey.",
+    "extendedDescription": "eWave is a global independent commerce innovator, with over 280 highly-certified talents and professionals.\n\nFirmly positioned between Global System Integrators (GSIs) and high-end eCommerce agencies, we provide the world brands with services for commerce success: end-to-end strategy, consulting, technical and creative services, delivering products and eCommerce solutions, managed services, and capacity enablement.\n\nWith offices in Sydney, Melbourne, Singapore, Hong Kong, Zhongshan, Grodno, Dnipro, Paris and London, eWave combines global expertise with local market knowledge to boost our clients’ commerce growth at speed and scale.\n\nThrough the years, with an unparalleled understanding of a rapidly evolving digital landscape across multiple markets and industry verticals, eWave has helped global Brands achieve their business objectives and create unique meaningful digital shopping experiences for their customers."
   },
   {
     "name": "GLOBANT | MULTI AWARD WINNING DIGITAL TRANSFORMATION",
@@ -269,7 +395,13 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "Technology That Dares to Delight",
+    "description": "We blend innovation, expertise, and engineering to redefine what's possible. With over +2,000 Salesforce experts, we have successfully delivered +1,200 projects worldwide. By leveraging Data, CRM and Agentforce, we provide end-to-end multicloud expertise.",
+    "expertise": "Trusted Salesforce Experts with Proven Results:\n21+ years as Salesforce Partners with deep Agentforce expertise\n31,000+ technologists, and 2000+ multi-cloud experts worldwide located in 58 Delivery Centers\n1,200+ projects delivered with a 4.7/5 CSAT",
+    "industries": "Founding partner of Agentforce partner network:\n+20 Einstein AI & Agentforce projects implemented\n+1280 Salesforce AI Certification\n+100 Salesforce Data Cloud Experts",
+    "services": "Recognized Industry Leader:\nWorldwide Leader in AI Services (2023) – IDC MarketScape\nWorldwide Leader in Media & Cloud Services (2024) – IDC MarketScape\nFastest-growing and 5th strongest IT brand globally (2024) – Brand Finance",
+    "extendedDescription": "Your Strategic AI Partner to Unlock Innovation In Salesforce\n\nOur Salesforce Studio is dedicated to maximizing your Salesforce investment for unmatched growth, delivering transformative Salesforce solutions.\n\nWith over 21 years of experience, + 6,700 Salesforce certifications, and Summit-level recognition—Salesforce's highest accolade for expertise and success—we are specialists in all Salesforce products.\n\nOur practice has earned recognitions such as Partner of the Year and multiple Innovation Awards for project success and innovative delivery. We’re part of the Mulesoft, Data & AI, Consulting & Agentforce Advisory Boards, helping Salesforce to share the product roadmap."
   },
   {
     "name": "COGNIZANT TECHNOLOGY SOLUTIONS CORP.",
@@ -281,7 +413,13 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "Driving Connected Customer Experiences",
+    "description": "Cognizant is a leading end-to-end provider of Salesforce services, including design, consulting, implementation and support. We are focused to help our clients discover emotional connections to their customers, innovate and fulfill their brand promise.",
+    "expertise": "We equip clients to succeed with digital and CX transformations by helping them identify, design and deliver digitally enabled products, services & experiences. Regarding Covid-19, we are focused on helping our clients return to work leveraging Work.com.",
+    "industries": "For our Salesforce expertise and service depth, we have been recognized by leading global analyst firms such as Forrester, Gartner, HFS, IDC, ISG and NelsonHall",
+    "services": "Allow us to improve your cloud ROI and deliver higher business value and increase product penetration with behavioral change and next-gen industry models.",
+    "extendedDescription": "Cognizant is an end-to-end provider of Salesforce services, including design, consulting, implementation and support. Our partnership brings you strong cross-industry knowledge from a global perspective and drives your next-gen business disruptions through UX tools such as Salesforce Lightning and AI technologies like Salesforce Einstein. Strategic acquisitions (such as Advanced Technology Group and SaaSfocus in 2018 and Code Zero, EI-Technologies and Lev in 2020) mean that we are always strengthening our Salesforce expertise so that we can deliver the customer-centricity, growth and innovation you expect—and the employee engagement you need—at the highest levels. Our designers, technologists and industry experts represent one of the largest pools of Salesforce-certified consultants and are focused to help our clients discover emotional connections to their customers, innovate and fulfill their brand promise."
   },
   {
     "name": "BRQ DIGITAL SOLUTIONS",
@@ -293,19 +431,13 @@
           "Agriculture & Mining"
         ]
       }
-    ]
-  },
-  {
-    "name": "REAL ESTATE, CAPITAL MARKETS, AND BEYOND | SUMMIT SALESFORCE CONSULTING PARTNERS",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000MSiwTEAT",
-    "foundIn": [
-      {
-        "section": "Industry Expertise",
-        "filters": [
-          "Agriculture & Mining"
-        ]
-      }
-    ]
+    ],
+    "tagline": "Your Partner in all Digital Transformation Challenges",
+    "description": "For 31 years, BRQ Digital Solutions has been a leading force in Brazil's digital transformation. We specialize in accelerating businesses through strategic digital solutions, tackling critical challenges in growth, experience, efficiency, and beyond.",
+    "expertise": "We are GPTW for the 5th consecutive time!",
+    "industries": "Leader for the 2nd consecutive year in salesforce by ISG Provider Lens™ Salesforce ecosystem partner 2023 - Brazil",
+    "services": "Leader for the 4th consecutive year in Digital Business in the ISG Digital Business Innovation Services 2023' ISG Provider Lens™ Study – Brazil and",
+    "extendedDescription": "BRQ connects business transformations with SALESFORCE tools, leveraging robust business expertise for process digitization, new business development, data-driven decision-making, operational efficiency, and cost reduction.\n\n+170 certifications +250 clients +400 Salesforce projects\n\nDigital DNA:\n\n- Sales Cloud\n- Service Cloud\n- Field Service\n- Marketing Cloud\n- Commerce\n- Partner Communities\n- Analytics\n- Integration\n\nOur services:\n\n- Managed Squads\n- High-speed Delivery Squads\n- AMS - Application Management System\n- Lean Inception\n\nBRQ's differentiators:\n\n- Specialized and certified professionals\n- Deep business knowledge\n- Utilization of innovative tools in projects."
   },
   {
     "name": "CLOUDGAIA | 100% SALESFORCE SUMMIT CONSULTING PARTNER",
@@ -317,7 +449,13 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "Cloudgaia | 100% Salesforce Summit Consulting Partner & AI Consulting",
+    "description": "We are a global 100% Salesforce Summit consulting partner.\nWe provide end-to-end Salesforce solutions, driven by Human + AI-powered innovation—from consulting and implementation to staff augmentation and ongoing support, ensuring seamless success for you.",
+    "expertise": "Expert Staff\nWe master Salesforce across all clouds with deep expertise. Our global team designs tailored solutions that optimize platforms and client roadmaps, ensuring exceptional user experiences.",
+    "industries": "One Team\nWe integrate seamlessly with your teams and Salesforce, creating a unified force for innovation. Our collaborative model drives transformation and measurable business impact, ensuring your success.",
+    "services": "Agentforce Ready\nAs Agentforce implementers, we drive AI transformation so clients can focus on growth. With 150+ AI & Data certifications, we craft intelligent experiences that give them a competitive edge.",
+    "extendedDescription": "We are a global consulting partner and 100% Salesforce Summit Partner with more than 15 years of experience.\n\nWe provide end-to-end Salesforce solutions, driven by Human + AI-powered innovation—from consulting and implementation to staff augmentation and ongoing support, ensuring seamless success for companies like Coca-Cola, Diageo, Schroders, Danone, Mercado Libre, The Walt Disney Company and countless SMEs\n\n🔹 One Team mindset – We integrate seamlessly with our clients, investing in their success as if it were our own.\n\n🔹 A global team of highly skilled experts – Driving faster value delivery with deep industry and technical expertise.\n\n🔹 Empowered by Salesforce Ventures – Backed by Salesforce’s investment arm, driving innovation at every step.\n\n✅ Salesforce Summit Partner\n✅ 4.8/5 Customer Satisfaction Score\n✅ 1000+ certifications | 150+ AI & Data Certifications\n✅ 240+ experts around the world\n\n📍 United States, Argentina, Spain, United Kingdom, Colombia, Mexico, Brazil, Chile\n\nWe’re all-in for your growth"
   },
   {
     "name": "COREFLEX SOLUTIONS INC",
@@ -329,19 +467,31 @@
           "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "Connect Industry Knowledge with Salesforce Expertise, Quality and Trust",
+    "description": "CoreFlex is a company obsessed with customer success. We are a bunch of passionate professionals who with our deep Salesforce expertise, quality, trust, and agility, deliver innovative, world-class, value-based transformational outcomes for our customers",
+    "expertise": "Well-versed with Salesforce Clouds like Service Cloud, Sales Cloud, Health Cloud, B2B and B2C Commerce Cloud, Experience Cloud, Einstein, FSL, and Marketing Cloud",
+    "industries": "Deep Industry expertise in Consumer Goods and Logistics, Software Engineering, Healthcare Services, Business Services and e-learning.",
+    "services": "Consistent Operational Excellence with 4.8/5 CSAT ratings",
+    "extendedDescription": "CoreFlex Solutions Inc. is a trusted global company focused on building Digital Enterprises of the future in the Consumer Products, Logistics, Business Services, Healthcare, and Software Engineering sectors. Our clients recognize us for our ability to deliver world-class full lifecycle solutions, using concepts like early thinking, POC development, architecting, development, deployment, and managed services support. Powered by our deep-rooted value system focused on customer success, CoreFlex serves our customers through our COEs in Salesforce, Digital, Data Management, Integration, and Testing harnessing the power of technologies like MS Azure, Power BI, and Mobility platforms. Our innovative engagement models ensure value-based transformational outcomes for our clients."
   },
   {
-    "name": "ACCENTURE",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3000000266zBEAQ",
+    "name": "REAL ESTATE, CAPITAL MARKETS, AND BEYOND | SUMMIT SALESFORCE CONSULTING PARTNERS",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3u00000MSiwTEAT",
     "foundIn": [
       {
         "section": "Industry Expertise",
         "filters": [
-          "Automotive"
+          "Agriculture & Mining"
         ]
       }
-    ]
+    ],
+    "tagline": "Salesforce Consulting & Development Services",
+    "description": "Ascendix is an SF Summit consulting and AppExchange app development partner from Dallas TX.\n\nHelped 300+ Real Estate & Capital Markets firms slash the cost of their SF solution reboot and development with a blended team from the US and Europe.",
+    "expertise": "INDUSTRIES IN FOCUS\n\n➤ Сommercial Real Estate\n➤ Residential Real Estate\n➤ Capital Markets\n➤ Property Management\n➤ Construction\n➤ Mortgage & Investment Banking\n➤ Venture Capital\n➤ Private Equity\n➤ Travel & Hospitality\n➤ Nonprofit\n➤ Oil & Energy",
+    "industries": "KEY SERVICES\n\n➤ CRM Audit\n➤ Salesforce Implementation/ Revamp\n➤ Migration to Salesforce\n➤ Configuration & Customization\n➤ AI Consulting\n➤ System Integration with Salesforce\n➤ AppExchange App Development\n➤ Custom CRM Development\n➤ Web Portal Development",
+    "services": "No services",
+    "extendedDescription": "OUR SALESFORCE CLOUD EXPERTISE\n\n▶ Sales and Service Cloud Consultants\n▶ Agentforce Specialists\n▶ Pardot (MC Account Engagement) Consultants\n▶ Marketing Cloud Consultants\n▶ Experience (Community) Cloud Consultants\n▶ Advisors in CRM Analytics (Einstein Analytics)"
   },
   {
     "name": "BORN GROUP",
@@ -353,7 +503,31 @@
           "Automotive"
         ]
       }
-    ]
+    ],
+    "tagline": "Imagine. Build. Run.",
+    "description": "Connecting creative, content and commerce, BORN Group is an award-winning, global agency that helps brands with digital transformation. BORN is a Tech Mahindra company [www.techmahindra.com].",
+    "expertise": "CREATIVE\nOur process and collaboration across our collective creative, digital and production teams allow for greater continuity and quality of output - delivering best in class work across multiple channels, platforms and markets.",
+    "industries": "CONTENT\nAt BORN we offer a full 360º approach to planning and creating content, that encourages action and delivers engagement for our clients.",
+    "services": "COMMERCE\nBuilding intuitive, useful and accessible eCommerce solutions that power the transaction and empower your business. BORN is pleased to be leading the charge in merging usability with shopability, and driving consumers online first.",
+    "extendedDescription": "Connecting creative, content and commerce, BORN Group is an award-winning, global agency that helps brands with digital transformation. BORN is a Tech Mahindra company [www.techmahindra.com]. The group operates in 90 countries employing 131,000 staff speaking 18 languages. The company produces unique brand experiences by connecting ten specialisms that serve as the foundation of the digital economy: creative design, content production, commerce enablement, conversions (visitors to customers), cloud technology, cognition (analytics), cohesion (integrating all the systems), consulting and completeness (connecting brand experiences) across all channels."
+  },
+  {
+    "name": "ACCENTURE",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N3000000266zBEAQ",
+    "foundIn": [
+      {
+        "section": "Industry Expertise",
+        "filters": [
+          "Automotive"
+        ]
+      }
+    ],
+    "tagline": "Reinvent with Accenture + Salesforce",
+    "description": "We help companies reinvent using data, AI, and Salesforce to connect with customers in new ways and deliver value across their organizations.",
+    "expertise": "Accenture is a 20+ Salesforce Partner Innovation Award winner including:\n- 2024 Partner Innovation Award Winner, Education\n- 2024 Mulesoft Awards, Global Practice Development\n- 2023 Partner Innovation Award Winner, Healthcare & Life Sciences industry",
+    "industries": "Recognized as a leader in Salesforce Consulting, Implementation and Industry Cloud services by industry analysts.",
+    "services": "Salesforce’s first partner to accelerate the transformative capability of Generative AI for CRM.",
+    "extendedDescription": "Accenture helps companies deliver seamless, personalized experiences on Salesforce by uniting data and AI-driven insights across marketing, sales, commerce, and service. In a rapidly changing market, this we empower businesses to stay relevant, build loyalty, and drive growth — all while continuously innovating to meet evolving customer needs.\n\nWe combine the breadth of our expertise across Strategy and Consulting, Technology and Operations services and Accenture Song. Our unmatched global scale, deep industry knowledge and technology prowess enables us to deliver end-to-end solutions through a collaborative ecosystem of trusted partners. By integrating Salesforce Agentforce and Accenture AI Refinery™ businesses can maximize the value of their AI investments.\n\nWith over 56,000 Salesforce-skilled professionals, 78,000+ Salesforce certifications, and 20+ Salesforce Partner Innovation Awards, Accenture enables companies to realize the full potential of their Salesforce investments."
   },
   {
     "name": "REPLY",
@@ -365,7 +539,13 @@
           "Automotive"
         ]
       }
-    ]
+    ],
+    "tagline": "Consulting, Implementation, App Development, System Integration, Services",
+    "description": "Reply has experts with high technical multi-cloud competence in the areas of Sales, Service, Marketing with DMP, Commerce for B2B and B2C, integration with MuleSoft as well as Heroku, Datorama and Tableau.",
+    "expertise": "Specialization in core Salesforce Clouds and multi-Cloud:\nSales, Service, Marketing, Data Cloud\nMarketing Services, Content Creation & Delivery, Campaign Services\nCommerce Cloud for B2B and B2C",
+    "industries": "MuleSoft integrations partner for SOA, SaaS und APIs\nExperts in data migration and integration, international roll-outs",
+    "services": "Experts in deep technical and innovativ topics with IoT, Robotic, RPA, Maschine Learning, AI, Big Data\nData Cloud and Tableau Partner with long-standing experience",
+    "extendedDescription": "Reply has experts with high technical multi-cloud competence in the areas of Sales, Service, Marketing, Data Cloud, AI, Commerce for B2B and B2C, integration with MuleSoft as well as Salesforce Engagement with Heroku. In addition, the Reply specialists active in the DACH-region, France, Italy, Poland, UK and the USA work with the various Salesforce extensions for CPQ, Pardot, Email Automation and Einstein AI, but are also reseller for Tableau.\n\nReply combines expertise and experience as a Salesforce Partner. The company's specialists guide their customers through transformation processes by advising them on the best strategies for implementing Salesforce solutions. Customers' needs can be met ad hoc through custom configuration or customization. The consultants, business analysts and developers have a large number of certifications and are therefore ready to design and implement the most innovative and complex projects in the field of Salesforce technology."
   },
   {
     "name": "TECH MAHINDRA",
@@ -377,7 +557,13 @@
           "Automotive"
         ]
       }
-    ]
+    ],
+    "tagline": "Business Consulting, Integration, Implementation, Post Implementation",
+    "description": "Since 2006, Tech Mahindra has been a valued global partner for Salesforce.com. Our expertise encompasses an extensive background of large enterprise implementations, integrations, support & maintenance as well as development of solutions on SFDC platform.",
+    "expertise": "Cloud Computing Solution Specialist for Mid & Large Enterprise Market",
+    "industries": "Extensive experience in end-to-end Implementations, Integrations, Support & Maintenance",
+    "services": "Quality Service & Delivery is primary focus",
+    "extendedDescription": "Our Salesforce Practice has delivered cutting-edge solutions on Salesforce and Force.com across verticals . Our Salesforce engagement highlights include:\n\n•Process footprint across the full spectrum of Salesforce - Sales, Service, Marketing, Mobile, Partner Management and Appexchange solutions for quotes, campaigns and others\nGlobal rollouts, multi-lingual deployments\n•Integration with back-end systems including ERPs (SAP, Oracle Apps, JDE), Lotus Notes, BI applications and other legacy applications\n•Integration using Apex Web Services, Middleware platforms such as webMethods and WebSphere and ETL tools - Informatica and Ab Initio\n•Migration from legacy platforms to Salesforce and Force.com\n•Re-platforming from legacy platforms to Force.com\n\nOur Practice helps cross-skill associates in solutions such as pure content management, or transactional portal or workflow-based applications. We are thus capable of offering integrated business solutions on Salesforce and Force.com."
   },
   {
     "name": "KCLOUD TECHNOLOGIES | SALESFORCE CONSULTANT, DEVELOPMENT, CUSTOMIZATION EXPERT",
@@ -389,31 +575,13 @@
           "Automotive"
         ]
       }
-    ]
-  },
-  {
-    "name": "LUTECH GROUP | SALESFORCE SUMMIT PARTNER & AUTHORIZED TRAINING PROVIDER",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gchPEAQ",
-    "foundIn": [
-      {
-        "section": "Industry Expertise",
-        "filters": [
-          "Automotive"
-        ]
-      }
-    ]
-  },
-  {
-    "name": "INFOSYS, SIMPLUS & FLUIDO: INDUSTRY-LED SALESFORCE CONSULTING FOR B2B & B2C",
-    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001ry7oEAA",
-    "foundIn": [
-      {
-        "section": "Industry Expertise",
-        "filters": [
-          "Automotive"
-        ]
-      }
-    ]
+    ],
+    "tagline": "Experience the World of Cloud with Kcloud- Salesforce Gold (Crest) Partner",
+    "description": "KCloud Technologies, a Premier Gold Salesforce Partner, offers expert consulting, implementation & customization. Contact us at contact@kcloudtechnologies.com. With 200+ certified experts, we deliver tailored solutions in Sales Cloud, Service Cloud & CPQ.",
+    "expertise": "Salesforce® 360 Products: Sales Cloud, Service Cloud, Marketing Cloud & Pardot, CPQ, Health Cloud, Financial Services Cloud, Tableau CRM & Tableau Desktop, Commerce Cloud, Lightning Migration, MuleSoft Integration, AppExchange Apps, Non-Profit Cloud.",
+    "industries": "Integration & API Development, Application & Architecture Design, DevOps & Automation, Custom Development & Testing, Data Migration & Management, New Cloud Rollouts, Consulting & Assessments, Salesforce® Implementation, Maintenance & Support.",
+    "services": "Sales Cloud Consultant, Service Cloud Specialist, CPQ Expert, Marketing Cloud & Pardot Specialist, Health Cloud Consultant, Platform Developer & App Builder, Lightning Migration Specialist, MuleSoft Integration Expert, Tableau CRM Consultant, and more.",
+    "extendedDescription": "Deep Salesforce Expertise: Our team comprises certified Salesforce professionals with in-depth knowledge of the platform's capabilities.\nCustomized Solutions: We understand that one size doesn't fit all. Our solutions are tailored to your specific needs.\n\nEnd-to-End Support: From initial consultation to post-implementation support, we guide you every step of the way.\nOptimized Workflows: We streamline and optimize your business processes, enhancing productivity and efficiency.\n\nHave similar capabilities like Wipro, IBM, Deloitte, Cognizant, Accenture with the best rates.\nWe provide process and technology consulting with strong expertise in integration and customization of cloud-based applications such as Salesforce.com, Force.com, and Amazon Web Services with specialization in Sales cloud & service cloud platforms. Your global business consulting partner, Kcloud Technologies is a USA-based IT company and has branch offices based in Delhi-NCR, Gurgaon, and Faridabad. Kcloud Technologies has global expertise collaborating with leading corporations and now brings its Consulting, Technology. With dedicated teams to service the International market."
   },
   {
     "name": "ARGO LOGIC",
@@ -425,7 +593,13 @@
           "Automotive"
         ]
       }
-    ]
+    ],
+    "tagline": "Our job is business optimisation",
+    "description": "We believe that unless we are solving your business problems first, the technology does not matter.\nThat is why every single member of the Argo Logic team is focused on delivering value and real ROI for our clients at every step.",
+    "expertise": "Experience across the Salesforce product suite from Sales cloud implementations through to custom app development on Heroku or integration solutions utilising Mulesoft - we create solutions that help our clients grow and scale",
+    "industries": "Extensive experience across various industries and business of all sizes from SMB to multinational corporations and publicly listed companies",
+    "services": "Our team of developers have vast experience creating unique applications that are not only fit for purpose but provide enhanced functionality and usability",
+    "extendedDescription": "Everyone at Argo is single-mindedly focused on delivering value for our clients at every step.\n\nWe believe that any solution should be adaptable and responsive to change. Our job isn’t just in solving for the now it’s in taking the time to anticipate the future as well.\n\nWeb: https://argologic.com.au\nCall: 1300080775\n\n\nAt a glance:\n\n100+ Salesforce projects and counting\n12 x Sydney based consultants and developers\n5 star Customer Satisfaction rating\nCombined experience of over 40 years of Salesforce"
   },
   {
     "name": "IBM",
@@ -437,7 +611,49 @@
           "Automotive"
         ]
       }
-    ]
+    ],
+    "tagline": "AI that is ready for business.\n\nConsulting expertise to put it to work.",
+    "description": "Only IBM has the industry-specific consulting expertise and technology to make front-to-back agentic AI all work together.",
+    "expertise": "Human-centered Approach\n\nIBM clients benefit from our strategic approach to experience design that puts audience engagement, productivity and trust at the center of your business transformation. We unite your business around your customer.",
+    "industries": "Access to Expertise\n\n​IBM teams include cross-functional experts who know your industry and have experience implementing intelligent workflows that improve experiences. IBM’s heritage of innovation shapes our perspectives and informs our solutions.",
+    "services": "Now and Next Technology\n\nIBM designs and creates the future of business. We leverage the latest technological advancements and data architecture best practices to enhance your experiences and place actionable insights directly inside of Salesforce.",
+    "extendedDescription": "It can be challenging to find the right partner to help you achieve your growth and productivity goals with AI. IBM stands alone as the only consultancy at scale within a technology company that delivers end-to-end, industry-specific solutions that integrate Salesforce seamlessly across your entire enterprise. Our solutions harmonize your existing infrastructure, minimizing disruption and maximizing ROI. ​\n\nA Salesforce partner for 25 years, IBM has a deep understanding of the complex needs of large enterprises. By combining our expertise in AI, hybrid-cloud, and enterprise transformation with the power of Salesforce, we help unlock new levels of efficiency, innovation and growth."
+  },
+  {
+    "name": "LUTECH GROUP | SALESFORCE SUMMIT PARTNER & AUTHORIZED TRAINING PROVIDER",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001gchPEAQ",
+    "foundIn": [
+      {
+        "section": "Industry Expertise",
+        "filters": [
+          "Automotive"
+        ]
+      }
+    ],
+    "tagline": "Consulting, Execution, Training per il digital customer engagement.",
+    "description": "Costruiamo relazioni di valore con i tuoi Clienti per la trasformazione digitale end-to-end dei processi sales&marketing e after sales.\n+20 anni di partnership Salesforce\n+500 progetti di Digital Customer Engagement\n+200 corsi di Salesforce Training",
+    "expertise": "Cloud CRM, Sales Force Automation and Customer Service",
+    "industries": "Marketing Automation & Omnichannel Data Driven Marketing",
+    "services": "Salesforce Authorized Training Provider: unico Partner in Italia che eroga corsi di formazione ufficiale su tutta la piattaforma Salesforce.",
+    "extendedDescription": "Lutech, Saleforce SUMMIT Partner, offre alle aziende soluzioni integrate per creare e nutrire relazioni di lungo periodo con i propri clienti, perché è solo raccogliendo e analizzando informazioni e dati di alta qualità sui contatti da tutte le fonti, utilizzando i data – driven insights, che è possibile incidere sull’engagement del proprio target attraverso tutti i touchpoint digitali e fisici.\n\nGrazie a Customer centric platform che hanno alla base strumenti di Business Intelligence (BI), Artificial Intelligence (AI) e Machine Learning, per personalizzare strategie di contenuto, relazione e offerta , Lutech costruisce customer experience realmente end-to-end, supportando le aziende nel raggiungimento degli obiettivi di business.\n\n- Lutech: https://lutech.group/it/servizi/customer-engagement-crm"
+  },
+  {
+    "name": "INFOSYS, SIMPLUS & FLUIDO: INDUSTRY-LED SALESFORCE CONSULTING FOR B2B & B2C",
+    "link": "https://appexchange.salesforce.com/appxConsultingListingDetail?listingId=a0N30000001ry7oEAA",
+    "foundIn": [
+      {
+        "section": "Industry Expertise",
+        "filters": [
+          "Automotive"
+        ]
+      }
+    ],
+    "tagline": "Accelerate strategic, industry-focused digital transformations",
+    "description": "As a Salesforce Global Summit Partner, Infosys is a leader in driving transformational experiences for our customers with innovative, end-to-end industry solutions to achieve a seamless customer experience, operational efficiency, and profitable growth.",
+    "expertise": "Offerings:\nSales Revenue\nService, Field Service & Loyalty\nSalesforce Industries\nCommerce\nExperience\nNetZero\nMarketing & Pardot\nApp Cloud\nFinancialForce, Tableau Analytics, MuleSoft, KBMax, DocuSign, Cloudsense, Apttus, ServiceMax, Heroku",
+    "industries": "Industries:\nFinancial Services\nHealthcare & Life Sciences\nComms & Media\nRetail, CPG, & Logistics\nHigh-Tech\nManufacturing & Auto\nEnergy & Utilities\nPublic Sector & Education\nNon-Profit\nChemicals & Agricultural\nTravel & Hospitality",
+    "services": "Presence:\nAMERICAS: US, Canada, LATAM\nAPAC: ANZ, ASEAN India, Greater China, Japan, and South Korea\nEUROPE: UK, NORDICS, Germany, Austria, Switzerland, Netherlands, Belgium, Luxembourg, France, Ireland, Poland, Slovakia, Spain",
+    "extendedDescription": "As a Salesforce Global Summit Partner, Infosys is a leader in driving transformational experiences for our customers with innovative, end-to-end industry solutions.\n\nThrough our Salesforce solutions, we help customers achieve a seamless customer experience, improve operational efficiency, and grow profitably. Our services include Customer Experience Advisory, Strategy Definition, Platform Implementation, Organizational Change Management, Data and Systems Integration, Business Platforms and\nAccelerators, License Consulting, and Managed Services. \n\nInfosys Salesforce service offerings help ensure a superior experience for customers, employees, and partners by leveraging innovative multi-cloud solutions with cutting-edge technologies and deep domain expertise to help accelerate the enterprise cloud journey.\n\nSimplus, Infosys' NA consulting arm, is the #1-rated Salesforce partner in the US and Australia regions. Fluido, Infosys' EMEA consulting arm, is the #1 Salesforce Partner in Europe."
   },
   {
     "name": "ALGOWORKS | EXPERT SALESFORCE® DEVELOPMENT, CUSTOMIZATION & SEAMLESS INTEGRATION",
@@ -449,6 +665,12 @@
           "Automotive"
         ]
       }
-    ]
+    ],
+    "tagline": "Premier Salesforce® Summit Partner Delivering Excellence Worldwide",
+    "description": "Lightning Development and Migration | Sales, Service, Community & Marketing Cloud | Einstein | Apps and more\n\nAlgoworks is a trusted global Salesforce® Partner for complete development and consulting services for businesses of all sizes.",
+    "expertise": "CLOUD EXPERTISE: Force.com Development, Financial Services Cloud, AppExchange Apps, Higher Education Cloud, Sales Clous & CPQ, Marketing Cloud & Pardot, Salesforce® Communit, Einstein Analytics, Service Cloud, Salesforce® Mobile and Non-Profit Cloud.",
+    "industries": "CORE SERVICES: Integration, Application & Architecture Design, DevOps & Automation, Development & Testing, Data Migration, New Cloud Roll-Out, Consulting & Assessment, Salesforce implementation, Maintenance & Support and Top Salesforce Consultants.",
+    "services": "TEAM EXPERTISE: Sales Cloud Consultant, CPQ Specialist, Marketing Cloud Consultant, Service Cloud Consultant, Pardot Consultant & Specialist, Force.com Developer, Platform Developer & App Builder, and Community Cloud Consultant.",
+    "extendedDescription": "COMMITMENT TO QUALITY DELIVERY\nAt Algoworks, we prioritize quality and excellence. Our agile methodology embraces flexibility and continuous improvement, ensuring seamless adaptation to evolving business needs. With a proven track record of successful global implementations from 5 to over 5000 users, we leverage 1–2-week deployment cycles for faster results.\n\nFOCUS ON PARTNERSHIPS\nOur clients are central to our approach. As a trusted Salesforce® Summit Partner, we build lasting, results-driven partnerships with strategies that drive growth, success, and long-term business value.\n\nCLEAR COMMUNICATION\nWe believe transparent and proactive communication is fundamental to project success. Our team ensures alignment with your business objectives through consistent updates and collaboration. Clients appreciate our availability and commitment to keeping them informed.\n\nProfessional Services include:\nData migration\nDevelopment using Visualforce, Apex Triggers\nSalesforce CPQ\nField Service Lightning - FSL\nMarketing Cloud & Pardot Setup\nService Cloud Setup & CTI Integration\nConga / DocuSign / Adobe Sign\nFor more information, visit www.algoworks.com. At Algoworks, we make it possible."
   }
 ]

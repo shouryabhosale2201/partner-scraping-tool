@@ -23,7 +23,7 @@ async function storeSalesforceDataAsJson(filepath, extractedDetails) {
     }
 }
 
-const scrapeData = async (fieldsToScrape = ['name', 'link', 'foundIn'], testingMode = true) => {
+const scrapeData = async (fieldsToScrape , testingMode = true) => {
 
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();

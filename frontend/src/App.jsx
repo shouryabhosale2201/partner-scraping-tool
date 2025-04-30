@@ -41,7 +41,7 @@ export default function ScraperApp() {
     const newUrl = e.target.value;
     setUrl(newUrl);
     setData([]);
-    
+
     // Reset selected fields when changing platform
     if (newUrl === "microsoft") {
       setMicrosoftFields({});
@@ -61,15 +61,18 @@ export default function ScraperApp() {
       if (url === "microsoft") {
         const fieldsToScrape = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
         const response = await axios.get(
-          `http://localhost:5000/api/v1/${url}/scrape`, 
+          `http://localhost:5000/api/v1/${url}/scrape`,
           { params: { fields: JSON.stringify(fieldsToScrape) } }
         );
         if (response.data.success) setData(response.data.data);
         else throw new Error(response.data.error);
       } else if (url === "salesforce") {
-        // For Salesforce, pass selected fields for scraping
+        // For Salesforce, use pendingSalesforceFields (not salesforceFields)
+        // Also update salesforceFields to keep them in sync
+        setSalesforceFields(pendingSalesforceFields);
+
         const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`, {
-          params: { fields: JSON.stringify(salesforceFields) }
+          params: { fields: JSON.stringify(pendingSalesforceFields) }
         });
         if (response.data.success) setData(response.data.data);
         else throw new Error(response.data.error);
@@ -84,15 +87,14 @@ export default function ScraperApp() {
     }
     setLoading(false);
   };
-
   const handleFetch = async (selectedFilters = {}) => {
     setLoading(true);
     setError(null);
-  
+
     try {
       let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
       const params = new URLSearchParams();
-  
+
       if (url === "microsoft") {
         // Microsoft-specific params
         if (Object.keys(microsoftFields).length > 0) {
@@ -114,16 +116,16 @@ export default function ScraperApp() {
         if (selectedFilters.country?.length > 0) {
           params.append('countries', JSON.stringify(selectedFilters.country));
         }
-        
+
         if (params.toString()) {
           endpoint += `?${params.toString()}`;
         }
       }
-  
+
       else if (url === "salesforce") {
         // Salesforce-specific params
         setSalesforceFields(pendingSalesforceFields);
-  
+
         if (pendingSalesforceFields.length > 0) {
           params.append("fields", JSON.stringify(pendingSalesforceFields));
         }
@@ -133,28 +135,28 @@ export default function ScraperApp() {
         if (selectedFilters.industryExpertise?.length > 0) {
           params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
         }
-  
+
         if (params.toString()) {
           endpoint += `?${params.toString()}`;
         }
       }
       console.log("Fetching from endpoint:", endpoint);
-  
+
       const response = await axios.get(endpoint);
-  
+
       if (response.data.success) {
         setData(response.data.data);
       } else {
         throw new Error(response.data.error || "Unknown error occurred");
       }
-  
+
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
   };
-  
+
 
   const handleSalesforceFilterChange = (selectedFilters) => {
     if (url === 'salesforce') {
@@ -171,14 +173,14 @@ export default function ScraperApp() {
   const handleDownloadExcel = async () => {
     try {
       const params = {};
-      
+
       // Set the appropriate fields parameter based on platform
       if (url === "microsoft") {
         params.fields = JSON.stringify(Object.keys(microsoftFields).filter(k => microsoftFields[k]));
       } else if (url === "salesforce") {
         params.fields = JSON.stringify(salesforceFields);
       }
-      
+
       const response = await axios.get(`http://localhost:5000/api/v1/${url}/downloadExcel`, {
         params,
         responseType: "blob"
@@ -221,9 +223,9 @@ export default function ScraperApp() {
         )}
 
         {url === "microsoft" && (
-          <MicrosoftFieldSelection 
-            selectedFields={microsoftFields} 
-            onFieldsChange={handleMicrosoftFieldsChange} 
+          <MicrosoftFieldSelection
+            selectedFields={microsoftFields}
+            onFieldsChange={handleMicrosoftFieldsChange}
           />
         )}
 
