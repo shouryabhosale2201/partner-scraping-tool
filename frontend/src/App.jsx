@@ -1,4 +1,3 @@
-// App.jsx
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import SalesforceTable from "./components/Tables/SalesforceTable";
@@ -87,6 +86,7 @@ export default function ScraperApp() {
     }
     setLoading(false);
   };
+  
   const handleFetch = async (selectedFilters = {}) => {
     setLoading(true);
     setError(null);
@@ -135,6 +135,12 @@ export default function ScraperApp() {
         if (selectedFilters.industryExpertise?.length > 0) {
           params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
         }
+        if (selectedFilters.country?.length > 0) {
+          params.append('countryFilters', JSON.stringify(selectedFilters.country));
+        }
+        if (selectedFilters.region?.length > 0) {
+          params.append('regionFilters', JSON.stringify(selectedFilters.region));
+        }
 
         if (params.toString()) {
           endpoint += `?${params.toString()}`;
@@ -170,35 +176,52 @@ export default function ScraperApp() {
     }
   };
 
+  // The updated download Excel function - now independent from fetch
   const handleDownloadExcel = async () => {
     try {
-      const params = {};
-
+      setLoading(true);
+      
+      // Create endpoint with appropriate parameters
+      let endpoint = `http://localhost:5000/api/v1/${url}/downloadExcel`;
+      const params = new URLSearchParams();
+      
       // Set the appropriate fields parameter based on platform
       if (url === "microsoft") {
-        params.fields = JSON.stringify(Object.keys(microsoftFields).filter(k => microsoftFields[k]));
+        const fieldsToExport = Object.keys(microsoftFields).filter(k => microsoftFields[k]);
+        if (fieldsToExport.length > 0) {
+          params.append('fields', JSON.stringify(fieldsToExport));
+        }
       } else if (url === "salesforce") {
-        params.fields = JSON.stringify(salesforceFields);
+        // Use the current state of salesforceFields
+        if (pendingSalesforceFields.length > 0) {
+          params.append('fields', JSON.stringify(pendingSalesforceFields));
+        }
       }
 
-      const response = await axios.get(`http://localhost:5000/api/v1/${url}/downloadExcel`, {
-        params,
+      if (params.toString()) {
+        endpoint += `?${params.toString()}`;
+      }
+
+      const response = await axios.get(endpoint, {
         responseType: "blob"
       });
 
       const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement("a");
       a.href = downloadUrl;
-      a.download = `${url || "Partners"}.xlsx`;
+      a.download = `${url}_partners.xlsx`;
 
       document.body.appendChild(a);
       a.click();
       a.remove();
 
       window.URL.revokeObjectURL(downloadUrl);
+      
+      setLoading(false);
     } catch (error) {
       console.error("Download failed:", error.message);
       alert("Failed to download Excel file. Please try again.");
+      setLoading(false);
     }
   };
 
@@ -229,24 +252,25 @@ export default function ScraperApp() {
           />
         )}
 
-        <div className="flex space-x-3 justify-center">
+        <div className="flex space-x-3 justify-center flex-wrap gap-2">
           <button
             onClick={handleScrape}
-            disabled={loading}
-            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
+            disabled={loading || !url}
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-300"
           >
             Scrape Data
           </button>
           <button
             onClick={() => handleFetch()}
-            disabled={loading}
-            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
+            disabled={loading || !url}
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-300"
           >
             Fetch Stored Data
           </button>
           <button
             onClick={handleDownloadExcel}
-            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-orange-400"
+            disabled={loading || !url}
+            className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-300"
           >
             Download Excel
           </button>

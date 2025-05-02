@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const SalesforceFieldSelector = ({ onFieldsChange, initialFields }) => {
   // Default required fields that cannot be unchecked
-  const requiredFields = ["name", "link", "foundIn"];
+  const requiredFields = ["name", "link", "foundIn","countries"];
   
   // All available fields
   const allFields = [
@@ -14,7 +14,9 @@ const SalesforceFieldSelector = ({ onFieldsChange, initialFields }) => {
     { id: "industries", label: "Industries", required: false },
     { id: "services", label: "Services", required: false },
     { id: "extendedDescription", label: "Extended Description", required: false },
-    { id: "foundIn", label: "Filter Data", required: true }
+    { id: "foundIn", label: "Filter Data", required: true },
+    { id: "countries", label: "Location", required: true }
+
   ];
   
   // Initialize selected fields with required fields and any passed initial fields

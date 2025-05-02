@@ -1,3 +1,4 @@
+// salesforceRouter.js
 const express = require("express");
 const scrapeData = require("./salesforceScraper");
 const exportToExcel = require("./salesforceExcel");
@@ -13,9 +14,9 @@ router.get("/scrape", async (req, res) => {
     try {
         // Parse the selected fields from the request
         const selectedFields = req.query.fields ? JSON.parse(req.query.fields) : [];
-        
+
         // Default fields if none selected
-        const fieldsToScrape = selectedFields.length > 0 ? selectedFields : ['name', 'link', 'foundIn'];
+        const fieldsToScrape = selectedFields.length > 0 ? selectedFields : ['name', 'link', 'foundIn', 'countries'];
         console.log(fieldsToScrape)
         const data = await scrapeData(fieldsToScrape);
         res.json({ success: true, data });
@@ -29,27 +30,44 @@ router.get("/fetch", async (req, res) => {
     try {
         const rawData = await fs.readFile(Salesforce_File, "utf-8");
         const partners = JSON.parse(rawData);
-        // Parse query parameters
+
+        // Parse query parameters (filters)
         const salesforceExpertise = req.query.salesforceExpertise ? JSON.parse(req.query.salesforceExpertise) : [];
         const industryExpertise = req.query.industryExpertise ? JSON.parse(req.query.industryExpertise) : [];
+        const regionFilters = req.query.regionFilters ? JSON.parse(req.query.regionFilters) : [];
         const selectedFields = req.query.fields ? JSON.parse(req.query.fields) : [];
-        // Helper function to check if a partner matches a section + filters
+
+        // Function to match Salesforce/Industry Expertise filters
         const matchesFilters = (foundIn, section, filters) => {
             const entry = foundIn.find(f => f.section === section);
             if (!entry) return false;
             return filters.every(f => entry.filters.includes(f));
         };
-        // Filter data based on provided filters
+
+        // Filter partners based on all conditions (AND logic)
+        // For all filter categories
         let filtered = partners.filter(partner => {
             const foundIn = partner.foundIn || [];
-            const matchesSalesforce = salesforceExpertise.length === 0 || matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertise);
-            const matchesIndustry = industryExpertise.length === 0 || matchesFilters(foundIn, "Industry Expertise", industryExpertise);
-            // Apply AND within each section, OR across sections
-            return (salesforceExpertise.length && industryExpertise.length)
-                ? matchesSalesforce || matchesIndustry
-                : matchesSalesforce && matchesIndustry;
+            const countries = partner.countries || {};
+
+            // Check Salesforce Expertise
+            const matchesSalesforce = salesforceExpertise.length === 0 ||
+                matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertise);
+
+            // Check Industry Expertise
+            const matchesIndustry = industryExpertise.length === 0 ||
+                matchesFilters(foundIn, "Industry Expertise", industryExpertise);
+
+            // Check Regions - a simple flat check to see if ANY selected region exists
+            const allRegions = Object.values(countries).flat(); // Get all regions regardless of country
+            const matchesRegions = regionFilters.length === 0 ||
+                regionFilters.every(region => allRegions.includes(region));
+
+            // Apply AND logic to all filter categories
+            return matchesSalesforce && matchesIndustry && matchesRegions;
         });
-        // Only include requested fields, always include "name" and "link" if no fields specified
+
+        // If selectedFields are provided, filter the response data accordingly
         if (selectedFields.length > 0) {
             filtered = filtered.map(partner => {
                 const partial = {};
@@ -61,99 +79,147 @@ router.get("/fetch", async (req, res) => {
                 return partial;
             });
         } else {
-            // Default fields if none specified
+            // If no specific fields are selected, return only name and link
             filtered = filtered.map(({ name, link }) => ({ name, link }));
         }
+
+        // Return filtered results
         res.json({ success: true, data: filtered });
     } catch (error) {
         console.error(":x: Salesforce Filter Fetch Error:", error.message);
         res.status(500).json({ success: false, error: "Failed to fetch filtered Salesforce data." });
     }
 });
+
+
 router.get("/filters", async (req, res) => {
     try {
         const rawData = await fs.readFile(Salesforce_File, "utf-8");
         const partners = JSON.parse(rawData);
-        // Initialize map to group filters by section
         const sectionsMap = {};
+
+        // Section filters: Salesforce Expertise & Industry Expertise
         partners.forEach((partner) => {
-            if (!partner.foundIn) return;
-            partner.foundIn.forEach(({ section, filters }) => {
-                if (!sectionsMap[section]) {
-                    sectionsMap[section] = new Set();
-                }
-                filters.forEach((filter) => {
-                    if (filter) sectionsMap[section].add(filter);
+            if (partner.foundIn) {
+                partner.foundIn.forEach(({ section, filters }) => {
+                    if (!sectionsMap[section]) sectionsMap[section] = new Set();
+                    filters.forEach((filter) => {
+                        if (filter) sectionsMap[section].add(filter);
+                    });
                 });
-            });
+            }
         });
-        // Convert sets to arrays for response
-        const responseData = Object.entries(sectionsMap).map(([section, filtersSet]) => ({
-            section,
-            filters: [...filtersSet]
-        }));
+
+        // Country + Regions as nested structure
+        const countryFilters = [];
+
+        partners.forEach((partner) => {
+            if (partner.countries) {
+                Object.entries(partner.countries).forEach(([countryGroup, regions]) => {
+                    let countryEntry = countryFilters.find(entry => entry.label === countryGroup);
+                    if (!countryEntry) {
+                        countryEntry = { label: countryGroup, children: new Set() };
+                        countryFilters.push(countryEntry);
+                    }
+                    regions.forEach(region => {
+                        if (region) countryEntry.children.add(region);
+                    });
+                });
+            }
+        });
+
+        // Final transformation
+        const responseData = [];
+
+        // Push country group with nested regions
+        responseData.push({
+            section: "Country",
+            filters: countryFilters.map(({ label, children }) => ({
+                label,
+                children: Array.from(children).sort()
+            }))
+        });
+
+        // Push expertise sections
+        Object.entries(sectionsMap).forEach(([section, filtersSet]) => {
+            if (section !== "Country" && section !== "Region") {
+                responseData.push({
+                    section,
+                    filters: [...filtersSet].sort()
+                });
+            }
+        });
+
         res.json(responseData);
     } catch (err) {
-        console.error(":x: Error reading Salesforce filters from file:", err);
+        console.error("❌ Error reading Salesforce filters from file:", err);
         res.status(500).json({ error: "Failed to fetch Salesforce filter data" });
     }
 });
 
 
+
+
+
+
 router.get("/downloadExcel", async (req, res) => {
     try {
-      const rawData = await fs.readFile(Salesforce_File, "utf-8");
-      const partners = JSON.parse(rawData);
-      
-      // Parse selected fields
-      const selectedFields = req.query.fields ? JSON.parse(req.query.fields) : [];
-      
-      // Build filtersMap from `foundIn` field in JSON but exclude it from output
-      const filtersMap = {};
-      const dataWithIds = partners.map((item, idx) => {
-        const id = `${idx}`; // Generate a pseudo-id since JSON has no database id
-        filtersMap[id] = item.foundIn || [];
-        return { id, ...item };
-      });
-      
-      // Apply selectedFields if provided, explicitly excluding foundIn
-      const rows = dataWithIds.map(item => {
-        const result = { id: item.id };
-        
-        if (selectedFields.length > 0) {
-          selectedFields
-            .filter(field => field !== 'foundIn') // Explicitly filter out foundIn
-            .forEach(field => {
-              if (item[field] !== undefined) {
-                result[field] = item[field];
-              }
+        // Read all data directly from the JSON file
+        const rawData = await fs.readFile(Salesforce_File, "utf-8");
+        const allPartners = JSON.parse(rawData);
+
+        // Parse selected fields
+        const selectedFields = req.query.fields ? JSON.parse(req.query.fields) : [];
+
+        // If no specific fields are selected, use default fields
+        const fieldsToInclude = selectedFields.length > 0 ? selectedFields : ['name', 'link'];
+
+        // Process all partners for Excel export
+        const dataWithIds = allPartners.map((item, idx) => {
+            // Create a new object with only the selected fields
+            const filteredItem = { id: `${idx}` }; // Add ID for reference in maps
+            
+            fieldsToInclude.forEach(field => {
+                if (field !== 'foundIn' && field !== 'countries' && item[field] !== undefined) {
+                    filteredItem[field] = item[field];
+                }
             });
-        } else {
-          // Default fields, explicitly excluding foundIn
-          result.name = item.name;
-          result.link = item.link;
-        }
+            
+            return filteredItem;
+        });
+
+        // Build maps for expertise and countries data
+        const filtersMap = {};
+        const countriesMap = {};
         
-        return result;
-      });
-      
-      // Generate the Excel file
-      const fileName = "salesforce_partners.xlsx";
-      const filePath = await exportToExcel(rows, filtersMap, fileName);
-      
-      // Send the file as download
-      res.download(filePath, fileName, (err) => {
-        if (err) {
-          console.error(":x: File Download Error:", err.message);
-          res.status(500).json({ success: false, error: "Failed to send Excel file." });
-        } else {
-          console.log(":white_check_mark: Excel file downloaded successfully");
-        }
-      });
+        allPartners.forEach((item, idx) => {
+            const id = `${idx}`;
+            filtersMap[id] = item.foundIn || [];
+            
+            // Include countries data separately for better formatting in Excel
+            if (item.countries) {
+                countriesMap[id] = item.countries;
+            }
+        });
+
+        // Generate the Excel file
+        const fileName = "salesforce_partners.xlsx";
+        const filePath = await exportToExcel(dataWithIds, filtersMap, countriesMap, fileName);
+
+        // Send the file as download
+        res.download(filePath, fileName, (err) => {
+            if (err) {
+                console.error(":x: File Download Error:", err.message);
+                res.status(500).json({ success: false, error: "Failed to send Excel file." });
+            } else {
+                console.log(":white_check_mark: Excel file downloaded successfully");
+            }
+        });
     } catch (error) {
-      console.error(":x: Excel Export Error:", error.message || error);
-      res.status(500).json({ success: false, error: "Failed to generate Excel file." });
+        console.error(":x: Excel Export Error:", error.message || error);
+        res.status(500).json({ success: false, error: "Failed to generate Excel file." });
     }
-  });
+});
+
 
 module.exports = router;

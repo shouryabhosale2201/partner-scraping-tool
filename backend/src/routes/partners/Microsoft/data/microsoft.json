@@ -170,7 +170,6 @@
       "SharePoint"
     ],
     "solutions": [
-      "Analytics",
       "Application Integration",
       "Artificial Intelligence",
       "Security",
@@ -299,6 +298,10 @@
     "industryFocus": [
       "Distribution",
       "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
       "Professional services",
       "Media & Communications",
       "Transportation",
@@ -316,6 +319,7 @@
       "Microsoft365",
       "Office",
       "PowerBI",
+      "Project",
       "SQL",
       "DynamicsAX GP NAV SL",
       "Dynamics365Business",
@@ -506,6 +510,7 @@
       "Agriculture",
       "Media & Communications",
       "Education",
+      "Manufacturing & Resources",
       "Financial Services",
       "Hospitality  & Travel",
       "Healthcare",
@@ -528,6 +533,7 @@
       "Azure"
     ],
     "solutions": [
+      "Security",
       "Analytics",
       "Application Integration",
       "Artificial Intelligence",
@@ -578,7 +584,6 @@
     "name": "COSMOS BUSINESS SYSTEMS S.A. COSMOS COMPUTERS",
     "description": "CBS IT Systems Cyprus LTD was founded in Cyprus (12 Kennedy Ave. Nicosia) in 2010 as a subsidiary company of Cosmos Business Systems SA, which has 25-years of presence in the Greek market (founded 1988) and numerous of projects, is one of the main business in integrated IT solutions, Software and Telecommunications in Greece and Cyprus. The activity of CBS IT (CY) is located in the high technology sector and focuses on providing integrated IT and telecommunications solutions (Data Centers, IT infrastructure and networks), providing specialized business support services as well as installations of software applications (ERP, CRM, BI, BPM). The Company also distributes standard software and undertakes projects including applications and web-based services (Internet) and also the Cloud.",
     "industryFocus": [
-      "Government",
       "Financial Services",
       "Manufacturing & Resources",
       "Power and utilities",
@@ -812,8 +817,7 @@
     "industryFocus": [
       "Agriculture",
       "Media & Communications",
-      "Education",
-      "Financial Services",
+      "Agriculture",
       "Government",
       "Healthcare",
       "Hospitality  & Travel",
@@ -939,8 +943,6 @@
       "Exchange",
       "Microsoft365",
       "Office",
-      "PowerBI",
-      "Project",
       "SharePoint",
       "SkypeForBusiness",
       "Surface1",
@@ -1011,9 +1013,7 @@
       "Healthcare",
       "Hospitality  & Travel",
       "Manufacturing & Resources",
-      "Nonprofit & IGO",
       "Power and utilities",
-      "Public Safety and National Security",
       "Retail & Consumer Goods",
       "Professional services",
       "Transportation",
@@ -1030,6 +1030,7 @@
       "Microsoft365",
       "Office",
       "PowerBI",
+      "SQL",
       "Project",
       "SharePoint",
       "SkypeForBusiness",
@@ -1409,7 +1410,6 @@
     "description": "SATH Kenya, a subsidiary of Signal Alliance Technology Holding (SATH), is a leading technology company in East Africa, dedicated to driving digital transformation through Microsoft technologies.\nOur Microsoft Expertise:\n- Cloud Infrastructure & Microsoft Azure: Implement scalable, secure cloud environments tailored to your business needs.\n- Data Analytics & AI: Leverage Microsoft Fabric and Power BI for actionable insights and predictive analytics. AI search service, Copilot & AI Agents\n- Cybersecurity: Protect your digital assets with advanced Microsoft security solutions, including threat protection and identity management. Microsoft Defender, Purview Sentinel, Azure Monitor and Microsoft Security Copilot.\n- Modern Workplace Solutions: Enhance collaboration and productivity with Microsoft 365, Teams, and Power Platform integrations, M365 Copilot.\n- Custom Business Applications: Develop bespoke applications using Microsoft Dynamics 365 and Power Platform to streamline operations leveraging Copilot Studio.\nWhy Choose SATH Kenya:\n- Recognized as a Microsoft Gold Partner, reflecting our commitment to excellence in delivering Microsoft technologies.\n- Active participant in initiatives like the Microsoft AI Tour Nairobi, showcasing our dedication to AI-driven business solutions.\n- Part of Signal Alliance Technology Holding, a leading African tech group with over two decades of experience in digital transformation.\nPartner with SATH Kenya to harness the full potential of Microsoft technologies and propel your business into the future.\n ",
     "industryFocus": [
       "Media & Communications",
-      "Education",
       "Financial Services",
       "Government",
       "Healthcare",
@@ -1425,17 +1425,11 @@
     ],
     "product": [
       "Azure",
-      "DeveloperTools",
-      "Dynamics365Business",
-      "Dynamics365Enterprise",
-      "DynamicsAX GP NAV SL",
       "EnterpriseMobilityAndSecurity",
       "Microsoft365",
-      "Teams",
       "Office",
       "PowerBI",
       "Project",
-      "SQL",
       "SharePoint",
       "Yammer",
       "Windows",
@@ -1453,7 +1447,6 @@
       "CompetitiveDatabaseMigration",
       "Data Warehouse",
       "DatabaseonLinux",
-      "DevOps",
       "Developer Tools",
       "Media",
       "Dynamics365forCustomerService",
@@ -1464,7 +1457,6 @@
       "Dynamics365forTalent",
       "DynamicsonAzure",
       "Enterprise Business Intelligence",
-      "HighPerformanceComputing",
       "Hybrid Storage",
       "IdentityAccessMngmnt",
       "Information Management",
@@ -1495,7 +1487,6 @@
       "Hardware",
       "IP Services (ISV)",
       "Integration",
-      "Learning and Certification",
       "Licensing",
       "Managed Services (MSP)",
       "ProjectManagement",
@@ -1523,7 +1514,8 @@
     "serviceType": [
       "Consulting",
       "Managed Services (MSP)",
-      "ProjectManagement"
+      "Licensing",
+      "Deployment or Migration"
     ],
     "country": "GB",
     "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/35fea610-e6d9-4586-b0c1-9c2f758161b5/overview"
@@ -1550,14 +1542,6 @@
     ],
     "product": [
       "Azure",
-      "EnterpriseMobilityAndSecurity",
-      "Exchange",
-      "DeveloperTools",
-      "Dynamics365Business",
-      "Dynamics365Enterprise",
-      "Office",
-      "PowerBI",
-      "Project",
       "SharePoint",
       "SkypeForBusiness",
       "SQL",
@@ -1567,10 +1551,8 @@
     ],
     "solutions": "N/A",
     "serviceType": [
+      "Consulting",
       "Deployment or Migration",
-      "Licensing",
-      "Custom solution",
-      "IP Services (ISV)",
       "Managed Services (MSP)",
       "ProjectManagement",
       "Hardware",
@@ -1633,8 +1615,6 @@
     ],
     "product": [
       "Azure",
-      "EnterpriseMobilityAndSecurity",
-      "Exchange",
       "DeveloperTools",
       "Microsoft365",
       "Office",
@@ -1655,7 +1635,6 @@
       "Azure Stack",
       "BackupDisasterRecovery",
       "Big Data",
-      "Blockchain",
       "Chatbot",
       "Cloud Database Migration",
       "CloudMigration",
@@ -1677,12 +1656,11 @@
       "AI + Machine Learning",
       "Microserviceapplications",
       "MySQLPostgresMigrationtoAzure",
-      "Networking",
       "NoSQLMigration",
       "ServerlessComputing",
       "SharepointonAzure",
       "SQL Server upgrade",
-      "Threat Protection",
+      "ServerlessComputing",
       "WebDevelopment"
     ],
     "serviceType": [
@@ -1855,12 +1833,9 @@
     "solutions": [
       "Analytics",
       "Application Integration",
-      "Artificial Intelligence",
       "Security",
       "Azure Stack",
       "BackupDisasterRecovery",
-      "Big Data",
-      "Chatbot",
       "Cloud Database Migration",
       "CloudMigration",
       "Cognitive Services",
@@ -1924,8 +1899,7 @@
       "Azure Stack",
       "BackupDisasterRecovery",
       "Big Data",
-      "Blockchain",
-      "Chatbot",
+      "Data Warehouse",
       "Cloud Database Migration",
       "CloudMigration",
       "Cognitive Services",
@@ -1944,6 +1918,7 @@
       "Internet of Things",
       "AI + Machine Learning",
       "Microserviceapplications",
+      "Analytics",
       "Mobile applications",
       "MySQLPostgresMigrationtoAzure",
       "NoSQLMigration",
@@ -1989,7 +1964,12 @@
       "Retail & Consumer Goods",
       "Professional services",
       "Transportation",
-      "Distribution"
+      "Hospitality  & Travel",
+      "Healthcare",
+      "Financial Services",
+      "Media & Communications",
+      "Education",
+      "Manufacturing & Resources"
     ],
     "product": [
       "Azure",
@@ -2134,8 +2114,11 @@
     "description": "PC Solutions is a trusted name in IT services and solutions, with over 30 years of experience in delivering innovation-led technology transformation. We began as a reliable OEM hardware and software provider and have evolved into a full-spectrum Managed Services and Digital Transformation Partner, helping businesses across industries modernize, secure, and scale their IT environments.\n\nWe specialize in Hybrid and Multi-Cloud Services, Modern Workplace Solutions, Cybersecurity, and Application Development & Integration, delivering measurable outcomes through customized service delivery frameworks. Our team of certified professionals leverages industry-best practices to offer seamless integration, proactive management, and 24x7 support for mission-critical systems.\n\nAs a Microsoft Tier-1 Cloud Solution Provider (CSP) and strategic partner to leading global technology vendors, we are uniquely positioned to help clients at every stage of their digital journey—whether it’s cloud migration, infrastructure optimization, or automating business processes for greater agility and resilience.\n\nAt PC Solutions, we understand that every business is unique. That’s why we align our services with your goals, ensuring operational efficiency, business continuity, and a secure digital ecosystem. Our customer-first approach, combined with strong governance and service excellence, has helped us build long-term relationships with some of the most respected brands in India and beyond.\n\nFrom building and managing on-premises and cloud infrastructure to delivering secure remote work environments and future-ready business applications, PC Solutions is your trusted technology partner—empowering your business to thrive in an ever-evolving digital world.",
     "industryFocus": [
       "Media & Communications",
-      "Financial Services",
+      "Professional services",
+      "Retail & Consumer Goods",
+      "Manufacturing & Resources",
       "Government",
+      "Financial Services",
       "Healthcare",
       "Hospitality  & Travel",
       "Manufacturing & Resources",
@@ -2144,7 +2127,7 @@
       "Retail & Consumer Goods",
       "Professional services",
       "Transportation",
-      "Distribution"
+      "Public Safety and National Security"
     ],
     "product": [
       "Azure",
@@ -2282,6 +2265,7 @@
       "Microsoft365",
       "Office",
       "PowerBI",
+      "Project",
       "SQL",
       "SharePoint",
       "Windows"
@@ -2514,8 +2498,7 @@
       "SQL",
       "Teams",
       "Visio",
-      "Windows",
-      "Yammer"
+      "Windows"
     ],
     "solutions": [
       "Application Integration",
@@ -2691,6 +2674,7 @@
       "Consulting",
       "Custom solution",
       "Deployment or Migration",
+      "Hardware",
       "Integration",
       "ProjectManagement",
       "Managed Services (MSP)"
@@ -2740,7 +2724,6 @@
       "Yammer"
     ],
     "solutions": [
-      "Analytics",
       "Application Integration",
       "Artificial Intelligence",
       "Security",
@@ -2789,9 +2772,34 @@
       "WebDevelopment"
     ],
     "serviceType": [
-      "Consulting",
-      "Custom solution",
-      "Deployment or Migration",
+      "Managed Services (MSP)",
+      "ProjectManagement",
+      "IP Services (ISV)"
+    ],
+    "country": "NO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/dd02d1e4-d2a8-4628-92c8-1f4b5de6419b/overview"
+  },
+  {
+    "id": 55,
+    "name": "Trintech AS",
+    "description": "Transform Your Financial Close Process with Adra by Trintech\n\nAdra by Trintech is your ultimate solution for streamlining and automating the financial close process. Designed to meet the needs of modern finance teams, Adra offers a suite of powerful tools that enhance accuracy, efficiency, and compliance.\n\nKey Features:\nAutomated Reconciliation: Reduce manual effort and errors with automated transaction matching and reconciliation.\nReal-Time Insights: Gain instant visibility into your financial data with real-time dashboards and reporting.\nCompliance and Control: Ensure compliance with regulatory standards and maintain control over your financial processes.\nSeamless Integration: Easily integrate with your existing ERP systems for a smooth and efficient workflow.\n\nWhy Choose Adra by Trintech?\nEfficiency: Save time and resources by automating repetitive tasks.\nAccuracy: Minimize errors and discrepancies with advanced automation.\nVisibility: Make informed decisions with comprehensive, real-time financial insights.\nScalability: Adapt to your growing business needs with a scalable solution.\n\nJoin the many organizations that have transformed their financial close process with Adra by Trintech. Experience the future of finance today!",
+    "industryFocus": [
+      "Financial Services",
+      "Retail & Consumer Goods",
+      "Hospitality  & Travel",
+      "Transportation",
+      "Government"
+    ],
+    "product": [
+      "Azure"
+    ],
+    "solutions": [
+      "Azure Stack",
+      "Artificial Intelligence",
+      "Analytics",
+      "Application Integration"
+    ],
+    "serviceType": [
       "IP Services (ISV)",
       "Integration",
       "Licensing",
@@ -2806,10 +2814,17 @@
     "name": "PATHWAYS INTERNATIONAL LIMITED",
     "description": "Pathways International is a business-focused tech, software development, business intelligence, and data analytics company. Pathways International has implemented Business Intelligence and Analytics solutions for clients in North America and Africa. Our expertise transcends technical implementation, business consultancy, adoption support, and entrenchment of analytics practices for our customers.  We have had successful engagements with our customers on BI and Data Analytics projects across diverse business sectors and industries, and we are confident that we deliver value for prospective customers.  Pathways International has a strong history of providing application development and business intelligence solutions that allow companies to make strategic decisions that gives them a competitive advantage while allowing them to achieve goals that they have established for themselves. Pathways International paves the way to even greater success.",
     "industryFocus": [
-      "Professional services"
+      "Media & Communications",
+      "Education",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Distribution",
+      "Transportation"
     ],
     "product": [
-      "Azure",
       "PowerBI",
       "SQL",
       "Teams",
@@ -2842,6 +2857,10 @@
       "Managed Services (MSP)",
       "ProjectManagement",
       "Deployment or Migration",
+      "Custom solution",
+      "IP Services (ISV)",
+      "Integration",
+      "ProjectManagement",
       "Licensing"
     ],
     "country": "KE",
@@ -2925,6 +2944,7 @@
       "Distribution"
     ],
     "product": [
+      "Dynamics365Enterprise",
       "Azure",
       "EnterpriseMobilityAndSecurity",
       "Exchange",
@@ -3038,8 +3058,8 @@
       "SQL"
     ],
     "solutions": [
-      "Analytics",
       "Application Integration",
+      "Analytics",
       "Artificial Intelligence",
       "Azure Stack",
       "Data Warehouse",
@@ -3104,6 +3124,7 @@
       "Agriculture",
       "Financial Services",
       "Healthcare",
+      "Hospitality  & Travel",
       "Manufacturing & Resources",
       "Retail & Consumer Goods",
       "Distribution"
@@ -3124,7 +3145,10 @@
       "Big Data",
       "Chatbot",
       "CloudMigration",
+      "CloudVoice",
       "Cognitive Services",
+      "CompetitiveDatabaseMigration",
+      "Containers",
       "Data Warehouse",
       "Dynamics365forCustomerService",
       "Dynamics365forFieldService",
@@ -3139,8 +3163,9 @@
       "WebDevelopment"
     ],
     "serviceType": [
+      "Managed Services (MSP)",
+      "ProjectManagement",
       "Consulting",
-      "Custom solution",
       "Deployment or Migration",
       "IP Services (ISV)",
       "Integration",
@@ -3154,59 +3179,49 @@
     "name": "Infotrans Caribbean N.V.",
     "description": "Infotrans Caribbean is a system integrator, a full-service Infrastructure, Communications and Technology Company (ITC), headquartered in the island of Curacao. Established in 1990, Infotrans Caribbean has since opened service locations in Aruba, Bonaire, Guyana, Colombia and Suriname, offering a wide-ranging portfolio of products and services that is the engine of modern day enterprises and governments. \nOur objective is to help organisations harness the best of tech to become world-class players on the global stage no matter the size of business or industry. We make a difference in the region by delivering excellence in ICT. We see ourselves as partners in our customers’ business, helping to enable their objectives through the intelligent use of ICT. We think “global” to optimize on major innovations shaping ICT in businesses and governments, but we act “local” to be completely agile and adaptable to our customers’ reality.\nAs ICT continues to evolve, Infotrans Caribbean invests in its teams and relationships with global leaders who are creating the new waves in technology. With our top-notch team of more than eighty (80) certified and experienced professionals, we collaborate with innovative, steadfast and industry-defining technology leaders to deliver our portfolio of ICT solutions. This advanced support network helps us, and by extension, our customers, to gain efficiencies, build knowledge and increase performance, ensuring that the solutions we bring exceed expectations.",
     "industryFocus": [
-      "Agriculture",
       "Education",
-      "Financial Services",
       "Government",
-      "Healthcare",
-      "Hospitality  & Travel",
       "Manufacturing & Resources",
-      "Power and utilities",
+      "Professional services",
+      "Financial Services",
       "Public Safety and National Security",
-      "Professional services"
+      "Distribution",
+      "Nonprofit & IGO"
     ],
     "product": [
+      "Azure",
       "Windows",
-      "Visio",
-      "Teams",
-      "SQL",
-      "SkypeForBusiness",
-      "SharePoint",
-      "Project",
       "Office",
-      "Microsoft365",
-      "Exchange",
       "EnterpriseMobilityAndSecurity",
-      "Azure"
+      "Microsoft365",
+      "Teams",
+      "Exchange"
     ],
     "solutions": [
-      "WebDevelopment",
-      "Threat Protection",
-      "SQL Server upgrade",
-      "ServerlessComputing",
-      "Networking",
-      "Information Management",
-      "IdentityAccessMngmnt",
-      "Hybrid Storage",
-      "Developer Tools",
-      "CloudVoice",
+      "Application Integration",
+      "Security",
       "CloudMigration",
-      "Cloud Database Migration",
+      "IdentityAccessMngmnt",
+      "Networking",
+      "ServerlessComputing",
+      "HighPerformanceComputing",
       "BackupDisasterRecovery",
-      "Application Integration"
+      "Threat Protection",
+      "CloudVoice",
+      "Information Management"
     ],
     "serviceType": [
+      "Deployment or Migration",
+      "Managed Services (MSP)",
+      "ProjectManagement",
       "Consulting",
       "Custom solution",
-      "Deployment or Migration",
-      "Hardware",
-      "Integration",
       "Licensing",
-      "Managed Services (MSP)",
-      "ProjectManagement"
+      "Hardware",
+      "Integration"
     ],
-    "country": "GY",
-    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/d1489f84-7eaf-43d8-8d15-606552384f72/overview"
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/7d9495ed-9fe5-42be-aeb2-955a2e3091d7/overview"
   },
   {
     "id": 61,
@@ -3280,7 +3295,19 @@
       "Microsoft365"
     ],
     "solutions": [
+      "BackupDisasterRecovery",
+      "CloudMigration",
+      "CloudVoice",
+      "Developer Tools",
+      "DatabaseonLinux",
+      "Networking",
+      "SharepointonAzure",
+      "IdentityAccessMngmnt",
+      "HighPerformanceComputing",
+      "Hybrid Storage",
+      "Information Management",
       "Analytics",
+      "Application Integration",
       "Artificial Intelligence",
       "Azure Stack",
       "Cloud Database Migration",
@@ -3298,6 +3325,9 @@
       "Application Integration"
     ],
     "serviceType": [
+      "Deployment or Migration",
+      "Licensing",
+      "Managed Services (MSP)",
       "Consulting",
       "Custom solution",
       "Integration",
@@ -3493,8 +3523,8 @@
       "Distribution"
     ],
     "product": [
-      "Azure",
       "EnterpriseMobilityAndSecurity",
+      "Azure",
       "Exchange",
       "PowerBI",
       "SharePoint",
@@ -3532,6 +3562,7 @@
       "Deployment or Migration",
       "Licensing",
       "Managed Services (MSP)",
+      "ProjectManagement",
       "Hardware",
       "ProjectManagement",
       "Consulting",
@@ -3596,9 +3627,6 @@
     "name": "Online24x7 India Pvt. Ltd.",
     "description": "Online24x7, a leading software development company, headquartered in San Jose, has been making ripples in the web solutions market. The organization with its high quality software solutions is a unanimous choice of a large number of organizations across the globe seeking the best in the software solutions arena. We are certified by International standard organization with on 3 parameters- ISO9001 : 2008 (Quality), ISO27001 : 2005 (Security) and ISO20000 : 2011 (Customer Satisfaction).",
     "industryFocus": [
-      "Agriculture",
-      "Media & Communications",
-      "Education",
       "Financial Services",
       "Government",
       "Healthcare",
@@ -3633,15 +3661,12 @@
       "Yammer"
     ],
     "solutions": [
-      "Analytics",
       "Application Integration",
-      "Artificial Intelligence",
       "Security",
       "Azure Stack",
       "BackupDisasterRecovery",
       "Big Data",
       "Blockchain",
-      "Chatbot",
       "Cloud Database Migration",
       "CloudMigration",
       "CloudVoice",
@@ -3662,15 +3687,7 @@
       "DynamicsonAzure",
       "Enterprise Business Intelligence",
       "HighPerformanceComputing",
-      "Hybrid Storage",
-      "IdentityAccessMngmnt",
-      "Information Management",
-      "Internet of Things",
-      "AI + Machine Learning",
-      "Microserviceapplications",
-      "Mobile applications",
       "MySQLPostgresMigrationtoAzure",
-      "Networking",
       "NoSQLMigration",
       "RedhatonAzure",
       "RegulatorycomplianceGDPR",
@@ -3828,9 +3845,7 @@
       "Manufacturing & Resources",
       "Nonprofit & IGO",
       "Retail & Consumer Goods",
-      "Professional services",
-      "Transportation",
-      "Distribution"
+      "Professional services"
     ],
     "product": [
       "Azure",
@@ -3850,6 +3865,7 @@
       "Windows"
     ],
     "solutions": [
+      "Analytics",
       "Application Integration",
       "Analytics",
       "BackupDisasterRecovery",
@@ -3873,11 +3889,31 @@
     "serviceType": [
       "Consulting",
       "Custom solution",
-      "Deployment or Migration",
-      "Hardware",
       "Integration",
-      "Licensing",
-      "Managed Services (MSP)",
+      "IP Services (ISV)"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0f621c67-98a0-4ed5-b5bd-31a35be41e29/overview"
+  },
+  {
+    "id": 78,
+    "name": "NEVARIS Bausoftware GmbH",
+    "description": "Wer ist NEVARIS?\nWir entwickeln und vertreiben ganzheitliche Software für die Bereiche BIM, Build (techn. Baubetrieb sowie AVA) und Finance (kaufmännischer Bereich). Unser Kernprodukt NEVARIS deckt den kompletten Bedarf einer leistungsfähigen Software für das Bauhaupt- und Baunebengewerbe ab. Lösungen für die digitale Baustelle, umfassende Software für Planer und Architekten sowie bewährte Lösungen wie AUER Success und Bau für Windows ergänzen unser Portfolio. Mit acht Standorten bieten wir unsere Leistungen im gesamten D|A|CH-Raum an.",
+    "industryFocus": [
+      "Professional services"
+    ],
+    "product": [
+      "Dynamics365Business",
+      "DynamicsAX GP NAV SL",
+      "SQL"
+    ],
+    "solutions": [
+      "Application Integration",
+      "Developer Tools"
+    ],
+    "serviceType": [
+      "Integration",
+      "Consulting",
       "ProjectManagement"
     ],
     "country": "US",
@@ -4219,6 +4255,7 @@
       "Media & Communications",
       "Education",
       "Financial Services",
+      "Media & Communications",
       "Government",
       "Healthcare",
       "Hospitality  & Travel",
@@ -4232,6 +4269,8 @@
       "Distribution"
     ],
     "product": [
+      "SharePoint",
+      "EnterpriseMobilityAndSecurity",
       "Azure",
       "EnterpriseMobilityAndSecurity",
       "Exchange",
@@ -4256,16 +4295,19 @@
       "IdentityAccessMngmnt",
       "Internet of Things",
       "Mobile applications",
+      "MySQLPostgresMigrationtoAzure",
       "Networking",
       "SQL Server upgrade",
       "SharepointonAzure",
       "Threat Protection"
     ],
     "serviceType": [
-      "Consulting",
+      "ProjectManagement",
       "Custom solution",
       "Deployment or Migration",
       "Integration",
+      "IP Services (ISV)",
+      "Learning and Certification",
       "Licensing",
       "Managed Services (MSP)",
       "ProjectManagement",
@@ -4309,6 +4351,7 @@
       "Azure Stack",
       "BackupDisasterRecovery",
       "Chatbot",
+      "Cloud Database Migration",
       "CloudMigration",
       "CloudVoice",
       "Cognitive Services",
@@ -4381,8 +4424,7 @@
       "Analytics",
       "Application Integration",
       "Artificial Intelligence",
-      "Security",
-      "BackupDisasterRecovery",
+      "Azure Stack",
       "Big Data",
       "Chatbot",
       "Cloud Database Migration",
@@ -4482,6 +4524,7 @@
     "name": "Senetic S.A.",
     "description": "Partner Roku Microsoft CSP 2019\nZaufany Sprzedawca Microsoft Devices & Software 2019\nPartner Roku Microsoft w kategorii sprzedaży licencji ESD 2018\nPartner Roku w segmencie MŚP 2017\n\n\nLider wśród firm oferujących Office365 i Microsoft365 | Azure to nasza specjalizacja | Doświadczenie, wiedza i ludzkie podejście.\n\nMicrosoft stworzył nowy wymiar organizacji pracy. Oferuje narzędzia, które usprawniają codzienne działania. My pokażemy Ci, jak je wykorzystać, by osiągnąć jeszcze więcej. \n\nWiemy, jak trudny jest wybór odpowiedniego rozwiązania dla firmy. Pomogliśmy już setkom firm, pomożemy i Tobie. \n\n- jesteśmy ekspertami z zakresu rozwiązań Microsoft365, Office365 i Azure\n- dzięki zaangażowaniu i wiedzy posiadamy tytuł Partnera Roku Microsoft 2019\n- znamy się na tym, co robimy - zarządzamy ponad 100 tysiącami aktywnych użytkowników\n- mamy doświadczenie ze zróżnicowanych rynków - od komercyjnego po publiczny i edukacyjny\n- obsługujemy klientów z ponad 100 krajów\n- dostarczamy licencje, przeprowadzamy wdrożenia, migracje i konfiguracje\n- od 2009 r. wspieramy naszych klientów, dzięki czemu wiedzą, że mogą na nas liczyć\n- jesteśmy dostępni pod telefonem i mailem – zawsze możesz się do nas zwrócić\n- oferujemy naszym klientom wsparcie 24/7 z opcją dedykowanego inżyniera.\n\nSkontaktuj się z nami i porozmawiajmy o Twoich potrzebach. Bez obaw – lubimy wyzwania! Nasi doświadczeni eksperci na pewno zrealizowali już coś podobnego dla innego klienta. Senetic.net",
     "industryFocus": [
+      "Agriculture",
       "Media & Communications",
       "Financial Services",
       "Retail & Consumer Goods",
@@ -4558,11 +4601,15 @@
       "Public Safety and National Security",
       "Retail & Consumer Goods",
       "Professional services",
+      "Media & Communications",
+      "Retail & Consumer Goods",
       "Transportation",
       "Distribution"
     ],
     "product": [
       "Microsoft365",
+      "SharePoint",
+      "Azure",
       "Office",
       "SharePoint",
       "Teams"
@@ -4619,6 +4666,7 @@
       "WebDevelopment",
       "Cognitive Services"
     ],
+    "solutions": "N/A",
     "serviceType": [
       "Consulting",
       "Custom solution",
@@ -4668,9 +4716,6 @@
       "Custom solution",
       "Consulting",
       "Deployment or Migration",
-      "Hardware",
-      "Integration",
-      "Licensing",
       "Managed Services (MSP)",
       "ProjectManagement"
     ],
@@ -4760,8 +4805,9 @@
       "Nonprofit & IGO",
       "Retail & Consumer Goods",
       "Professional services",
-      "Transportation",
-      "Distribution"
+      "Distribution",
+      "Power and utilities",
+      "Media & Communications"
     ],
     "product": [
       "Azure",
@@ -4781,6 +4827,7 @@
       "Windows"
     ],
     "solutions": [
+      "Analytics",
       "Application Integration",
       "Analytics",
       "BackupDisasterRecovery",
@@ -4805,11 +4852,10 @@
       "Consulting",
       "Custom solution",
       "Deployment or Migration",
-      "Hardware",
       "Integration",
       "Licensing",
       "Managed Services (MSP)",
-      "ProjectManagement"
+      "IP Services (ISV)"
     ],
     "country": "US",
     "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/87b66f08-478c-40ad-bb09-5e93796da295/overview"
@@ -4897,9 +4943,7 @@
       "Project",
       "SQL",
       "SharePoint",
-      "Visio",
-      "Windows",
-      "Yammer"
+      "Windows"
     ],
     "solutions": [
       "Analytics",
@@ -4952,7 +4996,6 @@
       "Consulting",
       "Custom solution",
       "Deployment or Migration",
-      "IP Services (ISV)",
       "Integration",
       "Learning and Certification",
       "Licensing",
@@ -5258,14 +5301,20 @@
       "Agriculture",
       "Financial Services",
       "Government",
+      "Professional services",
+      "Manufacturing & Resources",
       "Healthcare",
+      "Financial Services",
+      "Media & Communications",
+      "Education",
       "Hospitality  & Travel",
       "Nonprofit & IGO",
       "Power and utilities",
       "Public Safety and National Security",
       "Retail & Consumer Goods",
       "Transportation",
-      "Distribution"
+      "Distribution",
+      "Nonprofit & IGO"
     ],
     "product": [
       "Azure",
@@ -5449,7 +5498,9 @@
       "Retail & Consumer Goods",
       "Professional services",
       "Transportation",
-      "Distribution"
+      "Retail & Consumer Goods",
+      "Government",
+      "Healthcare"
     ],
     "product": [
       "Azure",
@@ -5596,6 +5647,7 @@
       "Financial Services"
     ],
     "product": [
+      "Office",
       "Azure",
       "PowerBI",
       "SQL"
@@ -5669,7 +5721,12 @@
     ],
     "product": [
       "Azure",
-      "EnterpriseMobilityAndSecurity",
+      "SharePoint",
+      "SQL",
+      "Project",
+      "PowerBI",
+      "Office",
+      "DeveloperTools",
       "Exchange",
       "DeveloperTools",
       "Dynamics365Business",
@@ -5740,16 +5797,9 @@
       "Microsoft365"
     ],
     "solutions": [
-      "Analytics",
-      "Application Integration",
-      "Artificial Intelligence",
-      "Security",
-      "Azure Stack",
-      "BackupDisasterRecovery",
-      "Big Data",
-      "Blockchain",
-      "Chatbot",
+      "Data Warehouse",
       "Cloud Database Migration",
+      "BackupDisasterRecovery",
       "CloudMigration",
       "Cognitive Services",
       "CompetitiveDatabaseMigration",
