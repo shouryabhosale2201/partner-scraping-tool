@@ -1,6 +1,7 @@
+// SalesForceTable.jsx
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
   const [filtersBySection, setFiltersBySection] = useState([]);
@@ -12,6 +13,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         const res = await fetch("http://localhost:5000/api/v1/salesforce/filters");
         if (!res.ok) throw new Error("Failed to fetch filters");
         const data = await res.json();
+        // console.log("Fetched filters:", data);
         setFiltersBySection(data);
       } catch (error) {
         console.error("Error fetching filters:", error);
@@ -22,65 +24,135 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     fetchFilters();
   }, []);
 
-  const handleFilterChange = (section, value) => {
+  const handleFilterChange = (section, value, parentCountry = null) => {
     // Create normalized section keys
     const sectionKey = section === "Salesforce Expertise"
       ? "salesforceExpertise"
-      : "industryExpertise";
+      : section === "Industry Expertise"
+        ? "industryExpertise"
+        : section === "Country"
+          ? "region" // This is for regions (Alabama, Arizona, etc.)
+          : section.toLowerCase();
 
-    // Create a deep copy of the selectedFilters
-    const updatedFilters = { ...selectedFilters };
+    // Special handling for country groups (UnitedStates, Canada, etc.)
+    if (parentCountry) {
+      // We're dealing with a region within a country
+      const countryKey = "country";
+      const updatedFilters = { ...selectedFilters };
 
-    // Initialize the section array if it doesn't exist
-    if (!updatedFilters[sectionKey]) {
-      updatedFilters[sectionKey] = [];
-    }
+      // Initialize arrays if they don't exist
+      if (!updatedFilters[countryKey]) updatedFilters[countryKey] = [];
+      if (!updatedFilters[sectionKey]) updatedFilters[sectionKey] = [];
 
-    // Add or remove the filter value
-    if (updatedFilters[sectionKey].includes(value)) {
-      updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
-      // Remove empty arrays to keep the object clean
-      if (updatedFilters[sectionKey].length === 0) {
-        delete updatedFilters[sectionKey];
+      // Add or remove the region
+      if (updatedFilters[sectionKey].includes(value)) {
+        updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
+        if (updatedFilters[sectionKey].length === 0) delete updatedFilters[sectionKey];
+      } else {
+        updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
       }
-    } else {
-      updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
-    }
 
-    // Update selected filters and trigger the filter change
-    setSelectedFilters(updatedFilters);
-    onFilterChange(updatedFilters);
+      // Make sure the parent country is included in country filters
+      if (!updatedFilters[countryKey].includes(parentCountry)) {
+        updatedFilters[countryKey] = [...updatedFilters[countryKey], parentCountry];
+      }
+
+      // If no regions are selected for this country, remove the country too
+      const countryRegions = updatedFilters[sectionKey] || [];
+      if (countryRegions.length === 0) {
+        updatedFilters[countryKey] = updatedFilters[countryKey].filter(c => c !== parentCountry);
+        if (updatedFilters[countryKey].length === 0) delete updatedFilters[countryKey];
+      }
+
+      setSelectedFilters(updatedFilters);
+      onFilterChange(updatedFilters);
+    } else {
+      // Standard handling for non-nested filters
+      const updatedFilters = { ...selectedFilters };
+
+      if (!updatedFilters[sectionKey]) {
+        updatedFilters[sectionKey] = [];
+      }
+
+      if (updatedFilters[sectionKey].includes(value)) {
+        updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
+        if (updatedFilters[sectionKey].length === 0) {
+          delete updatedFilters[sectionKey];
+        }
+      } else {
+        updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
+      }
+
+      setSelectedFilters(updatedFilters);
+      onFilterChange(updatedFilters);
+    }
   };
 
   const renderSection = (section, filters) => {
-    // Create normalized section keys
     const sectionKey = section === "Salesforce Expertise"
       ? "salesforceExpertise"
-      : "industryExpertise";
+      : section === "Industry Expertise"
+        ? "industryExpertise"
+        : section === "Country"
+          ? "region" // Changed to "region" for the checkbox values
+          : section.toLowerCase();
 
-    const filteredItems = filters.filter(item =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const isNested = section === "Country";
+
+    // Flat filters: apply search filtering
+    const filteredItems = !isNested
+      ? filters.filter(item =>
+        item.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      : filters.map(country => ({
+        ...country,
+        children: country.children.filter(region =>
+          region.toLowerCase().includes(searchTerm.toLowerCase())
+        ),
+      })).filter(country => country.children.length > 0); // Only include if matching children
 
     return (
       <div key={section} className="mb-6">
         <h3 className="text-md font-semibold mb-2">{section}</h3>
-        <div className="flex flex-col gap-2">
-          {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => (
-              <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  value={item}
-                  checked={selectedFilters[sectionKey]?.includes(item) || false}
-                  onChange={() => handleFilterChange(section, item)}
-                  className="checkbox checkbox-sm"
-                />
-                <span>{item}</span>
-              </label>
+        <div className="flex flex-col gap-2 pl-1">
+          {isNested ? (
+            filteredItems.map((country, i) => (
+              <div key={i} className="pl-2">
+                <h4 className="font-medium mb-1">{country.label}</h4>
+                <div className="flex flex-col gap-1 pl-4">
+                  {country.children.map((region, j) => (
+                    <label key={j} className="flex items-start space-x-2 cursor-pointer break-words max-w-full">
+                      <input
+                        type="checkbox"
+                        value={region}
+                        checked={selectedFilters[sectionKey]?.includes(region) || false}
+                        onChange={() => handleFilterChange(section, region, country.label)}
+                        className="checkbox checkbox-sm"
+                      />
+                      <span className="text-sm break-words max-w-[200px]">{region}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
             ))
           ) : (
-            <span className="text-gray-500 text-sm">No matches</span>
+            // Non-nested filters have a bug fix here - changed 'region' to 'item'
+            filteredItems.length > 0 ? (
+              filteredItems.map((item, index) => (
+                <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    value={item}
+                    checked={selectedFilters[sectionKey]?.includes(item) || false}
+                    onChange={() => handleFilterChange(section, item)}
+                    className="checkbox checkbox-sm"
+                  />
+                  <span>{item}</span>
+                </label>
+              ))
+            ) : (
+              <span className="text-gray-500 text-sm">No matches</span>
+            )
           )}
         </div>
       </div>
@@ -129,7 +201,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
   const [error, setError] = useState(null);
   const [tableSearchTerm, setTableSearchTerm] = useState("");
   const [displayFields, setDisplayFields] = useState(selectedFields);
-  
+
 
   useEffect(() => {
     setFilteredData(data);
@@ -170,7 +242,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
         tagline: true,
         description: true,
         expertise: true,
-        industries: true, 
+        industries: true,
         services: true,
         extendedDescription: true
       };
@@ -245,7 +317,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
                       className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-2 last:border-b-0 hover:bg-gray-50 transition"
                     >
                       <th className="py-2 pr-1">{index + 1}</th>
-                      
+
                       {visibleColumns.name && (
                         <td className="py-2 pr-2">
                           {visibleColumns.link && item.link ? (
@@ -262,35 +334,35 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
                           )}
                         </td>
                       )}
-                      
+
                       {visibleColumns.tagline && (
                         <td className="py-2 pr-2">{item.tagline || "N/A"}</td>
                       )}
-                      
+
                       {visibleColumns.description && (
                         <td className="py-2 pr-2">
                           <div className="max-h-[100px] overflow-y-auto">{item.description || "N/A"}</div>
                         </td>
                       )}
-                      
+
                       {visibleColumns.expertise && (
                         <td className="py-2 pr-2">
                           <div className="max-h-[100px] overflow-y-auto">{item.expertise || "N/A"}</div>
                         </td>
                       )}
-                      
+
                       {visibleColumns.industries && (
                         <td className="py-2 pr-2">
                           <div className="max-h-[100px] overflow-y-auto">{item.industries || "N/A"}</div>
                         </td>
                       )}
-                      
+
                       {visibleColumns.services && (
                         <td className="py-2 pr-2">
                           <div className="max-h-[100px] overflow-y-auto">{item.services || "N/A"}</div>
                         </td>
                       )}
-                      
+
                       {visibleColumns.extendedDescription && (
                         <td className="py-2 pr-2">
                           <div className="max-h-[100px] overflow-y-auto">{item.extendedDescription || "N/A"}</div>

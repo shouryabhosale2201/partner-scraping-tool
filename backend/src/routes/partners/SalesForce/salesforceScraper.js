@@ -23,7 +23,7 @@ async function storeSalesforceDataAsJson(filepath, extractedDetails) {
     }
 }
 
-const scrapeData = async (fieldsToScrape , testingMode = true) => {
+const scrapeData = async (fieldsToScrape , testingMode = false) => {
 
     const browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
@@ -106,7 +106,7 @@ const scrapeData = async (fieldsToScrape , testingMode = true) => {
                             await detailPage.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
 
                             if (fieldsToScrape.some(field =>
-                                ['tagline', 'description', 'expertise', 'industries', 'services', 'extendedDescription'].includes(field))) {
+                                ['tagline', 'description', 'expertise', 'industries', 'services', 'extendedDescription','countries'].includes(field))) {
                                 await detailPage.waitForSelector(".appx-headline-details-tagline, .appx-extended-detail-description", { timeout: 15000 });
                             }
 
@@ -139,6 +139,42 @@ const scrapeData = async (fieldsToScrape , testingMode = true) => {
                             if (fieldsToScrape.includes('extendedDescription')) {
                                 details.extendedDescription = await detailPage.locator(".appx-extended-detail-description").innerText().catch(() => "No extended description");
                             }
+                            if (fieldsToScrape.includes('countries')) {
+                                const countryData = await detailPage.evaluate(() => {
+                                    const result = { UnitedStates: [], Canada: [], International: [] };
+                            
+                                    const sections = document.querySelectorAll('.appx-detail-sub-subsection');
+                                    sections.forEach(section => {
+                                        const titleSpan = section.querySelector('.appx-detail-subsection-values-title');
+                                        if (!titleSpan) return;
+                                        const title = titleSpan.innerText.trim();
+                            
+                                        let countries = [];
+                                        const tooltip = section.querySelector('.appx-tooltip-text');
+                                        if (tooltip) {
+                                            countries = tooltip.innerText.split(',').map(c => c.trim()).filter(Boolean);
+                                        } else {
+                                            const inline = titleSpan.nextSibling;
+                                            if (inline && inline.nodeType === Node.TEXT_NODE) {
+                                                countries = [inline.textContent.trim()];
+                                            }
+                                        }
+                            
+                                        if (title === 'United States') {
+                                            result.UnitedStates = countries;
+                                        } else if (title === 'Canada') {
+                                            result.Canada = countries;
+                                        } else if (title === 'International') {
+                                            result.International = countries;
+                                        }
+                                    });
+                            
+                                    return result;
+                                });
+                            
+                                details.countries = countryData;
+                            }
+                            
 
                             scrapedMap.set(link, details);
                             await detailPage.close();
