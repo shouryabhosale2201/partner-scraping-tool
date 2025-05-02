@@ -93,15 +93,33 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
     const renderLocations = () => {
         const key = "oracleFilters";
+        const [isOpen, setIsOpen] = useState(false); // toggle dropdown
+    
+        const filteredLocations = Array.from(locationSet).filter(location =>
+            location.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    
         return (
-            <div className="mt-6">
-                <h3 className="text-md font-bold mb-2">Countries (APAC)</h3>
-                <div className="flex flex-col gap-2 ml-2">
-                    {Array.from(locationSet)
-                        .filter(location =>
-                            location.toLowerCase().includes(searchTerm.toLowerCase())
-                        )
-                        .map((location, idx) => (
+            <div className="mb-6">
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-bold rounded hover:bg-gray-200"
+                >
+                    <span>Countries (APAC)</span>
+                    <svg
+                        className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+    
+                {isOpen && (
+                    <div className="flex flex-col gap-2 mt-2 ml-2 max-h-64 overflow-y-auto">
+                        {filteredLocations.map((location, idx) => (
                             <label key={idx} className="flex items-center space-x-2 cursor-pointer">
                                 <input
                                     type="checkbox"
@@ -113,10 +131,12 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                                 <span>{location}</span>
                             </label>
                         ))}
-                </div>
+                    </div>
+                )}
             </div>
         );
     };
+    
 
 
     return (
@@ -154,8 +174,8 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
             {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto pl-2">
-                {renderHierarchy()}
                 {renderLocations()}
+                {renderHierarchy()}
             </div>
         </div>
     );
@@ -164,11 +184,15 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 const OracleTable = ({ data }) => {
     const [selectedFilters, setSelectedFilters] = useState({});
     const [tableSearchTerm, setTableSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const partnersPerPage = 200;
+    
     if (!data || data.length === 0) return null;
 
     // Filter the data based on selected filters
     const handleFilterChange = (newFilters) => {
         setSelectedFilters(newFilters);
+        setCurrentPage(1); // Reset to first page when filters change
     };
 
     const filteredData = useMemo(() => {
@@ -214,12 +238,28 @@ const OracleTable = ({ data }) => {
         });
     }, [data, selectedFilters]);
 
-
     const searchFilteredData = useMemo(() => {
         return filteredData.filter((item) =>
             item.name.toLowerCase().includes(tableSearchTerm.toLowerCase())
         );
     }, [filteredData, tableSearchTerm]);
+
+    // Calculate pagination
+    const totalPages = Math.ceil(searchFilteredData.length / partnersPerPage);
+    const startIndex = (currentPage - 1) * partnersPerPage;
+    const paginatedData = searchFilteredData.slice(startIndex, startIndex + partnersPerPage);
+    
+    const handlePreviousPage = () => {
+        setCurrentPage(prev => Math.max(prev - 1, 1));
+    };
+    
+    const handleNextPage = () => {
+        setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    };
+    
+    // Determine if buttons should be disabled
+    const isPreviousDisabled = currentPage === 1;
+    const isNextDisabled = currentPage === totalPages || searchFilteredData.length <= partnersPerPage;
 
     return (
         <div className="flex h-screen pt-4">
@@ -238,9 +278,15 @@ const OracleTable = ({ data }) => {
                         type="text"
                         placeholder="Search in table"
                         value={tableSearchTerm}
-                        onChange={(e) => setTableSearchTerm(e.target.value)}
+                        onChange={(e) => {
+                            setTableSearchTerm(e.target.value);
+                            setCurrentPage(1); // Reset to first page when search changes
+                        }}
                         className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                    <div className="text-sm text-gray-600 mt-2">
+                        Showing {paginatedData.length > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + partnersPerPage, searchFilteredData.length)} of {searchFilteredData.length} partners
+                    </div>
                 </div>
                 <div className="flex-1 overflow-y-auto pb-6">
                     <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
@@ -252,12 +298,12 @@ const OracleTable = ({ data }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {searchFilteredData.map((item, index) => (
+                            {paginatedData.map((item) => (
                                 <tr
-                                    key={index}
+                                    key={item.id || item.serialNumber}
                                     className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
                                 >
-                                    <th className="py-2">{index + 1}</th>
+                                    <th className="py-2">{item.serialNumber}</th>
                                     <td className="py-2 truncate">{item.name}</td>
                                     <td className="py-2">
                                         <a
@@ -280,6 +326,35 @@ const OracleTable = ({ data }) => {
                             </tr>
                         </tfoot>
                     </table>
+                    
+                    {/* Pagination Controls */}
+                    <div className="mt-4 flex justify-center space-x-4">
+                        <button 
+                            onClick={handlePreviousPage} 
+                            disabled={isPreviousDisabled}
+                            className={`px-4 py-2 rounded ${
+                                isPreviousDisabled 
+                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                                : 'bg-orange-500 text-white hover:bg-orange-600'
+                            }`}
+                        >
+                            Previous
+                        </button>
+                        <div className="flex items-center text-gray-700">
+                            Page {currentPage} of {Math.max(1, totalPages)}
+                        </div>
+                        <button 
+                            onClick={handleNextPage} 
+                            disabled={isNextDisabled}
+                            className={`px-4 py-2 rounded ${
+                                isNextDisabled 
+                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                                : 'bg-orange-500 text-white hover:bg-orange-600'
+                            }`}
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
