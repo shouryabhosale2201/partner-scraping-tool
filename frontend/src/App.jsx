@@ -214,7 +214,7 @@ export default function ScraperApp() {
           <option value="">Select a source</option>
           <option value="salesforce">Salesforce</option>
           <option value="oracle">Oracle</option>
-          <option value="shopify">Shopify</option>
+          {/* <option value="shopify">Shopify</option> */}
           <option value="microsoft">Microsoft</option>
         </select>
 
