@@ -52,63 +52,87 @@ const scrapeData = async () => {
     console.log(expertiseHierarchy);
 
     const scrapedMap = new Map();
+    let serialNumber = 1;
 
-    for (const level1 of expertiseHierarchy.slice(0, 5)) { 
+    for (const level1 of expertiseHierarchy) {
         const level1Name = level1.name;
-
-        for (const level2 of (level1.level_2_list || []).slice(0, 2)) {
+    
+        for (const level2 of (level1.level_2_list || [])) {
             const level2Name = level2.name;
-
-            for (const level3 of (level2.level_3_list || []).slice(0, 2)) {
+    
+            for (const level3 of (level2.level_3_list || [])) {
                 const level3Name = level3.name;
                 const ucm_column = level3.ucm_column;
-
-                for (const level4 of (level3.level_4_list || []).slice(0, 2)) {
+    
+                for (const level4 of (level3.level_4_list || [])) {
                     const level4Name = level4.name;
                     const level4Id = level4.id;
-
-                    let currentPage = 1;
-                    let totalPages = 1;
-
-                    while (currentPage <= totalPages) {
-                        try {
-                            const payload = {
+    
+                    // Step 1: Get total pages
+                    const firstPayload = {
+                        ...payloadTemplate,
+                        pageNumber: "1",
+                        filters: {
+                            [ucm_column]: [level4Id],
+                            xscCompanyLocation: ["1000"]
+                        }
+                    };
+    
+                    try {
+                        const firstResponse = await fetch(apiUrl, {
+                            method: "POST",
+                            headers,
+                            body: JSON.stringify(firstPayload),
+                        });
+    
+                        if (!firstResponse.ok) {
+                            console.error(`❌ Failed to get totalPages for ${level4Name}`);
+                            continue;
+                        }
+    
+                        const firstData = await firstResponse.json();
+                        const totalResults = firstData.count || firstData?.profiles?.length || 0;
+                        const totalPages = Math.ceil(totalResults / parseInt(payloadTemplate.resultCount));
+                        // const totalPages=1;
+                        // Step 2: Parallel fetch for all pages
+                        const pagePromises = [];
+    
+                        for (let page = 1; page <= totalPages; page++) {
+                            const pagePayload = {
                                 ...payloadTemplate,
-                                pageNumber: String(currentPage),
+                                pageNumber: String(page),
                                 filters: {
-                                    [ucm_column]: [level4Id]
+                                    [ucm_column]: [level4Id],
+                                    xscCompanyLocation: ["1000"]
                                 }
                             };
-
-                            const response = await fetch(apiUrl, {
+    
+                            const pageRequest = fetch(apiUrl, {
                                 method: "POST",
                                 headers,
-                                body: JSON.stringify(payload),
-                            });
-
-                            if (!response.ok) {
-                                console.error(`❌ Request failed: ${response.status} ${response.statusText}`);
-                                break;
-                            }
-
-                            const data = await response.json();
-
+                                body: JSON.stringify(pagePayload),
+                            }).then(res => res.json().catch(() => null));
+    
+                            pagePromises.push(pageRequest);
+                        }
+    
+                        const pageResponses = await Promise.all(pagePromises);
+    
+                        for (const data of pageResponses) {
                             const partnerList = data?.profiles || [];
-                            console.log("Partners found:", partnerList.length);
-
                             const baseUrl = "https://partner-finder.oracle.com/catalog/Partner/";
-
+    
                             for (const partner of partnerList) {
                                 const link = `${baseUrl}${partner.id}`;
                                 const name = partner.name;
-
+    
                                 if (scrapedMap.has(link)) {
                                     const existingDetails = scrapedMap.get(link);
-
+    
                                     if (!Array.isArray(existingDetails.filters)) {
                                         existingDetails.filters = [];
                                     }
-
+    
                                     existingDetails.filters.push({
                                         level1Name,
                                         level2Name,
@@ -117,10 +141,11 @@ const scrapeData = async () => {
                                         level4Name,
                                         level4Id
                                     });
-
+    
                                     scrapedMap.set(link, existingDetails);
                                 } else {
                                     const details = {
+                                        serialNumber,
                                         id: partner.id,
                                         name,
                                         link,
@@ -134,14 +159,13 @@ const scrapeData = async () => {
                                         }]
                                     };
                                     scrapedMap.set(link, details);
+                                    serialNumber++;
                                 }
                             }
-
-                            currentPage++;
-                        } catch (error) {
-                            console.error(`❌ Error during scraping for ${level4Name} page ${currentPage}:`, error);
-                            break;
                         }
+                        console.log("Current SR no. : ",serialNumber);
+                    } catch (error) {
+                        console.error(`❌ Error scraping ${level4Name}:`, error);
                     }
                 }
             }
@@ -201,6 +225,7 @@ const scrapeData = async () => {
                         scrapedMap.set(link, existingDetails);
                     } else {
                         const details = {
+                            serialNumber,
                             id: partner.id,
                             name,
                             link,
@@ -208,6 +233,7 @@ const scrapeData = async () => {
                             locations: [country.name]
                         };
                         scrapedMap.set(link, details);
+                        serialNumber++;
                     }
                 }
 
