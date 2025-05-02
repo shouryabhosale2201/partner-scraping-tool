@@ -1,145 +1,117 @@
 const { chromium } = require('playwright');
-const {db, initializeDatabase} = require("../../../db");
+const fs = require('fs');
+const path = require('path');
 
 const scrapeData = async () => {
-    const scrapePage = async (browser, pageNum) => {
-        const page = await browser.newPage();
-        const url = `https://www.shopify.com/partners/directory/services?page=${pageNum}`;
-        console.log(`Navigating to ${url}`);
+  const browser = await chromium.launch({ headless: true });
+  const context = await browser.newContext();
+
+  const totalPages = 221;
+  const allLinks = [];
+
+  // Step 1: Collect all partner profile links
+  for (let i = 1; i <= totalPages; i++) {
+    const page = await context.newPage();
+    const url = `https://www.shopify.com/partners/directory/services?page=${i}`;
+    console.log(`🌐 Visiting: ${url}`);
+
+    try {
+      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await page.waitForSelector('a[href^="/partners/directory/partner/"]', { timeout: 15000 });
+
+      const hrefs = await page.$$eval('a[href^="/partners/directory/partner/"]', anchors =>
+        anchors.map(a => a.getAttribute('href'))
+      );
+
+      hrefs.forEach(href => {
+        if (href && href.startsWith('/partners/directory/partner/')) {
+          allLinks.push(`https://www.shopify.com${href}`);
+        }
+      });
+    } catch (err) {
+      console.warn(`⚠️ Skipping page ${i}:`, err.message);
+    } finally {
+      await page.close();
+    }
+    console.log(`✅ Page ${i} done — total links so far: ${allLinks.length}`);
+  }
+
+  // Step 2: Extract data from each partner page with basic batching
+  const extracted = [];
+  const batchSize = 10;
+
+  for (let i = 0; i < allLinks.length; i += batchSize) {
+    const batch = allLinks.slice(i, i + batchSize);
+    console.log(`🔄 Processing batch ${i + 1} to ${i + batch.length}`);
+
+    const results = await Promise.all(batch.map(async (link) => {
+      const page = await context.newPage();
+      try {
+        await page.goto(link, { waitUntil: 'domcontentloaded', timeout: 60000 });
+        console.log(`🔍 Extracting: ${link}`);
+
+        const name = await page.locator('h1.richtext').textContent().catch(() => 'N/A');
+
+        // Primary Location
+        let primaryLocation = 'N/A';
         try {
-            await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
+          const label = await page.locator('p.richtext.text-t7:has-text("Primary location")');
+          const sibling = label.locator('xpath=following-sibling::p[1]');
+          primaryLocation = (await sibling.textContent())?.trim() || 'N/A';
+        } catch {}
 
-            const partnerSelector = 'a[href^="/partners/directory/partner/"]';
-            await page.waitForSelector(partnerSelector, { timeout: 10000 });
+        // Expand languages if "+X more"
+        try {
+          const expandBtn = page.locator('button[data-component-name="expand-languages"]');
+          if (await expandBtn.isVisible()) await expandBtn.click();
+        } catch {}
 
-            const partnerItems = await page.locator(partnerSelector).all();
+        // Languages
+        let languages = ['N/A'];
+        try {
+          const langLabel = await page.locator('p.richtext.text-t7:has-text("Languages")');
+          const langElem = langLabel.locator('xpath=following-sibling::p[1]');
+          const langText = await langElem.textContent();
+          if (langText) {
+            languages = langText.split(',').map(l => l.trim());
+          }
+        } catch {}
 
-            const data = await Promise.all(
-                partnerItems.map(async (partner) => {
-                    try {
-                        const href = await partner.getAttribute('href');
-                        return {
-                            link: `https://www.shopify.com${href}`,
-                        };
-                    } catch (err) {
-                        return null;
-                    }
-                })
-            );
+        // Industries
+        let industries = 'N/A';
+        try {
+          const industryText = await page.locator('h2:has-text("Industries") + p.richtext').textContent();
+          industries = industryText?.trim() || 'N/A';
+        } catch {}
 
-            return data.filter(Boolean);
-        } catch (error) {
-            console.error(`Error on page ${pageNum}:`, error.message);
-            return [];
-        } finally {
-            await page.close();
-        }
-    };
+        return {
+          name: name?.trim() || 'N/A',
+          link,
+          locations: [primaryLocation],
+          languages,
+          industries,
+        };
+      } catch (err) {
+        console.warn(`❌ Failed to extract ${link}:`, err.message);
+        return null;
+      } finally {
+        await page.close();
+      }
+    }));
 
-    (async () => {
-        initializeDatabase();
-        const browser = await chromium.launch({ headless: true });
-        const totalPages = 221;
-        const batchSize = 10;
-        const allPartnerData = [];
+    extracted.push(...results.filter(Boolean));
+  }
 
-        for (let i = 1; i <= totalPages; i += batchSize) {
-            const currentBatch = [];
-            for (let j = i; j < i + batchSize && j <= totalPages; j++) {
-                currentBatch.push(scrapePage(browser, j));
-            }
+  await browser.close();
 
-            const batchResults = await Promise.all(currentBatch);
-            for (const result of batchResults) {
-                allPartnerData.push(...result);
-            }
+  // Step 3: Save as JSON
+  const dataDir = path.join(__dirname, 'data');
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
+  const outputPath = path.join(dataDir, 'shopify_partners.json');
+  fs.writeFileSync(outputPath, JSON.stringify(extracted, null, 2));
+  console.log(`✅ Scraped data saved to: ${outputPath}`);
 
-            console.log(`✅ Completed batch ${i}–${Math.min(i + batchSize - 1, totalPages)} (${allPartnerData.length} links so far)`);
-        }
+  return extracted;
+};
 
-        let extractedDetails = [];
-
-        const detailBatchSize = 10;
-        for (let i = 0; i < allPartnerData.length; i += detailBatchSize) {
-            const batch = allPartnerData.slice(i, i + detailBatchSize);
-        
-            const batchResults = await Promise.all(batch.map(async ({ link }) => {
-                try {
-                    const page = await browser.newPage();
-                    await page.goto(link, { waitUntil: "domcontentloaded", timeout: 60000 });
-                    console.log("Reached website:", link);
-        
-                    const name = await page.locator('div.grid.gap-y-3 h1.richtext.text-t4').innerText();
-                    console.log("Name:", name);
-        
-                    const businessDescription = await page.$eval(
-                        'pre.text-body-base.font-sans.whitespace-pre-wrap.opacity-70.pb-4',
-                        (el) => el.innerText.trim()
-                    );
-        
-                    const services = await page.$$eval('div[aria-labelledby^="header-"]', (sections) => {
-                        return sections.map((section) => {
-                            const title = section.querySelector('h3')?.innerText || '';
-                            const price = section.querySelector('p.opacity-70')?.innerText || '';
-                            const description = section.querySelector('pre')?.innerText || '';
-                            return { title, price, description };
-                        });
-                    });
-        
-                    const featuredWork = await page.$$eval('div.pt-4 > div.flex.flex-col', (entries) => {
-                        return entries.map((entry) => {
-                            const title = entry.querySelector('h3')?.innerText.trim() || '';
-                            const description = entry.querySelector('pre')?.innerText.trim() || '';
-                            const linkElement = entry.querySelector('a');
-                            const link = linkElement ? linkElement.href : '';
-                            return { title, description, link };
-                        });
-                    });
-        
-                    const partnerDetails = {
-                        name, link, businessDescription, specializedServices: services, featuredWork: featuredWork
-                    };
-        
-                    await page.close();
-                    return partnerDetails;
-                } catch (error) {
-                    console.error(`Error extracting details for ${link}:`, error);
-                    return null;
-                }
-            }));
-
-            for (const partnerDetails of batchResults.filter(Boolean)) {
-                try {
-                    // Step 1: Insert into `shopify` table
-                    const [result] = await db.execute(
-                        `INSERT INTO shopify (name) VALUES (?)`,
-                        [partnerDetails.name]
-                    );
-                    const shopifyId = result.insertId;
-            
-                    // Step 2: Insert into `shopify_details` table
-                    await db.execute(
-                        `INSERT INTO shopify_details (id, link, business_description, specialized_services, featured_work) VALUES (?, ?, ?, ?, ?)`,
-                        [
-                            shopifyId,
-                            partnerDetails.link,
-                            partnerDetails.businessDescription,
-                            JSON.stringify(partnerDetails.specializedServices),
-                            JSON.stringify(partnerDetails.featuredWork),
-                        ]
-                    );
-            
-                    console.log("✅ Stored in DB:", partnerDetails.name);
-                    extractedDetails.push(partnerDetails);
-                } catch (dbError) {
-                    console.error("❌ Database Insert Error:", dbError.message);
-                }
-            }       
-        }
-        
-        console.log(`Scraped total ${allPartnerData.length} partner links from ${totalPages} pages`);
-        await browser.close();
-        return extractedDetails;
-    })();
-}
 module.exports = scrapeData;

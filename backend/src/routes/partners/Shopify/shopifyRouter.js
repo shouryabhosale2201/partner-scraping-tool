@@ -1,10 +1,13 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const scrapeData = require("./shopifyScraper");
 const exportToExcel = require("./shopifyExcel");
-const { db, initializeDatabase } = require("../../../db");
-const router = express.Router();
 
-// API to Scrape Data and Store in Database
+const router = express.Router();
+const jsonFilePath = path.join(__dirname, "data", "shopify_partners.json");
+
+// Scrape and save to JSON
 router.get("/scrape", async (req, res) => {
     try {
         console.log("🔄 Scraping fresh data from shopify");
@@ -16,49 +19,29 @@ router.get("/scrape", async (req, res) => {
     }
 });
 
-// API to Fetch Data from Database
-router.get("/fetch", async (req, res) => {
-    initializeDatabase();
+// Read from JSON file
+router.get("/fetch", (req, res) => {
     try {
-        const [rows] = await db.execute(`
-            SELECT 
-            s.id,
-            s.name,
-            d.link,
-            d.business_description,
-            d.specialized_services,
-            d.featured_work
-            FROM shopify s
-            LEFT JOIN shopify_details d ON s.id = d.id;
-        `);
-        res.json({ success: true, data: rows });
+        const jsonData = fs.readFileSync(jsonFilePath, "utf-8");
+        const data = JSON.parse(jsonData);
+        res.json({ success: true, data });
     } catch (error) {
-        console.error("❌ Database Fetch Error:", error.message);
-        res.status(500).json({ success: false, error: "Failed to fetch data." });
+        console.error("❌ JSON Fetch Error:", error.message);
+        res.status(500).json({ success: false, error: "Failed to read JSON file." });
     }
 });
 
-// Download Excel
-router.get("/downloadExcel", async (req, res) => {
-    initializeDatabase();
+// Export JSON data to Excel
+router.get("/downloadExcel", (req, res) => {
     try {
-        const [rows] = await db.execute(`
-            SELECT 
-            s.id,
-            s.name,
-            d.link,
-            d.business_description,
-            d.specialized_services,
-            d.featured_work
-            FROM shopify s
-            LEFT JOIN shopify_details d ON s.id = d.id;
-        `);
+        const jsonData = fs.readFileSync(jsonFilePath, "utf-8");
+        const data = JSON.parse(jsonData);
 
-        if (!rows || rows.length === 0) {
+        if (!data || data.length === 0) {
             return res.status(404).json({ success: false, error: "No data available to export." });
         }
 
-        const filePath = exportToExcel(rows); // Excel file path
+        const filePath = exportToExcel(data); // Excel file path
 
         res.download(filePath, "shopify_partners.xlsx", (err) => {
             if (err) {
