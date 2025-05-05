@@ -5,14 +5,31 @@ const path = require('path');
 const scrapeData = async () => {
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
+  const page = await context.newPage();
 
-  const totalPages = 221;
+  const baseUrl = 'https://www.shopify.com/partners/directory/services';
+  console.log(`🌐 Visiting: ${baseUrl}`);
+
+  // Step 1: Find total number of pages dynamically
+  await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForSelector('nav[aria-label="Pagination"]', { timeout: 15000 });
+
+  const totalPages = await page.$$eval('nav[aria-label="Pagination"] a', anchors => {
+    const pageNumbers = anchors
+      .map(a => parseInt(a.textContent.trim()))
+      .filter(n => !isNaN(n));
+    return Math.max(...pageNumbers);
+  });
+
+  console.log(`📄 Total pages found: ${totalPages}`);
+  await page.close();
+
   const allLinks = [];
 
-  // Step 1: Collect all partner profile links
+  // Step 2: Collect all partner profile links
   for (let i = 1; i <= totalPages; i++) {
     const page = await context.newPage();
-    const url = `https://www.shopify.com/partners/directory/services?page=${i}`;
+    const url = `${baseUrl}?page=${i}`;
     console.log(`🌐 Visiting: ${url}`);
 
     try {
@@ -36,7 +53,7 @@ const scrapeData = async () => {
     console.log(`✅ Page ${i} done — total links so far: ${allLinks.length}`);
   }
 
-  // Step 2: Extract data from each partner page with basic batching
+  // Step 3: Extract data in batches
   const extracted = [];
   const batchSize = 10;
 
@@ -52,7 +69,6 @@ const scrapeData = async () => {
 
         const name = await page.locator('h1.richtext').textContent().catch(() => 'N/A');
 
-        // Primary Location
         let primaryLocation = 'N/A';
         try {
           const label = await page.locator('p.richtext.text-t7:has-text("Primary location")');
@@ -60,13 +76,11 @@ const scrapeData = async () => {
           primaryLocation = (await sibling.textContent())?.trim() || 'N/A';
         } catch {}
 
-        // Expand languages if "+X more"
         try {
           const expandBtn = page.locator('button[data-component-name="expand-languages"]');
           if (await expandBtn.isVisible()) await expandBtn.click();
         } catch {}
 
-        // Languages
         let languages = ['N/A'];
         try {
           const langLabel = await page.locator('p.richtext.text-t7:has-text("Languages")');
@@ -77,7 +91,6 @@ const scrapeData = async () => {
           }
         } catch {}
 
-        // Industries
         let industries = 'N/A';
         try {
           const industryText = await page.locator('h2:has-text("Industries") + p.richtext').textContent();
@@ -104,7 +117,7 @@ const scrapeData = async () => {
 
   await browser.close();
 
-  // Step 3: Save as JSON
+  // Step 4: Save data to JSON
   const dataDir = path.join(__dirname, 'data');
   if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
   const outputPath = path.join(dataDir, 'shopify_partners.json');
