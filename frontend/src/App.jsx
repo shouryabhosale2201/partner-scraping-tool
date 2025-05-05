@@ -121,7 +121,7 @@ export default function ScraperApp() {
     setScraping(false);
     setScrapingPlatform(null); // Clear once done
   };
-  
+
   // const handleFetch = async (selectedFilters = {}) => {
   //   setLoading(true);
   //   setError(null);
@@ -201,18 +201,18 @@ export default function ScraperApp() {
   const handleFetch = async (selectedFilters = {}) => {
     setFetching(true);
     setError(null);
-  
+
     try {
       const filePath = `/resources/${url}.json`;
       const response = await fetch(filePath);
-  
+
       if (!response.ok) {
         throw new Error(`Failed to load file: ${filePath}`);
       }
-  
+
       const jsonData = await response.json();
       let filteredData = jsonData;
-  
+
       if (url === "microsoft") {
         // Microsoft logic remains unchanged
         // 1. Apply filter logic
@@ -243,10 +243,10 @@ export default function ScraperApp() {
             selectedFilters.country.includes(item.country)
           );
         }
-  
+
         // 2. Reduce to selected fields
         const selectedFieldKeys = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
-  
+
         filteredData = filteredData.map(item => {
           const trimmed = {};
           selectedFieldKeys.forEach(field => {
@@ -260,54 +260,91 @@ export default function ScraperApp() {
           return trimmed;
         });
       }
+      // In handleFetch function, replace the Salesforce section with this:
+
       if (url === "salesforce") {
+        setSalesforceFields(pendingSalesforceFields);
+        // First apply filters
         const salesforceExpertiseFilters = selectedFilters.salesforceExpertise || [];
         const industryExpertiseFilters = selectedFilters.industryExpertise || [];
-        const regionFilters = selectedFilters.regionFilters || [];
-      
-        const matchesFilters = (foundIn, section, filters) => {
-          const entry = foundIn.find(f => f.section === section);
-          if (!entry) return false;
-          return filters.every(f => entry.filters.includes(f));
-        };
-      
+        const countryFilters = selectedFilters.country || [];
+        const regionFilters = selectedFilters.region || [];
+
+        // Apply filtering
         filteredData = filteredData.filter(partner => {
-          const foundIn = partner.foundIn || [];
-          const countries = partner.countries || {};
-      
-          const allRegions = Object.values(countries).flat();
-      
-          const matchesSalesforce = salesforceExpertiseFilters.length === 0 ||
-            matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertiseFilters);
-      
-          const matchesIndustry = industryExpertiseFilters.length === 0 ||
-            matchesFilters(foundIn, "Industry Expertise", industryExpertiseFilters);
-      
-          const matchesRegions = regionFilters.length === 0 ||
-            regionFilters.every(region => allRegions.includes(region));
-      
-          return matchesSalesforce && matchesIndustry && matchesRegions;
+          // Filter by expertise (if any selected)
+          const expertiseMatch = salesforceExpertiseFilters.length === 0 ||
+            (partner.foundIn && partner.foundIn.some(entry =>
+              entry.section === "Salesforce Expertise" &&
+              salesforceExpertiseFilters.some(filter => entry.filters.includes(filter))
+            ));
+
+          // Filter by industry (if any selected)
+          const industryMatch = industryExpertiseFilters.length === 0 ||
+            (partner.foundIn && partner.foundIn.some(entry =>
+              entry.section === "Industry Expertise" &&
+              industryExpertiseFilters.some(filter => entry.filters.includes(filter))
+            ));
+
+          // Filter by country/region (if any selected)
+          let locationMatch = true;
+          if (countryFilters.length > 0 || regionFilters.length > 0) {
+            locationMatch = false;
+
+            if (partner.countries) {
+              // Check for country matches
+              if (countryFilters.length > 0) {
+                locationMatch = countryFilters.some(country =>
+                  partner.countries[country] !== undefined
+                );
+              }
+
+              // Check for region matches
+              if (regionFilters.length > 0 && !locationMatch) {
+                // Get all regions from all countries
+                const allRegions = Object.values(partner.countries).flat();
+                locationMatch = regionFilters.some(region =>
+                  allRegions.includes(region)
+                );
+              }
+            }
+          }
+
+          return expertiseMatch && industryMatch && locationMatch;
         });
-      
-        // Now trim to selected fields
+
+        // Now apply field selection
         if (salesforceFields.length > 0) {
           filteredData = filteredData.map(partner => {
-            const partial = {};
+            const result = {};
+
+            // Always include these reference fields
+            result.id = partner.id;
+            result.name = partner.name;
+            result.link = partner.link;
+
+            // Include selected fields
             salesforceFields.forEach(field => {
-              // Check if the field exists in the object, even if it's empty or falsy
+              // Copy the field if it exists in the source data
               if (field in partner) {
-                partial[field] = partner[field];
-              } else {
-                partial[field] = "N/A"; // Optional: you can leave this out if you want it completely omitted
+                result[field] = partner[field];
               }
             });
-            return partial;
+
+            // Include foundIn and countries for filtering functionality
+            if (salesforceFields.includes('foundIn') ||
+              salesforceFields.includes('expertise') ||
+              salesforceFields.includes('industries')) {
+              result.foundIn = partner.foundIn;
+            }
+
+            if (salesforceFields.includes('countries')) {
+              result.countries = partner.countries;
+            }
+
+            return result;
           });
-        } else {
-          // If no fields selected, show just name and link
-          filteredData = filteredData.map(({ name, link }) => ({ name, link }));
         }
-        
       }
       setData(filteredData);
     } catch (err) {
@@ -451,7 +488,7 @@ export default function ScraperApp() {
         {data.length > 0 && url === "salesforce" && (
           <SalesforceTable
             data={data}
-            selectedFields={salesforceFields}
+            selectedFields={pendingSalesforceFields}
             onFilterChange={handleSalesforceFilterChange}
           />
         )}

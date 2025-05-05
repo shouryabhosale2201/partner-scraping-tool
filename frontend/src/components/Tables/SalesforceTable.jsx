@@ -22,9 +22,9 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     fetchFilters();
   }, []);
 
-    const toggleSection = (section) => {
-        setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
-    };
+  const toggleSection = (section) => {
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
+  };
 
   const handleFilterChange = (section, value, parentCountry = null) => {
     const sectionKey = normalizeSectionKey(section);
@@ -52,18 +52,18 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         if (updatedFilters[countryKey].length === 0) delete updatedFilters[countryKey];
       }
     } else {
-        if (!updatedFilters[sectionKey]) {
-            updatedFilters[sectionKey] = [];
-        }
+      if (!updatedFilters[sectionKey]) {
+        updatedFilters[sectionKey] = [];
+      }
 
-        if (updatedFilters[sectionKey].includes(value)) {
-            updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
-            if (updatedFilters[sectionKey].length === 0) {
-                delete updatedFilters[sectionKey];
-            }
-        } else {
-            updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
+      if (updatedFilters[sectionKey].includes(value)) {
+        updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
+        if (updatedFilters[sectionKey].length === 0) {
+          delete updatedFilters[sectionKey];
         }
+      } else {
+        updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
+      }
     }
 
     setSelectedFilters(updatedFilters);
@@ -77,85 +77,85 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     return section.toLowerCase();
   };
 
-    const renderSection = (section, filters) => {
-        const sectionKey = normalizeSectionKey(section);
-        const isNested = section === "Country";
-        const isOpen = openSections[section] === true; // Get open state
+  const renderSection = (section, filters) => {
+    const sectionKey = normalizeSectionKey(section);
+    const isNested = section === "Country";
+    const isOpen = openSections[section] === true; // Get open state
 
-        const filteredItems = !isNested
-            ? filters.filter(item =>
-                item.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-            : filters.map(country => ({
-                ...country,
-                children: country.children.filter(region =>
-                    region.toLowerCase().includes(searchTerm.toLowerCase())
-                ),
-            })).filter(country => country.children.length > 0);
+    const filteredItems = !isNested
+      ? filters.filter(item =>
+        item.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      : filters.map(country => ({
+        ...country,
+        children: country.children.filter(region =>
+          region.toLowerCase().includes(searchTerm.toLowerCase())
+        ),
+      })).filter(country => country.children.length > 0);
 
-        return (
-            <div key={section} className="mb-6">
-                <button
-                    onClick={() => toggleSection(section)} // Use toggleSection
-                    className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-semibold rounded hover:bg-gray-300"
-                >
-                    <span>{section}</span>
-                    <svg
-                        className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
+    return (
+      <div key={section} className="mb-6">
+        <button
+          onClick={() => toggleSection(section)} // Use toggleSection
+          className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-semibold rounded hover:bg-gray-300"
+        >
+          <span>{section}</span>
+          <svg
+            className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
 
-                {isOpen && (  // Conditionally render content
-                <div className="flex flex-col gap-2 pl-2 mt-2">
-                    {isNested ? (
-                        filteredItems.map((country, i) => (
-                            <div key={i} className="pl-2">
-                                <h4 className="font-medium mb-1">{country.label}</h4>
-                                <div className="flex flex-col gap-1 pl-4">
-                                    {country.children.map((region, j) => (
-                                        <label key={j} className="flex items-start space-x-2 cursor-pointer break-words max-w-full">
-                                            <input
-                                                type="checkbox"
-                                                value={region}
-                                                checked={selectedFilters[sectionKey]?.includes(region) || false}
-                                                onChange={() => handleFilterChange(section, region, country.label)}
-                                                className="checkbox checkbox-sm"
-                                            />
-                                            <span className="text-sm break-words max-w-[200px]">{region}</span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        filteredItems.length > 0 ? (
-                            filteredItems.map((item, index) => (
-                                <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        value={item}
-                                        checked={selectedFilters[sectionKey]?.includes(item) || false}
-                                        onChange={() => handleFilterChange(section, item)}
-                                        className="checkbox checkbox-sm"
-                                    />
-                                    <span>{item}</span>
-                                </label>
-                            ))
-                        ) : (
-                            <span className="text-gray-500 text-sm">No matches</span>
-                        )
-                    )}
-                    </div>
-                )}
-            </div>
-        );
-    };
+        {isOpen && (  // Conditionally render content
+          <div className="flex flex-col gap-2 pl-2 mt-2">
+            {isNested ? (
+              filteredItems.map((country, i) => (
+                <div key={i} className="pl-2">
+                  <h4 className="font-medium mb-1">{country.label}</h4>
+                  <div className="flex flex-col gap-1 pl-4">
+                    {country.children.map((region, j) => (
+                      <label key={j} className="flex items-start space-x-2 cursor-pointer break-words max-w-full">
+                        <input
+                          type="checkbox"
+                          value={region}
+                          checked={selectedFilters[sectionKey]?.includes(region) || false}
+                          onChange={() => handleFilterChange(section, region, country.label)}
+                          className="checkbox checkbox-sm"
+                        />
+                        <span className="text-sm break-words max-w-[200px]">{region}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))
+            ) : (
+              filteredItems.length > 0 ? (
+                filteredItems.map((item, index) => (
+                  <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      value={item}
+                      checked={selectedFilters[sectionKey]?.includes(item) || false}
+                      onChange={() => handleFilterChange(section, item)}
+                      className="checkbox checkbox-sm"
+                    />
+                    <span>{item}</span>
+                  </label>
+                ))
+              ) : (
+                <span className="text-gray-500 text-sm">No matches</span>
+              )
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="w-1/7 min-w-[280px] border-r border-gray-200 shadow-md p-4 h-screen flex flex-col sticky top-0 overflow-y-auto">
@@ -202,63 +202,64 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
   const [displayFields, setDisplayFields] = useState(selectedFields);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(200);
-    
-    useEffect(() => {
-        setFilteredData(data);
-        setCurrentPage(1);
-    }, [data]);
 
-    useEffect(() => {
-        setDisplayFields(selectedFields);
-    }, [selectedFields]);
+  useEffect(() => {
+    setFilteredData(data);
+    setCurrentPage(1);
+  }, [data]);
+
+  useEffect(() => {
+    setDisplayFields(selectedFields);
+  }, [selectedFields]);
 
   const handleTableSearch = (searchTerm) => {
     setTableSearchTerm(searchTerm);
     setCurrentPage(1);
   };
 
-      // Handle change in page size
-      const handlePageSizeChange = (e) => {
-        setPartnersPerPage(Number(e.target.value));
-        setCurrentPage(1); // Reset to first page when page size changes
-    };
+  // Handle change in page size
+  const handlePageSizeChange = (e) => {
+    setPartnersPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset to first page when page size changes
+  };
 
   const getVisibleColumns = () => {
-        if (!displayFields || displayFields.length === 0) {
-            return {
-                name: true,
-                link: true,
-                tagline: true,
-                description: true,
-                expertise: true,
-                industries: true,
-                services: true,
-                extendedDescription: true
-            };
-        }
+    // If no fields specified, show a default set
+    if (!displayFields || displayFields.length === 0) {
+      return {
+        name: true,
+        link: true
+      };
+    }
 
-        const columns = {};
-        displayFields.forEach(field => {
-            if (field !== 'foundIn') {
-                columns[field] = true;
-            }
-        });
-        return columns;
-    };
+    const columns = {};
+    displayFields.forEach(field => {
+      // Skip internal fields used for filtering but not display
+      if (field !== 'foundIn' && field !== 'countries' && field !== 'id') {
+        columns[field] = true;
+      }
+    });
+
+    // Always ensure name and link are available
+    columns.name = true;
+    columns.link = true;
+
+    return columns;
+  };
 
   const visibleColumns = getVisibleColumns();
 
-    const searchedData = useMemo(() => {
-        if (!tableSearchTerm.trim()) {
-            return filteredData;
-        }
-        const term = tableSearchTerm.toLowerCase();
-        return filteredData.filter(item => {
-            return Object.keys(item).some(key => {
-                return item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(term);
-            });
-        });
-    }, [filteredData, tableSearchTerm]);
+  const searchedData = useMemo(() => {
+    if (!tableSearchTerm.trim()) {
+      return filteredData;
+    }
+    const term = tableSearchTerm.toLowerCase();
+    return filteredData.filter(item => {
+      return Object.keys(item).some(key => {
+        return item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(term);
+      });
+    });
+  }, [filteredData, tableSearchTerm]);
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -266,16 +267,16 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
   const currentItems = searchedData.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(searchedData.length / itemsPerPage);
 
-    const handlePreviousPage = () => {
-        setCurrentPage(prev => Math.max(prev - 1, 1));
-    };
+  const handlePreviousPage = () => {
+    setCurrentPage(prev => Math.max(prev - 1, 1));
+  };
 
-    const handleNextPage = () => {
-        setCurrentPage(prev => Math.min(prev + 1, totalPages));
-    };
-    
-    const isPreviousDisabled = currentPage === 1;
-    const isNextDisabled = currentPage === totalPages || searchedData.length <= itemsPerPage;
+  const handleNextPage = () => {
+    setCurrentPage(prev => Math.min(prev + 1, totalPages));
+  };
+
+  const isPreviousDisabled = currentPage === 1;
+  const isNextDisabled = currentPage === totalPages || searchedData.length <= itemsPerPage;
 
 
   return (
@@ -304,7 +305,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
               onChange={(e) => handleTableSearch(e.target.value)}
               className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
-            
+
             <div className="flex items-center">
               <label htmlFor="pageSize" className="mr-2 text-sm text-gray-600">Show:</label>
               <select
@@ -357,17 +358,17 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
 
                       {visibleColumns.name && (
                         <td className="py-2 pr-2">
-                          {visibleColumns.link && item.link ? (
+                          {item.link ? (
                             <a
                               href={item.link}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-blue-500 hover:underline"
                             >
-                              {item.name}
+                              {item.name || "N/A"}
                             </a>
                           ) : (
-                            item.name
+                            item.name || "N/A"
                           )}
                         </td>
                       )}
@@ -384,13 +385,27 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
 
                       {visibleColumns.expertise && (
                         <td className="py-2 pr-2">
-                          <div className="max-h-[100px] overflow-y-auto">{item.expertise || "N/A"}</div>
+                          <div className="max-h-[100px] overflow-y-auto">
+                            {item.foundIn ?
+                              item.foundIn
+                                .filter(entry => entry.section === "Salesforce Expertise")
+                                .flatMap(entry => entry.filters)
+                                .join(", ") || "N/A"
+                              : "N/A"}
+                          </div>
                         </td>
                       )}
 
                       {visibleColumns.industries && (
                         <td className="py-2 pr-2">
-                          <div className="max-h-[100px] overflow-y-auto">{item.industries || "N/A"}</div>
+                          <div className="max-h-[100px] overflow-y-auto">
+                            {item.foundIn ?
+                              item.foundIn
+                                .filter(entry => entry.section === "Industry Expertise")
+                                .flatMap(entry => entry.filters)
+                                .join(", ") || "N/A"
+                              : "N/A"}
+                          </div>
                         </td>
                       )}
 
@@ -418,31 +433,29 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
             </table>
             {/* Pagination Controls */}
             <div className="mt-4 flex justify-center space-x-4">
-                <button 
-                    onClick={handlePreviousPage} 
-                    disabled={isPreviousDisabled}
-                    className={`px-4 py-2 rounded ${
-                        isPreviousDisabled 
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                        : 'bg-orange-500 text-white hover:bg-orange-600'
-                    }`}
-                >
-                    Previous
-                </button>
-                <div className="flex items-center text-gray-700">
-                    Page {currentPage} of {Math.max(1, totalPages)}
-                </div>
-                <button 
-                    onClick={handleNextPage} 
-                    disabled={isNextDisabled}
-                    className={`px-4 py-2 rounded ${
-                        isNextDisabled 
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                        : 'bg-orange-500 text-white hover:bg-orange-600'
-                    }`}
-                >
-                    Next
-                </button>
+              <button
+                onClick={handlePreviousPage}
+                disabled={isPreviousDisabled}
+                className={`px-4 py-2 rounded ${isPreviousDisabled
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                  }`}
+              >
+                Previous
+              </button>
+              <div className="flex items-center text-gray-700">
+                Page {currentPage} of {Math.max(1, totalPages)}
+              </div>
+              <button
+                onClick={handleNextPage}
+                disabled={isNextDisabled}
+                className={`px-4 py-2 rounded ${isNextDisabled
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-orange-500 text-white hover:bg-orange-600'
+                  }`}
+              >
+                Next
+              </button>
             </div>
           </>
         )}
