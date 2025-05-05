@@ -24,6 +24,19 @@ export default function ScraperApp() {
   const [salesforceFields, setSalesforceFields] = useState([]);
   const [pendingSalesforceFields, setPendingSalesforceFields] = useState([]);
   const tableRef = useRef(null);
+  const [lastScrapedAt, setLastScrapedAt] = useState(null);
+
+  useEffect(() => {
+    if (url) {
+      const savedTime = localStorage.getItem(`${url}_lastScrapedAt`);
+      if (savedTime) {
+        setLastScrapedAt(savedTime);
+      } else {
+        setLastScrapedAt(null);
+      }
+    }
+  }, [url]);
+
 
   useEffect(() => {
     if (data.length > 0 && tableRef.current) {
@@ -69,7 +82,12 @@ export default function ScraperApp() {
           `http://localhost:5000/api/v1/${url}/scrape`,
           { params: { fields: JSON.stringify(fieldsToScrape) } }
         );
-        if (response.data.success) setData(response.data.data);
+        if (response.data.success) {
+          setData(response.data.data);
+          const now = new Date().toISOString();
+          localStorage.setItem(`${url}_lastScrapedAt`, now);
+          setLastScrapedAt(now);
+        }
         else throw new Error(response.data.error);
       } else if (url === "salesforce") {
         // For Salesforce, use pendingSalesforceFields (not salesforceFields)
@@ -79,12 +97,22 @@ export default function ScraperApp() {
         const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`, {
           params: { fields: JSON.stringify(pendingSalesforceFields) }
         });
-        if (response.data.success) setData(response.data.data);
+        if (response.data.success) {
+          setData(response.data.data);
+          const now = new Date().toISOString();
+          localStorage.setItem(`${url}_lastScrapedAt`, now);
+          setLastScrapedAt(now);
+        }
         else throw new Error(response.data.error);
       } else {
         // For other platforms, use the basic approach
         const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`);
-        if (response.data.success) setData(response.data.data);
+        if (response.data.success) {
+          setData(response.data.data);
+          const now = new Date().toISOString();
+          localStorage.setItem(`${url}_lastScrapedAt`, now);
+          setLastScrapedAt(now);
+        }
         else throw new Error(response.data.error);
       }
     } catch (err) {
@@ -258,6 +286,15 @@ export default function ScraperApp() {
             onFieldsChange={handleMicrosoftFieldsChange}
           />
         )}
+        {lastScrapedAt && (
+          <div className="flex justify-center mb-4">
+            <div className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg shadow-sm">
+              Last scraped on: {new Date(lastScrapedAt).toLocaleString()}
+            </div>
+          </div>
+        )}
+
+
 
         <div className="flex space-x-3 justify-center flex-wrap gap-2">
           <button
