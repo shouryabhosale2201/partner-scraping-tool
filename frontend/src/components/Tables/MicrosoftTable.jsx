@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
     const [filters, setFilters] = useState({
@@ -14,10 +15,8 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     useEffect(() => {
         const fetchFilters = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/v1/microsoft/filters");
-                if (!res.ok) throw new Error("Failed to fetch filters");
-                const data = await res.json();
-                setFilters(data);
+                const res = await axios.get("http://localhost:5000/api/v1/microsoft/filters");
+                setFilters(res.data);
             } catch (error) {
                 console.error("Error fetching filters:", error);
                 setFilters({
@@ -29,19 +28,29 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                 });
             }
         };
-
+    
         fetchFilters();
     }, []);
-
+    
     const handleFilterChange = (type, value) => {
-        const updatedFilters = {
-            ...selectedFilters,
-            [type]: selectedFilters[type]?.includes(value)
-                ? selectedFilters[type].filter(item => item !== value)
-                : [...(selectedFilters[type] || []), value],
-        };
-        setSelectedFilters(updatedFilters);
-        onFilterChange(updatedFilters);
+        // Create a copy of current filters
+        const newFilters = { ...selectedFilters };
+        
+        // Initialize the array if it doesn't exist
+        if (!newFilters[type]) newFilters[type] = [];
+        
+        // Check if value is already selected
+        if (newFilters[type].includes(value)) {
+            // If selected, remove it
+            newFilters[type] = newFilters[type].filter(item => item !== value);
+        } else {
+            // If not selected, add it
+            newFilters[type].push(value);
+        }
+        
+        // Update state and notify parent
+        setSelectedFilters(newFilters);
+        onFilterChange(newFilters);
     };
 
     const toggleSection = (sectionName) => {
