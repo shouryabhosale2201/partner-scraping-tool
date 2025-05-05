@@ -57,46 +57,55 @@ const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterCha
         onFilterChange(newSelected);
     };
 
-    const renderFilterSection = (title, filters, filterType, isOpen, setIsOpen) => (
-        <div className="mb-6">
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-bold rounded hover:bg-gray-200"
-            >
-                <span>{title}</span>
-                <svg
-                    className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
+    const renderFilterSection = (title, filters, filterType, isOpen, setIsOpen) => {
+        const filteredFilters = filters.filter(filter =>
+            filter.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        const hasSearchResults = filteredFilters.length > 0;
 
-            {isOpen && (
-                <div className="flex flex-col gap-2 mt-2 ml-2 max-h-64 overflow-y-auto">
-                    {filters
-                        .filter(filter =>
-                            filter.toLowerCase().includes(searchTerm.toLowerCase())
-                        )
-                        .map((filter, idx) => (
-                            <label key={idx} className="flex items-center space-x-2 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    value={filter}
-                                    checked={selectedFilters["shopifyFilters"]?.[filterType]?.includes(filter) || false}
-                                    onChange={() => handleFilterToggle(filterType, filter)}
-                                    className="checkbox checkbox-sm"
-                                />
-                                <span>{filter}</span>
-                            </label>
-                        ))}
-                </div>
-            )}
-        </div>
-    );
+        return (
+            <div className="mb-6">
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-bold rounded hover:bg-gray-200"
+                >
+                    <span>{title}</span>
+                    <svg
+                        className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                {searchTerm && !isOpen && hasSearchResults && setIsOpen(true)}
+
+                {isOpen && (
+                    <div className="flex flex-col gap-2 mt-2 ml-2 max-h-64 overflow-y-auto">
+                        {hasSearchResults ? (
+                            filteredFilters.map((filter, idx) => (
+                                <label key={idx} className="flex items-center space-x-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        value={filter}
+                                        checked={selectedFilters["shopifyFilters"]?.[filterType]?.includes(filter) || false}
+                                        onChange={() => handleFilterToggle(filterType, filter)}
+                                        className="checkbox checkbox-sm"
+                                    />
+                                    <span>{filter}</span>
+                                </label>
+                            ))
+                        ) : (
+                            <div className="text-sm text-gray-500">No matches found.</div>
+                        )}
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     return (
         <div className="w-1/4 min-w-[300px] border-r bg-gray-100 border-gray-200 shadow-md p-4 h-screen flex flex-col">
@@ -107,7 +116,21 @@ const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterCha
                         type="text"
                         placeholder="Search filters"
                         value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                            // Automatically open dropdowns if search term is not empty
+                            if (e.target.value) {
+                                if (uniqueLanguages.some(lang => lang.toLowerCase().includes(e.target.value.toLowerCase()))) {
+                                    setIsLanguagesOpen(true);
+                                }
+                                if (uniqueIndustries.some(ind => ind.toLowerCase().includes(e.target.value.toLowerCase()))) {
+                                    setIsIndustriesOpen(true);
+                                }
+                                if (uniqueLocations.some(loc => loc.toLowerCase().includes(e.target.value.toLowerCase()))) {
+                                    setIsLocationsOpen(true);
+                                }
+                            }
+                        }}
                         className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
@@ -118,6 +141,9 @@ const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterCha
                             setSelectedFilters({});
                             onFilterChange({});
                             setSearchTerm("");
+                            setIsLanguagesOpen(false);
+                            setIsIndustriesOpen(false);
+                            setIsLocationsOpen(false);
                         }}
                         className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
                     >
@@ -205,6 +231,10 @@ const ShopifyTable = ({ data }) => {
         setCurrentPage(prev => Math.min(prev + 1, totalPages));
     };
 
+    const handlePartnerClick = (link) => {
+        window.open(link, '_blank', 'noopener,noreferrer');
+    };
+
     // Determine if buttons should be disabled
     const isPreviousDisabled = currentPage === 1;
     const isNextDisabled = currentPage === totalPages || searchFilteredData.length <= partnersPerPage;
@@ -240,50 +270,30 @@ const ShopifyTable = ({ data }) => {
                 </div>
                 <div className="flex-1 overflow-y-auto pb-6">
                     <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
-                        <thead className="sticky z-10 bg-base-200 text-base font-semibold border-b border-gray-300">
+                        <thead className="sticky z-10 bg-base-200 text-base font-semibold">
                             <tr>
                                 <th className="w-12">#</th>
                                 <th className="w-64 text-left">Partner Name</th>
                                 <th className="w-48 text-left">Location</th>
                                 <th className="w-48 text-left">Languages</th>
-                                <th className="w-[200px] text-left">Industries</th>
-                                <th className="w-32 text-left pr-8">Profile Link</th>
+                                <th className="w-[300px] text-left">Industries</th>
                             </tr>
                         </thead>
                         <tbody>
                             {paginatedData.map((item, index) => (
                                 <tr
                                     key={index}
-                                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+                                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition cursor-pointer"
+                                    onClick={() => handlePartnerClick(item.link)}
                                 >
                                     <th className="py-2">{startIndex + index + 1}</th>
-                                    <td className="py-2 truncate">{item.name}</td>
+                                    <td className="py-2 truncate text-blue-500 hover:underline">{item.name}</td>
                                     <td className="py-2">{item.locations?.join(', ')}</td>
                                     <td className="py-2">{item.languages?.join(', ')}</td>
                                     <td className="py-2">{item.industries}</td>
-                                    <td className="py-2 pr-8">
-                                        <a
-                                            href={item.profileUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-blue-500 hover:underline"
-                                        >
-                                            Visit Partner
-                                        </a>
-                                    </td>
                                 </tr>
                             ))}
-                        </tbody>ca
-                        {/* <tfoot>
-                            <tr>
-                                <th className="w-12">#</th>
-                                <th className="w-64 text-left">Partner Name</th>
-                                <th className="w-48 text-left">Location</th>
-                                <th className="w-48 text-left">Languages</th>
-                                <th className="w-[200px] text-left">Industries</th>
-                                <th className="w-32 text-left pr-8">Profile Link</th>
-                            </tr>
-                        </tfoot> */}
+                        </tbody>
                     </table>
 
                     {/* Pagination Controls */}

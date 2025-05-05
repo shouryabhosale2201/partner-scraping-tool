@@ -1,8 +1,110 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChange }) => {
     const [searchTerm, setSearchTerm] = useState("");
-    const [openSections, setOpenSections] = useState({}); // To manage open/close state of dropdowns
+    const [openSections, setOpenSections] = useState({});
+    const [noMatch, setNoMatch] = useState({}); // Track "No match found" messages
+
+    useEffect(() => {
+        setNoMatch({}); // Clear "No match found" on search term change
+        if (searchTerm) {
+            setOpenSections(prev => {
+                const newState = { ...prev };
+                let foundMatchOverall = false;
+
+                // Check in Locations
+                const locationMatch = Array.from(locationSet).some(location =>
+                    location.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+                newState["locations"] = true; // Always open locations on search
+                if (locationMatch) {
+                    foundMatchOverall = true;
+                } else {
+                    setNoMatch(prevNoMatch => ({ ...prevNoMatch, locations: true }));
+                }
+
+                // Check in Hierarchy
+                const newNoMatch = {}; // Create a new object to track no matches in this iteration
+                Array.from(hierarchy.keys()).forEach(level1Name => {
+                    newState[level1Name] = true; // Always open level 1 on search
+                    let level1Match = false;
+                    const level2Map = hierarchy.get(level1Name);
+                    if (level2Map) {
+                        const level2NoMatch = {};
+                        let level2MatchOverall = false;
+                        Array.from(level2Map.keys()).forEach(level2Name => {
+                            let level2HasMatch = false;
+                            const level3Map = level2Map.get(level2Name);
+                            if (level3Map) {
+                                const level3NoMatch = {};
+                                let level3MatchOverall = false;
+                                Array.from(level3Map.keys()).forEach(level3Name => {
+                                    let level3HasMatch = false;
+                                    const level4Set = level3Map.get(level3Name);
+                                    if (level4Set) {
+                                        const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
+                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                        );
+                                        if (hasMatchingLevel4) {
+                                            level3HasMatch = true;
+                                            level3MatchOverall = true;
+                                            level2HasMatch = true;
+                                            level2MatchOverall = true;
+                                            level1Match = true;
+                                            foundMatchOverall = true;
+                                        } else {
+                                            level3NoMatch[level3Name] = true;
+                                        }
+                                    }
+                                });
+                                if (!level3MatchOverall) {
+                                    level2NoMatch[level2Name] = true;
+                                }
+                                newNoMatch[level1Name] = { // Use the newNoMatch object
+                                    ...newNoMatch[level1Name],
+                                    [level2Name]: level3NoMatch,
+                                };
+                            }
+                            if (level2HasMatch) {
+                                newState[level1Name] = true;
+                            }
+                            if (!level2HasMatch) {
+                                level2NoMatch[level2Name] = true;
+                            }
+                        });
+                        if (!level1Match) {
+                            newNoMatch[level1Name] = level2NoMatch; // Use the newNoMatch object
+                        }
+                    }
+                });
+                setNoMatch(newNoMatch); // Update noMatch state
+                if (!foundMatchOverall) {
+                    // If no overall match, expand all up to depth 2 and show "No match"
+                    const allOpen = {};
+                    Array.from(hierarchy.keys()).forEach(level1Name => {
+                        allOpen[level1Name] = true;
+                        const level2Map = hierarchy.get(level1Name);
+                        const level2NoMatchAll = {};
+                        if (level2Map) {
+                            Array.from(level2Map.keys()).forEach(level2Name => {
+                                level2NoMatchAll[level2Name] = {}; // Indicate no match at this level
+                            });
+                        }
+                        newNoMatch[level1Name] = level2NoMatchAll;
+                    });
+                    allOpen["locations"] = true;
+                    newNoMatch["locations"] = true;
+                    setNoMatch(newNoMatch);
+                    setOpenSections(allOpen);
+                }
+
+                return newState;
+            });
+        } else {
+            setOpenSections({});
+            setNoMatch({});
+        }
+    }, [searchTerm, data]);
 
     const handleFilterToggle = (filterName) => {
         const newSelected = { ...selectedFilters };
@@ -23,7 +125,6 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
     const hierarchy = useMemo(() => {
         const map = new Map();
 
-        // Loop through every partner
         for (const partner of data) {
             for (const filter of partner.filters || []) {
                 if (!filter.level1Name || !filter.level2Name || !filter.level3Name || !filter.level4Name) continue;
@@ -37,10 +138,9 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                 if (!level3Map.has(filter.level3Name)) level3Map.set(filter.level3Name, new Set());
                 const level4Set = level3Map.get(filter.level3Name);
 
-                level4Set.add(filter.level4Name); // Using Set to avoid duplicates
+                level4Set.add(filter.level4Name);
             }
         }
-
         return map;
     }, [data]);
 
@@ -57,7 +157,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
     const toggleSection = (sectionName) => {
         setOpenSections(prev => ({
             ...prev,
-            [sectionName]: !prev[sectionName] // Toggle the boolean value
+            [sectionName]: !prev[sectionName]
         }));
     };
 
@@ -66,6 +166,21 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
         return Array.from(hierarchy.entries()).map(([level1Name, level2Map]) => {
             const level1Open = openSections[level1Name] === true;
             const showDropdown = level1Name === "Cloud Solution Builders & ISVs" || level1Name === "Cloud Services Partners";
+            const level1NoMatch = noMatch[level1Name];
+
+            const hasMatchingChildren = Array.from(level2Map.entries()).some(([, level3Map]) =>
+                Array.from(level3Map.entries()).some(([, level4Set]) =>
+                    Array.from(level4Set).some(level4Name =>
+                        level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                    )
+                )
+            );
+
+            const shouldRenderLevel1 = !searchTerm || hasMatchingChildren || (level1NoMatch && Object.keys(level1NoMatch).length > 0);
+
+            if (!shouldRenderLevel1 && searchTerm) {
+                return null;
+            }
 
             return (
                 <div key={level1Name} className="mb-4">
@@ -93,36 +208,81 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                     {level1Open && showDropdown && (
                         <div className="ml-4">
                             {Array.from(level2Map.entries()).map(([level2Name, level3Map]) => {
+                                const level2NoMatch = level1NoMatch && level1NoMatch[level2Name];
+                                const hasMatchingLevel3 = Array.from(level3Map.entries()).some(([, level4Set]) =>
+                                    Array.from(level3Map.entries()).some(([, level4Set]) =>
+                                        Array.from(level4Set).some(level4Name =>
+                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                        )
+                                    )
+                                );
+
+                                const shouldRenderLevel2 = !searchTerm || hasMatchingLevel3 || (level2NoMatch && Object.keys(level2NoMatch).length > 0);
+
+                                if (!shouldRenderLevel2 && searchTerm) {
+                                    return null;
+                                }
+
                                 return (
                                     <div key={level2Name} className="mb-2">
-                                        <h4 className="text-sm font-semibold ml-4 mb-1">{level2Name}</h4>
-                                        {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => (
-                                            <div key={level3Name} className="mb-2">
-                                                <h5 className="text-sm font-medium ml-8 mb-1">{level3Name}</h5>
-                                                <div className="ml-8 flex flex-col gap-2">
-                                                    {Array.from(level4Set)
-                                                        .filter(level4Name =>
-                                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                                        )
-                                                        .map((level4Name, idx) => (
-                                                            <label key={idx} className="flex items-center space-x-2 cursor-pointer text-xs">
-                                                                <input
-                                                                    type="checkbox"
-                                                                    value={level4Name}
-                                                                    checked={selectedFilters[key]?.includes(level4Name) || false}
-                                                                    onChange={() => handleFilterToggle(level4Name)}
-                                                                    className="checkbox checkbox-sm"
-                                                                />
-                                                                <span>{level4Name}</span>
-                                                            </label>
-                                                        ))}
+                                        <h4 className="text-sm font-semibold ml-4 mb-1">
+                                            {level2Name}
+                                            {searchTerm && !hasMatchingLevel3 && level2NoMatch && (Object.keys(level2NoMatch).length > 0) && (
+                                                <span className="text-gray-500 text-xs ml-2">(No match)</span>
+                                            )}
+                                        </h4>
+                                        {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => {
+                                            const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
+                                                level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                            );
+                                            const level3NoMatch = level2NoMatch && level2NoMatch[level3Name];
+
+                                            const shouldRenderLevel3 = !searchTerm || hasMatchingLevel4 || level3NoMatch;
+
+                                            if (!shouldRenderLevel3 && searchTerm) {
+                                                return null;
+                                            }
+
+                                            return (
+                                                <div key={level3Name} className="mb-2">
+                                                    <h5 className="text-sm font-medium ml-8 mb-1">
+                                                        {level3Name}
+                                                        {searchTerm && !hasMatchingLevel4 && level3NoMatch && (
+                                                            <span className="text-gray-500 text-xs ml-2">(No match)</span>
+                                                        )}
+                                                    </h5>
+                                                    <div className="ml-8 flex flex-col gap-2">
+                                                        {searchTerm && !hasMatchingLevel4 && level3NoMatch ? (
+                                                            <span className="text-gray-500 text-sm">No matches</span>
+                                                        ) : (
+                                                            Array.from(level4Set)
+                                                                .filter(level4Name =>
+                                                                    !searchTerm || level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                                                )
+                                                                .map((level4Name, idx) => (
+                                                                    <label key={idx} className={`flex items-center space-x-2 cursor-pointer text-xs ${searchTerm && level4Name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            value={level4Name}
+                                                                            checked={selectedFilters[key]?.includes(level4Name) || false}
+                                                                            onChange={() => handleFilterToggle(level4Name)}
+                                                                            className="checkbox checkbox-sm"
+                                                                        />
+                                                                        <span>{level4Name}</span>
+                                                                    </label>
+                                                                ))
+                                                        )}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 );
                             })}
                         </div>
+                    )}
+                    {searchTerm && showDropdown && !hasMatchingChildren && (!level1NoMatch || Object.keys(level1NoMatch).length === 0) && (
+                        <div className="ml-4 text-gray-500 text-sm">(No match)</div>
                     )}
                 </div>
             );
@@ -131,15 +291,17 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
     const renderLocations = () => {
         const key = "oracleFilters";
-        const isOpen = openSections["locations"] === true; // Use a unique key for locations
+        const isOpen = openSections["locations"] === true;
         const filteredLocations = Array.from(locationSet).filter(location =>
-            location.toLowerCase().includes(searchTerm.toLowerCase())
+            !searchTerm || location.toLowerCase().includes(searchTerm.toLowerCase())
         );
+        const hasLocationMatch = filteredLocations.length > 0;
+        const showNoMatch = searchTerm && !hasLocationMatch && noMatch["locations"];
 
         return (
             <div className="mb-6">
                 <button
-                    onClick={() => toggleSection("locations")} // Use "locations" as the key
+                    onClick={() => toggleSection("locations")}
                     className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-bold rounded hover:bg-gray-200"
                 >
                     <span>Countries (APAC)</span>
@@ -156,29 +318,33 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
                 {isOpen && (
                     <div className="flex flex-col gap-2 mt-2 ml-2 max-h-64 overflow-y-auto">
-                        {filteredLocations.map((location, idx) => (
-                            <label key={idx} className="flex items-center space-x-2 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    value={location}
-                                    checked={selectedFilters[key]?.includes(location) || false}
-                                    onChange={() => handleFilterToggle(location)}
-                                    className="checkbox checkbox-sm"
-                                />
-                                <span>{location}</span>
-                            </label>
-                        ))}
+                        {hasLocationMatch ? (
+                            filteredLocations.map((location, idx) => (
+                                <label key={idx} className={`flex items-center space-x-2 cursor-pointer ${searchTerm && location.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
+                                    <input
+                                        type="checkbox"
+                                        value={location}
+                                        checked={selectedFilters[key]?.includes(location) || false}
+                                        onChange={() => handleFilterToggle(location)}
+                                        className="checkbox checkbox-sm"
+                                    />
+                                    <span>{location}</span>
+                                </label>
+                            ))
+                        ) : (
+                            <span className="text-gray-500 text-sm">No matches</span>
+                        )}
                     </div>
+                )}
+                {showNoMatch && !hasLocationMatch && (
+                    <div className="mt-2 ml-2 text-gray-500 text-sm">(No match)</div>
                 )}
             </div>
         );
     };
 
-
-
     return (
         <div className="w-1/4 min-w-[400px] border-r bg-gray-100 border-gray-200 shadow-md p-4 h-screen flex flex-col">
-            {/* Fixed Header */}
             <div className="sticky top-0 z-10 bg-gray-100 pb-4">
                 <div className="mb-4">
                     <input
@@ -196,7 +362,8 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                             setSelectedFilters({});
                             onFilterChange({});
                             setSearchTerm("");
-                            setOpenSections({}); // Reset open sections
+                            setOpenSections({});
+                            setNoMatch({});
                         }}
                         className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
                     >
@@ -205,12 +372,9 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                 </div>
 
                 <h2 className="text-lg font-semibold mb-2">Apply Filters</h2>
-
-                {/* Add a divider to clearly separate the fixed header from scrollable content */}
                 <div className="border-b border-gray-300 mb-4"></div>
             </div>
 
-            {/* Scrollable Content */}
             <div className="flex-1 overflow-y-auto pl-2">
                 {renderLocations()}
                 {renderHierarchy()}
@@ -227,10 +391,9 @@ const OracleTable = ({ data }) => {
 
     if (!data || data.length === 0) return null;
 
-    // Filter the data based on selected filters
     const handleFilterChange = (newFilters) => {
         setSelectedFilters(newFilters);
-        setCurrentPage(1); // Reset to first page when filters change
+        setCurrentPage(1);
     };
 
     const filteredData = useMemo(() => {
@@ -238,11 +401,9 @@ const OracleTable = ({ data }) => {
         const selected = selectedFilters[key];
         if (!selected || selected.length === 0) return data;
 
-        // Split the selected filters into expertise and location groups
         const selectedExpertise = [];
         const selectedLocations = [];
 
-        // Categorize the selections
         selected.forEach(item => {
             // Check if this item exists in any partner's filters (expertise) or locations
             const isExpertise = data.some(partner =>
@@ -328,7 +489,7 @@ const OracleTable = ({ data }) => {
                 </div>
                 <div className="flex-1 overflow-y-auto pb-6">
                     <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
-                        <thead className="sticky z-10 bg-base-200 text-base font-semibold border-b border-gray-300">
+                        <thead className="sticky z-10 bg-base-200 text-base font-semibold">
                             <tr>
                                 <th className="w-12">#</th>
                                 <th className="w-64 text-left">Partner Name</th>
@@ -400,3 +561,4 @@ const OracleTable = ({ data }) => {
 };
 
 export default OracleTable;
+
