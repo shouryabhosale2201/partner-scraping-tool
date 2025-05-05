@@ -415,18 +415,6 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
                   </tr>
                 )}
               </tbody>
-              {/* <tfoot>
-                <tr>
-                  <th>#</th>
-                  {visibleColumns.name && <th>Name</th>}
-                  {visibleColumns.tagline && <th>Tagline</th>}
-                  {visibleColumns.description && <th>Description</th>}
-                  {visibleColumns.expertise && <th>Expertise</th>}
-                  {visibleColumns.industries && <th>Industries</th>}
-                  {visibleColumns.services && <th>Services</th>}
-                  {visibleColumns.extendedDescription && <th>Extended Description</th>}
-                </tr>
-              </tfoot> */}
             </table>
             {/* Pagination Controls */}
             <div className="mt-4 flex justify-center space-x-4">

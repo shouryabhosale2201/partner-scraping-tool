@@ -87,82 +87,200 @@ export default function ScraperApp() {
     setLoading(false);
   };
   
+  // const handleFetch = async (selectedFilters = {}) => {
+  //   setLoading(true);
+  //   setError(null);
+
+  //   try {
+  //     let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
+  //     const params = new URLSearchParams();
+
+  //     if (url === "microsoft") {
+  //       // Microsoft-specific params
+  //       if (Object.keys(microsoftFields).length > 0) {
+  //         const fieldsToFetch = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
+  //         params.append('fields', JSON.stringify(fieldsToFetch));
+  //       }
+  //       if (selectedFilters.industry?.length > 0) {
+  //         params.append('industries', JSON.stringify(selectedFilters.industry));
+  //       }
+  //       if (selectedFilters.product?.length > 0) {
+  //         params.append('products', JSON.stringify(selectedFilters.product));
+  //       }
+  //       if (selectedFilters.solution?.length > 0) {
+  //         params.append('solutions', JSON.stringify(selectedFilters.solution));
+  //       }
+  //       if (selectedFilters.services?.length > 0) {
+  //         params.append('services', JSON.stringify(selectedFilters.services));
+  //       }
+  //       if (selectedFilters.country?.length > 0) {
+  //         params.append('countries', JSON.stringify(selectedFilters.country));
+  //       }
+
+  //       if (params.toString()) {
+  //         endpoint += `?${params.toString()}`;
+  //       }
+  //     }
+
+  //     else if (url === "salesforce") {
+  //       // Salesforce-specific params
+  //       setSalesforceFields(pendingSalesforceFields);
+
+  //       if (pendingSalesforceFields.length > 0) {
+  //         params.append("fields", JSON.stringify(pendingSalesforceFields));
+  //       }
+  //       if (selectedFilters.salesforceExpertise?.length > 0) {
+  //         params.append("salesforceExpertise", JSON.stringify(selectedFilters.salesforceExpertise));
+  //       }
+  //       if (selectedFilters.industryExpertise?.length > 0) {
+  //         params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
+  //       }
+  //       if (selectedFilters.country?.length > 0) {
+  //         params.append('countryFilters', JSON.stringify(selectedFilters.country));
+  //       }
+  //       if (selectedFilters.region?.length > 0) {
+  //         params.append('regionFilters', JSON.stringify(selectedFilters.region));
+  //       }
+
+  //       if (params.toString()) {
+  //         endpoint += `?${params.toString()}`;
+  //       }
+  //     }
+  //     console.log("Fetching from endpoint:", endpoint);
+
+  //     const response = await axios.get(endpoint);
+
+  //     if (response.data.success) {
+  //       setData(response.data.data);
+  //     } else {
+  //       throw new Error(response.data.error || "Unknown error occurred");
+  //     }
+
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleFetch = async (selectedFilters = {}) => {
     setLoading(true);
     setError(null);
-
+  
     try {
-      let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
-      const params = new URLSearchParams();
-
+      const filePath = `/resources/${url}.json`;
+      const response = await fetch(filePath);
+  
+      if (!response.ok) {
+        throw new Error(`Failed to load file: ${filePath}`);
+      }
+  
+      const jsonData = await response.json();
+      let filteredData = jsonData;
+  
       if (url === "microsoft") {
-        // Microsoft-specific params
-        if (Object.keys(microsoftFields).length > 0) {
-          const fieldsToFetch = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
-          params.append('fields', JSON.stringify(fieldsToFetch));
-        }
+        // Microsoft logic remains unchanged
+        // 1. Apply filter logic
         if (selectedFilters.industry?.length > 0) {
-          params.append('industries', JSON.stringify(selectedFilters.industry));
+          filteredData = filteredData.filter(item =>
+            item.industryFocus?.some(ind => selectedFilters.industry.includes(ind))
+          );
         }
         if (selectedFilters.product?.length > 0) {
-          params.append('products', JSON.stringify(selectedFilters.product));
+          filteredData = filteredData.filter(item =>
+            item.product?.some(prod => selectedFilters.product.includes(prod))
+          );
         }
         if (selectedFilters.solution?.length > 0) {
-          params.append('solutions', JSON.stringify(selectedFilters.solution));
+          filteredData = filteredData.filter(item =>
+            Array.isArray(item.solutions)
+              ? item.solutions.some(sol => selectedFilters.solution.includes(sol))
+              : false
+          );
         }
         if (selectedFilters.services?.length > 0) {
-          params.append('services', JSON.stringify(selectedFilters.services));
+          filteredData = filteredData.filter(item =>
+            item.serviceType?.some(service => selectedFilters.services.includes(service))
+          );
         }
         if (selectedFilters.country?.length > 0) {
-          params.append('countries', JSON.stringify(selectedFilters.country));
+          filteredData = filteredData.filter(item =>
+            selectedFilters.country.includes(item.country)
+          );
         }
-
-        if (params.toString()) {
-          endpoint += `?${params.toString()}`;
-        }
+  
+        // 2. Reduce to selected fields
+        const selectedFieldKeys = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
+  
+        filteredData = filteredData.map(item => {
+          const trimmed = {};
+          selectedFieldKeys.forEach(field => {
+            if (item[field] !== undefined) {
+              trimmed[field] = item[field];
+            }
+          });
+          // Always include `id` and `link` for reference/navigation
+          trimmed.id = item.id;
+          trimmed.link = item.link;
+          return trimmed;
+        });
       }
-
-      else if (url === "salesforce") {
-        // Salesforce-specific params
-        setSalesforceFields(pendingSalesforceFields);
-
-        if (pendingSalesforceFields.length > 0) {
-          params.append("fields", JSON.stringify(pendingSalesforceFields));
+      if (url === "salesforce") {
+        const salesforceExpertiseFilters = selectedFilters.salesforceExpertise || [];
+        const industryExpertiseFilters = selectedFilters.industryExpertise || [];
+        const regionFilters = selectedFilters.regionFilters || [];
+      
+        const matchesFilters = (foundIn, section, filters) => {
+          const entry = foundIn.find(f => f.section === section);
+          if (!entry) return false;
+          return filters.every(f => entry.filters.includes(f));
+        };
+      
+        filteredData = filteredData.filter(partner => {
+          const foundIn = partner.foundIn || [];
+          const countries = partner.countries || {};
+      
+          const allRegions = Object.values(countries).flat();
+      
+          const matchesSalesforce = salesforceExpertiseFilters.length === 0 ||
+            matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertiseFilters);
+      
+          const matchesIndustry = industryExpertiseFilters.length === 0 ||
+            matchesFilters(foundIn, "Industry Expertise", industryExpertiseFilters);
+      
+          const matchesRegions = regionFilters.length === 0 ||
+            regionFilters.every(region => allRegions.includes(region));
+      
+          return matchesSalesforce && matchesIndustry && matchesRegions;
+        });
+      
+        // Now trim to selected fields
+        if (salesforceFields.length > 0) {
+          filteredData = filteredData.map(partner => {
+            const partial = {};
+            salesforceFields.forEach(field => {
+              // Check if the field exists in the object, even if it's empty or falsy
+              if (field in partner) {
+                partial[field] = partner[field];
+              } else {
+                partial[field] = "N/A"; // Optional: you can leave this out if you want it completely omitted
+              }
+            });
+            return partial;
+          });
+        } else {
+          // If no fields selected, show just name and link
+          filteredData = filteredData.map(({ name, link }) => ({ name, link }));
         }
-        if (selectedFilters.salesforceExpertise?.length > 0) {
-          params.append("salesforceExpertise", JSON.stringify(selectedFilters.salesforceExpertise));
-        }
-        if (selectedFilters.industryExpertise?.length > 0) {
-          params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
-        }
-        if (selectedFilters.country?.length > 0) {
-          params.append('countryFilters', JSON.stringify(selectedFilters.country));
-        }
-        if (selectedFilters.region?.length > 0) {
-          params.append('regionFilters', JSON.stringify(selectedFilters.region));
-        }
-
-        if (params.toString()) {
-          endpoint += `?${params.toString()}`;
-        }
+        
       }
-      console.log("Fetching from endpoint:", endpoint);
-
-      const response = await axios.get(endpoint);
-
-      if (response.data.success) {
-        setData(response.data.data);
-      } else {
-        throw new Error(response.data.error || "Unknown error occurred");
-      }
-
+      setData(filteredData);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
   };
-
 
   const handleSalesforceFilterChange = (selectedFilters) => {
     if (url === 'salesforce') {
