@@ -11,7 +11,12 @@ import MicrosoftFieldSelection from "./components/Field_Selectors/MicorsoftField
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [scraping, setScraping] = useState(false);
+  const [scrapingPlatform, setScrapingPlatform] = useState(null);
+
+  const [fetching, setFetching] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+
   const [error, setError] = useState(null);
   // For Microsoft - object-based field selection
   const [microsoftFields, setMicrosoftFields] = useState({});
@@ -19,6 +24,19 @@ export default function ScraperApp() {
   const [salesforceFields, setSalesforceFields] = useState([]);
   const [pendingSalesforceFields, setPendingSalesforceFields] = useState([]);
   const tableRef = useRef(null);
+  const [lastScrapedAt, setLastScrapedAt] = useState(null);
+
+  useEffect(() => {
+    if (url) {
+      const savedTime = localStorage.getItem(`${url}_lastScrapedAt`);
+      if (savedTime) {
+        setLastScrapedAt(savedTime);
+      } else {
+        setLastScrapedAt(null);
+      }
+    }
+  }, [url]);
+
 
   useEffect(() => {
     if (data.length > 0 && tableRef.current) {
@@ -52,7 +70,8 @@ export default function ScraperApp() {
   };
 
   const handleScrape = async () => {
-    setLoading(true);
+    setScraping(true);
+    setScrapingPlatform(url); // Lock in the current platform being scraped
     setError(null);
     setData([]);
     try {
@@ -63,7 +82,12 @@ export default function ScraperApp() {
           `http://localhost:5000/api/v1/${url}/scrape`,
           { params: { fields: JSON.stringify(fieldsToScrape) } }
         );
-        if (response.data.success) setData(response.data.data);
+        if (response.data.success) {
+          setData(response.data.data);
+          const now = new Date().toISOString();
+          localStorage.setItem(`${url}_lastScrapedAt`, now);
+          setLastScrapedAt(now);
+        }
         else throw new Error(response.data.error);
       } else if (url === "salesforce") {
         // For Salesforce, use pendingSalesforceFields (not salesforceFields)
@@ -73,18 +97,29 @@ export default function ScraperApp() {
         const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`, {
           params: { fields: JSON.stringify(pendingSalesforceFields) }
         });
-        if (response.data.success) setData(response.data.data);
+        if (response.data.success) {
+          setData(response.data.data);
+          const now = new Date().toISOString();
+          localStorage.setItem(`${url}_lastScrapedAt`, now);
+          setLastScrapedAt(now);
+        }
         else throw new Error(response.data.error);
       } else {
         // For other platforms, use the basic approach
         const response = await axios.get(`http://localhost:5000/api/v1/${url}/scrape`);
-        if (response.data.success) setData(response.data.data);
+        if (response.data.success) {
+          setData(response.data.data);
+          const now = new Date().toISOString();
+          localStorage.setItem(`${url}_lastScrapedAt`, now);
+          setLastScrapedAt(now);
+        }
         else throw new Error(response.data.error);
       }
     } catch (err) {
       setError(err.message);
     }
-    setLoading(false);
+    setScraping(false);
+    setScrapingPlatform(null); // Clear once done
   };
   
   // const handleFetch = async (selectedFilters = {}) => {
@@ -164,7 +199,7 @@ export default function ScraperApp() {
   // };
 
   const handleFetch = async (selectedFilters = {}) => {
-    setLoading(true);
+    setFetching(true);
     setError(null);
   
     try {
@@ -278,7 +313,7 @@ export default function ScraperApp() {
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      setFetching(false);
     }
   };
 
@@ -297,12 +332,12 @@ export default function ScraperApp() {
   // The updated download Excel function - now independent from fetch
   const handleDownloadExcel = async () => {
     try {
-      setLoading(true);
-      
+      setDownloading(true);
+
       // Create endpoint with appropriate parameters
       let endpoint = `http://localhost:5000/api/v1/${url}/downloadExcel`;
       const params = new URLSearchParams();
-      
+
       // Set the appropriate fields parameter based on platform
       if (url === "microsoft") {
         const fieldsToExport = Object.keys(microsoftFields).filter(k => microsoftFields[k]);
@@ -334,12 +369,12 @@ export default function ScraperApp() {
       a.remove();
 
       window.URL.revokeObjectURL(downloadUrl);
-      
-      setLoading(false);
+
+      setDownloading(false);
     } catch (error) {
       console.error("Download failed:", error.message);
       alert("Failed to download Excel file. Please try again.");
-      setLoading(false);
+      setDownloading(false);
     }
   };
 
@@ -355,7 +390,7 @@ export default function ScraperApp() {
           <option value="">Select a source</option>
           <option value="salesforce">Salesforce</option>
           <option value="oracle">Oracle</option>
-          <option value="shopify">Shopify</option> 
+          <option value="shopify">Shopify</option>
           <option value="microsoft">Microsoft</option>
         </select>
 
@@ -369,31 +404,46 @@ export default function ScraperApp() {
             onFieldsChange={handleMicrosoftFieldsChange}
           />
         )}
+        {lastScrapedAt && (
+          <div className="flex justify-center mb-4">
+            <div className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-lg shadow-sm">
+              Last scraped on: {new Date(lastScrapedAt).toLocaleString()}
+            </div>
+          </div>
+        )}
+
+
 
         <div className="flex space-x-3 justify-center flex-wrap gap-2">
           <button
             onClick={handleScrape}
-            disabled={loading || !url}
+            disabled={scraping || !url}
             className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-300"
           >
             Scrape Data
           </button>
           <button
             onClick={() => handleFetch()}
-            disabled={loading || !url}
+            disabled={!url}
             className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-300"
           >
             Fetch Stored Data
           </button>
           <button
             onClick={handleDownloadExcel}
-            disabled={loading || !url}
+            disabled={!url}
             className="px-5 py-2 bg-orange-400 text-white rounded-lg hover:bg-gray-600 disabled:bg-gray-300"
           >
             Download Excel
           </button>
         </div>
-        {loading && <p className="text-center mt-4">Loading...</p>}
+        {(scraping || fetching || downloading) && (
+          <p className="text-center mt-4 text-gray-700 font-medium">
+            {scraping && `Scraping ${scrapingPlatform?.charAt(0).toUpperCase() + scrapingPlatform?.slice(1)}...`}
+          </p>
+        )}
+
+
         {error && <p className="text-red-500 text-center mt-4">Error: {error}</p>}
       </div>
 
