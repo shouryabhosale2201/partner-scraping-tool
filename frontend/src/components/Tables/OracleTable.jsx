@@ -1,3 +1,4 @@
+// oracleTable.jsx
 import React, { useState, useMemo, useEffect } from "react";
 
 const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChange }) => {
@@ -6,100 +7,87 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
     const [noMatch, setNoMatch] = useState({}); // Track "No match found" messages
 
     useEffect(() => {
-        setNoMatch({}); // Clear "No match found" on search term change
+        setNoMatch({});
+        setOpenSections({});
+
         if (searchTerm) {
-            setOpenSections(prev => {
-                const newState = { ...prev };
-                let foundMatchOverall = false;
+            const newOpenSections = {};
+            const newNoMatch = {};
+            let overallMatchFound = false;
 
-                // Check in Locations
-                const locationMatch = Array.from(locationSet).some(location =>
-                    location.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-                newState["locations"] = true; // Always open locations on search
-                if (locationMatch) {
-                    foundMatchOverall = true;
-                } else {
-                    setNoMatch(prevNoMatch => ({ ...prevNoMatch, locations: true }));
-                }
+            // Check Locations
+            const matchingLocations = Array.from(locationSet).filter(loc =>
+                loc.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            if (matchingLocations.length > 0) {
+                newOpenSections["locations"] = true;
+                overallMatchFound = true;
+            } else {
+                newNoMatch["locations"] = true;
+            }
 
-                // Check in Hierarchy
-                const newNoMatch = {}; // Create a new object to track no matches in this iteration
-                Array.from(hierarchy.keys()).forEach(level1Name => {
-                    newState[level1Name] = true; // Always open level 1 on search
-                    let level1Match = false;
-                    const level2Map = hierarchy.get(level1Name);
-                    if (level2Map) {
-                        const level2NoMatch = {};
-                        let level2MatchOverall = false;
-                        Array.from(level2Map.keys()).forEach(level2Name => {
-                            let level2HasMatch = false;
-                            const level3Map = level2Map.get(level2Name);
-                            if (level3Map) {
-                                const level3NoMatch = {};
-                                let level3MatchOverall = false;
-                                Array.from(level3Map.keys()).forEach(level3Name => {
-                                    let level3HasMatch = false;
-                                    const level4Set = level3Map.get(level3Name);
-                                    if (level4Set) {
-                                        const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
-                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                        );
-                                        if (hasMatchingLevel4) {
-                                            level3HasMatch = true;
-                                            level3MatchOverall = true;
-                                            level2HasMatch = true;
-                                            level2MatchOverall = true;
-                                            level1Match = true;
-                                            foundMatchOverall = true;
-                                        } else {
-                                            level3NoMatch[level3Name] = true;
-                                        }
-                                    }
-                                });
-                                if (!level3MatchOverall) {
-                                    level2NoMatch[level2Name] = true;
-                                }
-                                newNoMatch[level1Name] = { // Use the newNoMatch object
-                                    ...newNoMatch[level1Name],
-                                    [level2Name]: level3NoMatch,
-                                };
-                            }
-                            if (level2HasMatch) {
-                                newState[level1Name] = true;
-                            }
-                            if (!level2HasMatch) {
-                                level2NoMatch[level2Name] = true;
-                            }
-                        });
-                        if (!level1Match) {
-                            newNoMatch[level1Name] = level2NoMatch; // Use the newNoMatch object
+            // Check Hierarchy
+            const hierarchyMatches = {};
+            hierarchy.forEach((level2Map, level1Name) => {
+                let level1HasMatch = false;
+                const level2NoMatch = {};
+
+                level2Map.forEach((level3Map, level2Name) => {
+                    let level2HasMatch = false;
+                    const level3NoMatch = {};
+
+                    level3Map.forEach((level4Set, level3Name) => {
+                        const matchingLevel4 = Array.from(level4Set).filter(level4 =>
+                            level4.toLowerCase().includes(searchTerm.toLowerCase())
+                        );
+                        if (matchingLevel4.length > 0) {
+                            if (!hierarchyMatches[level1Name]) hierarchyMatches[level1Name] = {};
+                            if (!hierarchyMatches[level1Name][level2Name]) hierarchyMatches[level1Name][level2Name] = {};
+                            hierarchyMatches[level1Name][level2Name][level3Name] = matchingLevel4;
+                            level1HasMatch = true;
+                            level2HasMatch = true;
+                            overallMatchFound = true;
+                        } else {
+                            level3NoMatch[level3Name] = true;
                         }
+                    });
+                    if (level2HasMatch) {
+                        newOpenSections[level1Name] = true;
+                        newOpenSections[level1Name + "-" + level2Name] = true;
+                    } else {
+                        level2NoMatch[level2Name] = level3NoMatch;
                     }
                 });
-                setNoMatch(newNoMatch); // Update noMatch state
-                if (!foundMatchOverall) {
-                    // If no overall match, expand all up to depth 2 and show "No match"
-                    const allOpen = {};
-                    Array.from(hierarchy.keys()).forEach(level1Name => {
-                        allOpen[level1Name] = true;
-                        const level2Map = hierarchy.get(level1Name);
-                        const level2NoMatchAll = {};
-                        if (level2Map) {
-                            Array.from(level2Map.keys()).forEach(level2Name => {
-                                level2NoMatchAll[level2Name] = {}; // Indicate no match at this level
-                            });
-                        }
-                        newNoMatch[level1Name] = level2NoMatchAll;
-                    });
-                    allOpen["locations"] = true;
-                    newNoMatch["locations"] = true;
-                    setNoMatch(newNoMatch);
-                    setOpenSections(allOpen);
+                if (!level1HasMatch) {
+                    newNoMatch[level1Name] = level2NoMatch;
+                } else {
+                    newOpenSections[level1Name] = true;
                 }
-
-                return newState;
             });
+
+            setOpenSections(newOpenSections);
+            setNoMatch(newNoMatch);
+
+            if (!overallMatchFound && searchTerm) {
+                const allOpen = {};
+                const allNoMatch = {};
+                Array.from(hierarchy.keys()).forEach(level1Name => {
+                    allOpen[level1Name] = true;
+                    const level2NoMatchAll = {};
+                    const level2Map = hierarchy.get(level1Name);
+                    if (level2Map) {
+                        Array.from(level2Map.keys()).forEach(level2Name => {
+                            level2NoMatchAll[level2Name] = {};
+                        });
+                    }
+                    allNoMatch[level1Name] = level2NoMatchAll;
+                });
+                allOpen["locations"] = true;
+                allNoMatch["locations"] = true;
+                setOpenSections(allOpen);
+                setNoMatch(allNoMatch);
+            }
+
         } else {
             setOpenSections({});
             setNoMatch({});
@@ -168,7 +156,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
             const showDropdown = level1Name === "Cloud Solution Builders & ISVs" || level1Name === "Cloud Services Partners";
             const level1NoMatch = noMatch[level1Name];
 
-            const hasMatchingChildren = Array.from(level2Map.entries()).some(([, level3Map]) =>
+            const hasMatchingChildrenAtLevel1 = Array.from(level2Map.entries()).some(([, level3Map]) =>
                 Array.from(level3Map.entries()).some(([, level4Set]) =>
                     Array.from(level4Set).some(level4Name =>
                         level4Name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -176,7 +164,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                 )
             );
 
-            const shouldRenderLevel1 = !searchTerm || hasMatchingChildren || (level1NoMatch && Object.keys(level1NoMatch).length > 0);
+            const shouldRenderLevel1 = !searchTerm || hasMatchingChildrenAtLevel1 || (level1NoMatch && Object.keys(level1NoMatch).length > 0);
 
             if (!shouldRenderLevel1 && searchTerm) {
                 return null;
@@ -208,16 +196,16 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                     {level1Open && showDropdown && (
                         <div className="ml-4">
                             {Array.from(level2Map.entries()).map(([level2Name, level3Map]) => {
+                                const level2Open = openSections[level1Name + "-" + level2Name] === true;
                                 const level2NoMatch = level1NoMatch && level1NoMatch[level2Name];
-                                const hasMatchingLevel3 = Array.from(level3Map.entries()).some(([, level4Set]) =>
-                                    Array.from(level3Map.entries()).some(([, level4Set]) =>
-                                        Array.from(level4Set).some(level4Name =>
-                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                        )
+
+                                const hasMatchingChildrenAtLevel2 = Array.from(level3Map.entries()).some(([, level4Set]) =>
+                                    Array.from(level4Set).some(level4Name =>
+                                        level4Name.toLowerCase().includes(searchTerm.toLowerCase())
                                     )
                                 );
 
-                                const shouldRenderLevel2 = !searchTerm || hasMatchingLevel3 || (level2NoMatch && Object.keys(level2NoMatch).length > 0);
+                                const shouldRenderLevel2 = !searchTerm || hasMatchingChildrenAtLevel2 || (level2NoMatch && Object.keys(level2NoMatch).length > 0);
 
                                 if (!shouldRenderLevel2 && searchTerm) {
                                     return null;
@@ -225,63 +213,86 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
                                 return (
                                     <div key={level2Name} className="mb-2">
-                                        <h4 className="text-sm font-semibold ml-4 mb-1">
-                                            {level2Name}
-                                            {searchTerm && !hasMatchingLevel3 && level2NoMatch && (Object.keys(level2NoMatch).length > 0) && (
+                                        <h4
+                                            onClick={() => toggleSection(level1Name + "-" + level2Name)}
+                                            className={`text-sm font-semibold ml-4 mb-1 cursor-pointer flex justify-between items-center`}
+                                        >
+                                            <span>{level2Name}</span>
+                                            {Object.keys(level3Map).length > 0 && (
+                                                <svg
+                                                    className={`w-3 h-3 transform transition-transform ${level2Open ? "rotate-180" : ""}`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                </svg>
+                                            )}
+                                            {searchTerm && !hasMatchingChildrenAtLevel2 && level2NoMatch && Object.keys(level2NoMatch).length > 0 && (
                                                 <span className="text-gray-500 text-xs ml-2">(No match)</span>
                                             )}
                                         </h4>
-                                        {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => {
-                                            const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
-                                                level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                            );
-                                            const level3NoMatch = level2NoMatch && level2NoMatch[level3Name];
+                                        {level2Open && (
+                                            <div className="ml-4">
+                                                {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => {
+                                                    const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
+                                                        level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                                    );
+                                                    const level3NoMatch = level2NoMatch && level2NoMatch[level3Name];
 
-                                            const shouldRenderLevel3 = !searchTerm || hasMatchingLevel4 || level3NoMatch;
+                                                    const shouldRenderLevel3 = !searchTerm || hasMatchingLevel4 || level3NoMatch;
 
-                                            if (!shouldRenderLevel3 && searchTerm) {
-                                                return null;
-                                            }
+                                                    if (!shouldRenderLevel3 && searchTerm) {
+                                                        return null;
+                                                    }
 
-                                            return (
-                                                <div key={level3Name} className="mb-2">
-                                                    <h5 className="text-sm font-medium ml-8 mb-1">
-                                                        {level3Name}
-                                                        {searchTerm && !hasMatchingLevel4 && level3NoMatch && (
-                                                            <span className="text-gray-500 text-xs ml-2">(No match)</span>
-                                                        )}
-                                                    </h5>
-                                                    <div className="ml-8 flex flex-col gap-2">
-                                                        {searchTerm && !hasMatchingLevel4 && level3NoMatch ? (
-                                                            <span className="text-gray-500 text-sm">No matches</span>
-                                                        ) : (
-                                                            Array.from(level4Set)
-                                                                .filter(level4Name =>
-                                                                    !searchTerm || level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                                                )
-                                                                .map((level4Name, idx) => (
-                                                                    <label key={idx} className={`flex items-center space-x-2 cursor-pointer text-xs ${searchTerm && level4Name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            value={level4Name}
-                                                                            checked={selectedFilters[key]?.includes(level4Name) || false}
-                                                                            onChange={() => handleFilterToggle(level4Name)}
-                                                                            className="checkbox checkbox-sm"
-                                                                        />
-                                                                        <span>{level4Name}</span>
-                                                                    </label>
-                                                                ))
-                                                        )}
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
+                                                    return (
+                                                        <div key={level3Name} className="mb-2">
+                                                            <h5 className="text-sm font-medium ml-8 mb-1">
+                                                                {level3Name}
+                                                                {searchTerm && !hasMatchingLevel4 && level3NoMatch && (
+                                                                    <span className="text-gray-500 text-xs ml-2">(No match)</span>
+                                                                )}
+                                                            </h5>
+                                                            <div className="ml-8 flex flex-col gap-2">
+                                                                {Array.from(level4Set)
+                                                                    .filter(level4Name =>
+                                                                        !searchTerm || level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                                                    )
+                                                                    .map((level4Name, idx) => (
+                                                                        <label key={idx} className={`flex items-center space-x-2 cursor-pointer text-xs ${searchTerm && level4Name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                value={level4Name}
+                                                                                checked={selectedFilters[key]?.includes(level4Name) || false}
+                                                                                onChange={() => handleFilterToggle(level4Name)}
+                                                                                className="checkbox checkbox-sm"
+                                                                            />
+                                                                            <span>{level4Name}</span>
+                                                                        </label>
+                                                                    ))}
+                                                                {searchTerm && Array.from(level4Set).every(level4Name => !level4Name.toLowerCase().includes(searchTerm.toLowerCase())) && (
+                                                                    <span className="text-gray-500 text-xs">No matches</span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                                {searchTerm && Object.keys(level3Map).length > 0 && Array.from(level3Map.entries()).every(([, level4Set]) => Array.from(level4Set).every(ln => !ln.toLowerCase().includes(searchTerm.toLowerCase()))) && (
+                                                    <div className="ml-4 text-gray-500 text-xs">(No match)</div>
+                                                )}
+                                            </div>
+                                        )}
+                                        {searchTerm && Object.keys(level3Map).length === 0 && (level2NoMatch && Object.keys(level2NoMatch).length > 0) && (
+                                            <div className="ml-4 text-gray-500 text-xs">(No match)</div>
+                                        )}
                                     </div>
                                 );
                             })}
                         </div>
                     )}
-                    {searchTerm && showDropdown && !hasMatchingChildren && (!level1NoMatch || Object.keys(level1NoMatch).length === 0) && (
+                    {searchTerm && showDropdown && !hasMatchingChildrenAtLevel1 && (!level1NoMatch || Object.keys(level1NoMatch).length === 0) && (
                         <div className="ml-4 text-gray-500 text-sm">(No match)</div>
                     )}
                 </div>

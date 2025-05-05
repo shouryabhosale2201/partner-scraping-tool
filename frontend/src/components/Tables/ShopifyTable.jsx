@@ -1,3 +1,4 @@
+//shopifyTable.jsx
 import React, { useState, useMemo, useEffect } from 'react';
 
 const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChange }) => {

@@ -1,3 +1,4 @@
+//salesforceTable.jsx
 import React, { useEffect, useState, useMemo } from "react";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
