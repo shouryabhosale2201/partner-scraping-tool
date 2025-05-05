@@ -1,6 +1,4 @@
-// MicrosoftTable.jsx
-
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
     const [filters, setFilters] = useState({
@@ -8,9 +6,10 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         services: [],
         product: [],
         solution: [],
-        country:[],
+        country: [],
     });
     const [searchTerm, setSearchTerm] = useState("");
+    const [openSections, setOpenSections] = useState({}); // State to manage dropdown open/close
 
     useEffect(() => {
         const fetchFilters = async () => {
@@ -39,45 +38,69 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             ...selectedFilters,
             [type]: selectedFilters[type]?.includes(value)
                 ? selectedFilters[type].filter(item => item !== value)
-                : [...(selectedFilters[type] || []), value]
+                : [...(selectedFilters[type] || []), value],
         };
         setSelectedFilters(updatedFilters);
         onFilterChange(updatedFilters);
+    };
+
+    const toggleSection = (sectionName) => {
+        setOpenSections(prev => ({
+            ...prev,
+            [sectionName]: !prev[sectionName]
+        }));
     };
 
     const renderFilterSection = (title, items, type) => {
         const filteredItems = items.filter(item =>
             item.toLowerCase().includes(searchTerm.toLowerCase())
         );
+        const isOpen = openSections[type] === true; // Get open state
 
         return (
             <div className="mb-6">
-                <h3 className="text-md font-semibold mb-2 capitalize">{title}</h3>
-                <div className="flex flex-col gap-2">
-                    {filteredItems.length > 0 ? (
-                        filteredItems.map((item, index) => (
-                            <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    value={item}
-                                    checked={selectedFilters[type]?.includes(item) || false}
-                                    onChange={() => handleFilterChange(type, item)}
-                                    className="checkbox checkbox-sm"
-                                />
-                                <span>{item}</span>
-                            </label>
-                        ))
-                    ) : (
-                        <span className="text-gray-500 text-sm">No matches</span>
-                    )}
-                </div>
+                <button
+                    onClick={() => toggleSection(type)} // Use toggleSection
+                    className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-semibold rounded hover:bg-gray-300"
+                >
+                    <span>{title}</span>
+                    <svg
+                        className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                {isOpen && ( // Conditionally render content
+                    <div className="flex flex-col gap-2 pl-2 mt-2">
+                        {filteredItems.length > 0 ? (
+                            filteredItems.map((item, index) => (
+                                <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        value={item}
+                                        checked={selectedFilters[type]?.includes(item) || false}
+                                        onChange={() => handleFilterChange(type, item)}
+                                        className="checkbox checkbox-sm"
+                                    />
+                                    <span>{item}</span>
+                                </label>
+                            ))
+                        ) : (
+                            <span className="text-gray-500 text-sm">No matches</span>
+                        )}
+                    </div>
+                )}
             </div>
         );
     };
-    return (
-        <div className="w-1/7 min-w-[250px] border-r border-gray-200 shadow-md p-4">
-            <div className="sticky top-0 z-10 p-2">
 
+    return (
+        <div className="w-1/7 min-w-[250px] border-r border-gray-200 shadow-md p-4 h-screen flex flex-col">
+            <div className="sticky top-0 z-10 bg-gray-100 p-2 pb-4">
                 <div className="mb-4">
                     <input
                         type="text"
@@ -105,6 +128,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                                 country: []
                             });
                             setSearchTerm("");
+                            setOpenSections({}); // Reset open sections
                         }}
                         className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
                     >
@@ -114,7 +138,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                 <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
             </div>
 
-            <div className="overflow-y-auto max-h-[calc(100vh-180px)] pl-2">
+            <div className="overflow-y-auto flex-1 pl-2">
                 {renderFilterSection("Industry", filters.industry, "industry")}
                 {renderFilterSection("Services", filters.services, "services")}
                 {renderFilterSection("Product", filters.product, "product")}
@@ -140,7 +164,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     const columnMapping = {
         'name': { display: 'Partner Name', width: '12%' },
         'description': { display: 'Description', width: '25%' },
-        'country':{display: 'Country', width:'15%'},
+        'country': { display: 'Country', width: '15%' },
         'product': { display: 'Products', width: '15%' },
         'solutions': { display: 'Solutions', width: '15%' },
         'serviceType': { display: 'Service Types', width: '15%' },
@@ -153,7 +177,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
 
         const firstRow = data[0];
         return Object.keys(firstRow)
-            .filter(key => key !== 'id' && key !== 'link') // Exclude id column
+            .filter(key => key !== 'id' && key !== 'link') // Exclude id and link columns
             .map(key => ({
                 key,
                 display: columnMapping[key]?.display || key,
@@ -170,38 +194,77 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         }
     };
 
-    // Filter data based on search term
+    // Filter data based on selected filters
     const filteredData = data?.filter(item => {
-        if (!tableSearchTerm) return true;
+        if (
+            selectedFilters.industry?.length ||
+            selectedFilters.services?.length ||
+            selectedFilters.product?.length ||
+            selectedFilters.solution?.length ||
+            selectedFilters.country?.length
+        ) {
+            let matches = true; // Start with true, and disprove
 
-        // Search across all available columns
+            if (selectedFilters.industry?.length) {
+                matches = matches && selectedFilters.industry.some(filter =>
+                    item.industryFocus?.includes(filter)
+                );
+            }
+            if (selectedFilters.services?.length) {
+                matches = matches && selectedFilters.services.some(filter =>
+                    item.serviceType?.includes(filter)
+                );
+            }
+            if (selectedFilters.product?.length) {
+                matches = matches && selectedFilters.product.some(filter =>
+                    item.product?.includes(filter)
+                );
+            }
+            if (selectedFilters.solution?.length) {
+                matches = matches && selectedFilters.solution.some(filter =>
+                    item.solutions?.includes(filter)
+                );
+            }
+            if (selectedFilters.country?.length) {
+                matches = matches && selectedFilters.country.some(filter =>
+                    item.country?.includes(filter)
+                );
+            }
+
+            return matches;
+        }
+        return true;
+    }) || [];
+
+    // Apply table search
+    const searchedData = filteredData.filter(item => {
+        if (!tableSearchTerm) return true;
         return availableColumns.some(column => {
             const value = item[column.key];
             if (!value) return false;
-
             if (Array.isArray(value)) {
                 return value.join(", ").toLowerCase().includes(tableSearchTerm.toLowerCase());
             } else {
                 return String(value).toLowerCase().includes(tableSearchTerm.toLowerCase());
             }
         });
-    }) || [];
+    });
 
     // Render cell content properly handling different data types
     const renderCellContent = (item, column) => {
         const value = item[column.key];
 
         if (!value) return "N/A";
-        
+
         // If the column is 'name', wrap it in a link (anchor tag)
-    if (column.key === 'name' && item.link) {
-        return (
-            <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-                {value}
-            </a>
-        );
-    }
-    
+        if (column.key === 'name' && item.link) {
+            return (
+                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                    {value}
+                </a>
+            );
+        }
+
         // Handle array data (stored as JSON strings or actual arrays)
         let content;
         if (Array.isArray(value)) {
@@ -243,6 +306,9 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                         onChange={(e) => setTableSearchTerm(e.target.value)}
                         className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
+                    <div className="text-sm text-gray-600 mt-2">
+                        Showing {searchedData.length} results
+                    </div>
                 </div>
 
                 <table className="max-w-[1470px] w-full shadow-md rounded-lg">
@@ -257,8 +323,8 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.length > 0 ? (
-                            filteredData.map((item, index) => (
+                        {searchedData.length > 0 ? (
+                            searchedData.map((item, index) => (
                                 <tr
                                     key={index}
                                     className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-3 last:border-b-0 hover:bg-gray-50 transition"
@@ -279,14 +345,14 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                             </tr>
                         )}
                     </tbody>
-                    <tfoot>
+                    {/* <tfoot>
                         <tr>
                             <th>#</th>
                             {availableColumns.map((column) => (
                                 <th key={column.key}>{column.display}</th>
                             ))}
                         </tr>
-                    </tfoot>
+                    </tfoot> */}
                 </table>
             </div>
         </div>

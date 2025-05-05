@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 
 const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChange }) => {
     const [searchTerm, setSearchTerm] = useState("");
+    const [openSections, setOpenSections] = useState({}); // To manage open/close state of dropdowns
 
     const handleFilterToggle = (filterName) => {
         const newSelected = { ...selectedFilters };
@@ -53,56 +54,92 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
         return set;
     }, [data]);
 
+    const toggleSection = (sectionName) => {
+        setOpenSections(prev => ({
+            ...prev,
+            [sectionName]: !prev[sectionName] // Toggle the boolean value
+        }));
+    };
 
     const renderHierarchy = () => {
         const key = "oracleFilters";
-        return Array.from(hierarchy.entries()).map(([level1Name, level2Map]) => (
-            <div key={level1Name} className="mb-4">
-                <h3 className="text-md font-bold mb-2">{level1Name}</h3>
-                {Array.from(level2Map.entries()).map(([level2Name, level3Map]) => (
-                    <div key={level2Name} className="ml-4 mb-2">
-                        <h4 className="text-sm font-semibold mb-1">{level2Name}</h4>
-                        {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => (
-                            <div key={level3Name} className="ml-4 mb-2">
-                                <h5 className="text-sm font-medium mb-1">{level3Name}</h5>
-                                <div className="flex flex-col gap-2 ml-2">
-                                    {Array.from(level4Set)
-                                        .filter(level4Name =>
-                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                        )
-                                        .map((level4Name, idx) => (
-                                            <label key={idx} className="flex items-center space-x-2 cursor-pointer">
-                                                <input
-                                                    type="checkbox"
-                                                    value={level4Name}
-                                                    checked={selectedFilters[key]?.includes(level4Name) || false}
-                                                    onChange={() => handleFilterToggle(level4Name)}
-                                                    className="checkbox checkbox-sm"
-                                                />
-                                                <span>{level4Name}</span>
-                                            </label>
+        return Array.from(hierarchy.entries()).map(([level1Name, level2Map]) => {
+            const level1Open = openSections[level1Name] === true;
+            const showDropdown = level1Name === "Cloud Solution Builders & ISVs" || level1Name === "Cloud Services Partners";
+
+            return (
+                <div key={level1Name} className="mb-4">
+                    <button
+                        onClick={() => {
+                            if (showDropdown) {
+                                toggleSection(level1Name);
+                            }
+                        }}
+                        className={`w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-bold rounded hover:bg-gray-200 ${showDropdown ? "cursor-pointer" : ""}`}
+                    >
+                        <span>{level1Name}</span>
+                        {showDropdown && (
+                            <svg
+                                className={`w-4 h-4 transform transition-transform ${level1Open ? "rotate-180" : ""}`}
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        )}
+                    </button>
+                    {level1Open && showDropdown && (
+                        <div className="ml-4">
+                            {Array.from(level2Map.entries()).map(([level2Name, level3Map]) => {
+                                return (
+                                    <div key={level2Name} className="mb-2">
+                                        <h4 className="text-sm font-semibold ml-4 mb-1">{level2Name}</h4>
+                                        {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => (
+                                            <div key={level3Name} className="mb-2">
+                                                <h5 className="text-sm font-medium ml-8 mb-1">{level3Name}</h5>
+                                                <div className="ml-8 flex flex-col gap-2">
+                                                    {Array.from(level4Set)
+                                                        .filter(level4Name =>
+                                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
+                                                        )
+                                                        .map((level4Name, idx) => (
+                                                            <label key={idx} className="flex items-center space-x-2 cursor-pointer text-xs">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    value={level4Name}
+                                                                    checked={selectedFilters[key]?.includes(level4Name) || false}
+                                                                    onChange={() => handleFilterToggle(level4Name)}
+                                                                    className="checkbox checkbox-sm"
+                                                                />
+                                                                <span>{level4Name}</span>
+                                                            </label>
+                                                        ))}
+                                                </div>
+                                            </div>
                                         ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </div>
-        ));
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+            );
+        });
     };
 
     const renderLocations = () => {
         const key = "oracleFilters";
-        const [isOpen, setIsOpen] = useState(false); // toggle dropdown
-    
+        const isOpen = openSections["locations"] === true; // Use a unique key for locations
         const filteredLocations = Array.from(locationSet).filter(location =>
             location.toLowerCase().includes(searchTerm.toLowerCase())
         );
-    
+
         return (
             <div className="mb-6">
                 <button
-                    onClick={() => setIsOpen(!isOpen)}
+                    onClick={() => toggleSection("locations")} // Use "locations" as the key
                     className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-bold rounded hover:bg-gray-200"
                 >
                     <span>Countries (APAC)</span>
@@ -116,7 +153,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-    
+
                 {isOpen && (
                     <div className="flex flex-col gap-2 mt-2 ml-2 max-h-64 overflow-y-auto">
                         {filteredLocations.map((location, idx) => (
@@ -136,7 +173,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
             </div>
         );
     };
-    
+
 
 
     return (
@@ -159,6 +196,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                             setSelectedFilters({});
                             onFilterChange({});
                             setSearchTerm("");
+                            setOpenSections({}); // Reset open sections
                         }}
                         className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
                     >
@@ -167,7 +205,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                 </div>
 
                 <h2 className="text-lg font-semibold mb-2">Apply Filters</h2>
-                
+
                 {/* Add a divider to clearly separate the fixed header from scrollable content */}
                 <div className="border-b border-gray-300 mb-4"></div>
             </div>
@@ -186,7 +224,7 @@ const OracleTable = ({ data }) => {
     const [tableSearchTerm, setTableSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const partnersPerPage = 200;
-    
+
     if (!data || data.length === 0) return null;
 
     // Filter the data based on selected filters
@@ -203,38 +241,38 @@ const OracleTable = ({ data }) => {
         // Split the selected filters into expertise and location groups
         const selectedExpertise = [];
         const selectedLocations = [];
-        
+
         // Categorize the selections
         selected.forEach(item => {
             // Check if this item exists in any partner's filters (expertise) or locations
-            const isExpertise = data.some(partner => 
+            const isExpertise = data.some(partner =>
                 partner.filters?.some(f => f.level4Name === item)
             );
-            
-            const isLocation = data.some(partner => 
+
+            const isLocation = data.some(partner =>
                 partner.locations?.some(loc => loc === item)
             );
-            
+
             if (isExpertise) selectedExpertise.push(item);
             if (isLocation) selectedLocations.push(item);
         });
 
         return data.filter((item) => {
             // For expertise: ALL selected expertise must match (AND logic)
-            const expertiseMatch = selectedExpertise.length === 0 || 
-                selectedExpertise.every(exp => 
+            const expertiseMatch = selectedExpertise.length === 0 ||
+                selectedExpertise.every(exp =>
                     item.filters?.some(f => f.level4Name === exp)
                 );
-            
+
             // For locations: ALL selected locations must match (AND logic)
-            const locationMatch = selectedLocations.length === 0 || 
-                selectedLocations.every(loc => 
+            const locationMatch = selectedLocations.length === 0 ||
+                selectedLocations.every(loc =>
                     item.locations?.includes(loc)
                 );
-            
+
             // Between expertise and location categories, use OR logic
-            return (selectedExpertise.length > 0 && expertiseMatch) || 
-                   (selectedLocations.length > 0 && locationMatch);
+            return (selectedExpertise.length > 0 && expertiseMatch) ||
+                (selectedLocations.length > 0 && locationMatch);
         });
     }, [data, selectedFilters]);
 
@@ -248,15 +286,15 @@ const OracleTable = ({ data }) => {
     const totalPages = Math.ceil(searchFilteredData.length / partnersPerPage);
     const startIndex = (currentPage - 1) * partnersPerPage;
     const paginatedData = searchFilteredData.slice(startIndex, startIndex + partnersPerPage);
-    
+
     const handlePreviousPage = () => {
         setCurrentPage(prev => Math.max(prev - 1, 1));
     };
-    
+
     const handleNextPage = () => {
         setCurrentPage(prev => Math.min(prev + 1, totalPages));
     };
-    
+
     // Determine if buttons should be disabled
     const isPreviousDisabled = currentPage === 1;
     const isNextDisabled = currentPage === totalPages || searchFilteredData.length <= partnersPerPage;
@@ -318,24 +356,24 @@ const OracleTable = ({ data }) => {
                                 </tr>
                             ))}
                         </tbody>
-                        <tfoot>
+                        {/* <tfoot>
                             <tr>
                                 <th className="w-12">#</th>
                                 <th className="w-64 text-left">Partner Name</th>
                                 <th className="w-20 text-left">Link</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> */}
                     </table>
-                    
+
                     {/* Pagination Controls */}
                     <div className="mt-4 flex justify-center space-x-4">
-                        <button 
-                            onClick={handlePreviousPage} 
+                        <button
+                            onClick={handlePreviousPage}
                             disabled={isPreviousDisabled}
                             className={`px-4 py-2 rounded ${
-                                isPreviousDisabled 
-                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                                : 'bg-orange-500 text-white hover:bg-orange-600'
+                                isPreviousDisabled
+                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                    : 'bg-orange-500 text-white hover:bg-orange-600'
                             }`}
                         >
                             Previous
@@ -343,13 +381,13 @@ const OracleTable = ({ data }) => {
                         <div className="flex items-center text-gray-700">
                             Page {currentPage} of {Math.max(1, totalPages)}
                         </div>
-                        <button 
-                            onClick={handleNextPage} 
+                        <button
+                            onClick={handleNextPage}
                             disabled={isNextDisabled}
                             className={`px-4 py-2 rounded ${
-                                isNextDisabled 
-                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
-                                : 'bg-orange-500 text-white hover:bg-orange-600'
+                                isNextDisabled
+                                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                    : 'bg-orange-500 text-white hover:bg-orange-600'
                             }`}
                         >
                             Next

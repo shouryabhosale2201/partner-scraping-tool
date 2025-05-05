@@ -1,11 +1,10 @@
 // SalesForceTable.jsx
-import React from "react";
-import { useEffect, useState } from "react";
-
+import React, { useEffect, useState, useMemo } from "react";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
   const [filtersBySection, setFiltersBySection] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [openSections, setOpenSections] = useState({}); // Track open/closed state of sections
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -13,7 +12,6 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         const res = await fetch("http://localhost:5000/api/v1/salesforce/filters");
         if (!res.ok) throw new Error("Failed to fetch filters");
         const data = await res.json();
-        // console.log("Fetched filters:", data);
         setFiltersBySection(data);
       } catch (error) {
         console.error("Error fetching filters:", error);
@@ -24,27 +22,19 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     fetchFilters();
   }, []);
 
+    const toggleSection = (section) => {
+        setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
+    };
+
   const handleFilterChange = (section, value, parentCountry = null) => {
-    // Create normalized section keys
-    const sectionKey = section === "Salesforce Expertise"
-      ? "salesforceExpertise"
-      : section === "Industry Expertise"
-        ? "industryExpertise"
-        : section === "Country"
-          ? "region" // This is for regions (Alabama, Arizona, etc.)
-          : section.toLowerCase();
+    const sectionKey = normalizeSectionKey(section);
+    const updatedFilters = { ...selectedFilters };
 
-    // Special handling for country groups (UnitedStates, Canada, etc.)
     if (parentCountry) {
-      // We're dealing with a region within a country
       const countryKey = "country";
-      const updatedFilters = { ...selectedFilters };
-
-      // Initialize arrays if they don't exist
       if (!updatedFilters[countryKey]) updatedFilters[countryKey] = [];
       if (!updatedFilters[sectionKey]) updatedFilters[sectionKey] = [];
 
-      // Add or remove the region
       if (updatedFilters[sectionKey].includes(value)) {
         updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
         if (updatedFilters[sectionKey].length === 0) delete updatedFilters[sectionKey];
@@ -52,116 +42,124 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
       }
 
-      // Make sure the parent country is included in country filters
       if (!updatedFilters[countryKey].includes(parentCountry)) {
         updatedFilters[countryKey] = [...updatedFilters[countryKey], parentCountry];
       }
 
-      // If no regions are selected for this country, remove the country too
       const countryRegions = updatedFilters[sectionKey] || [];
       if (countryRegions.length === 0) {
         updatedFilters[countryKey] = updatedFilters[countryKey].filter(c => c !== parentCountry);
         if (updatedFilters[countryKey].length === 0) delete updatedFilters[countryKey];
       }
-
-      setSelectedFilters(updatedFilters);
-      onFilterChange(updatedFilters);
     } else {
-      // Standard handling for non-nested filters
-      const updatedFilters = { ...selectedFilters };
-
-      if (!updatedFilters[sectionKey]) {
-        updatedFilters[sectionKey] = [];
-      }
-
-      if (updatedFilters[sectionKey].includes(value)) {
-        updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
-        if (updatedFilters[sectionKey].length === 0) {
-          delete updatedFilters[sectionKey];
+        if (!updatedFilters[sectionKey]) {
+            updatedFilters[sectionKey] = [];
         }
-      } else {
-        updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
-      }
 
-      setSelectedFilters(updatedFilters);
-      onFilterChange(updatedFilters);
+        if (updatedFilters[sectionKey].includes(value)) {
+            updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
+            if (updatedFilters[sectionKey].length === 0) {
+                delete updatedFilters[sectionKey];
+            }
+        } else {
+            updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
+        }
     }
+
+    setSelectedFilters(updatedFilters);
+    onFilterChange(updatedFilters);
   };
 
-  const renderSection = (section, filters) => {
-    const sectionKey = section === "Salesforce Expertise"
-      ? "salesforceExpertise"
-      : section === "Industry Expertise"
-        ? "industryExpertise"
-        : section === "Country"
-          ? "region" // Changed to "region" for the checkbox values
-          : section.toLowerCase();
+  const normalizeSectionKey = (section) => {
+    if (section === "Salesforce Expertise") return "salesforceExpertise";
+    if (section === "Industry Expertise") return "industryExpertise";
+    if (section === "Country") return "region";
+    return section.toLowerCase();
+  };
 
-    const isNested = section === "Country";
+    const renderSection = (section, filters) => {
+        const sectionKey = normalizeSectionKey(section);
+        const isNested = section === "Country";
+        const isOpen = openSections[section] === true; // Get open state
 
-    // Flat filters: apply search filtering
-    const filteredItems = !isNested
-      ? filters.filter(item =>
-        item.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      : filters.map(country => ({
-        ...country,
-        children: country.children.filter(region =>
-          region.toLowerCase().includes(searchTerm.toLowerCase())
-        ),
-      })).filter(country => country.children.length > 0); // Only include if matching children
-
-    return (
-      <div key={section} className="mb-6">
-        <h3 className="text-md font-semibold mb-2">{section}</h3>
-        <div className="flex flex-col gap-2 pl-1">
-          {isNested ? (
-            filteredItems.map((country, i) => (
-              <div key={i} className="pl-2">
-                <h4 className="font-medium mb-1">{country.label}</h4>
-                <div className="flex flex-col gap-1 pl-4">
-                  {country.children.map((region, j) => (
-                    <label key={j} className="flex items-start space-x-2 cursor-pointer break-words max-w-full">
-                      <input
-                        type="checkbox"
-                        value={region}
-                        checked={selectedFilters[sectionKey]?.includes(region) || false}
-                        onChange={() => handleFilterChange(section, region, country.label)}
-                        className="checkbox checkbox-sm"
-                      />
-                      <span className="text-sm break-words max-w-[200px]">{region}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            ))
-          ) : (
-            // Non-nested filters have a bug fix here - changed 'region' to 'item'
-            filteredItems.length > 0 ? (
-              filteredItems.map((item, index) => (
-                <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    value={item}
-                    checked={selectedFilters[sectionKey]?.includes(item) || false}
-                    onChange={() => handleFilterChange(section, item)}
-                    className="checkbox checkbox-sm"
-                  />
-                  <span>{item}</span>
-                </label>
-              ))
-            ) : (
-              <span className="text-gray-500 text-sm">No matches</span>
+        const filteredItems = !isNested
+            ? filters.filter(item =>
+                item.toLowerCase().includes(searchTerm.toLowerCase())
             )
-          )}
-        </div>
-      </div>
-    );
-  };
+            : filters.map(country => ({
+                ...country,
+                children: country.children.filter(region =>
+                    region.toLowerCase().includes(searchTerm.toLowerCase())
+                ),
+            })).filter(country => country.children.length > 0);
+
+        return (
+            <div key={section} className="mb-6">
+                <button
+                    onClick={() => toggleSection(section)} // Use toggleSection
+                    className="w-full flex justify-between items-center bg-gray-200 px-4 py-2 text-md font-semibold rounded hover:bg-gray-300"
+                >
+                    <span>{section}</span>
+                    <svg
+                        className={`w-4 h-4 transform transition-transform ${isOpen ? "rotate-180" : ""}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                {isOpen && (  // Conditionally render content
+                <div className="flex flex-col gap-2 pl-2 mt-2">
+                    {isNested ? (
+                        filteredItems.map((country, i) => (
+                            <div key={i} className="pl-2">
+                                <h4 className="font-medium mb-1">{country.label}</h4>
+                                <div className="flex flex-col gap-1 pl-4">
+                                    {country.children.map((region, j) => (
+                                        <label key={j} className="flex items-start space-x-2 cursor-pointer break-words max-w-full">
+                                            <input
+                                                type="checkbox"
+                                                value={region}
+                                                checked={selectedFilters[sectionKey]?.includes(region) || false}
+                                                onChange={() => handleFilterChange(section, region, country.label)}
+                                                className="checkbox checkbox-sm"
+                                            />
+                                            <span className="text-sm break-words max-w-[200px]">{region}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        filteredItems.length > 0 ? (
+                            filteredItems.map((item, index) => (
+                                <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        value={item}
+                                        checked={selectedFilters[sectionKey]?.includes(item) || false}
+                                        onChange={() => handleFilterChange(section, item)}
+                                        className="checkbox checkbox-sm"
+                                    />
+                                    <span>{item}</span>
+                                </label>
+                            ))
+                        ) : (
+                            <span className="text-gray-500 text-sm">No matches</span>
+                        )
+                    )}
+                    </div>
+                )}
+            </div>
+        );
+    };
 
   return (
-    <div className="w-1/7 min-w-[250px] border-r border-gray-200 shadow-md p-4">
-      <div className="sticky top-0 z-10 p-2">
+    <div className="w-1/7 min-w-[280px] border-r border-gray-200 shadow-md p-4 h-screen flex flex-col sticky top-0 overflow-y-auto">
+      <div className="sticky top-0 z-10 bg-gray-100 pb-4">
         <div className="mb-4">
           <input
             type="text"
@@ -178,6 +176,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
               setSelectedFilters({});
               onFilterChange({});
               setSearchTerm("");
+              setOpenSections({}); // Reset open sections
             }}
             className="w-24 h-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 hover:bg-gray-600 bg-orange-500 text-white text-sm"
           >
@@ -187,7 +186,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         <h2 className="text-lg font-semibold mb-4">Apply Filters</h2>
       </div>
 
-      <div className="overflow-y-auto max-h-[calc(100vh-180px)] pl-2">
+      <div className="flex-1 overflow-y-auto pl-2">
         {filtersBySection.map(({ section, filters }) => renderSection(section, filters))}
       </div>
     </div>
@@ -201,64 +200,77 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
   const [error, setError] = useState(null);
   const [tableSearchTerm, setTableSearchTerm] = useState("");
   const [displayFields, setDisplayFields] = useState(selectedFields);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(200); // Increased for better performance
+    
+    useEffect(() => {
+        setFilteredData(data);
+        setCurrentPage(1);
+    }, [data]);
 
+    useEffect(() => {
+        setDisplayFields(selectedFields);
+    }, [selectedFields]);
 
-  useEffect(() => {
-    setFilteredData(data);
-  }, [data]);
-
-  // Update displayFields only when selectedFields changes from parent
-  useEffect(() => {
-    setDisplayFields(selectedFields);
-  }, [selectedFields]);
-
-  // Function to handle table search
   const handleTableSearch = (searchTerm) => {
     setTableSearchTerm(searchTerm);
-
-    if (!searchTerm.trim()) {
-      setFilteredData(data);
-      return;
-    }
-
-    const term = searchTerm.toLowerCase();
-    const filtered = data.filter(item => {
-      // Check all text fields in the item
-      return Object.keys(item).some(key => {
-        return item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(term);
-      });
-    });
-
-    setFilteredData(filtered);
+    setCurrentPage(1);
   };
 
-  // Determine which columns to show based on displayFields
   const getVisibleColumns = () => {
-    // If no displayFields provided, show all fields
-    if (!displayFields || displayFields.length === 0) {
-      return {
-        name: true,
-        link: true,
-        tagline: true,
-        description: true,
-        expertise: true,
-        industries: true,
-        services: true,
-        extendedDescription: true
-      };
-    }
+        if (!displayFields || displayFields.length === 0) {
+            return {
+                name: true,
+                link: true,
+                tagline: true,
+                description: true,
+                expertise: true,
+                industries: true,
+                services: true,
+                extendedDescription: true
+            };
+        }
 
-    // Create object with selected fields
-    const columns = {};
-    displayFields.forEach(field => {
-      if (field !== 'foundIn') { // Skip foundIn as it's not a display column
-        columns[field] = true;
-      }
-    });
-    return columns;
-  };
+        const columns = {};
+        displayFields.forEach(field => {
+            if (field !== 'foundIn') {
+                columns[field] = true;
+            }
+        });
+        return columns;
+    };
 
   const visibleColumns = getVisibleColumns();
+
+    const searchedData = useMemo(() => {
+        if (!tableSearchTerm.trim()) {
+            return filteredData;
+        }
+        const term = tableSearchTerm.toLowerCase();
+        return filteredData.filter(item => {
+            return Object.keys(item).some(key => {
+                return item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(term);
+            });
+        });
+    }, [filteredData, tableSearchTerm]);
+
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = searchedData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(searchedData.length / itemsPerPage);
+
+    const handlePreviousPage = () => {
+        setCurrentPage(prev => Math.max(prev - 1, 1));
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(prev => Math.min(prev + 1, totalPages));
+    };
+    
+    const isPreviousDisabled = currentPage === 1;
+    const isNextDisabled = currentPage === totalPages || searchedData.length <= itemsPerPage;
+
 
   return (
     <div className="flex h-screen overflow-hidden mt-6">
@@ -276,8 +288,8 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
           </div>
         )}
 
-        {/* Table Search Bar and Export Button */}
-        <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200 flex justify-between items-center">
+        {/* Table Search Bar */}
+        <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200">
           <input
             type="text"
             placeholder="Search in table"
@@ -285,6 +297,9 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
             onChange={(e) => handleTableSearch(e.target.value)}
             className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          <div className="text-sm text-gray-600 mt-2">
+            Showing {currentItems.length > 0 ? indexOfFirstItem + 1 : 0}-{Math.min(indexOfLastItem, searchedData.length)} of {searchedData.length} partners
+          </div>
         </div>
 
         {isLoading ? (
@@ -293,9 +308,6 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
           </div>
         ) : (
           <>
-            <div className="mb-2 text-sm text-gray-600 ml-6">
-              Showing {filteredData.length} of {data.length} entries
-            </div>
             <table className="min-w-[1000px] w-full border border-gray-200 shadow-md rounded-lg">
               <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
                 <tr>
@@ -310,13 +322,13 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
                 </tr>
               </thead>
               <tbody>
-                {filteredData.length > 0 ? (
-                  filteredData.map((item, index) => (
+                {currentItems.length > 0 ? (
+                  currentItems.map((item, index) => (
                     <tr
-                      key={index}
+                      key={item.id || index}
                       className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-2 last:border-b-0 hover:bg-gray-50 transition"
                     >
-                      <th className="py-2 pr-1">{index + 1}</th>
+                      <th className="py-2 pr-1">{indexOfFirstItem + index + 1}</th>
 
                       {visibleColumns.name && (
                         <td className="py-2 pr-2">
@@ -378,7 +390,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
                   </tr>
                 )}
               </tbody>
-              <tfoot>
+              {/* <tfoot>
                 <tr>
                   <th>#</th>
                   {visibleColumns.name && <th>Name</th>}
@@ -389,8 +401,36 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
                   {visibleColumns.services && <th>Services</th>}
                   {visibleColumns.extendedDescription && <th>Extended Description</th>}
                 </tr>
-              </tfoot>
+              </tfoot> */}
             </table>
+            {/* Pagination Controls */}
+            <div className="mt-4 flex justify-center space-x-4">
+                <button 
+                    onClick={handlePreviousPage} 
+                    disabled={isPreviousDisabled}
+                    className={`px-4 py-2 rounded ${
+                        isPreviousDisabled 
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                        : 'bg-orange-500 text-white hover:bg-orange-600'
+                    }`}
+                >
+                    Previous
+                </button>
+                <div className="flex items-center text-gray-700">
+                    Page {currentPage} of {Math.max(1, totalPages)}
+                </div>
+                <button 
+                    onClick={handleNextPage} 
+                    disabled={isNextDisabled}
+                    className={`px-4 py-2 rounded ${
+                        isNextDisabled 
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                        : 'bg-orange-500 text-white hover:bg-orange-600'
+                    }`}
+                >
+                    Next
+                </button>
+            </div>
           </>
         )}
       </div>

@@ -268,13 +268,13 @@ const ShopifyTable = ({ data }) => {
                                             rel="noopener noreferrer"
                                             className="text-blue-500 hover:underline"
                                         >
-                                            Visit
+                                            Visit Partner
                                         </a>
                                     </td>
                                 </tr>
                             ))}
-                        </tbody>
-                        <tfoot>
+                        </tbody>ca
+                        {/* <tfoot>
                             <tr>
                                 <th className="w-12">#</th>
                                 <th className="w-64 text-left">Partner Name</th>
@@ -283,7 +283,7 @@ const ShopifyTable = ({ data }) => {
                                 <th className="w-[200px] text-left">Industries</th>
                                 <th className="w-32 text-left pr-8">Profile Link</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> */}
                     </table>
 
                     {/* Pagination Controls */}
