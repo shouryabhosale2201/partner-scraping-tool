@@ -166,7 +166,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             placeholder="Search filters"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
           />
         </div>
 
@@ -201,7 +201,7 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
   const [tableSearchTerm, setTableSearchTerm] = useState("");
   const [displayFields, setDisplayFields] = useState(selectedFields);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(200); // Increased for better performance
+  const [itemsPerPage, setItemsPerPage] = useState(200);
     
     useEffect(() => {
         setFilteredData(data);
@@ -216,6 +216,12 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
     setTableSearchTerm(searchTerm);
     setCurrentPage(1);
   };
+
+      // Handle change in page size
+      const handlePageSizeChange = (e) => {
+        setPartnersPerPage(Number(e.target.value));
+        setCurrentPage(1); // Reset to first page when page size changes
+    };
 
   const getVisibleColumns = () => {
         if (!displayFields || displayFields.length === 0) {
@@ -289,14 +295,33 @@ const SalesforceTable = ({ data, selectedFields = [], onFilterChange }) => {
         )}
 
         {/* Table Search Bar */}
-        <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-6 pb-4 border-gray-200">
-          <input
-            type="text"
-            placeholder="Search in table"
-            value={tableSearchTerm}
-            onChange={(e) => handleTableSearch(e.target.value)}
-            className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+        <div className="sticky top-0 z-20 bg-gray-100 px-6 pt-4 pb-4 mb-4 border-gray-200">
+          <div className="flex items-center justify-between">
+            <input
+              type="text"
+              placeholder="Search in table"
+              value={tableSearchTerm}
+              onChange={(e) => handleTableSearch(e.target.value)}
+              className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+            />
+            
+            <div className="flex items-center">
+              <label htmlFor="pageSize" className="mr-2 text-sm text-gray-600">Show:</label>
+              <select
+                id="pageSize"
+                value={itemsPerPage}
+                onChange={(e) => {
+                  setItemsPerPage(Number(e.target.value));
+                  setCurrentPage(1); // Reset to first page when page size changes
+                }}
+                className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              >
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+                <option value={200}>200</option>
+              </select>
+            </div>
+          </div>
           <div className="text-sm text-gray-600 mt-2">
             Showing {currentItems.length > 0 ? indexOfFirstItem + 1 : 0}-{Math.min(indexOfLastItem, searchedData.length)} of {searchedData.length} partners
           </div>

@@ -108,7 +108,7 @@ const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterCha
                         placeholder="Search filters"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     />
                 </div>
 
@@ -145,7 +145,7 @@ const ShopifyTable = ({ data }) => {
     const [selectedFilters, setSelectedFilters] = useState({});
     const [tableSearchTerm, setTableSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const partnersPerPage = 200;
+    const [partnersPerPage, setPartnersPerPage] = useState(200);
 
     useEffect(() => {
         const storedFilters = localStorage.getItem('shopifyFilters');
@@ -161,6 +161,11 @@ const ShopifyTable = ({ data }) => {
     const handleFilterChange = (newFilters) => {
         setSelectedFilters(newFilters);
         setCurrentPage(1); // Reset to first page when filters change
+    };
+
+    const handlePageSizeChange = (e) => {
+        setPartnersPerPage(Number(e.target.value));
+        setCurrentPage(1); // Reset to first page when page size changes
     };
 
     const filteredData = useMemo(() => {
@@ -224,16 +229,32 @@ const ShopifyTable = ({ data }) => {
             {/* Table */}
             <div className="flex-1 flex flex-col overflow-hidden">
                 <div className="sticky top-0 z-10 bg-gray-100 px-6 pt-4 pb-4 border-b border-gray-300">
-                    <input
-                        type="text"
-                        placeholder="Search in table"
-                        value={tableSearchTerm}
-                        onChange={(e) => {
-                            setTableSearchTerm(e.target.value);
-                            setCurrentPage(1); // Reset to first page when search changes
-                        }}
-                        className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    <div className="flex items-center justify-between">
+                        <input
+                            type="text"
+                            placeholder="Search in table"
+                            value={tableSearchTerm}
+                            onChange={(e) => {
+                                setTableSearchTerm(e.target.value);
+                                setCurrentPage(1); // Reset to first page when search changes
+                            }}
+                            className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        />
+
+                        <div className="flex items-center">
+                            <label htmlFor="pageSize" className="mr-2 text-sm text-gray-600">Show:</label>
+                            <select
+                                id="pageSize"
+                                value={partnersPerPage}
+                                onChange={handlePageSizeChange}
+                                className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            >
+                                <option value={50}>50</option>
+                                <option value={100}>100</option>
+                                <option value={200}>200</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className="text-sm text-gray-600 mt-2">
                         Showing {paginatedData.length > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + partnersPerPage, searchFilteredData.length)} of {searchFilteredData.length} partners
                     </div>
@@ -273,7 +294,7 @@ const ShopifyTable = ({ data }) => {
                                     </td>
                                 </tr>
                             ))}
-                        </tbody>ca
+                        </tbody>
                         {/* <tfoot>
                             <tr>
                                 <th className="w-12">#</th>
@@ -291,11 +312,10 @@ const ShopifyTable = ({ data }) => {
                         <button
                             onClick={handlePreviousPage}
                             disabled={isPreviousDisabled}
-                            className={`px-4 py-2 rounded ${
-                                isPreviousDisabled
+                            className={`px-4 py-2 rounded ${isPreviousDisabled
                                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                     : 'bg-orange-500 text-white hover:bg-orange-600'
-                            }`}
+                                }`}
                         >
                             Previous
                         </button>
@@ -305,11 +325,10 @@ const ShopifyTable = ({ data }) => {
                         <button
                             onClick={handleNextPage}
                             disabled={isNextDisabled}
-                            className={`px-4 py-2 rounded ${
-                                isNextDisabled
+                            className={`px-4 py-2 rounded ${isNextDisabled
                                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                     : 'bg-orange-500 text-white hover:bg-orange-600'
-                            }`}
+                                }`}
                         >
                             Next
                         </button>
