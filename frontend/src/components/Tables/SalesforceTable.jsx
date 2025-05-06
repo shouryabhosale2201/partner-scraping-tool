@@ -1,4 +1,4 @@
-// SalesForceTable.jsx
+//salesforceTable.jsx
 import React, { useEffect, useState, useMemo } from "react";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
@@ -70,21 +70,21 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
   };
 
-  const handleFilterChange = (section, value, parentCountry = null) => {
-    const sectionKey = normalizeSectionKey(section);
-    const updatedFilters = { ...selectedFilters };
+    const handleFilterChange = (section, value, parentCountry = null) => {
+        const sectionKey = normalizeSectionKey(section);
+        const updatedFilters = { ...selectedFilters };
 
-    if (parentCountry) {
-      const countryKey = "country";
-      if (!updatedFilters[countryKey]) updatedFilters[countryKey] = [];
-      if (!updatedFilters[sectionKey]) updatedFilters[sectionKey] = [];
+        if (parentCountry) {
+            const countryKey = "country";
+            if (!updatedFilters[countryKey]) updatedFilters[countryKey] = [];
+            if (!updatedFilters[sectionKey]) updatedFilters[sectionKey] = [];
 
-      if (updatedFilters[sectionKey].includes(value)) {
-        updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
-        if (updatedFilters[sectionKey].length === 0) delete updatedFilters[sectionKey];
-      } else {
-        updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
-      }
+            if (updatedFilters[sectionKey].includes(value)) {
+                updatedFilters[sectionKey] = updatedFilters[sectionKey].filter(item => item !== value);
+                if (updatedFilters[sectionKey].length === 0) delete updatedFilters[sectionKey];
+            } else {
+                updatedFilters[sectionKey] = [...updatedFilters[sectionKey], value];
+            }
 
       if (!updatedFilters[countryKey].includes(parentCountry)) {
         updatedFilters[countryKey] = [...updatedFilters[countryKey], parentCountry];
@@ -332,7 +332,7 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
     return columns;
   };
 
-  const visibleColumns = getVisibleColumns();
+    const visibleColumns = getVisibleColumns();
 
   const searchedData = useMemo(() => {
     if (!tableSearchTerm.trim()) return filteredData;
