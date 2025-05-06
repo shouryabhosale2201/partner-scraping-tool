@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
     const [filters, setFilters] = useState({
@@ -15,10 +14,65 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     useEffect(() => {
         const fetchFilters = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/v1/microsoft/filters");
-                setFilters(res.data);
+                console.log("Fetching filters from JSON file...");
+                // Fetch directly from the JSON file with proper error handling
+                const response = await fetch("/resources/microsoft.json");
+
+                if (!response.ok) {
+                    throw new Error(`Failed to load file: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log("JSON data loaded successfully, items:", data.length);
+
+                // Extract unique values for each filter category
+                const extractUniqueValues = (field) => {
+                    // First ensure we handle arrays properly
+                    const allValues = data.flatMap(item => {
+                        const value = item[field];
+                        // Handle arrays
+                        if (Array.isArray(value)) {
+                            return value;
+                        }
+                        // Handle JSON strings that might be arrays
+                        else if (typeof value === 'string' && (value.startsWith('[') || value.startsWith('{'))) {
+                            try {
+                                const parsed = JSON.parse(value);
+                                return Array.isArray(parsed) ? parsed : [value];
+                            } catch {
+                                // If we can't parse it, treat as a string
+                                return value ? [value] : [];
+                            }
+                        }
+                        // Handle regular strings or other values
+                        else if (value) {
+                            return [value];
+                        }
+                        return [];
+                    });
+
+                    // Create a unique set and sort
+                    return [...new Set(allValues)].filter(Boolean).sort();
+                };
+
+                // Build filters object
+                const extractedFilters = {
+                    product: extractUniqueValues('product'),
+                    solution: extractUniqueValues('solutions'),
+                    services: extractUniqueValues('serviceType'),
+                    industry: extractUniqueValues('industryFocus'),
+                    country: extractUniqueValues('country')
+                };
+
+                // Debug output to see if values are being extracted
+                Object.entries(extractedFilters).forEach(([key, values]) => {
+                    console.log(`${key} filters: ${values.length} values found`);
+                });
+
+                setFilters(extractedFilters);
             } catch (error) {
-                console.error("Error fetching filters:", error);
+                console.error("Error fetching filters from JSON file:", error);
+                // Set default empty filters on error
                 setFilters({
                     industry: [],
                     services: [],
@@ -28,36 +82,17 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                 });
             }
         };
-    
+
         fetchFilters();
     }, []);
-
-    useEffect(() => {
-        if (searchTerm) {
-            setOpenSections(prev => {
-                const newState = { ...prev };
-                for (const type in filters) {
-                    const hasMatch = filters[type].some(item =>
-                        item.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                    if (hasMatch) {
-                        newState[type] = true;
-                    }
-                }
-                return newState;
-            });
-        } else {
-            setOpenSections({});
-        }
-    }, [searchTerm, filters]);
 
     const handleFilterChange = (type, value) => {
         // Create a copy of current filters
         const newFilters = { ...selectedFilters };
-        
+
         // Initialize the array if it doesn't exist
         if (!newFilters[type]) newFilters[type] = [];
-        
+
         // Check if value is already selected
         if (newFilters[type].includes(value)) {
             // If selected, remove it
@@ -66,7 +101,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             // If not selected, add it
             newFilters[type].push(value);
         }
-        
+
         // Update state and notify parent
         setSelectedFilters(newFilters);
         onFilterChange(newFilters);
@@ -181,6 +216,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
     );
 };
 
+
 export default function MicrosoftTable({ data, onFilterChange }) {
     const [selectedFilters, setSelectedFilters] = useState({
         industry: [],
@@ -191,6 +227,35 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     });
 
     const [tableSearchTerm, setTableSearchTerm] = useState("");
+    const [jsonData, setJsonData] = useState(data || []);
+
+    useEffect(() => {
+        // If no data is provided, try to fetch it directly
+        if (!data || data.length === 0) {
+            console.log("No data provided via props, fetching directly...");
+            const fetchData = async () => {
+                try {
+                    const response = await fetch("/resources/microsoft.json");
+
+                    if (!response.ok) {
+                        throw new Error(`Failed to load file: ${response.status} ${response.statusText}`);
+                    }
+
+                    const jsonData = await response.json();
+                    console.log(`Fetched ${jsonData.length} records from JSON file`);
+                    setJsonData(jsonData);
+                } catch (error) {
+                    console.error("Error fetching data from JSON file:", error);
+                    setJsonData([]);
+                }
+            };
+
+            fetchData();
+        } else {
+            console.log(`Using ${data.length} records provided via props`);
+            setJsonData(data);
+        }
+    }, [data]);
 
     // Determine which columns are actually available in the data
     const columnMapping = {
@@ -205,9 +270,9 @@ export default function MicrosoftTable({ data, onFilterChange }) {
 
     // Dynamically generate column list based on what's in the data
     const getAvailableColumns = () => {
-        if (!data || data.length === 0) return [];
+        if (!jsonData || jsonData.length === 0) return [];
 
-        const firstRow = data[0];
+        const firstRow = jsonData[0];
         return Object.keys(firstRow)
             .filter(key => key !== 'id' && key !== 'link') // Exclude id and link columns
             .map(key => ({
@@ -226,47 +291,93 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         }
     };
 
-    // Filter data based on selected filters
-    const filteredData = data?.filter(item => {
-        if (
-            selectedFilters.industry?.length ||
-            selectedFilters.services?.length ||
-            selectedFilters.product?.length ||
-            selectedFilters.solution?.length ||
-            selectedFilters.country?.length
-        ) {
-            let matches = true; // Start with true, and disprove
+    // Helper function to safely check if an array includes a value
+    const arrayIncludes = (arr, value) => {
+        if (!arr) return false;
 
-            if (selectedFilters.industry?.length) {
-                matches = matches && selectedFilters.industry.some(filter =>
-                    item.industryFocus?.includes(filter)
-                );
-            }
-            if (selectedFilters.services?.length) {
-                matches = matches && selectedFilters.services.some(filter =>
-                    item.serviceType?.includes(filter)
-                );
-            }
-            if (selectedFilters.product?.length) {
-                matches = matches && selectedFilters.product.some(filter =>
-                    item.product?.includes(filter)
-                );
-            }
-            if (selectedFilters.solution?.length) {
-                matches = matches && selectedFilters.solution.some(filter =>
-                    item.solutions?.includes(filter)
-                );
-            }
-            if (selectedFilters.country?.length) {
-                matches = matches && selectedFilters.country.some(filter =>
-                    item.country?.includes(filter)
-                );
-            }
-
-            return matches;
+        // If it's already an array, check directly
+        if (Array.isArray(arr)) {
+            return arr.some(item =>
+                typeof item === 'string' &&
+                item.toLowerCase().includes(value.toLowerCase())
+            );
         }
-        return true;
+
+        // If it's a stringified JSON array
+        if (typeof arr === 'string' && (arr.startsWith('[') || arr.startsWith('{'))) {
+            try {
+                const parsed = JSON.parse(arr);
+                if (Array.isArray(parsed)) {
+                    return parsed.some(item =>
+                        typeof item === 'string' &&
+                        item.toLowerCase().includes(value.toLowerCase())
+                    );
+                }
+                // If it parsed but isn't an array
+                return String(arr).toLowerCase().includes(value.toLowerCase());
+            } catch {
+                // If parsing failed, treat as string
+                return String(arr).toLowerCase().includes(value.toLowerCase());
+            }
+        }
+
+        // For simple strings
+        return String(arr).toLowerCase().includes(value.toLowerCase());
+    };
+
+    // Add debug logging
+    console.log("Current filters:", selectedFilters);
+    console.log("Available data items:", jsonData?.length || 0);
+
+    // Filter data based on selected filters
+    const filteredData = jsonData?.filter(item => {
+        // If no filters are selected, return all items
+        if (!Object.values(selectedFilters).some(arr => arr && arr.length > 0)) {
+            return true;
+        }
+
+        let matches = true;
+
+        if (selectedFilters.industry?.length > 0) {
+            const hasMatch = selectedFilters.industry.some(filter => {
+                const result = arrayIncludes(item.industryFocus, filter);
+                return result;
+            });
+            matches = matches && hasMatch;
+        }
+
+        if (matches && selectedFilters.services?.length > 0) {
+            const hasMatch = selectedFilters.services.some(filter =>
+                arrayIncludes(item.serviceType, filter)
+            );
+            matches = matches && hasMatch;
+        }
+
+        if (matches && selectedFilters.product?.length > 0) {
+            const hasMatch = selectedFilters.product.some(filter =>
+                arrayIncludes(item.product, filter)
+            );
+            matches = matches && hasMatch;
+        }
+
+        if (matches && selectedFilters.solution?.length > 0) {
+            const hasMatch = selectedFilters.solution.some(filter =>
+                arrayIncludes(item.solutions, filter)
+            );
+            matches = matches && hasMatch;
+        }
+
+        if (matches && selectedFilters.country?.length > 0) {
+            const hasMatch = selectedFilters.country.some(filter =>
+                arrayIncludes(item.country, filter)
+            );
+            matches = matches && hasMatch;
+        }
+
+        return matches;
     }) || [];
+
+    console.log("Filtered data count:", filteredData.length);
 
     // Apply table search
     const searchedData = filteredData.filter(item => {
@@ -286,7 +397,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
     const renderCellContent = (item, column) => {
         const value = item[column.key];
 
-        if (!value) return "N/A";
+        if (value === undefined || value === null) return "N/A";
 
         // If the column is 'name', wrap it in a link (anchor tag)
         if (column.key === 'name' && item.link) {
@@ -330,7 +441,6 @@ export default function MicrosoftTable({ data, onFilterChange }) {
 
             <div className="flex-1 overflow-auto">
                 <div className="sticky top-0 z-30 bg-gray-100 px-6 pt-6 pb-4 border-b border-gray-300">
-
                     <input
                         type="text"
                         placeholder="Search in table"
@@ -339,53 +449,48 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                         className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <div className="text-sm text-gray-600 mt-2">
-                        Showing {searchedData.length} results
+                        Showing {searchedData.length} results {jsonData.length > 0 && filteredData.length === 0 ? "(All filtered out)" : ""}
                     </div>
                 </div>
 
-                <table className="max-w-[1470px] w-full shadow-md rounded-lg">
-                    <thead className="sticky top-[80px] z-10 bg-gray-100 font-semibold">
-                        <tr>
-                            <th className="w-[2%] pb-2">#</th>
-                            {availableColumns.map((column) => (
-                                <th key={column.key} className={`${column.width} pb-2`}>
-                                    {column.display}
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {searchedData.length > 0 ? (
-                            searchedData.map((item, index) => (
-                                <tr
-                                    key={index}
-                                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 pr-3 last:border-b-0 hover:bg-gray-50 transition"
-                                >
-                                    <th className="py-2">{index + 1}</th>
-                                    {availableColumns.map((column) => (
-                                        <td key={column.key} className="py-2 pr-3">
-                                            {renderCellContent(item, column)}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))
-                        ) : (
+                <div className="p-4">
+                    <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
+                        <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold border-b border-gray-300">
                             <tr>
-                                <td colSpan={availableColumns.length + 1} className="text-center py-4">
-                                    No data available
-                                </td>
+                                <th className="w-12">#</th>
+                                {availableColumns.map((column) => (
+                                    <th key={column.key} className={`${column.width} text-left`}>
+                                        {column.display}
+                                    </th>
+                                ))}
                             </tr>
-                        )}
-                    </tbody>
-                    {/* <tfoot>
-                        <tr>
-                            <th>#</th>
-                            {availableColumns.map((column) => (
-                                <th key={column.key}>{column.display}</th>
-                            ))}
-                        </tr>
-                    </tfoot> */}
-                </table>
+                        </thead>
+                        <tbody>
+                            {searchedData.length > 0 ? (
+                                searchedData.map((item, index) => (
+                                    <tr
+                                        key={index}
+                                        className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+                                    >
+                                        <th className="py-2">{index + 1}</th>
+                                        {availableColumns.map((column) => (
+                                            <td key={column.key} className="py-2 pr-3 truncate">
+                                                {renderCellContent(item, column)}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={availableColumns.length + 1} className="text-center py-4 text-sm text-gray-500">
+                                        No data available
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
     );
