@@ -7,6 +7,9 @@ import ShopifyTable from "./components/Tables/ShopifyTable";
 import MicrosoftTable from "./components/Tables/MicrosoftTable";
 import ProductInfo from "./components/ProductInfo";
 import MicrosoftFieldSelection from "./components/Field_Selectors/MicorsoftFieldSelection";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
 
 export default function ScraperApp() {
   const [url, setUrl] = useState("");
@@ -125,74 +128,163 @@ export default function ScraperApp() {
   const handleFetch = async (selectedFilters = {}) => {
     setFetching(true);
     setError(null);
-
+  
     try {
-      let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
-      const params = new URLSearchParams();
-
+      // Construct file path based on url variable
+      const filePath = `/resources/${url}.json`;
+      console.log(`Fetching from local file: ${filePath}`);
+      
+      const response = await fetch(filePath);
+      if (!response.ok) {
+        throw new Error(`Failed to load file: ${filePath}`);
+      }
+      
+      const jsonData = await response.json();
+      let filteredData = [...jsonData]; // Create a copy to avoid mutation issues
+      
+      // MICROSOFT DATA HANDLING
       if (url === "microsoft") {
-        // Microsoft-specific params
-        if (Object.keys(microsoftFields).length > 0) {
-          const fieldsToFetch = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
-          params.append('fields', JSON.stringify(fieldsToFetch));
-        }
+        // Helper function to apply filters with EVERY logic (matches server implementation)
+        const applyFilter = (field, selectedValues) => {
+          if (!selectedValues || selectedValues.length === 0) return;
+          filteredData = filteredData.filter(item => {
+            const itemField = item[field] || [];
+            return selectedValues.some(val => itemField.includes(val));
+          });
+        };
+        
+        // Apply each filter using the helper function - this matches the server implementation
         if (selectedFilters.industry?.length > 0) {
-          params.append('industries', JSON.stringify(selectedFilters.industry));
+          applyFilter('industryFocus', selectedFilters.industry);
         }
+        
         if (selectedFilters.product?.length > 0) {
-          params.append('products', JSON.stringify(selectedFilters.product));
+          applyFilter('product', selectedFilters.product);
         }
+        
         if (selectedFilters.solution?.length > 0) {
-          params.append('solutions', JSON.stringify(selectedFilters.solution));
+          applyFilter('solutions', selectedFilters.solution);
         }
+        
         if (selectedFilters.services?.length > 0) {
-          params.append('services', JSON.stringify(selectedFilters.services));
+          applyFilter('serviceType', selectedFilters.services);
         }
+        
         if (selectedFilters.country?.length > 0) {
-          params.append('countries', JSON.stringify(selectedFilters.country));
+          applyFilter('country', selectedFilters.country);
         }
-
-        if (params.toString()) {
-          endpoint += `?${params.toString()}`;
+        
+        // Get selected fields
+        const selectedFieldKeys = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
+        
+        // Apply field selection (matches server implementation)
+        if (selectedFieldKeys && selectedFieldKeys.length > 0) {
+          filteredData = filteredData.map(item => {
+            // Always include these core fields
+            const newItem = { 
+              id: item.id, 
+              name: item.name || '',
+              link: item.link || ''
+            };
+            
+            // Add selected fields
+            selectedFieldKeys.forEach(field => {
+              if (item[field] !== undefined) {
+                newItem[field] = item[field];
+              }
+            });
+            
+            return newItem;
+          });
         }
       }
-
+      
+      // SALESFORCE DATA HANDLING
       else if (url === "salesforce") {
-        // Salesforce-specific params
+        // Update the Salesforce fields in state
         setSalesforceFields(pendingSalesforceFields);
-
+        
+        // Extract filters
+        const salesforceExpertise = selectedFilters.salesforceExpertise || [];
+        const industryExpertise = selectedFilters.industryExpertise || [];
+        const regionFilters = selectedFilters.region || [];
+        const countryFilters = selectedFilters.country || [];
+        
+        // Helper function to match expertise filters - matches server implementation
+        const matchesFilters = (foundIn, section, filters) => {
+          if (!filters || filters.length === 0) return true;
+          const entry = foundIn?.find(f => f.section === section);
+          if (!entry) return false;
+          return filters.every(f => entry.filters.includes(f));
+        };
+        
+        // Filter partners based on all conditions (AND logic)
+        filteredData = filteredData.filter(partner => {
+          const foundIn = partner.foundIn || [];
+          const countries = partner.countries || {};
+          
+          // Check Salesforce Expertise
+          const matchesSalesforce = salesforceExpertise.length === 0 ||
+            matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertise);
+          
+          // Check Industry Expertise
+          const matchesIndustry = industryExpertise.length === 0 ||
+            matchesFilters(foundIn, "Industry Expertise", industryExpertise);
+          
+          // Region filtering - use Every logic as per server
+          let matchesRegions = true;
+          if (regionFilters.length > 0) {
+            const allRegions = Object.values(countries).flat(); // Get all regions regardless of country
+            matchesRegions = regionFilters.every(region => allRegions.includes(region));
+          }
+          
+          // Country filtering
+          let matchesCountries = true;
+          if (countryFilters.length > 0) {
+            matchesCountries = countryFilters.some(country => 
+              Object.keys(countries).includes(country)
+            );
+          }
+          
+          // Apply AND logic to all filter categories
+          return matchesSalesforce && matchesIndustry && matchesRegions && matchesCountries;
+        });
+        
+        // Apply field selection
         if (pendingSalesforceFields.length > 0) {
-          params.append("fields", JSON.stringify(pendingSalesforceFields));
-        }
-        if (selectedFilters.salesforceExpertise?.length > 0) {
-          params.append("salesforceExpertise", JSON.stringify(selectedFilters.salesforceExpertise));
-        }
-        if (selectedFilters.industryExpertise?.length > 0) {
-          params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
-        }
-        if (selectedFilters.country?.length > 0) {
-          params.append('countryFilters', JSON.stringify(selectedFilters.country));
-        }
-        if (selectedFilters.region?.length > 0) {
-          params.append('regionFilters', JSON.stringify(selectedFilters.region));
-        }
-
-        if (params.toString()) {
-          endpoint += `?${params.toString()}`;
+          filteredData = filteredData.map(partner => {
+            const partial = {
+              // Always include these core fields
+              id: partner.id || '',
+              name: partner.name || '',
+              link: partner.link || ''
+            };
+            
+            // Add selected fields
+            pendingSalesforceFields.forEach(field => {
+              if (partner[field] !== undefined) {
+                partial[field] = partner[field];
+              }
+            });
+            
+            return partial;
+          });
+        } else {
+          // If no specific fields are selected, return only id, name and link
+          filteredData = filteredData.map(partner => ({
+            id: partner.id || '',
+            name: partner.name || '',
+            link: partner.link || ''
+          }));
         }
       }
-      console.log("Fetching from endpoint:", endpoint);
-
-      const response = await axios.get(endpoint);
-
-      if (response.data.success) {
-        setData(response.data.data);
-      } else {
-        throw new Error(response.data.error || "Unknown error occurred");
-      }
-
+      
+      console.log(`Filtered data count: ${filteredData.length}`);
+      setData(filteredData);
+      
     } catch (err) {
-      setError(err.message);
+      console.error("Error fetching data:", err);
+      setError(err.message || "An unknown error occurred");
     } finally {
       setFetching(false);
     }
@@ -212,50 +304,132 @@ export default function ScraperApp() {
   };
 
   // The updated download Excel function - now independent from fetch
+  // const handleDownloadExcel = async () => {
+  //   try {
+  //     setDownloading(true);
+
+  //     // Create endpoint with appropriate parameters
+  //     let endpoint = `http://localhost:5000/api/v1/${url}/downloadExcel`;
+  //     const params = new URLSearchParams();
+
+  //     // Set the appropriate fields parameter based on platform
+  //     if (url === "microsoft") {
+  //       const fieldsToExport = Object.keys(microsoftFields).filter(k => microsoftFields[k]);
+  //       if (fieldsToExport.length > 0) {
+  //         params.append('fields', JSON.stringify(fieldsToExport));
+  //       }
+  //     } else if (url === "salesforce") {
+  //       // Use the current state of salesforceFields
+  //       if (pendingSalesforceFields.length > 0) {
+  //         params.append('fields', JSON.stringify(pendingSalesforceFields));
+  //       }
+  //     }
+
+  //     if (params.toString()) {
+  //       endpoint += `?${params.toString()}`;
+  //     }
+
+  //     const response = await axios.get(endpoint, {
+  //       responseType: "blob"
+  //     });
+
+  //     const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
+  //     const a = document.createElement("a");
+  //     a.href = downloadUrl;
+  //     a.download = `${url}_partners.xlsx`;
+
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     a.remove();
+
+  //     window.URL.revokeObjectURL(downloadUrl);
+
+  //     setDownloading(false);
+  //   } catch (error) {
+  //     console.error("Download failed:", error.message);
+  //     alert("Failed to download Excel file. Please try again.");
+  //     setDownloading(false);
+  //   }
+  // };
+
   const handleDownloadExcel = async () => {
     try {
       setDownloading(true);
-
-      // Create endpoint with appropriate parameters
-      let endpoint = `http://localhost:5000/api/v1/${url}/downloadExcel`;
-      const params = new URLSearchParams();
-
-      // Set the appropriate fields parameter based on platform
-      if (url === "microsoft") {
-        const fieldsToExport = Object.keys(microsoftFields).filter(k => microsoftFields[k]);
-        if (fieldsToExport.length > 0) {
-          params.append('fields', JSON.stringify(fieldsToExport));
-        }
-      } else if (url === "salesforce") {
-        // Use the current state of salesforceFields
-        if (pendingSalesforceFields.length > 0) {
-          params.append('fields', JSON.stringify(pendingSalesforceFields));
-        }
+      // 1. Load the JSON
+      const resp = await fetch(`/resources/${url}.json`);
+      if (!resp.ok) throw new Error(`Failed to fetch ${url}.json: ${resp.statusText}`);
+      const data = await resp.json();
+      if (!Array.isArray(data) || data.length === 0) {
+        alert("No data available to export.");
+        setDownloading(false);
+        return;
       }
-
-      if (params.toString()) {
-        endpoint += `?${params.toString()}`;
+      let processed;
+      // 2. Salesforce special case
+      if (url === "salesforce") {
+        processed = data.map(item => {
+          // pull out filters & countries, keep all other fields
+          const { foundIn = [], countries = {}, ...rest } = item;
+          const out = { ...rest };
+          // helper to grab & join filters for a section
+          const getFilters = section =>
+            (foundIn.find(f => f.section === section)?.filters || []).join(", ");
+          // add the two expertise columns
+          out["Salesforce Expertise"] = getFilters("Salesforce Expertise");
+          out["Industry Expertise"] = getFilters("Industry Expertise");
+          // add each countryGroup as its own "X Regions" column
+          Object.entries(countries).forEach(([group, regions]) => {
+            out[`${group} Regions`] = Array.isArray(regions) ? regions.join(", ") : "";
+          });
+          // finally, flatten any other arrays just in case
+          Object.entries(out).forEach(([k, v]) => {
+            if (Array.isArray(v)) out[k] = v.join(", ");
+          });
+          return out;
+        });
+        // 3. Default case for everything else
+      } else if (url === "oracle") {
+        processed = data.map(item => {
+          // pull out filters & locations, keep all other fields
+          const { filters = [], locations = [], ...rest } = item;
+          const out = { ...rest };
+          // level4Name entries as a "Filters" column
+          out["Filters"] = filters.map(f => f.level4Name).join(", ");
+          // join locations into a "Locations" column
+          out["Locations"] = Array.isArray(locations) ? locations.join(", ") : "";
+          // flatten any other arrays just in case
+          Object.entries(out).forEach(([k, v]) => {
+            if (Array.isArray(v)) out[k] = v.join(", ");
+          });
+          return out;
+        });
+      } else {
+        processed = data.map(row => {
+          const out = {};
+          Object.entries(row).forEach(([k, v]) => {
+            out[k] = Array.isArray(v) ? v.join(", ") : (v ?? "");
+          });
+          return out;
+        });
       }
-
-      const response = await axios.get(endpoint, {
-        responseType: "blob"
-      });
-
-      const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
-      const a = document.createElement("a");
-      a.href = downloadUrl;
-      a.download = `${url}_partners.xlsx`;
-
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-
-      window.URL.revokeObjectURL(downloadUrl);
-
+      // 4. Build worksheet
+      const worksheet = XLSX.utils.json_to_sheet(processed);
+      // 5. Fixed width = 50 for every column
+      const headers = Object.keys(processed[0]);
+      worksheet["!cols"] = headers.map(() => ({ wch: 50 }));
+      // 6. Autofilter over full range
+      const lastCol = XLSX.utils.encode_col(headers.length - 1);
+      const lastRow = processed.length + 1;
+      worksheet["!autofilter"] = { ref: `A1:${lastCol}${lastRow}` };
+      // 7. Pack workbook & trigger download
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, worksheet, "Partners");
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      saveAs(new Blob([wbout]), `${url}_partners.xlsx`);
       setDownloading(false);
-    } catch (error) {
-      console.error("Download failed:", error.message);
-      alert("Failed to download Excel file. Please try again.");
+    } catch (err) {
+      console.error(":x: Excel download failed:", err);
+      alert("Failed to generate/download the Excel file.");
       setDownloading(false);
     }
   };
