@@ -137,8 +137,8 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                {isOpen && ( // Conditionally render content
-                    <div className="flex flex-col gap-2 pl-2 mt-2">
+                {isOpen ? ( // Conditionally render content
+                    <div className="flex flex-col gap-2 pl-2 mt-2 max-h-64 overflow-y-auto">
                         {filteredItems.length > 0 ? (
                             filteredItems.map((item, index) => (
                                 <label key={index} className="flex items-center space-x-2 cursor-pointer">
@@ -153,9 +153,13 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                                 </label>
                             ))
                         ) : (
-                            <span className="text-gray-500 text-sm">No matches</span>
+                            <span className="text-gray-500 text-sm">No matches found </span>
                         )}
                     </div>
+                ) : (
+                    searchTerm && filteredItems.length === 0 && (
+                        <div className="mt-2 ml-2 text-sm text-gray-500">No matches found</div>
+                    )
                 )}
             </div>
         );
