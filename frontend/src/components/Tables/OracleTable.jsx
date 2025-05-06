@@ -5,122 +5,6 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
     const [openSections, setOpenSections] = useState({});
     const [noMatch, setNoMatch] = useState({}); // Track "No match found" messages
 
-    useEffect(() => {
-        setNoMatch({}); // Clear "No match found" on search term change
-        if (searchTerm) {
-            setOpenSections(prev => {
-                const newState = { ...prev };
-                let foundMatchOverall = false;
-
-                // Check in Locations
-                const locationMatch = Array.from(locationSet).some(location =>
-                    location.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-                newState["locations"] = true; // Always open locations on search
-                if (locationMatch) {
-                    foundMatchOverall = true;
-                } else {
-                    setNoMatch(prevNoMatch => ({ ...prevNoMatch, locations: true }));
-                }
-
-                // Check in Hierarchy
-                const newNoMatch = {};
-                Array.from(hierarchy.keys()).forEach(level1Name => {
-                    newState[level1Name] = true;
-                    let level1Match = false;
-                    const level2Map = hierarchy.get(level1Name);
-                    if (level2Map) {
-                        const level2NoMatch = {};
-                        let level2MatchOverall = false;
-                        Array.from(level2Map.keys()).forEach(level2Name => {
-                            let level2HasMatch = false;
-                            const level3Map = level2Map.get(level2Name);
-                            if (level3Map) {
-                                const level3NoMatch = {};
-                                let level3MatchOverall = false;
-                                Array.from(level3Map.keys()).forEach(level3Name => {
-                                    let level3HasMatch = false;
-                                    const level4Set = level3Map.get(level3Name);
-                                    if (level4Set) {
-                                        const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
-                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                        );
-                                        if (hasMatchingLevel4) {
-                                            level3HasMatch = true;
-                                            level3MatchOverall = true;
-                                            level2HasMatch = true;
-                                            level2MatchOverall = true;
-                                            level1Match = true;
-                                            foundMatchOverall = true;
-                                        } else {
-                                            level3NoMatch[level3Name] = true;
-                                        }
-                                    }
-                                });
-                                if (!level3MatchOverall) {
-                                    level2NoMatch[level2Name] = true;
-                                }
-                                newNoMatch[level1Name] = {
-                                    ...newNoMatch[level1Name],
-                                    [level2Name]: level3NoMatch,
-                                };
-                            }
-                            if (level2HasMatch) {
-                                newState[level1Name] = true;
-                            }
-                            if (!level2HasMatch) {
-                                level2NoMatch[level2Name] = true;
-                            }
-                        });
-                        if (!level1Match) {
-                            newNoMatch[level1Name] = level2NoMatch;
-                        }
-                    }
-                });
-                setNoMatch(newNoMatch);
-                if (!foundMatchOverall) {
-                    const allOpen = {};
-                    Array.from(hierarchy.keys()).forEach(level1Name => {
-                        allOpen[level1Name] = true;
-                        const level2Map = hierarchy.get(level1Name);
-                        const level2NoMatchAll = {};
-                        if (level2Map) {
-                            Array.from(level2Map.keys()).forEach(level2Name => {
-                                level2NoMatchAll[level2Name] = {};
-                            });
-                        }
-                        newNoMatch[level1Name] = level2NoMatchAll;
-                    });
-                    allOpen["locations"] = true;
-                    newNoMatch["locations"] = true;
-                    setNoMatch(newNoMatch);
-                    setOpenSections(allOpen);
-                }
-
-                return newState;
-            });
-        } else {
-            setOpenSections({});
-            setNoMatch({});
-        }
-    }, [searchTerm, data]);
-
-    const handleFilterToggle = (filterName) => {
-        const newSelected = { ...selectedFilters };
-        const key = "oracleFilters";
-
-        if (!newSelected[key]) newSelected[key] = [];
-
-        if (newSelected[key].includes(filterName)) {
-            newSelected[key] = newSelected[key].filter(item => item !== filterName);
-        } else {
-            newSelected[key].push(filterName);
-        }
-
-        setSelectedFilters(newSelected);
-        onFilterChange(newSelected);
-    };
-
     const hierarchy = useMemo(() => {
         const map = new Map();
 
@@ -153,6 +37,128 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
         return set;
     }, [data]);
 
+    useEffect(() => {
+        setNoMatch({});
+        setOpenSections({});
+
+        if (searchTerm) {
+            const newOpenSections = { locations: true };
+            const newNoMatch = { hierarchy: {} };
+            let foundMatchOverall = false;
+
+            const searchResults = {
+                locations: new Set(),
+                hierarchyMatches: new Map(), // level1Name -> { level2Name -> { level3Name -> Set<level4Name> } }
+            };
+
+            // Search through the data
+            const trimmedSearchTerm = searchTerm.trim().toLowerCase();
+            console.log("searchTerm:", searchTerm);
+            console.log("trimmedSearchTerm:", trimmedSearchTerm);
+
+
+            for (const partner of data) {
+                // Search locations
+                for (const loc of partner.locations || []) {
+                    if (loc.toLowerCase().includes(trimmedSearchTerm)) {
+                        searchResults.locations.add(loc);
+                        foundMatchOverall = true;
+                        break; // Found a match for this partner's location
+                    }
+                }
+
+                // Search hierarchy
+                for (const filter of partner.filters || []) {
+                    const filterNameLower = filter.level4Name?.toLowerCase();
+                    if (filterNameLower?.includes(trimmedSearchTerm)) {
+                        foundMatchOverall = true;
+                        if (!searchResults.hierarchyMatches.has(filter.level1Name)) {
+                            searchResults.hierarchyMatches.set(filter.level1Name, new Map());
+                        }
+                        const level2Map = searchResults.hierarchyMatches.get(filter.level1Name);
+                        if (!level2Map.has(filter.level2Name)) {
+                            level2Map.set(filter.level2Name, new Map());
+                        }
+                        const level3Map = level2Map.get(filter.level2Name);
+                        if (!level3Map.has(filter.level3Name)) {
+                            level3Map.set(filter.level3Name, new Set());
+                        }
+                        level3Map.get(filter.level3Name)?.add(filter.level4Name);
+                    }
+                }
+            }
+
+            // Update openSections based on search results
+            searchResults.hierarchyMatches.forEach((level2Map, level1Name) => {
+                newOpenSections[level1Name] = true;
+            });
+
+            // Update noMatch based on search results
+            if (searchTerm) {
+                // Locations no match
+                if (searchResults.locations.size === 0) {
+                    newNoMatch["locations"] = true;
+                }
+
+                // Hierarchy no match
+                const hierarchyNoMatch = {};
+                hierarchy.forEach((level2Map, level1Name) => {
+                    if (!searchResults.hierarchyMatches.has(level1Name) && !level1Name.toLowerCase().includes(trimmedSearchTerm)) {
+                        hierarchyNoMatch[level1Name] = {};
+                    } else if (searchResults.hierarchyMatches.has(level1Name)) {
+                        const level2NoMatch = {};
+                        level2Map.forEach((level3Map, level2Name) => {
+                            if (!searchResults.hierarchyMatches.get(level1Name)?.has(level2Name) && !level2Name.toLowerCase().includes(trimmedSearchTerm)) {
+                                level2NoMatch[level2Name] = {};
+                            } else if (searchResults.hierarchyMatches.get(level1Name)?.has(level2Name)) {
+                                const level3NoMatch = {};
+                                level3Map.forEach((level4Set, level3Name) => {
+                                    if (!searchResults.hierarchyMatches.get(level1Name)?.get(level2Name)?.has(level3Name) && !level3Name.toLowerCase().includes(trimmedSearchTerm)) {
+                                        level3NoMatch[level3Name] = true;
+                                    }
+                                });
+                                if (Object.keys(level3NoMatch).length > 0) {
+                                    level2NoMatch[level2Name] = level3NoMatch;
+                                }
+                            } else if (!level2Name.toLowerCase().includes(trimmedSearchTerm)) {
+                                level2NoMatch[level2Name] = {};
+                            }
+                        });
+                        if (Object.keys(level2NoMatch).length > 0) {
+                            hierarchyNoMatch[level1Name] = level2NoMatch;
+                        }
+                    } else if (!level1Name.toLowerCase().includes(trimmedSearchTerm)) {
+                        hierarchyNoMatch[level1Name] = {};
+                    }
+                });
+                newNoMatch["hierarchy"] = hierarchyNoMatch;
+            }
+
+            setOpenSections(newOpenSections);
+            setNoMatch(newNoMatch);
+
+        } else {
+            setOpenSections({});
+            setNoMatch({});
+        }
+    }, [searchTerm, data, hierarchy]);
+
+    const handleFilterToggle = (filterName) => {
+        const newSelected = { ...selectedFilters };
+        const key = "oracleFilters";
+
+        if (!newSelected[key]) newSelected[key] = [];
+
+        if (newSelected[key].includes(filterName)) {
+            newSelected[key] = newSelected[key].filter(item => item !== filterName);
+        } else {
+            newSelected[key].push(filterName);
+        }
+
+        setSelectedFilters(newSelected);
+        onFilterChange(newSelected);
+    };
+
     const toggleSection = (sectionName) => {
         setOpenSections(prev => ({
             ...prev,
@@ -160,22 +166,24 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
         }));
     };
 
+    // Helper Functions
+    const searchResultsExistForLevel1 = (level1Name) => {
+        return searchTerm && !!(noMatch.hierarchy && noMatch.hierarchy[level1Name] === undefined);
+    };
+
+    const searchResultsExistForLevel2 = (level1Name, level2Name) => {
+        return searchTerm && !!(noMatch.hierarchy && noMatch.hierarchy[level1Name] && noMatch.hierarchy[level1Name][level2Name] === undefined);
+    };
+
     const renderHierarchy = () => {
         const key = "oracleFilters";
         return Array.from(hierarchy.entries()).map(([level1Name, level2Map]) => {
             const level1Open = openSections[level1Name] === true;
             const showDropdown = level1Name === "Cloud Solution Builders & ISVs" || level1Name === "Cloud Services Partners";
-            const level1NoMatch = noMatch[level1Name];
+            const level1NoMatch = noMatch.hierarchy?.[level1Name];
+            const hasMatchingChildren = searchTerm && searchResultsExistForLevel1(level1Name);
 
-            const hasMatchingChildren = Array.from(level2Map.entries()).some(([, level3Map]) =>
-                Array.from(level3Map.entries()).some(([, level4Set]) =>
-                    Array.from(level4Set).some(level4Name =>
-                        level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                    )
-                )
-            );
-
-            const shouldRenderLevel1 = !searchTerm || hasMatchingChildren || (level1NoMatch && Object.keys(level1NoMatch).length > 0);
+            const shouldRenderLevel1 = !searchTerm || hasMatchingChildren || level1NoMatch;
 
             if (!shouldRenderLevel1 && searchTerm) {
                 return null;
@@ -207,16 +215,10 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                     {level1Open && showDropdown && (
                         <div className="ml-4">
                             {Array.from(level2Map.entries()).map(([level2Name, level3Map]) => {
-                                const level2NoMatch = level1NoMatch && level1NoMatch[level2Name];
-                                const hasMatchingLevel3 = Array.from(level3Map.entries()).some(([, level4Set]) =>
-                                    Array.from(level3Map.entries()).some(([, level4Set]) =>
-                                        Array.from(level4Set).some(level4Name =>
-                                            level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                        )
-                                    )
-                                );
+                                const level2NoMatch = level1NoMatch?.[level2Name];
+                                const hasMatchingLevel3 = searchTerm && searchResultsExistForLevel2(level1Name, level2Name);
 
-                                const shouldRenderLevel2 = !searchTerm || hasMatchingLevel3 || (level2NoMatch && Object.keys(level2NoMatch).length > 0);
+                                const shouldRenderLevel2 = !searchTerm || hasMatchingLevel3 || level2NoMatch;
 
                                 if (!shouldRenderLevel2 && searchTerm) {
                                     return null;
@@ -226,15 +228,13 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                                     <div key={level2Name} className="mb-2">
                                         <h4 className="text-sm font-semibold ml-4 mb-1">
                                             {level2Name}
-                                            {searchTerm && !hasMatchingLevel3 && level2NoMatch && (Object.keys(level2NoMatch).length > 0) && (
-                                                <span className="text-gray-500 text-xs ml-2">(No match)</span>
+                                            {searchTerm && !hasMatchingLevel3 && level2NoMatch && Object.keys(level2NoMatch).length > 0 && (
+                                                <span className="text-gray-500 text-xs ml-2">(No matches found)</span>
                                             )}
                                         </h4>
                                         {Array.from(level3Map.entries()).map(([level3Name, level4Set]) => {
-                                            const hasMatchingLevel4 = Array.from(level4Set).some(level4Name =>
-                                                level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                            );
-                                            const level3NoMatch = level2NoMatch && level2NoMatch[level3Name];
+                                            const hasMatchingLevel4 = searchTerm && Array.from(level4Set).some(ln => ln.toLowerCase().includes(searchTerm.toLowerCase()));
+                                            const level3NoMatch = level2NoMatch?.[level3Name];
 
                                             const shouldRenderLevel3 = !searchTerm || hasMatchingLevel4 || level3NoMatch;
 
@@ -247,29 +247,33 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                                                     <h5 className="text-sm font-medium ml-8 mb-1">
                                                         {level3Name}
                                                         {searchTerm && !hasMatchingLevel4 && level3NoMatch && (
-                                                            <span className="text-gray-500 text-xs ml-2">(No match)</span>
+                                                            <span className="text-gray-500 text-xs ml-2">(No matches found)</span>
                                                         )}
                                                     </h5>
                                                     <div className="ml-8 flex flex-col gap-2">
                                                         {searchTerm && !hasMatchingLevel4 && level3NoMatch ? (
-                                                            <span className="text-gray-500 text-sm">No matches</span>
+                                                            <span className="text-gray-500 text-sm">No matches found</span>
                                                         ) : (
                                                             Array.from(level4Set)
-                                                                .filter(level4Name =>
-                                                                    !searchTerm || level4Name.toLowerCase().includes(searchTerm.toLowerCase())
-                                                                )
-                                                                .map((level4Name, idx) => (
-                                                                    <label key={idx} className={`flex items-center space-x-2 cursor-pointer text-xs ${searchTerm && level4Name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
-                                                                        <input
-                                                                            type="checkbox"
-                                                                            value={level4Name}
-                                                                            checked={selectedFilters[key]?.includes(level4Name) || false}
-                                                                            onChange={() => handleFilterToggle(level4Name)}
-                                                                            className="checkbox checkbox-sm"
-                                                                        />
-                                                                        <span>{level4Name}</span>
-                                                                    </label>
-                                                                ))
+                                                                .filter(level4Name => {
+                                                                    const match = !searchTerm || level4Name.toLowerCase().includes(searchTerm.toLowerCase());
+                                                                    return match;
+                                                                })
+                                                                .map((level4Name, idx) => {
+                                                                    const isSelected = selectedFilters[key]?.includes(level4Name) || false;
+                                                                    return (
+                                                                        <label key={idx} className={`flex items-center space-x-2 cursor-pointer text-xs ${searchTerm && level4Name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
+                                                                            <input
+                                                                                type="checkbox"
+                                                                                value={level4Name}
+                                                                                checked={isSelected}
+                                                                                onChange={() => handleFilterToggle(level4Name)}
+                                                                                className="checkbox checkbox-sm"
+                                                                            />
+                                                                            <span>{level4Name}</span>
+                                                                        </label>
+                                                                    );
+                                                                })
                                                         )}
                                                     </div>
                                                 </div>
@@ -280,8 +284,8 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                             })}
                         </div>
                     )}
-                    {searchTerm && showDropdown && !hasMatchingChildren && (!level1NoMatch || Object.keys(level1NoMatch).length === 0) && (
-                        <div className="ml-4 text-gray-500 text-sm">(No match)</div>
+                    {searchTerm && showDropdown && !searchResultsExistForLevel1(level1Name) && (
+                        <div className="ml-4 text-gray-500 text-sm">(No matches found)</div>
                     )}
                 </div>
             );
@@ -331,12 +335,14 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                                 </label>
                             ))
                         ) : (
-                            <span className="text-gray-500 text-sm">No matches</span>
+                            searchTerm && showNoMatch && (
+                                <span className="text-gray-500 text-sm">No matches found</span>
+                            )
                         )}
                     </div>
                 )}
-                {showNoMatch && !hasLocationMatch && (
-                    <div className="mt-2 ml-2 text-gray-500 text-sm">(No match)</div>
+                {showNoMatch && !hasLocationMatch && searchTerm && (
+                    <div className="mt-2 ml-2 text-gray-500 text-sm">(No matches found)</div>
                 )}
             </div>
         );
@@ -549,4 +555,3 @@ const OracleTable = ({ data }) => {
 };
 
 export default OracleTable;
-

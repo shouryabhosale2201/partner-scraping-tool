@@ -1,4 +1,3 @@
-//microsoftTable.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -119,12 +118,12 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
                                 </label>
                             ))
                         ) : (
-                            searchTerm && <span className="text-gray-500 text-sm">No matches</span>
+                            <span className="text-gray-500 text-sm">No matches found </span>
                         )}
                     </div>
                 ) : (
                     searchTerm && filteredItems.length === 0 && (
-                        <div className="mt-2 ml-2 text-sm text-gray-500">No matches found. Open to view all.</div>
+                        <div className="mt-2 ml-2 text-sm text-gray-500">No matches found</div>
                     )
                 )}
             </div>
