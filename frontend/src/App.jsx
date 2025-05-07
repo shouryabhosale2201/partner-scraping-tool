@@ -125,13 +125,89 @@ export default function ScraperApp() {
     setScrapingPlatform(null); // Clear once done
   };
 
+  // const handleFetch = async (selectedFilters = {}) => {
+  //   setLoading(true);
+  //   setError(null);
+
+  //   try {
+  //     let endpoint = `http://localhost:5000/api/v1/${url}/fetch`;
+  //     const params = new URLSearchParams();
+
+  //     if (url === "microsoft") {
+  //       // Microsoft-specific params
+  //       if (Object.keys(microsoftFields).length > 0) {
+  //         const fieldsToFetch = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
+  //         params.append('fields', JSON.stringify(fieldsToFetch));
+  //       }
+  //       if (selectedFilters.industry?.length > 0) {
+  //         params.append('industries', JSON.stringify(selectedFilters.industry));
+  //       }
+  //       if (selectedFilters.product?.length > 0) {
+  //         params.append('products', JSON.stringify(selectedFilters.product));
+  //       }
+  //       if (selectedFilters.solution?.length > 0) {
+  //         params.append('solutions', JSON.stringify(selectedFilters.solution));
+  //       }
+  //       if (selectedFilters.services?.length > 0) {
+  //         params.append('services', JSON.stringify(selectedFilters.services));
+  //       }
+  //       if (selectedFilters.country?.length > 0) {
+  //         params.append('countries', JSON.stringify(selectedFilters.country));
+  //       }
+
+  //       if (params.toString()) {
+  //         endpoint += `?${params.toString()}`;
+  //       }
+  //     }
+
+  //     else if (url === "salesforce") {
+  //       // Salesforce-specific params
+  //       setSalesforceFields(pendingSalesforceFields);
+
+  //       if (pendingSalesforceFields.length > 0) {
+  //         params.append("fields", JSON.stringify(pendingSalesforceFields));
+  //       }
+  //       if (selectedFilters.salesforceExpertise?.length > 0) {
+  //         params.append("salesforceExpertise", JSON.stringify(selectedFilters.salesforceExpertise));
+  //       }
+  //       if (selectedFilters.industryExpertise?.length > 0) {
+  //         params.append("industryExpertise", JSON.stringify(selectedFilters.industryExpertise));
+  //       }
+  //       if (selectedFilters.country?.length > 0) {
+  //         params.append('countryFilters', JSON.stringify(selectedFilters.country));
+  //       }
+  //       if (selectedFilters.region?.length > 0) {
+  //         params.append('regionFilters', JSON.stringify(selectedFilters.region));
+  //       }
+
+  //       if (params.toString()) {
+  //         endpoint += `?${params.toString()}`;
+  //       }
+  //     }
+  //     console.log("Fetching from endpoint:", endpoint);
+
+  //     const response = await axios.get(endpoint);
+
+  //     if (response.data.success) {
+  //       setData(response.data.data);
+  //     } else {
+  //       throw new Error(response.data.error || "Unknown error occurred");
+  //     }
+
+  //   } catch (err) {
+  //     setError(err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleFetch = async (selectedFilters = {}) => {
     setFetching(true);
     setError(null);
   
     try {
       // Construct file path based on url variable
-      const filePath = `/resources/${url}.json`;
+      const filePath = `data/${url}-partners.json`;
       console.log(`Fetching from local file: ${filePath}`);
       
       const response = await fetch(filePath);
@@ -290,7 +366,6 @@ export default function ScraperApp() {
     }
   };
 
-
   const handleSalesforceFilterChange = (selectedFilters) => {
     if (url === 'salesforce') {
       handleFetch(selectedFilters);
@@ -356,8 +431,8 @@ export default function ScraperApp() {
     try {
       setDownloading(true);
       // 1. Load the JSON
-      const resp = await fetch(`/resources/${url}.json`);
-      if (!resp.ok) throw new Error(`Failed to fetch ${url}.json: ${resp.statusText}`);
+      const resp = await fetch(`data/${url}-partners.json`);
+      if (!resp.ok) throw new Error(`Failed to fetch ${url}-partners.json: ${resp.statusText}`);
       const data = await resp.json();
       if (!Array.isArray(data) || data.length === 0) {
         alert("No data available to export.");
@@ -434,6 +509,115 @@ export default function ScraperApp() {
     }
   };
 
+  // Pure-JS version – no XLSX, no extra libraries
+// const handleDownloadCSV = async () => {
+//   try {
+//     setDownloading(true);
+
+//     /* ---------- 1. Fetch the JSON ---------- */
+//     const resp = await fetch(`/resources/${url}.json`);
+//     if (!resp.ok) throw new Error(`Failed to fetch ${url}.json: ${resp.statusText}`);
+//     const data = await resp.json();
+
+//     if (!Array.isArray(data) || data.length === 0) {
+//       alert("No data available to export.");
+//       setDownloading(false);
+//       return;
+//     }
+
+//     /* ---------- 2. Shape the data (same logic as before) ---------- */
+//     let processed;
+
+//     if (url === "salesforce") {
+//       processed = data.map(item => {
+//         const { foundIn = [], countries = {}, ...rest } = item;
+//         const out = { ...rest };
+
+//         const getFilters = section =>
+//           (foundIn.find(f => f.section === section)?.filters || []).join(", ");
+
+//         out["Salesforce Expertise"] = getFilters("Salesforce Expertise");
+//         out["Industry Expertise"]   = getFilters("Industry Expertise");
+
+//         Object.entries(countries).forEach(([group, regions]) => {
+//           out[`${group} Regions`] = Array.isArray(regions) ? regions.join(", ") : "";
+//         });
+
+//         Object.entries(out).forEach(([k, v]) => {
+//           if (Array.isArray(v)) out[k] = v.join(", ");
+//         });
+//         return out;
+//       });
+
+//     } else if (url === "oracle") {
+//       processed = data.map(item => {
+//         const { filters = [], locations = [], ...rest } = item;
+//         const out = { ...rest };
+
+//         out["Filters"]   = filters.map(f => f.level4Name).join(", ");
+//         out["Locations"] = Array.isArray(locations) ? locations.join(", ") : "";
+
+//         Object.entries(out).forEach(([k, v]) => {
+//           if (Array.isArray(v)) out[k] = v.join(", ");
+//         });
+//         return out;
+//       });
+
+//     } else {
+//       processed = data.map(row => {
+//         const out = {};
+//         Object.entries(row).forEach(([k, v]) => {
+//           out[k] = Array.isArray(v) ? v.join(", ") : (v ?? "");
+//         });
+//         return out;
+//       });
+//     }
+
+//     /* ---------- 3. Convert to CSV string ---------- */
+//     // Collect headers (union of keys in case rows differ)
+//     const headers = Array.from(
+//       processed.reduce((set, row) => {
+//         Object.keys(row).forEach(k => set.add(k));
+//         return set;
+//       }, new Set())
+//     );
+
+//     // Helper to escape CSV cells
+//     const esc = val => {
+//       const s = String(val ?? "");
+//       return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+//     };
+
+//     const csvRows = [
+//       headers.map(esc).join(","),                      // header row
+//       ...processed.map(row =>
+//         headers.map(h => esc(row[h])).join(",")        // data rows
+//       )
+//     ];
+
+//     const csvString = csvRows.join("\n");
+
+//     /* ---------- 4. Trigger download ---------- */
+//     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8" });
+//     const urlObject = URL.createObjectURL(blob);
+
+//     const a = document.createElement("a");
+//     a.href = urlObject;
+//     a.download = ``${url}`_partners.csv`;
+//     document.body.appendChild(a);
+//     a.click();
+//     a.remove();
+//     URL.revokeObjectURL(urlObject);
+
+//     setDownloading(false);
+//   } catch (err) {
+//     console.error("❌ CSV download failed:", err);
+//     alert("Failed to generate/download the CSV file.");
+//     setDownloading(false);
+//   }
+// };
+
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
       <div className="bg-white shadow-lg rounded-lg p-6 max-w-3xl w-full">
@@ -444,9 +628,9 @@ export default function ScraperApp() {
           className="w-1/2 flex mx-auto p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 mb-4 mt-4"
         >
           <option value="">Select a source</option>
-          <option value="salesforce">Salesforce</option>
+          <option value="salesforce" disabled>Salesforce</option>
           <option value="oracle">Oracle</option>
-          <option value="shopify">Shopify</option>
+          <option value="shopify" disabled>Shopify</option>
           <option value="microsoft">Microsoft</option>
         </select>
 
@@ -507,7 +691,7 @@ export default function ScraperApp() {
         {data.length > 0 && url === "salesforce" && (
           <SalesforceTable
             data={data}
-            selectedFields={salesforceFields}
+            selectedFields={pendingSalesforceFields}
             onFilterChange={handleSalesforceFilterChange}
           />
         )}

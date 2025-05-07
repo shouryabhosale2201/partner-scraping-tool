@@ -43,7 +43,7 @@ export default function FieldSelectionComponent({ selectedFields, onFieldsChange
   };
   return (
     <div className="mt-4 mb-6 p-4 border border-gray-200 rounded-lg shadow-sm bg-white">
-      <h3 className="text-lg font-medium mb-3">Select Fields to Scrape</h3>
+      <h3 className="text-lg font-medium mb-3">Select Fields to Fetch</h3>
       <div className="flex gap-2 mb-4">
         <button
           onClick={handleSelectAll}
