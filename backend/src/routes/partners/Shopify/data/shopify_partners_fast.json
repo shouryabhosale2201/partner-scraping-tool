@@ -1712,6 +1712,18 @@
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
   {
+    "name": "Zdify Agency",
+    "link": "https://www.shopify.com/partners/directory/partner/spanlify",
+    "locations": [
+      "Mansoura, Egypt"
+    ],
+    "languages": [
+      "English",
+      "Arabic"
+    ],
+    "industries": "N/A"
+  },
+  {
     "name": "Aron Web Solutions",
     "link": "https://www.shopify.com/partners/directory/partner/aron-web-solution",
     "locations": [
@@ -1779,18 +1791,6 @@
       "English"
     ],
     "industries": "Automotive, Clothing and fashion, Electronics, Pet care"
-  },
-  {
-    "name": "Zdify Agency",
-    "link": "https://www.shopify.com/partners/directory/partner/spanlify",
-    "locations": [
-      "Mansoura, Egypt"
-    ],
-    "languages": [
-      "English",
-      "Arabic"
-    ],
-    "industries": "N/A"
   },
   {
     "name": "Thriftizer",
@@ -2129,7 +2129,7 @@
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Toys and games"
   },
   {
-    "name": "Squashed Pixel",
+    "name": "Squashed Pixel LTD",
     "link": "https://www.shopify.com/partners/directory/partner/squashed-pixel",
     "locations": [
       "Keighley, United Kingdom"
@@ -2197,7 +2197,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Portuguese (Brazil)"
+      "Portuguese (Brazil)",
+      "Portuguese (European)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Pet care"
   },
@@ -2223,7 +2224,18 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Swedish",
+      "Turkish",
+      "Danish",
+      "Thai",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -2236,7 +2248,8 @@
     "languages": [
       "English",
       "French",
-      "Chinese (PRC)"
+      "Chinese (PRC)",
+      "Chinese (Traditional)"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -2500,7 +2513,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Hindi"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty"
   },
@@ -2662,6 +2677,20 @@
     "industries": "N/A"
   },
   {
+    "name": "Tendency LTD",
+    "link": "https://www.shopify.com/partners/directory/partner/tendency-ltd",
+    "locations": [
+      "Ilfrod, United Kingdom"
+    ],
+    "languages": [
+      "English",
+      "Spanish",
+      "Italian",
+      "Portuguese (Brazil)"
+    ],
+    "industries": "Services"
+  },
+  {
     "name": "DigiFist",
     "link": "https://www.shopify.com/partners/directory/partner/digifist",
     "locations": [
@@ -2672,19 +2701,6 @@
       "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
-  },
-  {
-    "name": "Tendency LTD",
-    "link": "https://www.shopify.com/partners/directory/partner/tendency-ltd",
-    "locations": [
-      "Ilfrod, United Kingdom"
-    ],
-    "languages": [
-      "English",
-      "Spanish",
-      "Italian"
-    ],
-    "industries": "Services"
   },
   {
     "name": "Avid Brio LLP",
@@ -2758,7 +2774,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Marathi"
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "N/A"
   },
@@ -2901,7 +2918,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -2959,7 +2978,10 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian",
+      "Hindi",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -3280,7 +3302,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Hindi",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -3330,6 +3356,18 @@
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Toys and games"
   },
   {
+    "name": "Omni Themes | Store Build & Redesign, Store Migration, Theme Customization",
+    "link": "https://www.shopify.com/partners/directory/partner/eurus-theme-support-center",
+    "locations": [
+      "Hanoi, Vietnam"
+    ],
+    "languages": [
+      "English",
+      "Vietnamese"
+    ],
+    "industries": "Clothing and fashion, Food and drink, Health and beauty, Home and garden"
+  },
+  {
     "name": "Radical Global",
     "link": "https://www.shopify.com/partners/directory/partner/radical-global4",
     "locations": [
@@ -3350,18 +3388,6 @@
       "English"
     ],
     "industries": "Food and drink, Health and beauty, Home and garden, Pet care"
-  },
-  {
-    "name": "Omni Themes | Store Build & Redesign, Store Migration, Theme Customization",
-    "link": "https://www.shopify.com/partners/directory/partner/eurus-theme-support-center",
-    "locations": [
-      "Hanoi, Vietnam"
-    ],
-    "languages": [
-      "English",
-      "Vietnamese"
-    ],
-    "industries": "Clothing and fashion, Food and drink, Health and beauty, Home and garden"
   },
   {
     "name": "Vitamina Online",
@@ -3500,7 +3526,22 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Korean",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Thai",
+      "Polish",
+      "Gujarati"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Services"
   },
@@ -3641,7 +3682,13 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Russian",
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -3654,7 +3701,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Home and garden, Jewelry and accessories, Pet care"
   },
@@ -3667,7 +3717,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -3783,7 +3834,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -3866,7 +3918,10 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Russian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Health and beauty"
   },
@@ -3964,7 +4019,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Norwegian"
+      "Norwegian",
+      "Danish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -3977,7 +4033,14 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Russian",
+      "Hindi",
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Jewelry and accessories"
   },
@@ -4026,7 +4089,10 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -4085,7 +4151,15 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (Traditional)",
+      "Russian",
+      "Hindi",
+      "Vietnamese",
+      "Arabic",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -4220,6 +4294,18 @@
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
   {
+    "name": "Sefa KÖKSAL",
+    "link": "https://www.shopify.com/partners/directory/partner/sefa2",
+    "locations": [
+      "ankara, Türkiye"
+    ],
+    "languages": [
+      "English",
+      "Turkish"
+    ],
+    "industries": "Clothing and fashion, Home and garden, Jewelry and accessories, Toys and games"
+  },
+  {
     "name": "The Suburbs",
     "link": "https://www.shopify.com/partners/directory/partner/the-suburbs",
     "locations": [
@@ -4250,7 +4336,20 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Sports and recreation"
   },
@@ -4348,7 +4447,14 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -4512,18 +4618,6 @@
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Toys and games"
   },
   {
-    "name": "Sefa KÖKSAL",
-    "link": "https://www.shopify.com/partners/directory/partner/sefa2",
-    "locations": [
-      "ankara, Türkiye"
-    ],
-    "languages": [
-      "English",
-      "Turkish"
-    ],
-    "industries": "Clothing and fashion, Home and garden, Jewelry and accessories, Toys and games"
-  },
-  {
     "name": "by Jack Neville",
     "link": "https://www.shopify.com/partners/directory/partner/by-jn",
     "locations": [
@@ -4556,7 +4650,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (Traditional)",
+      "Hindi",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -4627,7 +4726,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -4710,6 +4810,19 @@
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
   {
+    "name": "Falkeconsulting Berlin",
+    "link": "https://www.shopify.com/partners/directory/partner/falkeconsulting1",
+    "locations": [
+      "Berlin, Germany"
+    ],
+    "languages": [
+      "English",
+      "Spanish",
+      "German"
+    ],
+    "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Home and garden"
+  },
+  {
     "name": "SiteJojo Enterprise",
     "link": "https://www.shopify.com/partners/directory/partner/sitejojo",
     "locations": [
@@ -4744,17 +4857,6 @@
     "industries": "Clothing and fashion, Electronics, Health and beauty, Toys and games"
   },
   {
-    "name": "Claudia Howard",
-    "link": "https://www.shopify.com/partners/directory/partner/webology1",
-    "locations": [
-      "Gibsons, Canada"
-    ],
-    "languages": [
-      "English"
-    ],
-    "industries": "Food and drink, Health and beauty, Home and garden, Jewelry and accessories"
-  },
-  {
     "name": "Mean3 LLC",
     "link": "https://www.shopify.com/partners/directory/partner/mean3",
     "locations": [
@@ -4765,6 +4867,17 @@
       "Urdu"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Home and garden"
+  },
+  {
+    "name": "Claudia Howard",
+    "link": "https://www.shopify.com/partners/directory/partner/webology1",
+    "locations": [
+      "Gibsons, Canada"
+    ],
+    "languages": [
+      "English"
+    ],
+    "industries": "Food and drink, Health and beauty, Home and garden, Jewelry and accessories"
   },
   {
     "name": "Marketing Warriors",
@@ -4811,19 +4924,6 @@
       "Spanish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
-  },
-  {
-    "name": "Falkeconsulting Berlin",
-    "link": "https://www.shopify.com/partners/directory/partner/falkeconsulting1",
-    "locations": [
-      "Berlin, Germany"
-    ],
-    "languages": [
-      "English",
-      "Spanish",
-      "German"
-    ],
-    "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Home and garden"
   },
   {
     "name": "Dotsquares Ltd.",
@@ -4928,7 +5028,20 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Turkish",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -4999,7 +5112,20 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -5341,7 +5467,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -5365,7 +5493,9 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Turkish",
+      "Danish"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Home and garden, Jewelry and accessories, Sports and recreation"
   },
@@ -5390,7 +5520,8 @@
     "languages": [
       "English",
       "German",
-      "Hindi"
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Home and garden, Pet care"
   },
@@ -5437,7 +5568,8 @@
     "languages": [
       "English",
       "German",
-      "Hindi"
+      "Hindi",
+      "Tamil"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Toys and games"
   },
@@ -5483,7 +5615,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Sports and recreation, Toys and games"
   },
@@ -5542,20 +5677,16 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
-  },
-  {
-    "name": "Kurli Codes",
-    "link": "https://www.shopify.com/partners/directory/partner/ashfak-khan",
-    "locations": [
-      "Los Angeles, United States"
-    ],
-    "languages": [
-      "English"
-    ],
-    "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
   {
     "name": "My IT Studio",
@@ -5590,7 +5721,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Services"
   },
@@ -5603,7 +5736,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Bahasa Indonesia"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -5616,7 +5750,8 @@
     "languages": [
       "English",
       "Urdu",
-      "Swedish"
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Jewelry and accessories"
   },
@@ -5803,7 +5938,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Hindi"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Sports and recreation"
   },
@@ -5816,7 +5953,14 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Pet care, Sports and recreation"
   },
@@ -5829,7 +5973,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Marathi"
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -5855,7 +6000,8 @@
     "languages": [
       "English",
       "French",
-      "Arabic"
+      "Arabic",
+      "Portuguese (European)"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -5891,7 +6037,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "Business to business (B2B)"
   },
@@ -6053,7 +6201,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -6066,7 +6216,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Arabic",
+      "Portuguese (European)"
     ],
     "industries": "N/A"
   },
@@ -6124,7 +6276,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Hindi"
     ],
     "industries": "N/A"
   },
@@ -6453,7 +6606,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "N/A"
   },
@@ -6512,7 +6666,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -6690,7 +6845,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Hindi"
     ],
     "industries": "Business to business (B2B), Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -6864,7 +7022,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Marathi"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Services"
   },
@@ -6910,7 +7069,15 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese"
     ],
     "industries": "Business to business (B2B)"
   },
@@ -6945,7 +7112,31 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Bengali",
+      "Lahnda",
+      "Korean",
+      "Finnish",
+      "Danish",
+      "Javanese",
+      "Thai",
+      "Bahasa Indonesia",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -7027,7 +7218,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Russian"
+      "Russian",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Services"
   },
@@ -7062,7 +7254,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Marathi"
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "N/A"
   },
@@ -7123,7 +7316,9 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Chinese (Traditional)",
+      "Arabic"
     ],
     "industries": "Art and photography, Clothing and fashion, Health and beauty, Services"
   },
@@ -7334,7 +7529,8 @@
     "languages": [
       "English",
       "Russian",
-      "Dutch"
+      "Dutch",
+      "Turkish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Lifestyle, Services"
   },
@@ -7408,7 +7604,22 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Services"
   },
@@ -7432,7 +7643,8 @@
     "languages": [
       "English",
       "German",
-      "Hindi"
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -7480,7 +7692,11 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Arabic",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -7551,7 +7767,9 @@
     "languages": [
       "English",
       "French",
-      "Hindi"
+      "Hindi",
+      "Arabic",
+      "Bengali"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -7586,7 +7804,8 @@
     "languages": [
       "English",
       "German",
-      "Italian"
+      "Italian",
+      "Turkish"
     ],
     "industries": "Automotive, Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -7692,7 +7911,17 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hindi",
+      "Urdu",
+      "Dutch",
+      "Swedish",
+      "Portuguese (European)",
+      "Danish"
     ],
     "industries": "Art and photography, Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -7705,7 +7934,8 @@
     "languages": [
       "English",
       "Portuguese (Brazil)",
-      "Swedish"
+      "Swedish",
+      "Finnish"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Sports and recreation"
   },
@@ -8115,6 +8345,18 @@
     "industries": "N/A"
   },
   {
+    "name": "Labanana",
+    "link": "https://www.shopify.com/partners/directory/partner/labanana",
+    "locations": [
+      "Mauguio, France"
+    ],
+    "languages": [
+      "English",
+      "French"
+    ],
+    "industries": "Clothing and fashion, Food and drink, Home and garden, Sports and recreation"
+  },
+  {
     "name": "IDHL",
     "link": "https://www.shopify.com/partners/directory/partner/idhl-agency",
     "locations": [
@@ -8157,7 +8399,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian",
+      "Russian",
+      "Hindi",
+      "Korean"
     ],
     "industries": "Art and photography, Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -8256,18 +8502,6 @@
       "Danish"
     ],
     "industries": "N/A"
-  },
-  {
-    "name": "Labanana",
-    "link": "https://www.shopify.com/partners/directory/partner/labanana",
-    "locations": [
-      "Mauguio, France"
-    ],
-    "languages": [
-      "English",
-      "French"
-    ],
-    "industries": "Clothing and fashion, Food and drink, Home and garden, Sports and recreation"
   },
   {
     "name": "Wema & Supernova",
@@ -8470,7 +8704,8 @@
     "languages": [
       "English",
       "Swedish",
-      "Portuguese (European)"
+      "Portuguese (European)",
+      "Finnish"
     ],
     "industries": "Art and photography, Business to business (B2B), Clothing and fashion, Jewelry and accessories"
   },
@@ -8666,19 +8901,6 @@
     "industries": "Clothing and fashion, Consumer packaged goods, Food and drink, Jewelry and accessories"
   },
   {
-    "name": "Actively Studio",
-    "link": "https://www.shopify.com/partners/directory/partner/dropshippinguru",
-    "locations": [
-      "Didwana, India"
-    ],
-    "languages": [
-      "English",
-      "Spanish",
-      "German"
-    ],
-    "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
-  },
-  {
     "name": "Growthify.in",
     "link": "https://www.shopify.com/partners/directory/partner/growthify1",
     "locations": [
@@ -8688,6 +8910,31 @@
       "English"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
+  },
+  {
+    "name": "Actively Studio",
+    "link": "https://www.shopify.com/partners/directory/partner/dropshippinguru",
+    "locations": [
+      "Didwana, India"
+    ],
+    "languages": [
+      "English",
+      "Spanish",
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hindi",
+      "Vietnamese",
+      "Arabic",
+      "Dutch",
+      "Portuguese (European)",
+      "Danish",
+      "Polish"
+    ],
+    "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
   {
     "name": "Ossom",
@@ -8756,7 +9003,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Home and garden, Pet care"
   },
@@ -8793,7 +9041,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -8921,7 +9172,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -9091,7 +9343,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "N/A"
   },
@@ -9266,7 +9520,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -9568,7 +9824,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -9638,7 +9895,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Art and photography, Clothing and fashion, Health and beauty, Lifestyle"
   },
@@ -9788,7 +10046,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -9857,7 +10118,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty"
   },
@@ -10017,7 +10281,15 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Hindi",
+      "Vietnamese",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Lifestyle"
   },
@@ -10196,7 +10468,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Swedish"
+      "Swedish",
+      "Norwegian",
+      "Danish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Lifestyle"
   },
@@ -10279,7 +10553,8 @@
     "languages": [
       "English",
       "Japanese",
-      "Vietnamese"
+      "Vietnamese",
+      "Korean"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -10655,7 +10930,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Vietnamese"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Jewelry and accessories"
   },
@@ -10945,7 +11221,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -10971,7 +11248,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Urdu",
+      "Portuguese (European)"
     ],
     "industries": "Art and photography, Clothing and fashion, Electronics, Jewelry and accessories"
   },
@@ -11029,7 +11311,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Russian",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Food and drink, Jewelry and accessories, Sports and recreation"
   },
@@ -11042,7 +11328,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Hindi",
+      "Dutch",
+      "Bengali",
+      "Gujarati"
     ],
     "industries": "Business to business (B2B), Food and drink, Health and beauty, Pet care"
   },
@@ -11066,7 +11356,36 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Bengali",
+      "Lahnda",
+      "Korean",
+      "Telugu",
+      "Turkish",
+      "Tamil",
+      "Finnish",
+      "Danish",
+      "Javanese",
+      "Thai",
+      "Bahasa Indonesia",
+      "Polish",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Jewelry and accessories, Lifestyle, Toys and games"
   },
@@ -11116,7 +11435,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Arabic"
     ],
     "industries": "Art and photography, Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -11141,7 +11461,17 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Vietnamese",
+      "Portuguese (European)",
+      "Finnish",
+      "Danish",
+      "Thai"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -11167,7 +11497,26 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Portuguese (European)",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -11421,7 +11770,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Clothing and fashion, Food and drink, Services, Sports and recreation"
   },
@@ -11549,7 +11899,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Health and beauty, Home and garden, Lifestyle, Pet care"
   },
@@ -11619,7 +11970,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Turkish"
     ],
     "industries": "N/A"
   },
@@ -11667,7 +12019,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -11772,7 +12125,20 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -11786,19 +12152,6 @@
       "English"
     ],
     "industries": "Business to business (B2B), Food and drink, Health and beauty, Sports and recreation"
-  },
-  {
-    "name": "Scandiweb.com",
-    "link": "https://www.shopify.com/partners/directory/partner/scandiweb",
-    "locations": [
-      "Riga, Latvia"
-    ],
-    "languages": [
-      "English",
-      "German",
-      "French"
-    ],
-    "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Sports and recreation"
   },
   {
     "name": "Thalia Tech",
@@ -11855,7 +12208,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Portuguese (Brazil)",
+      "Portuguese (European)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Home and garden"
   },
@@ -11880,7 +12235,8 @@
     "languages": [
       "English",
       "Japanese",
-      "Vietnamese"
+      "Vietnamese",
+      "Korean"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -12111,7 +12467,11 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Hebrew",
+      "Korean"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -12162,7 +12522,8 @@
     "languages": [
       "English",
       "Swedish",
-      "Norwegian"
+      "Norwegian",
+      "Danish"
     ],
     "industries": "Automotive, Business to business (B2B), Clothing and fashion, Sports and recreation"
   },
@@ -12279,7 +12640,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Health and beauty, Jewelry and accessories, Services"
   },
@@ -12385,7 +12749,8 @@
     "languages": [
       "English",
       "Swedish",
-      "Norwegian"
+      "Norwegian",
+      "Danish"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -12435,7 +12800,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Toys and games"
   },
@@ -12635,7 +13003,22 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Lifestyle"
   },
@@ -12683,7 +13066,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Arabic"
     ],
     "industries": "Automotive, Clothing and fashion, Electronics, Home and garden"
   },
@@ -12813,7 +13197,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -12988,7 +13374,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Chinese (Traditional)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Jewelry and accessories"
   },
@@ -13012,7 +13399,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty"
   },
@@ -13061,7 +13449,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Pet care"
   },
@@ -13074,7 +13463,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Japanese"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Health and beauty"
   },
@@ -13362,7 +13752,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Food and drink, Lifestyle, Pet care"
   },
@@ -13411,7 +13802,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Portuguese (Brazil)"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Services"
   },
@@ -13597,7 +13989,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -13680,7 +14077,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Hindi",
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -13693,7 +14093,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -13778,7 +14180,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Russian",
+      "Polish"
     ],
     "industries": "N/A"
   },
@@ -13838,7 +14243,12 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi",
+      "Urdu",
+      "Bengali",
+      "Tamil",
+      "Gujarati"
     ],
     "industries": "Automotive, Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -13874,7 +14284,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Bahasa Indonesia"
     ],
     "industries": "N/A"
   },
@@ -13899,7 +14310,8 @@
     "languages": [
       "English",
       "Russian",
-      "Urdu"
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty"
   },
@@ -13935,7 +14347,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Korean"
     ],
     "industries": "N/A"
   },
@@ -14052,7 +14465,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Health and beauty, Home and garden, Lifestyle"
   },
@@ -14065,7 +14479,16 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -14482,7 +14905,24 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Korean",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Thai",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Services"
   },
@@ -14554,7 +14994,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -14670,7 +15111,13 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Arabic",
+      "Bengali",
+      "Telugu",
+      "Marathi",
+      "Tamil",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -14729,7 +15176,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -14754,7 +15202,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Jewelry and accessories"
   },
@@ -14849,7 +15298,18 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Korean",
+      "Turkish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Sports and recreation"
   },
@@ -14873,7 +15333,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Sports and recreation"
   },
@@ -14971,7 +15435,8 @@
     "languages": [
       "English",
       "Dutch",
-      "Swedish"
+      "Swedish",
+      "Finnish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Sports and recreation"
   },
@@ -15184,7 +15649,8 @@
     "languages": [
       "English",
       "Japanese",
-      "Hindi"
+      "Hindi",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Health and beauty, Home and garden, Lifestyle"
   },
@@ -15278,7 +15744,9 @@
     "languages": [
       "English",
       "Italian",
-      "Chinese (PRC)"
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "Art and photography, Consumer packaged goods, Electronics, Lifestyle"
   },
@@ -15291,7 +15759,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Marathi"
+      "Marathi",
+      "Tamil"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Home and garden"
   },
@@ -15304,7 +15773,19 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Hebrew",
+      "Arabic",
+      "Swedish",
+      "Norwegian",
+      "Turkish",
+      "Finnish",
+      "Danish"
     ],
     "industries": "Automotive, Business to business (B2B), Clothing and fashion, Jewelry and accessories"
   },
@@ -15317,7 +15798,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Hindi"
+      "Hindi",
+      "Arabic"
     ],
     "industries": "Automotive, Business to business (B2B), Clothing and fashion, Food and drink"
   },
@@ -15636,7 +16118,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Hindi",
+      "Thai",
+      "Gujarati"
     ],
     "industries": "Food and drink, Health and beauty, Jewelry and accessories, Services"
   },
@@ -15787,7 +16274,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Telugu"
+      "Telugu",
+      "Tamil"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Pet care"
   },
@@ -15925,7 +16413,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Russian"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -16289,7 +16778,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Sports and recreation"
   },
@@ -16562,7 +17052,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Portuguese (Brazil)"
+      "Portuguese (Brazil)",
+      "Hindi"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Jewelry and accessories"
   },
@@ -16724,7 +17215,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -16797,7 +17289,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Japanese",
+      "Dutch",
+      "Turkish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -16944,7 +17440,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Chinese (PRC)",
+      "Japanese"
     ],
     "industries": "Clothing and fashion, Jewelry and accessories, Pet care, Sports and recreation"
   },
@@ -17159,7 +17657,12 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Dutch",
+      "Swedish",
+      "Portuguese (European)"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty, Home and garden"
   },
@@ -17197,7 +17700,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Arabic",
+      "Portuguese (European)",
+      "Turkish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Toys and games"
   },
@@ -17292,7 +17800,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -17538,7 +18047,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Portuguese (Brazil)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Health and beauty"
   },
@@ -17562,7 +18072,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Korean"
     ],
     "industries": "Automotive, Business to business (B2B), Clothing and fashion, Electronics, Home and garden, Sports and recreation"
   },
@@ -17645,7 +18160,10 @@
     "languages": [
       "English",
       "French",
-      "Hindi"
+      "Hindi",
+      "Bengali",
+      "Marathi",
+      "Tamil"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Services"
   },
@@ -17704,7 +18222,10 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Japanese"
+      "Japanese",
+      "Vietnamese",
+      "Arabic",
+      "Bahasa Indonesia"
     ],
     "industries": "Consumer packaged goods, Food and drink, Health and beauty, Lifestyle"
   },
@@ -17752,7 +18273,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Norwegian",
+      "Danish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -17883,7 +18407,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Urdu"
     ],
     "industries": "Business to business (B2B), Services"
   },
@@ -17992,6 +18517,17 @@
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
   {
+    "name": "Tundra72",
+    "link": "https://www.shopify.com/partners/directory/partner/masani",
+    "locations": [
+      "Scottsdale, United States"
+    ],
+    "languages": [
+      "English"
+    ],
+    "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
+  },
+  {
     "name": "BTW INFORMATICA S.R.L.",
     "link": "https://www.shopify.com/partners/directory/partner/logic-one-srl",
     "locations": [
@@ -18035,17 +18571,6 @@
       "English"
     ],
     "industries": "N/A"
-  },
-  {
-    "name": "Tundra72",
-    "link": "https://www.shopify.com/partners/directory/partner/masani",
-    "locations": [
-      "Scottsdale, United States"
-    ],
-    "languages": [
-      "English"
-    ],
-    "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
   {
     "name": "StoreHero",
@@ -18174,7 +18699,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Marathi"
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -18370,7 +18896,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Lifestyle"
   },
@@ -18439,7 +18966,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Swedish"
+      "Swedish",
+      "Norwegian",
+      "Danish"
     ],
     "industries": "Business to business (B2B)"
   },
@@ -18475,7 +19004,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Dutch"
     ],
     "industries": "N/A"
   },
@@ -18707,7 +19240,15 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Chinese (Traditional)",
+      "Portuguese (Brazil)",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Health and beauty"
   },
@@ -18949,7 +19490,10 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Arabic",
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Automotive, Business to business (B2B), Health and beauty, Lifestyle"
   },
@@ -19031,7 +19575,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "N/A"
   },
@@ -19525,7 +20070,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Hindi",
+      "Arabic"
     ],
     "industries": "N/A"
   },
@@ -19700,7 +20247,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -19724,7 +20273,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Portuguese (Brazil)",
+      "Vietnamese"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Health and beauty, Home and garden, Pet care"
   },
@@ -19760,7 +20311,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "N/A"
   },
@@ -19795,7 +20347,10 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi",
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -20109,7 +20664,8 @@
     "languages": [
       "English",
       "German",
-      "Hindi"
+      "Hindi",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Lifestyle"
   },
@@ -20134,7 +20690,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Arabic",
+      "Korean"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -20544,7 +21102,10 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Japanese",
+      "Russian",
+      "Hindi"
     ],
     "industries": "Art and photography, Clothing and fashion, Food and drink, Jewelry and accessories"
   },
@@ -20604,7 +21165,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -20752,7 +21315,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Portuguese (European)",
+      "Turkish"
     ],
     "industries": "Food and drink, Health and beauty, Pet care, Sports and recreation"
   },
@@ -20952,7 +21520,9 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Russian",
+      "Turkish"
     ],
     "industries": "Clothing and fashion, Electronics, Jewelry and accessories, Lifestyle"
   },
@@ -21003,7 +21573,8 @@
     "languages": [
       "English",
       "German",
-      "Italian"
+      "Italian",
+      "Polish"
     ],
     "industries": "Automotive, Business to business (B2B), Clothing and fashion, Services"
   },
@@ -21016,7 +21587,24 @@
     "languages": [
       "English",
       "German",
-      "Italian"
+      "Italian",
+      "Chinese (PRC)",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Urdu",
+      "Arabic",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Bengali",
+      "Korean",
+      "Telugu",
+      "Tamil",
+      "Danish",
+      "Javanese",
+      "Bahasa Indonesia",
+      "Polish",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Toys and games"
   },
@@ -21189,7 +21777,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -21254,7 +21844,8 @@
     "languages": [
       "English",
       "German",
-      "Hindi"
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Automotive, Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -21280,7 +21871,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Lifestyle"
   },
@@ -21444,7 +22037,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Hindi"
+      "Hindi",
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -21492,7 +22087,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "N/A"
   },
@@ -21629,7 +22227,24 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Korean",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Thai",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Toys and games"
   },
@@ -21715,7 +22330,36 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Bengali",
+      "Lahnda",
+      "Korean",
+      "Telugu",
+      "Marathi",
+      "Turkish",
+      "Tamil",
+      "Finnish",
+      "Danish",
+      "Javanese",
+      "Thai",
+      "Bahasa Indonesia",
+      "Polish",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -21728,7 +22372,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Art and photography, Clothing and fashion, Jewelry and accessories, Lifestyle"
   },
@@ -21823,7 +22468,9 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -21908,7 +22555,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Japanese"
     ],
     "industries": "Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -21957,7 +22605,9 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian",
+      "Russian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Sports and recreation"
   },
@@ -22285,7 +22935,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian",
+      "Japanese",
+      "Arabic"
     ],
     "industries": "Art and photography, Business to business (B2B), Clothing and fashion, Services"
   },
@@ -22406,7 +23059,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Russian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -22465,7 +23119,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Urdu",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Home and garden"
   },
@@ -22511,7 +23169,8 @@
     "languages": [
       "English",
       "German",
-      "Dutch"
+      "Dutch",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Health and beauty"
   },
@@ -22596,7 +23255,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Russian"
+      "Russian",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -22702,7 +23362,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Bahasa Indonesia"
     ],
     "industries": "N/A"
   },
@@ -22857,7 +23518,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Hindi"
     ],
     "industries": "Electronics, Home and garden, Sports and recreation, Toys and games"
   },
@@ -23111,7 +23776,8 @@
     "languages": [
       "English",
       "German",
-      "Italian"
+      "Italian",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Home and garden"
   },
@@ -23493,7 +24159,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Consumer packaged goods, Electronics, Services"
   },
@@ -23506,7 +24173,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Russian"
     ],
     "industries": "Business to business (B2B), Services"
   },
@@ -23655,7 +24323,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "N/A"
   },
@@ -23972,7 +24641,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden"
   },
@@ -24272,7 +24942,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Bengali"
     ],
     "industries": "Clothing and fashion, Health and beauty, Services"
   },
@@ -24609,7 +25280,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "N/A"
   },
@@ -24808,7 +25480,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian",
+      "Russian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Pet care, Sports and recreation"
   },
@@ -24985,7 +25659,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Food and drink, Lifestyle"
   },
@@ -25207,7 +25882,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Art and photography, Automotive, Jewelry and accessories, Pet care"
   },
@@ -25324,7 +26000,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Portuguese (Brazil)"
     ],
     "industries": "Pet care"
   },
@@ -25464,7 +26145,24 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Korean",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Thai",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Electronics, Services"
   },
@@ -25491,6 +26189,17 @@
       "English"
     ],
     "industries": "Clothing and fashion, Food and drink, Jewelry and accessories, Sports and recreation"
+  },
+  {
+    "name": "QCM Media",
+    "link": "https://www.shopify.com/partners/directory/partner/developer-509e56d3874d63f5",
+    "locations": [
+      "Camano, United States"
+    ],
+    "languages": [
+      "English"
+    ],
+    "industries": "Food and drink, Home and garden, Services, Sports and recreation"
   },
   {
     "name": "Cacti Creative",
@@ -25545,7 +26254,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Russian",
+      "Hebrew",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Pet care"
   },
@@ -25580,7 +26294,8 @@
     "languages": [
       "English",
       "German",
-      "Arabic"
+      "Arabic",
+      "Turkish"
     ],
     "industries": "Business to business (B2B), Food and drink, Home and garden, Sports and recreation"
   },
@@ -25593,7 +26308,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -25667,17 +26383,6 @@
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
   {
-    "name": "QCM Media",
-    "link": "https://www.shopify.com/partners/directory/partner/developer-509e56d3874d63f5",
-    "locations": [
-      "Camano, United States"
-    ],
-    "languages": [
-      "English"
-    ],
-    "industries": "Business to business (B2B), Home and garden, Services, Sports and recreation"
-  },
-  {
     "name": "Speed Boostr Services",
     "link": "https://www.shopify.com/partners/directory/partner/speed-boostr-services",
     "locations": [
@@ -25719,7 +26424,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Sports and recreation"
   },
@@ -25768,7 +26475,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Chinese (Traditional)"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -25828,7 +26536,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Japanese"
+      "Japanese",
+      "Vietnamese"
     ],
     "industries": "Business to business (B2B), Health and beauty, Home and garden, Services"
   },
@@ -25863,7 +26572,13 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian",
+      "Hindi",
+      "Urdu",
+      "Dutch",
+      "Swedish",
+      "Danish"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -26156,7 +26871,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Hebrew"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -26391,7 +27108,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -26475,7 +27193,11 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Russian",
+      "Swedish"
     ],
     "industries": "Business to business (B2B), Services"
   },
@@ -26636,7 +27358,25 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Korean",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Thai",
+      "Polish",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Health and beauty, Services"
   },
@@ -27313,7 +28053,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Portuguese (Brazil)"
+      "Portuguese (Brazil)",
+      "Portuguese (European)"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -27364,7 +28105,9 @@
     "languages": [
       "English",
       "Hindi",
-      "Telugu"
+      "Telugu",
+      "Tamil",
+      "Gujarati"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -27400,7 +28143,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Portuguese (Brazil)",
+      "Dutch"
     ],
     "industries": "Electronics, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -27435,7 +28180,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Automotive, Clothing and fashion, Electronics, Pet care"
   },
@@ -27843,7 +28589,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Russian",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Electronics, Home and garden, Services"
   },
@@ -28048,7 +28797,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "N/A"
   },
@@ -28261,7 +29012,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "N/A"
   },
@@ -28740,7 +29492,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Portuguese (European)"
     ],
     "industries": "Clothing and fashion, Jewelry and accessories, Pet care"
   },
@@ -28776,7 +29532,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Health and beauty, Home and garden"
   },
@@ -28906,7 +29663,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -29375,7 +30134,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Urdu",
+      "Arabic",
+      "Danish"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -29632,7 +30394,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics"
   },
@@ -29762,7 +30525,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi"
     ],
     "industries": "Services"
   },
@@ -29845,7 +30609,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -29963,7 +30728,22 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Polish"
     ],
     "industries": "Automotive, Business to business (B2B), Clothing and fashion, Lifestyle"
   },
@@ -30022,7 +30802,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Services"
   },
@@ -30219,7 +31002,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Chinese (PRC)",
+      "Japanese",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Lifestyle"
   },
@@ -30291,7 +31077,9 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Jewelry and accessories"
   },
@@ -30328,7 +31116,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -30764,7 +31553,9 @@
     "languages": [
       "English",
       "Chinese (Traditional)",
-      "Hindi"
+      "Hindi",
+      "Urdu",
+      "Tamil"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Jewelry and accessories"
   },
@@ -30998,7 +31789,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Portuguese (Brazil)"
+      "Portuguese (Brazil)",
+      "Russian"
     ],
     "industries": "N/A"
   },
@@ -31253,7 +32045,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian"
     ],
     "industries": "N/A"
   },
@@ -31266,7 +32059,8 @@
     "languages": [
       "English",
       "German",
-      "Hebrew"
+      "Hebrew",
+      "Hindi"
     ],
     "industries": "Clothing and fashion, Home and garden, Jewelry and accessories, Lifestyle"
   },
@@ -31643,7 +32437,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Home and garden, Jewelry and accessories, Pet care"
   },
@@ -31690,7 +32485,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Dutch"
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Clothing and fashion, Jewelry and accessories, Toys and games"
   },
@@ -31874,7 +32670,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Home and garden, Lifestyle, Toys and games"
   },
@@ -32162,7 +32959,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Urdu"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Jewelry and accessories"
   },
@@ -32265,7 +33063,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Hebrew"
     ],
     "industries": "N/A"
   },
@@ -32477,7 +33276,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Lifestyle, Sports and recreation"
   },
@@ -32570,7 +33370,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Arabic",
+      "Dutch",
+      "Swedish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Services"
   },
@@ -32665,7 +33469,22 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "N/A"
   },
@@ -32700,7 +33519,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Chinese (PRC)",
+      "Russian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Sports and recreation"
   },
@@ -32713,7 +33534,10 @@
     "languages": [
       "English",
       "French",
-      "Dutch"
+      "Dutch",
+      "Swedish",
+      "Finnish",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Food and drink"
   },
@@ -32737,7 +33561,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Health and beauty, Home and garden, Lifestyle, Sports and recreation"
   },
@@ -32762,7 +33587,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Pet care"
   },
@@ -33033,7 +33860,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Toys and games"
   },
@@ -33091,7 +33919,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Dutch"
     ],
     "industries": "N/A"
   },
@@ -33172,7 +34001,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian",
+      "Hindi",
+      "Vietnamese",
+      "Arabic",
+      "Dutch"
     ],
     "industries": "N/A"
   },
@@ -33426,7 +34260,14 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (Traditional)",
+      "Russian",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Pet care"
   },
@@ -33568,7 +34409,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Home and garden"
   },
@@ -33593,7 +34435,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Home and garden, Services"
   },
@@ -33651,7 +34494,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Food and drink, Home and garden, Services"
   },
@@ -33777,7 +34621,8 @@
     "languages": [
       "English",
       "Chinese (PRC)",
-      "Chinese (Traditional)"
+      "Chinese (Traditional)",
+      "Japanese"
     ],
     "industries": "Clothing and fashion, Health and beauty, Lifestyle, Sports and recreation"
   },
@@ -33827,7 +34672,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Lifestyle"
   },
@@ -33840,7 +34686,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Telugu"
+      "Telugu",
+      "Tamil"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Food and drink, Health and beauty"
   },
@@ -33877,7 +34724,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Services"
   },
@@ -33949,7 +34799,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Jewelry and accessories"
   },
@@ -34101,7 +34953,24 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Hindi",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Korean",
+      "Turkish",
+      "Finnish",
+      "Danish",
+      "Thai",
+      "Polish"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Health and beauty"
   },
@@ -34271,7 +35140,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Toys and games"
   },
@@ -34355,7 +35225,8 @@
     "languages": [
       "English",
       "Swedish",
-      "Norwegian"
+      "Norwegian",
+      "Finnish"
     ],
     "industries": "Art and photography, Business to business (B2B), Clothing and fashion, Lifestyle"
   },
@@ -34404,7 +35275,13 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Norwegian",
+      "Portuguese (European)",
+      "Finnish",
+      "Danish",
+      "Polish"
     ],
     "industries": "Clothing and fashion, Electronics, Jewelry and accessories, Pet care"
   },
@@ -34807,7 +35684,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Toys and games"
   },
@@ -34903,7 +35782,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Health and beauty"
   },
@@ -34940,7 +35821,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -35012,7 +35894,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Health and beauty, Lifestyle"
   },
@@ -35084,7 +35967,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Food and drink, Health and beauty"
   },
@@ -35193,7 +36077,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Health and beauty"
   },
@@ -35335,7 +36220,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "N/A"
   },
@@ -35359,7 +36245,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Russian"
     ],
     "industries": "Services"
   },
@@ -35440,7 +36329,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Portuguese (Brazil)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Lifestyle, Services"
   },
@@ -35464,7 +36354,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Russian",
+      "Hindi"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Consumer packaged goods, Health and beauty"
   },
@@ -35930,7 +36822,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian"
     ],
     "industries": "Automotive, Business to business (B2B), Health and beauty, Lifestyle"
   },
@@ -36256,7 +37150,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Business to business (B2B), Services"
   },
@@ -36340,7 +37236,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Vietnamese",
+      "Dutch"
     ],
     "industries": "Automotive, Business to business (B2B), Health and beauty, Services"
   },
@@ -36663,7 +37564,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -36676,7 +37578,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Russian"
     ],
     "industries": "Art and photography, Automotive, Consumer packaged goods, Home and garden"
   },
@@ -36853,7 +37757,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Dutch"
     ],
     "industries": "Food and drink, Jewelry and accessories, Services, Sports and recreation"
   },
@@ -37383,7 +38288,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Hindi"
     ],
     "industries": "Business to business (B2B), Health and beauty, Sports and recreation"
   },
@@ -37456,7 +38362,10 @@
     "languages": [
       "English",
       "French",
-      "Chinese (PRC)"
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Russian",
+      "Hindi"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Toys and games"
   },
@@ -37654,7 +38563,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Portuguese (Brazil)"
+      "Portuguese (Brazil)",
+      "Portuguese (European)"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Health and beauty, Jewelry and accessories"
   },
@@ -37690,7 +38600,8 @@
     "languages": [
       "English",
       "French",
-      "Arabic"
+      "Arabic",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Services"
   },
@@ -37761,7 +38672,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Urdu",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Electronics, Home and garden, Services"
   },
@@ -37845,7 +38759,9 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Dutch"
     ],
     "industries": "Automotive, Business to business (B2B), Health and beauty, Home and garden"
   },
@@ -37882,7 +38798,9 @@
     "languages": [
       "English",
       "German",
-      "Arabic"
+      "Arabic",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Electronics, Jewelry and accessories"
   },
@@ -38007,7 +38925,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Russian"
+      "Russian",
+      "Hindi"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Home and garden"
   },
@@ -38114,7 +39033,8 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French"
     ],
     "industries": "Consumer packaged goods, Electronics, Health and beauty, Sports and recreation"
   },
@@ -38220,7 +39140,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Japanese"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Sports and recreation"
   },
@@ -38374,7 +39295,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Portuguese (Brazil)"
+      "Portuguese (Brazil)",
+      "Portuguese (European)"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -38583,7 +39505,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -38607,7 +39530,13 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Pet care"
   },
@@ -38838,7 +39767,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Marathi"
+      "Marathi",
+      "Gujarati"
     ],
     "industries": "N/A"
   },
@@ -39189,9 +40119,21 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Clothing and fashion, Jewelry and accessories"
+  },
+  {
+    "name": "Cristian Varela",
+    "link": "https://www.shopify.com/partners/directory/partner/cristian-varela",
+    "locations": [
+      "Campana, Argentina"
+    ],
+    "languages": [
+      "Spanish"
+    ],
+    "industries": "N/A"
   },
   {
     "name": "HasnainDEV",
@@ -39214,17 +40156,6 @@
       "English"
     ],
     "industries": "Consumer packaged goods"
-  },
-  {
-    "name": "Cristian Varela",
-    "link": "https://www.shopify.com/partners/directory/partner/cristian-varela",
-    "locations": [
-      "Campana, Argentina"
-    ],
-    "languages": [
-      "Spanish"
-    ],
-    "industries": "N/A"
   },
   {
     "name": "Rethink Business",
@@ -39292,7 +40223,12 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Russian",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Electronics, Jewelry and accessories"
   },
@@ -39385,7 +40321,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "Services"
   },
@@ -39608,7 +40546,15 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Vietnamese",
+      "Arabic",
+      "Dutch"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Services"
   },
@@ -39643,7 +40589,10 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Korean"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -40026,7 +40975,8 @@
     "languages": [
       "English",
       "Chinese (Traditional)",
-      "Japanese"
+      "Japanese",
+      "Thai"
     ],
     "industries": "Clothing and fashion, Consumer packaged goods, Health and beauty, Lifestyle"
   },
@@ -40186,7 +41136,13 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian",
+      "Japanese",
+      "Hebrew",
+      "Hindi",
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Health and beauty, Pet care"
   },
@@ -40199,7 +41155,8 @@
     "languages": [
       "English",
       "Korean",
-      "Telugu"
+      "Telugu",
+      "Tamil"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -40224,7 +41181,37 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Chinese (PRC)",
+      "Chinese (Traditional)",
+      "Japanese",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Hebrew",
+      "Hindi",
+      "Vietnamese",
+      "Urdu",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian",
+      "Portuguese (European)",
+      "Bengali",
+      "Lahnda",
+      "Korean",
+      "Telugu",
+      "Marathi",
+      "Turkish",
+      "Tamil",
+      "Finnish",
+      "Danish",
+      "Javanese",
+      "Thai",
+      "Bahasa Indonesia",
+      "Polish",
+      "Gujarati"
     ],
     "industries": "Automotive, Business to business (B2B), Consumer packaged goods, Food and drink"
   },
@@ -40390,7 +41377,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Hindi"
+      "Hindi",
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Jewelry and accessories, Services"
   },
@@ -40425,7 +41414,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Hindi",
+      "Urdu"
     ],
     "industries": "Pet care, Services, Sports and recreation, Toys and games"
   },
@@ -40530,7 +41521,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Hindi"
+      "Hindi",
+      "Urdu",
+      "Arabic"
     ],
     "industries": "Clothing and fashion, Food and drink, Health and beauty, Jewelry and accessories"
   },
@@ -40715,7 +41708,10 @@
     "languages": [
       "English",
       "French",
-      "Chinese (PRC)"
+      "Chinese (PRC)",
+      "Hindi",
+      "Korean",
+      "Tamil"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty, Home and garden, Sports and recreation"
   },
@@ -40773,7 +41769,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Art and photography, Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -40786,7 +41783,8 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Arabic"
     ],
     "industries": "N/A"
   },
@@ -40833,7 +41831,9 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Arabic",
+      "Portuguese (European)"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Jewelry and accessories"
   },
@@ -40950,7 +41950,9 @@
     "languages": [
       "English",
       "Spanish",
-      "French"
+      "French",
+      "Chinese (PRC)",
+      "Chinese (Traditional)"
     ],
     "industries": "N/A"
   },
@@ -41101,7 +42103,15 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Russian",
+      "Arabic",
+      "Dutch",
+      "Swedish",
+      "Norwegian"
     ],
     "industries": "Business to business (B2B), Clothing and fashion, Food and drink, Health and beauty"
   },
@@ -41171,7 +42181,9 @@
     "languages": [
       "English",
       "French",
-      "Italian"
+      "Italian",
+      "Japanese",
+      "Swedish"
     ],
     "industries": "N/A"
   },
@@ -41281,7 +42293,8 @@
     "languages": [
       "English",
       "Hindi",
-      "Urdu"
+      "Urdu",
+      "Dutch"
     ],
     "industries": "Clothing and fashion, Electronics, Health and beauty, Pet care"
   },
@@ -41647,7 +42660,8 @@
     "languages": [
       "English",
       "German",
-      "Chinese (PRC)"
+      "Chinese (PRC)",
+      "Chinese (Traditional)"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories"
   },
@@ -41741,7 +42755,11 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Japanese",
+      "Portuguese (Brazil)"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Health and beauty"
   },
@@ -41777,7 +42795,8 @@
     "languages": [
       "English",
       "Spanish",
-      "Italian"
+      "Italian",
+      "Portuguese (Brazil)"
     ],
     "industries": "Clothing and fashion, Electronics, Food and drink, Jewelry and accessories"
   },
@@ -41861,7 +42880,10 @@
     "languages": [
       "English",
       "Spanish",
-      "German"
+      "German",
+      "French",
+      "Italian",
+      "Hindi"
     ],
     "industries": "Clothing and fashion, Health and beauty, Jewelry and accessories, Toys and games"
   },
@@ -41977,7 +42999,8 @@
     "languages": [
       "English",
       "German",
-      "French"
+      "French",
+      "Italian"
     ],
     "industries": "Art and photography, Clothing and fashion, Jewelry and accessories, Toys and games"
   },
