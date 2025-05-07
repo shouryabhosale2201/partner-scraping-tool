@@ -53,9 +53,6 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
             // Search through the data
             const trimmedSearchTerm = searchTerm.trim().toLowerCase();
-            console.log("searchTerm:", searchTerm);
-            console.log("trimmedSearchTerm:", trimmedSearchTerm);
-
 
             for (const partner of data) {
                 // Search locations
@@ -226,7 +223,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
 
                                 return (
                                     <div key={level2Name} className="mb-2">
-                                        <h4 className="text-sm font-semibold ml-4 mb-1">
+                                        <h4 className="text-sm ml-4 mb-1">
                                             {level2Name}
                                             {searchTerm && !hasMatchingLevel3 && level2NoMatch && Object.keys(level2NoMatch).length > 0 && (
                                                 <span className="text-gray-500 text-xs ml-2">(No matches found)</span>
@@ -262,7 +259,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                                                                 .map((level4Name, idx) => {
                                                                     const isSelected = selectedFilters[key]?.includes(level4Name) || false;
                                                                     return (
-                                                                        <label key={idx} className={`flex items-center space-x-2 cursor-pointer text-xs ${searchTerm && level4Name.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
+                                                                        <label key={idx} className="flex items-center space-x-2 cursor-pointer text-xs">
                                                                             <input
                                                                                 type="checkbox"
                                                                                 value={level4Name}
@@ -323,7 +320,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
                     <div className="flex flex-col gap-2 mt-2 ml-2 max-h-64 overflow-y-auto">
                         {hasLocationMatch ? (
                             filteredLocations.map((location, idx) => (
-                                <label key={idx} className={`flex items-center space-x-2 cursor-pointer ${searchTerm && location.toLowerCase().includes(searchTerm.toLowerCase()) ? 'font-semibold' : ''}`}>
+                                <label key={idx} className="flex items-center space-x-2 cursor-pointer">
                                     <input
                                         type="checkbox"
                                         value={location}
@@ -349,7 +346,7 @@ const OracleSidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChan
     };
 
     return (
-        <div className="w-1/4 min-w-[400px] border-r bg-gray-100 border-gray-200 shadow-md p-4 h-screen flex flex-col">
+        <div className="w-1/4 min-w-[300px] border-r bg-gray-100 border-gray-200 shadow-md p-4 h-screen flex flex-col sticky top-0 overflow-y-auto">
             <div className="sticky top-0 z-10 bg-gray-100 pb-4">
                 <div className="mb-4">
                     <input
@@ -474,16 +471,33 @@ const OracleTable = ({ data }) => {
             {/* Table */}
             <div className="flex-1 flex flex-col overflow-hidden">
                 <div className="sticky top-0 z-10 bg-gray-100 px-6 pt-4 pb-4 border-b border-gray-300">
-                    <input
-                        type="text"
-                        placeholder="Search in table"
-                        value={tableSearchTerm}
-                        onChange={(e) => {
-                            setTableSearchTerm(e.target.value);
-                            setCurrentPage(1);
-                        }}
-                        className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
+                    <div className="flex items-center justify-between">
+                        <input
+                            type="text"
+                            placeholder="Search in table"
+                            value={tableSearchTerm}
+                            onChange={(e) => {
+                                setTableSearchTerm(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            className="w-1/3 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                        <div className="flex items-center">
+                            <label htmlFor="pageSize" className="mr-2 text-sm text-gray-600">Show:</label>
+                            <select
+                                value={partnersPerPage}
+                                onChange={(e) => {
+                                    setPartnersPerPage(Number(e.target.value));
+                                    setCurrentPage(1); // Reset to first page when page size changes
+                                }}
+                                className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-100"
+                            >
+                                <option value={50}>50</option>
+                                <option value={100}>100</option>
+                                <option value={200}>200</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className="text-sm text-gray-600 mt-2">
                         Showing {paginatedData.length > 0 ? startIndex + 1 : 0}-{Math.min(startIndex + partnersPerPage, searchFilteredData.length)} of {searchFilteredData.length} partners
                     </div>

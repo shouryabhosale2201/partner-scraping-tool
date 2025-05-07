@@ -119,6 +119,15 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             item.toLowerCase().includes(searchTerm.toLowerCase())
         );
         const isOpen = openSections[type] === true; // Get open state
+        const hasSearchResults = filteredItems.length > 0;
+
+        // Open the section if there's a search term and items are found
+        useEffect(() => {
+            if (searchTerm && hasSearchResults) {
+                setOpenSections(prev => ({ ...prev, [type]: true }));
+            }
+        }, [searchTerm, hasSearchResults, type]);
+
 
         return (
             <div className="mb-6">
@@ -455,7 +464,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
 
                 <div className="p-4">
                     <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
-                        <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold border-b border-gray-300">
+                        <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold ">
                             <tr>
                                 <th className="w-12">#</th>
                                 {availableColumns.map((column) => (
@@ -495,3 +504,4 @@ export default function MicrosoftTable({ data, onFilterChange }) {
         </div>
     );
 }
+
