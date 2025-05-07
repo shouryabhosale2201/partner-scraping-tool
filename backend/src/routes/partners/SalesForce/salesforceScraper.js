@@ -4,6 +4,7 @@ const pLimit       = require("p-limit").default;
 const path         = require("path");
 const fs           = require("fs").promises;
 
+
 /* ───────────────────────  concurrency knobs  ───────────────────── */
 const FILTER_CONCURRENCY = 8;   // filter→listing rounds running in parallel
 const DETAIL_CONCURRENCY = 40;  // partner detail pages per round
@@ -13,36 +14,32 @@ const limitFilter = pLimit(FILTER_CONCURRENCY);
 const newDetailLimiter = () => pLimit(DETAIL_CONCURRENCY);
 
 const SALESFORCE_FILE = path.resolve(
-    __dirname,
-    '../../../../../frontend/public/resources/salesforce-partrners.json'
-  );
-  
-  /**
-   * Ensures the directory & file exist, then writes `extractedDetails` to SALESFORCE_FILE.
-   */
-  async function storeSalesforceDataAsJson(extractedDetails) {
-    try {
-      // 1. Ensure the target directory exists
-      const resourceDir = path.dirname(SALESFORCE_FILE);
-      await fs.mkdir(resourceDir, { recursive: true });
-  
-      // 2. If the file doesn’t exist yet, create it with an empty array
-      try {
-        await fs.access(SALESFORCE_FILE);
-      } catch {
-        await fs.writeFile(SALESFORCE_FILE, JSON.stringify([], null, 2), 'utf8');
-        console.log(`🆕 Created empty JSON file: ${SALESFORCE_FILE}`);
-      }
-  
-      // 3. Pretty-print JSON and overwrite the file
-      const jsonData = JSON.stringify(extractedDetails, null, 2);
-      await fs.writeFile(SALESFORCE_FILE, jsonData, 'utf8');
-  
-      console.log('✅ Successfully stored scraped data to salesforce.json');
-    } catch (error) {
-      console.error('❌ Error in storeSalesforceDataAsJson:', error);
-    }
+  __dirname,
+  '../../../../../frontend/public/data/salesforce-partners.json'
+ );
+ /**
+  * Ensures the directory & file exist, then writes `extractedDetails` to SALESFORCE_FILE.
+  */
+ async function storeSalesforceDataAsJson(extractedDetails) {
+  try {
+   // 1. Ensure the target directory exists
+   const resourceDir = path.dirname(SALESFORCE_FILE);
+   await fs.mkdir(resourceDir, { recursive: true });
+   // 2. If the file doesn’t exist yet, create it with an empty array
+   try {
+    await fs.access(SALESFORCE_FILE);
+   } catch {
+    await fs.writeFile(SALESFORCE_FILE, JSON.stringify([], null, 2), 'utf8');
+    console.log(`:new: Created empty JSON file: ${SALESFORCE_FILE}`);
+   }
+   // 3. Pretty-print JSON and overwrite the file
+   const jsonData = JSON.stringify(extractedDetails, null, 2);
+   await fs.writeFile(SALESFORCE_FILE, jsonData, 'utf8');
+   console.log(':white_check_mark: Successfully stored scraped data to salesforce.json');
+  } catch (error) {
+   console.error(':x: Error in storeSalesforceDataAsJson:', error);
   }
+ }
 
 /* ───────────────────────────  main entry  ───────────────────────── */
 const scrapeData = async (fieldsToScrape, testingMode = false) => {

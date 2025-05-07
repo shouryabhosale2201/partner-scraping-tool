@@ -4,8 +4,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 // File paths for our JSON "tables"
-const MICROSOFT_FILE = path.resolve(__dirname, '../../../../../frontend/public/resources/microsoft-partners.json');
-
+const MICROSOFT_FILE = path.resolve(__dirname, '../../../../../frontend/public/data/microsoft-partners.json');
 async function storeMicrosoftDataAsJson(filepath, scrapedArray) {
   try {
     await fs.writeFile(filepath, JSON.stringify([]), 'utf8'); // This clears the file
@@ -18,14 +17,12 @@ async function storeMicrosoftDataAsJson(filepath, scrapedArray) {
     console.error(':x: Error saving JSON file:', error);
   }
 }
-
 // Initialize the JSON files if they don't exist
 const initializeJsonFiles = async () => {
   try {
     // Create the resources directory if it doesn't exist
     const resourceDir = path.dirname(MICROSOFT_FILE);
     await fs.mkdir(resourceDir, { recursive: true });
-
     try {
       // Check if the file exists
       await fs.access(MICROSOFT_FILE);
@@ -34,7 +31,6 @@ const initializeJsonFiles = async () => {
       await fs.writeFile(MICROSOFT_FILE, JSON.stringify([]));
       console.log(`Created empty JSON file: ${MICROSOFT_FILE}`);
     }
-
     console.log('JSON files initialized successfully');
   } catch (error) {
     console.error('Error initializing JSON files:', error);

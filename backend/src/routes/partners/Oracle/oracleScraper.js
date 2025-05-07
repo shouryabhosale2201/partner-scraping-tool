@@ -1,8 +1,3 @@
-/* oracleScraper.js
- * Polite Oracle partner scraper with per-Level-2 batching and delays
- * Throttles concurrency and injects configurable wait between Level-4 tasks.
- */
-
 const fs = require('fs').promises;
 const path = require('path');
 const pLimit = require('p-limit').default;
@@ -22,26 +17,21 @@ const RESULT_COUNT = process.env.ORACLE_SCRAPER_RESULT_COUNT
 const WAIT_MS = process.env.ORACLE_SCRAPER_WAIT_MS
   ? Number(process.env.ORACLE_SCRAPER_WAIT_MS)
   : 500; // Default 500ms between Level-4 tasks
-
 const limit = pLimit(CONCURRENCY);
-
 // keep-alive agents for HTTP/HTTPS
 const keepAliveHttpAgent = new http.Agent({ keepAlive: true });
 const keepAliveHttpsAgent = new https.Agent({ keepAlive: true });
 const agent = parsedURL =>
   parsedURL.protocol === 'http:' ? keepAliveHttpAgent : keepAliveHttpsAgent;
-
 const headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json, text/javascript, */*; q=0.01',
   'X-Requested-With': 'XMLHttpRequest',
 };
-
 const ORACLE_FILE = path.resolve(
   __dirname,
-  '../../../../../frontend/public/resources/oracle-partners.json'
+  '../../../../../frontend/public/data/oracle-partners.json'
 );
-
 const payloadTemplate = {
   keyword: '',
   pageNumber: '1',
@@ -55,12 +45,10 @@ const payloadTemplate = {
   },
   xscProfileType: 'Partner Profile',
 };
-
 // simple sleep helper
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 async function storeOracleDataAsJson(scrapedMap) {
   try {
     await fs.mkdir(path.dirname(ORACLE_FILE), { recursive: true });
@@ -73,7 +61,6 @@ async function storeOracleDataAsJson(scrapedMap) {
     console.error('❌  Cannot write JSON:', err);
   }
 }
-
 async function scrapeData() {
   console.log('🔄  Starting Oracle scrape…');
   const [expertiseHierarchy, apacCountries] = await Promise.all([
@@ -82,16 +69,13 @@ async function scrapeData() {
   ]);
   console.log(`✅  Expertise L1 count: ${expertiseHierarchy.length}`);
   console.log(`✅  APAC country count : ${apacCountries.length}`);
-
   const scrapedMap = new Map();
   let serial = 1;
-
   // --- process per Level-2 group with delays ---
   for (const lvl1 of expertiseHierarchy) {
     console.log(`▶️  L1 ${lvl1.name}`);
     for (const lvl2 of lvl1.level_2_list || []) {
       console.log(`   ➡️  L2 ${lvl2.name}`);
-
       // gather Level-4 tasks under this Level-2
       const tasks = [];
       for (const lvl3 of lvl2.level_3_list || []) {
@@ -100,7 +84,6 @@ async function scrapeData() {
         }
       }
       console.log(`      ⏳  Running ${tasks.length} tasks for ${lvl2.name}`);
-
       // process tasks sequentially in limited batches
       for (const task of tasks) {
         await limit(() => processLevel4(task, scrapedMap, () => serial++));
@@ -109,7 +92,6 @@ async function scrapeData() {
       }
     }
   }
-
   // --- APAC location scrape ---
   console.log('🌏  Location scrape…');
   for (const country of apacCountries) {
@@ -129,11 +111,9 @@ async function scrapeData() {
             agent,
           });
           if (!res.ok) { console.error(`🚨  ${country.name} p${page} ${res.status}`); break; }
-
           const data = await res.json();
           const partners = data.profiles || [];
           pages = Math.ceil((data.count || partners.length) / RESULT_COUNT);
-
           partners.forEach(p => {
             const link = `https://partner-finder.oracle.com/catalog/Partner/${p.id}`;
             if (!scrapedMap.has(link)) {
@@ -157,15 +137,12 @@ async function scrapeData() {
       }
     });
   }
-
   // --- persist & finish ---
   console.log(`📝  Writing ${scrapedMap.size} partners…`);
   await storeOracleDataAsJson(scrapedMap);
   console.log('🎉  Done');
-
   return [...scrapedMap.values()];
 }
-
 /**
  * processLevel4
  * @param {object} task  contains lvl1, lvl2, lvl3, lvl4
@@ -176,11 +153,9 @@ async function processLevel4(task, scrapedMap, nextSerial) {
   const { lvl1, lvl2, lvl3, lvl4 } = task;
   const { name: level3Name, ucm_column } = lvl3;
   const { name: level4Name, id: level4Id } = lvl4;
-
   console.log(`🔍  ${lvl1.name} > ${lvl2.name} > ${level3Name} > ${level4Name}`);
   const baseFilters = { [ucm_column]: [level4Id], xscCompanyLocation: ['1000'] };
   const firstPayload = { ...payloadTemplate, filters: baseFilters, pageNumber: '1' };
-
   let firstJson;
   try {
     const res = await fetch(ORACLE_API_URL, {
@@ -197,11 +172,9 @@ async function processLevel4(task, scrapedMap, nextSerial) {
     console.error(`🚨  ${level4Name} first page`, err.message);
     return;
   }
-
   const total = firstJson.count || firstJson.profiles?.length || 0;
   const totalPages = Math.ceil(total / RESULT_COUNT);
   let allProfiles = firstJson.profiles || [];
-
   if (total > RESULT_COUNT) {
     const restPages = Array.from({ length: totalPages - 1 }, (_, i) => i + 2);
     const rest = await Promise.all(
@@ -217,7 +190,6 @@ async function processLevel4(task, scrapedMap, nextSerial) {
     );
     rest.forEach(pg => { if (pg?.profiles) allProfiles.push(...pg.profiles); });
   }
-
   allProfiles.forEach(partner => {
     const link = `https://partner-finder.oracle.com/catalog/Partner/${partner.id}`;
     if (!scrapedMap.has(link)) {
@@ -240,5 +212,4 @@ async function processLevel4(task, scrapedMap, nextSerial) {
   });
   console.log(`✔️  total now ${scrapedMap.size}`);
 }
-
 module.exports = scrapeData;

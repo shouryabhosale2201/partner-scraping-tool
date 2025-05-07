@@ -16,7 +16,7 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
             try {
                 console.log("Fetching filters from JSON file...");
                 // Fetch directly from the JSON file with proper error handling
-                const response = await fetch("data/microsoft-partners.json");
+                const response = await fetch("/data/microsoft-partners.json");
 
                 if (!response.ok) {
                     throw new Error(`Failed to load file: ${response.status} ${response.statusText}`);
@@ -244,7 +244,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
             console.log("No data provided via props, fetching directly...");
             const fetchData = async () => {
                 try {
-                    const response = await fetch("data/microsoft-partners.json");
+                    const response = await fetch("/data/microsoft-partners.json");
 
                     if (!response.ok) {
                         throw new Error(`Failed to load file: ${response.status} ${response.statusText}`);
