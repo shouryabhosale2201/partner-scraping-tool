@@ -131,7 +131,7 @@ export default function ScraperApp() {
   
     try {
       // Construct file path based on url variable
-      const filePath = `/resources/${url}.json`;
+      const filePath = `/data/${url}-partners.json`;
       console.log(`Fetching from local file: ${filePath}`);
       
       const response = await fetch(filePath);
@@ -356,7 +356,7 @@ export default function ScraperApp() {
     try {
       setDownloading(true);
       // 1. Load the JSON
-      const resp = await fetch(`/resources/${url}.json`);
+      const resp = await fetch(`/data/${url}-partners.json`);
       if (!resp.ok) throw new Error(`Failed to fetch ${url}.json: ${resp.statusText}`);
       const data = await resp.json();
       if (!Array.isArray(data) || data.length === 0) {
