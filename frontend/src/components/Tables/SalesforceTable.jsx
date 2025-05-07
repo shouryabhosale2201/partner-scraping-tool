@@ -1,7 +1,16 @@
-//salesforceTable.jsx
-import React, { useEffect, useState, useMemo } from "react";
+ //salesforceTable.jsx
+ import React, { useEffect, useState, useMemo } from "react";
+ // -- put this near your imports, replacing the old one
+// limits the cell to ±6 rem tall and lets its content scroll vertically
+const ScrollableCell = ({ children }) => (
+    <div className="h-24 overflow-y-auto overflow-x-hidden
+                    whitespace-pre-wrap break-words leading-snug px-2">
+      {children}
+    </div>
+  );
+  
 
-const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
+ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) => {
   const [filtersBySection, setFiltersBySection] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [openSections, setOpenSections] = useState({});
@@ -115,7 +124,11 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
         children: country.children.filter(region =>
           region.toLowerCase().includes(searchTerm.toLowerCase())
         ),
-      })).filter(country => country.children.length > 0);
+      })).filter(country => country.children.length > 0 || country.label.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const hasSearchResults = !isNested
+      ? filteredItems.length > 0
+      : filteredItems.some(country => country.children.length > 0 || country.label.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
       <div key={section} className="mb-6">
@@ -126,41 +139,59 @@ const FilterSidebar = ({ selectedFilters, setSelectedFilters, onFilterChange }) 
           </svg>
         </button>
 
+        {searchTerm && !isOpen && hasSearchResults && toggleSection(section)}
+
         {isOpen && (
-          <div className="flex flex-col gap-2 pl-2 mt-2">
-            {isNested ? (
-              filteredItems.map((country, i) => (
-                <div key={i} className="pl-2">
-                  <h4 className="font-medium mb-1">{country.label}</h4>
-                  <div className="flex flex-col gap-1 pl-4">
-                    {country.children.map((region, j) => (
-                      <label key={j} className="flex items-start space-x-2 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          value={region}
-                          checked={selectedFilters[sectionKey]?.includes(region) || false}
-                          onChange={() => handleFilterChange(section, region, country.label)}
-                          className="checkbox checkbox-sm"
-                        />
-                        <span className="text-sm break-words max-w-[200px]">{region}</span>
-                      </label>
-                    ))}
+          <div className="flex flex-col gap-2 pl-2 mt-2 max-h-64 overflow-y-auto">
+            {hasSearchResults ? (
+              isNested ? (
+                filteredItems.map((country, i) => (
+                  <div key={i} className="pl-2">
+                    <h4 className="font-medium mb-1">{country.label}</h4>
+                    <div className="flex flex-col gap-1 pl-4">
+                      {country.children.map((region, j) => (
+                        <label key={j} className="flex items-start space-x-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            value={region}
+                            checked={selectedFilters[sectionKey]?.includes(region) || false}
+                            onChange={() => handleFilterChange(section, region, country.label)}
+                            className="checkbox checkbox-sm"
+                          />
+                          <span className="text-sm break-words max-w-[200px]">{region}</span>
+                        </label>
+                      ))}
+                      {searchTerm && country.label.toLowerCase().includes(searchTerm.toLowerCase()) && country.children.length === 0 && (
+                        <label className="flex items-start space-x-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            value={country.label}
+                            checked={selectedFilters[sectionKey]?.includes(country.label) || false}
+                            onChange={() => handleFilterChange(section, country.label)}
+                            className="checkbox checkbox-sm"
+                          />
+                          <span className="text-sm break-words max-w-[200px]">{country.label}</span>
+                        </label>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))
+                ))
+              ) : (
+                filteredItems.map((item, index) => (
+                  <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      value={item}
+                      checked={selectedFilters[sectionKey]?.includes(item) || false}
+                      onChange={() => handleFilterChange(section, item)}
+                      className="checkbox checkbox-sm"
+                    />
+                    <span>{item}</span>
+                  </label>
+                ))
+              )
             ) : (
-              filteredItems.map((item, index) => (
-                <label key={index} className="flex items-center space-x-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    value={item}
-                    checked={selectedFilters[sectionKey]?.includes(item) || false}
-                    onChange={() => handleFilterChange(section, item)}
-                    className="checkbox checkbox-sm"
-                  />
-                  <span>{item}</span>
-                </label>
-              ))
+              <div className="text-sm text-gray-500">No matches found.</div>
             )}
           </div>
         )}
@@ -212,6 +243,7 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
   const [displayFields, setDisplayFields] = useState(selectedFields);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(200);
+  const [noSearchResults, setNoSearchResults] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -332,16 +364,21 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
     return columns;
   };
 
-    const visibleColumns = getVisibleColumns();
+  const visibleColumns = getVisibleColumns();
 
   const searchedData = useMemo(() => {
-    if (!tableSearchTerm.trim()) return filteredData;
+    if (!tableSearchTerm.trim()) {
+      setNoSearchResults(false);
+      return filteredData;
+    }
     const term = tableSearchTerm.toLowerCase();
-    return filteredData.filter(item =>
+    const results = filteredData.filter(item =>
       Object.keys(item).some(key =>
         item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(term)
       )
     );
+    setNoSearchResults(results.length === 0);
+    return results;
   }, [filteredData, tableSearchTerm]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -369,9 +406,9 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
               className="w-1/3 border border-gray-300 rounded-md p-2"
             />
             <div className="flex items-center">
-            <label htmlFor="pageSize" className="mr-2 text-sm text-gray-600">Show:</label>
+              <label htmlFor="pageSize" className="mr-2 text-sm text-gray-600">Show:</label>
               <select value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))} className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-100">
-              
+
                 <option value={50}>50</option>
                 <option value={100}>100</option>
                 <option value={200}>200</option>
@@ -387,9 +424,13 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
           <div className="flex justify-center items-center h-64">
             <span>Loading...</span>
           </div>
+        ) : noSearchResults ? (
+          <div className="flex justify-center items-center h-full">
+            <div className="text-gray-500 text-lg font-semibold">No partners found matching your search.</div>
+          </div>
         ) : (
           <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
-            <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold border-b border-gray-300">
+            <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold ">
               <tr>
                 <th className="w-12">#</th>
                 {visibleColumns.name && <th className="text-left">Name</th>}
@@ -402,45 +443,77 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.length > 0 ? (
-                currentItems.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
-                  >
-                    <th className="py-2">{indexOfFirstItem + index + 1}</th>
-                    {visibleColumns.name && (
-                      <td className="py-2 truncate">
-                        {item.link ? (
-                          <a
-                            href={item.link}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-blue-500 hover:underline"
-                          >
-                            {item.name}
-                          </a>
-                        ) : (
-                          item.name
-                        )}
-                      </td>
-                    )}
-                    {visibleColumns.tagline && <td className="py-2">{item.tagline || "N/A"}</td>}
-                    {visibleColumns.description && <td className="py-2">{item.description || "N/A"}</td>}
-                    {visibleColumns.expertise && <td className="py-2">{item.expertise || "N/A"}</td>}
-                    {visibleColumns.industries && <td className="py-2">{item.industries || "N/A"}</td>}
-                    {visibleColumns.services && <td className="py-2">{item.services || "N/A"}</td>}
-                    {visibleColumns.extendedDescription && <td className="py-2">{item.extendedDescription || "N/A"}</td>}
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={8} className="text-center py-4 text-sm text-gray-500">
-                    No data available
-                  </td>
-                </tr>
-              )}
-            </tbody>
+  {currentItems.length > 0 ? (
+    currentItems.map((item, index) => (
+      <tr
+        key={index}
+        className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+      >
+        <th className="py-2">{indexOfFirstItem + index + 1}</th>
+
+        {visibleColumns.name && (
+          <td className="py-2 truncate">
+            {item.link ? (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                {item.name}
+              </a>
+            ) : (
+              item.name
+            )}
+          </td>
+        )}
+
+        {visibleColumns.tagline && (
+          <td className="py-2">
+            <ScrollableCell>{item.tagline || "N/A"}</ScrollableCell>
+          </td>
+        )}
+
+        {visibleColumns.description && (
+          <td className="py-2">
+            <ScrollableCell>{item.description || "N/A"}</ScrollableCell>
+          </td>
+        )}
+
+        {visibleColumns.expertise && (
+          <td className="py-2">
+            <ScrollableCell>{item.expertise || "N/A"}</ScrollableCell>
+          </td>
+        )}
+
+        {visibleColumns.industries && (
+          <td className="py-2">
+            <ScrollableCell>{item.industries || "N/A"}</ScrollableCell>
+          </td>
+        )}
+
+        {visibleColumns.services && (
+          <td className="py-2">
+            <ScrollableCell>{item.services || "N/A"}</ScrollableCell>
+          </td>
+        )}
+
+        {visibleColumns.extendedDescription && (
+          <td className="py-2">
+            <ScrollableCell>{item.extendedDescription || "N/A"}</ScrollableCell>
+          </td>
+        )}
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan={8} className="text-center py-4 text-sm text-gray-500">
+        No data available
+      </td>
+    </tr>
+  )}
+</tbody>
+
           </table>
 
 
