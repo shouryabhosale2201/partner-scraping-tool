@@ -82,7 +82,7 @@ export default function ScraperApp() {
       if (url === "microsoft") {
         const fieldsToScrape = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
         const response = await axios.get(
-          `https://jqyofv5grhippmyroxbh6eqsfq0uiuwm.lambda-url.us-west-2.on.aws/microsoft`,
+          `http://localhost:5000/api/v1/${url}/scrape`,
           { params: { fields: JSON.stringify(fieldsToScrape) } }
         );
         if (response.data.success) {
@@ -276,84 +276,84 @@ export default function ScraperApp() {
       }
       
       // SALESFORCE DATA HANDLING
-      // else if (url === "salesforce") {
-      //   // Update the Salesforce fields in state
-      //   setSalesforceFields(pendingSalesforceFields);
+      else if (url === "salesforce") {
+        // Update the Salesforce fields in state
+        setSalesforceFields(pendingSalesforceFields);
         
-      //   // Extract filters
-      //   const salesforceExpertise = selectedFilters.salesforceExpertise || [];
-      //   const industryExpertise = selectedFilters.industryExpertise || [];
-      //   const regionFilters = selectedFilters.region || [];
-      //   const countryFilters = selectedFilters.country || [];
+        // Extract filters
+        const salesforceExpertise = selectedFilters.salesforceExpertise || [];
+        const industryExpertise = selectedFilters.industryExpertise || [];
+        const regionFilters = selectedFilters.region || [];
+        const countryFilters = selectedFilters.country || [];
         
-      //   // Helper function to match expertise filters - matches server implementation
-      //   const matchesFilters = (foundIn, section, filters) => {
-      //     if (!filters || filters.length === 0) return true;
-      //     const entry = foundIn?.find(f => f.section === section);
-      //     if (!entry) return false;
-      //     return filters.every(f => entry.filters.includes(f));
-      //   };
+        // Helper function to match expertise filters - matches server implementation
+        const matchesFilters = (foundIn, section, filters) => {
+          if (!filters || filters.length === 0) return true;
+          const entry = foundIn?.find(f => f.section === section);
+          if (!entry) return false;
+          return filters.every(f => entry.filters.includes(f));
+        };
         
-      //   // Filter partners based on all conditions (AND logic)
-      //   filteredData = filteredData.filter(partner => {
-      //     const foundIn = partner.foundIn || [];
-      //     const countries = partner.countries || {};
+        // Filter partners based on all conditions (AND logic)
+        filteredData = filteredData.filter(partner => {
+          const foundIn = partner.foundIn || [];
+          const countries = partner.countries || {};
           
-      //     // Check Salesforce Expertise
-      //     const matchesSalesforce = salesforceExpertise.length === 0 ||
-      //       matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertise);
+          // Check Salesforce Expertise
+          const matchesSalesforce = salesforceExpertise.length === 0 ||
+            matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertise);
           
-      //     // Check Industry Expertise
-      //     const matchesIndustry = industryExpertise.length === 0 ||
-      //       matchesFilters(foundIn, "Industry Expertise", industryExpertise);
+          // Check Industry Expertise
+          const matchesIndustry = industryExpertise.length === 0 ||
+            matchesFilters(foundIn, "Industry Expertise", industryExpertise);
           
-      //     // Region filtering - use Every logic as per server
-      //     let matchesRegions = true;
-      //     if (regionFilters.length > 0) {
-      //       const allRegions = Object.values(countries).flat(); // Get all regions regardless of country
-      //       matchesRegions = regionFilters.every(region => allRegions.includes(region));
-      //     }
+          // Region filtering - use Every logic as per server
+          let matchesRegions = true;
+          if (regionFilters.length > 0) {
+            const allRegions = Object.values(countries).flat(); // Get all regions regardless of country
+            matchesRegions = regionFilters.every(region => allRegions.includes(region));
+          }
           
-      //     // Country filtering
-      //     let matchesCountries = true;
-      //     if (countryFilters.length > 0) {
-      //       matchesCountries = countryFilters.some(country => 
-      //         Object.keys(countries).includes(country)
-      //       );
-      //     }
+          // Country filtering
+          let matchesCountries = true;
+          if (countryFilters.length > 0) {
+            matchesCountries = countryFilters.some(country => 
+              Object.keys(countries).includes(country)
+            );
+          }
           
-      //     // Apply AND logic to all filter categories
-      //     return matchesSalesforce && matchesIndustry && matchesRegions && matchesCountries;
-      //   });
+          // Apply AND logic to all filter categories
+          return matchesSalesforce && matchesIndustry && matchesRegions && matchesCountries;
+        });
         
-      //   // Apply field selection
-      //   if (pendingSalesforceFields.length > 0) {
-      //     filteredData = filteredData.map(partner => {
-      //       const partial = {
-      //         // Always include these core fields
-      //         id: partner.id || '',
-      //         name: partner.name || '',
-      //         link: partner.link || ''
-      //       };
+        // Apply field selection
+        if (pendingSalesforceFields.length > 0) {
+          filteredData = filteredData.map(partner => {
+            const partial = {
+              // Always include these core fields
+              id: partner.id || '',
+              name: partner.name || '',
+              link: partner.link || ''
+            };
             
-      //       // Add selected fields
-      //       pendingSalesforceFields.forEach(field => {
-      //         if (partner[field] !== undefined) {
-      //           partial[field] = partner[field];
-      //         }
-      //       });
+            // Add selected fields
+            pendingSalesforceFields.forEach(field => {
+              if (partner[field] !== undefined) {
+                partial[field] = partner[field];
+              }
+            });
             
-      //       return partial;
-      //     });
-      //   } else {
-      //     // If no specific fields are selected, return only id, name and link
-      //     filteredData = filteredData.map(partner => ({
-      //       id: partner.id || '',
-      //       name: partner.name || '',
-      //       link: partner.link || ''
-      //     }));
-      //   }
-      // }
+            return partial;
+          });
+        } else {
+          // If no specific fields are selected, return only id, name and link
+          filteredData = filteredData.map(partner => ({
+            id: partner.id || '',
+            name: partner.name || '',
+            link: partner.link || ''
+          }));
+        }
+      }
       
       console.log(`Filtered data count: ${filteredData.length}`);
       setData(filteredData);
@@ -629,7 +629,7 @@ export default function ScraperApp() {
         >
           <option value="">Select a source</option>
           <option value="salesforce" disabled>Salesforce</option>
-          <option value="oracle" disabled>Oracle</option>
+          <option value="oracle">Oracle</option>
           <option value="shopify" disabled>Shopify</option>
           <option value="microsoft">Microsoft</option>
         </select>

@@ -4,10 +4,6 @@ const pLimit       = require("p-limit").default;
 const path         = require("path");
 const fs           = require("fs").promises;
 
-/* ────────────────────────────  paths  ──────────────────────────── */
-const DATA_DIR        = path.join(__dirname, "data");
-const Salesforce_File = path.join(DATA_DIR, "salesforce_partners.json");
-
 /* ───────────────────────  concurrency knobs  ───────────────────── */
 const FILTER_CONCURRENCY = 8;   // filter→listing rounds running in parallel
 const DETAIL_CONCURRENCY = 40;  // partner detail pages per round
@@ -16,16 +12,37 @@ const limitFilter = pLimit(FILTER_CONCURRENCY);
 /* we create one limitDetail **per filter round** so they don’t share the pool */
 const newDetailLimiter = () => pLimit(DETAIL_CONCURRENCY);
 
-/* ───────────────────────  util: save JSON  ─────────────────────── */
-async function storeSalesforceDataAsJson(filepath, extractedDetails) {
-  try {
-    const jsonData = JSON.stringify(extractedDetails, null, 2);
-    await fs.writeFile(filepath, jsonData, "utf8");
-    console.log("✅ Successfully stored scraped data to salesforce_partners.json");
-  } catch (error) {
-    console.error("❌ Error saving JSON file:", error);
+const SALESFORCE_FILE = path.resolve(
+    __dirname,
+    '../../../../../frontend/public/resources/salesforce-partrners.json'
+  );
+  
+  /**
+   * Ensures the directory & file exist, then writes `extractedDetails` to SALESFORCE_FILE.
+   */
+  async function storeSalesforceDataAsJson(extractedDetails) {
+    try {
+      // 1. Ensure the target directory exists
+      const resourceDir = path.dirname(SALESFORCE_FILE);
+      await fs.mkdir(resourceDir, { recursive: true });
+  
+      // 2. If the file doesn’t exist yet, create it with an empty array
+      try {
+        await fs.access(SALESFORCE_FILE);
+      } catch {
+        await fs.writeFile(SALESFORCE_FILE, JSON.stringify([], null, 2), 'utf8');
+        console.log(`🆕 Created empty JSON file: ${SALESFORCE_FILE}`);
+      }
+  
+      // 3. Pretty-print JSON and overwrite the file
+      const jsonData = JSON.stringify(extractedDetails, null, 2);
+      await fs.writeFile(SALESFORCE_FILE, jsonData, 'utf8');
+  
+      console.log('✅ Successfully stored scraped data to salesforce.json');
+    } catch (error) {
+      console.error('❌ Error in storeSalesforceDataAsJson:', error);
+    }
   }
-}
 
 /* ───────────────────────────  main entry  ───────────────────────── */
 const scrapeData = async (fieldsToScrape, testingMode = false) => {
@@ -88,7 +105,7 @@ const scrapeData = async (fieldsToScrape, testingMode = false) => {
 
   await browser.close();
   const extractedDetails = Array.from(scrapedMap.values());
-  await storeSalesforceDataAsJson(Salesforce_File, extractedDetails);
+  await storeSalesforceDataAsJson(extractedDetails);
   const elapsedMs = Date.now() - t0;
   const hh = String(Math.floor(elapsedMs / 3_600_000)).padStart(2, "0");
   const mm = String(Math.floor((elapsedMs % 3_600_000) / 60_000)).padStart(2, "0");
