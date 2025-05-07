@@ -260,7 +260,9 @@ const ShopifyTable = ({ data }) => {
                 </div>
 
                 <div className="flex-1 overflow-y-auto pb-6">
-                    <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
+                    {/* <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed"> */}
+                    <table className={`table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed
+                    ${pageRows.length === 0 ? 'max-h-[220px]' : ''}`}>
                         <thead className="sticky z-10 bg-base-200 text-base font-semibold">
                             <tr>
                                 <th className="w-12 px-4 py-2">#</th>
@@ -270,7 +272,7 @@ const ShopifyTable = ({ data }) => {
                                 <th className="w-[300px] text-left px-4 py-2">Industries</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        {/* <tbody>
                             {pageRows.map((row, idx) => (
                                 <tr key={idx}
                                     className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition cursor-pointer"
@@ -282,7 +284,42 @@ const ShopifyTable = ({ data }) => {
                                     <td className="py-2 px-4">{renderCell(row.industries)}</td>
                                 </tr>
                             ))}
+                        </tbody> */}
+                        <tbody>
+                            {pageRows.length > 0 ? (
+                                /* normal rows */
+                                pageRows.map((row, idx) => (
+                                <tr
+                                    key={idx}
+                                    className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition cursor-pointer"
+                                    onClick={() => row.link && handlePartnerClick(row.link)}
+                                >
+                                    <th className="py-2 px-4">{startIndex + idx + 1}</th>
+                                    <td className="py-2 break-words text-blue-500 hover:underline px-4">{row.name}</td>
+                                    <td className="py-2 px-4">{renderCell(row.locations)}</td>
+                                    <td className="py-2 px-4">{renderCell(row.languages)}</td>
+                                    <td className="py-2 px-4">{renderCell(row.industries)}</td>
+                                </tr>
+                                ))
+                            ) : (
+                                /* empty state */
+                                <tr>
+                                <td colSpan={5} className="py-10">
+                                    <div className="flex flex-col items-center text-gray-500">
+                                    {/* binocular icon */}
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" strokeWidth="1.5">
+                                        <path d="M7 4h2l1 5m6-5h2l-1 5M5 13v4a3 3 0 003 3h0a3 3 0 003-3v-4M13 13v4a3 3 0 003 3h0a3 3 0 003-3v-4M9 13h6M9 9h6"/>
+                                    </svg>
+                                    <span className="mt-3 text-base font-medium">
+                                        No partners found&nbsp;… try different filters
+                                    </span>
+                                    </div>
+                                </td>
+                                </tr>
+                            )}
                         </tbody>
+
                     </table>
 
                     {/* pagination controls */}

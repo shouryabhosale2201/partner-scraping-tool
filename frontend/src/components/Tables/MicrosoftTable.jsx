@@ -466,9 +466,9 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                     <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
                         <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold ">
                             <tr>
-                                <th className="w-12">#</th>
+                                <th className="w-12 px-4">#</th>
                                 {availableColumns.map((column) => (
-                                    <th key={column.key} className={`${column.width} text-left`}>
+                                    <th key={column.key} className={`${column.width} px-4 text-left`}>
                                         {column.display}
                                     </th>
                                 ))}
@@ -483,7 +483,7 @@ export default function MicrosoftTable({ data, onFilterChange }) {
                                     >
                                         <th className="py-2">{index + 1}</th>
                                         {availableColumns.map((column) => (
-                                            <td key={column.key} className="py-2 pr-3 truncate">
+                                            <td key={column.key} className="py-2 px-4 whitespace-normal break-words">
                                                 {renderCellContent(item, column)}
                                             </td>
                                         ))}

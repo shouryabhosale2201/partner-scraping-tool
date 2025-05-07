@@ -244,6 +244,24 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(200);
   const [noSearchResults, setNoSearchResults] = useState(false);
+  const [searchedData, setSearchedData] = useState([]); // Add searchedData to state
+
+  const noFilterResults =
+    !isLoading &&                 // done loading
+    !tableSearchTerm.trim() &&    // search box empty
+    filteredData.length === 0;    // filters removed all rows
+
+//   if (noFilterResults) {
+//     return (
+//       <div className="flex justify-center items-center h-full">
+//         <div className="text-gray-500 text-lg font-semibold">
+//           No partners found.
+//         </div>
+//       </div>
+//     );
+//   }
+  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -344,6 +362,26 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
     setCurrentPage(1);
   };
 
+
+
+  useEffect(() => {
+    const results = performSearch(filteredData, tableSearchTerm);
+    setSearchedData(results);
+    setNoSearchResults(results.length === 0);
+  }, [filteredData, tableSearchTerm]);
+
+  const performSearch = (data, term) => {
+      if (!term.trim()) {
+        return data;
+      }
+      const lowerCaseTerm = term.toLowerCase();
+      return data.filter(item =>
+        Object.keys(item).some(key =>
+          item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(lowerCaseTerm)
+        )
+      );
+  };
+
   const getVisibleColumns = () => {
     if (!displayFields || displayFields.length === 0) {
       return {
@@ -366,20 +404,6 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
 
   const visibleColumns = getVisibleColumns();
 
-  const searchedData = useMemo(() => {
-    if (!tableSearchTerm.trim()) {
-      setNoSearchResults(false);
-      return filteredData;
-    }
-    const term = tableSearchTerm.toLowerCase();
-    const results = filteredData.filter(item =>
-      Object.keys(item).some(key =>
-        item[key] && typeof item[key] === 'string' && item[key].toLowerCase().includes(term)
-      )
-    );
-    setNoSearchResults(results.length === 0);
-    return results;
-  }, [filteredData, tableSearchTerm]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -424,124 +448,129 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
           <div className="flex justify-center items-center h-64">
             <span>Loading...</span>
           </div>
-        ) : noSearchResults ? (
-          <div className="flex justify-center items-center h-full">
-            <div className="text-gray-500 text-lg font-semibold">No partners found matching your search.</div>
-          </div>
         ) : (
-          <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
-            <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold ">
-              <tr>
-                <th className="w-12">#</th>
-                {visibleColumns.name && <th className="text-left">Name</th>}
-                {visibleColumns.tagline && <th className="text-left">Tagline</th>}
-                {visibleColumns.description && <th className="text-left">Description</th>}
-                {visibleColumns.expertise && <th className="text-left">Expertise</th>}
-                {visibleColumns.industries && <th className="text-left">Industries</th>}
-                {visibleColumns.services && <th className="text-left">Services</th>}
-                {visibleColumns.extendedDescription && <th className="text-left">Extended Description</th>}
-              </tr>
-            </thead>
-            <tbody>
-  {currentItems.length > 0 ? (
-    currentItems.map((item, index) => (
-      <tr
-        key={index}
-        className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
-      >
-        <th className="py-2">{indexOfFirstItem + index + 1}</th>
-
-        {visibleColumns.name && (
-          <td className="py-2 truncate">
-            {item.link ? (
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                {item.name}
-              </a>
+          <React.Fragment>
+            {noSearchResults ? (
+              <div className="flex justify-center items-center h-64">
+                <div className="text-gray-500 text-lg font-semibold">No partners found matching your search.</div>
+              </div>
             ) : (
-              item.name
+              <table className="table table-xs border border-gray-200 shadow-md rounded-lg w-full table-fixed">
+                <thead className="sticky top-[80px] z-10 bg-base-200 text-base font-semibold ">
+                  <tr>
+                    <th className="w-12">#</th>
+                    {visibleColumns.name && <th className="text-left">Name</th>}
+                    {visibleColumns.tagline && <th className="text-left">Tagline</th>}
+                    {visibleColumns.description && <th className="text-left">Description</th>}
+                    {visibleColumns.expertise && <th className="text-left">Expertise</th>}
+                    {visibleColumns.industries && <th className="text-left">Industries</th>}
+                    {visibleColumns.services && <th className="text-left">Services</th>}
+                    {visibleColumns.extendedDescription && <th className="text-left">Extended Description</th>}
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems.length > 0 ? (
+                    currentItems.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="align-top text-sm text-gray-700 border-b border-gray-300 py-2 last:border-b-0 hover:bg-gray-50 transition"
+                      >
+                        <th className="py-2">{indexOfFirstItem + index + 1}</th>
+
+                        {visibleColumns.name && (
+                          <td className="py-2 whitespace-normal break-words">
+
+                            {item.link ? (
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-blue-500 hover:underline"
+                              >
+                                {item.name}
+                              </a>
+                            ) : (
+                              item.name
+                            )}
+                          </td>
+                        )}
+
+                        {visibleColumns.tagline && (
+                          <td className="py-2">
+                            <ScrollableCell>{item.tagline || "N/A"}</ScrollableCell>
+                          </td>
+                        )}
+
+                        {visibleColumns.description && (
+                          <td className="py-2">
+                            <ScrollableCell>{item.description || "N/A"}</ScrollableCell>
+                          </td>
+                        )}
+
+                        {visibleColumns.expertise && (
+                          <td className="py-2">
+                            <ScrollableCell>{item.expertise || "N/A"}</ScrollableCell>
+                          </td>
+                        )}
+
+                        {visibleColumns.industries && (
+                          <td className="py-2">
+                            <ScrollableCell>{item.industries || "N/A"}</ScrollableCell>
+                          </td>
+                        )}
+
+                        {visibleColumns.services && (
+                          <td className="py-2">
+                            <ScrollableCell>{item.services || "N/A"}</ScrollableCell>
+                          </td>
+                        )}
+
+                        {visibleColumns.extendedDescription && (
+                          <td className="py-2">
+                            <ScrollableCell>{item.extendedDescription || "N/A"}</ScrollableCell>
+                          </td>
+                        )}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={8} className="text-center py-4 text-sm text-gray-500">
+                        No data available
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+
+              </table>
             )}
-          </td>
+
+            {searchedData.length > 0 && (
+              <div className="mt-4 flex justify-center space-x-4">
+                <button
+                  onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded ${currentPage === 1
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-orange-500 text-white hover:bg-orange-600'}`}
+                >
+                  Previous
+                </button>
+                <div className="flex items-center text-gray-700">
+                  Page {currentPage} of {Math.max(1, totalPages)}
+                </div>
+                <button
+                  onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className={`px-4 py-2 rounded ${currentPage === totalPages
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-orange-500 text-white hover:bg-orange-600'}`}
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </React.Fragment>
         )}
-
-        {visibleColumns.tagline && (
-          <td className="py-2">
-            <ScrollableCell>{item.tagline || "N/A"}</ScrollableCell>
-          </td>
-        )}
-
-        {visibleColumns.description && (
-          <td className="py-2">
-            <ScrollableCell>{item.description || "N/A"}</ScrollableCell>
-          </td>
-        )}
-
-        {visibleColumns.expertise && (
-          <td className="py-2">
-            <ScrollableCell>{item.expertise || "N/A"}</ScrollableCell>
-          </td>
-        )}
-
-        {visibleColumns.industries && (
-          <td className="py-2">
-            <ScrollableCell>{item.industries || "N/A"}</ScrollableCell>
-          </td>
-        )}
-
-        {visibleColumns.services && (
-          <td className="py-2">
-            <ScrollableCell>{item.services || "N/A"}</ScrollableCell>
-          </td>
-        )}
-
-        {visibleColumns.extendedDescription && (
-          <td className="py-2">
-            <ScrollableCell>{item.extendedDescription || "N/A"}</ScrollableCell>
-          </td>
-        )}
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan={8} className="text-center py-4 text-sm text-gray-500">
-        No data available
-      </td>
-    </tr>
-  )}
-</tbody>
-
-          </table>
-
-
-        )}
-
-        <div className="mt-4 flex justify-center space-x-4">
-          <button
-            onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-            disabled={currentPage === 1}
-            className={`px-4 py-2 rounded ${currentPage === 1
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-orange-500 text-white hover:bg-orange-600'}`}
-          >
-            Previous
-          </button>
-          <div className="flex items-center text-gray-700">
-            Page {currentPage} of {Math.max(1, totalPages)}
-          </div>
-          <button
-            onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
-            disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded ${currentPage === totalPages
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-orange-500 text-white hover:bg-orange-600'}`}
-          >
-            Next
-          </button>
-        </div>
 
       </div>
     </div>
@@ -549,3 +578,4 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
 };
 
 export default SalesforceTable;
+
