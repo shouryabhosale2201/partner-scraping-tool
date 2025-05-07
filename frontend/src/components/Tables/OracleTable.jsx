@@ -389,7 +389,7 @@ const OracleTable = ({ data }) => {
     const [selectedFilters, setSelectedFilters] = useState({});
     const [tableSearchTerm, setTableSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
-    const [partnersPerPage, setPartnersPerPage] = useState(200);
+    const partnersPerPage = 200;
 
     if (!data || data.length === 0) return null;
 
