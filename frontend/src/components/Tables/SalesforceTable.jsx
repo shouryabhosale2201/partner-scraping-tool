@@ -18,7 +18,7 @@ const ScrollableCell = ({ children }) => (
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const response = await fetch("/resources/salesforce.json");
+        const response = await fetch("/data/salesforce-partners.json");
         if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
 
@@ -267,7 +267,7 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/resources/salesforce.json");
+        const response = await fetch("/data/salesforce-partners.json");
         if (!response.ok) throw new Error("Failed to load data");
         const data = await response.json();
         setJsonData(data);
@@ -402,7 +402,7 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
     return columns;
   };
 
-  const visibleColumns = getVisibleColumns();
+    const visibleColumns = getVisibleColumns();
 
 
   const indexOfLastItem = currentPage * itemsPerPage;
