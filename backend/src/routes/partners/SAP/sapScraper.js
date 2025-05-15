@@ -36,7 +36,7 @@ async function fetchFilterMetadata() {
     return {
         industries: Object.values(data.industries || {}),
         engagement: Object.values(data.engagement || {}),
-        // countries: Object.values(data.allowedCountries || {}),
+        countries: Object.values(data.allowedCountries || {}),
         solutions
     };
 }
@@ -103,7 +103,7 @@ async function scrapeData() {
               industries: [],
               engagement: [],
               countries: [],
-              solutions: {}  // ✅ updated to be an object
+              solutions: {}
             });
           }
   
@@ -138,7 +138,7 @@ async function scrapeData() {
               industries: [],
               engagement: [],
               countries: [],
-              solutions: {}  // ✅ updated to object
+              solutions: {}
             });
           }
   
