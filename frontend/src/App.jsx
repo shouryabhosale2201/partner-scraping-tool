@@ -5,6 +5,8 @@ import SalesforceFieldSelector from "./components/Field_Selectors/SalesforceFiel
 import OracleTable from "./components/Tables/OracleTable";
 import ShopifyTable from "./components/Tables/ShopifyTable";
 import MicrosoftTable from "./components/Tables/MicrosoftTable";
+import SAPTable from "./components/Tables/SAPTable";
+import NetsuiteTable from "./components/Tables/NetsuiteTable";
 import IntuitTable from "./components/Tables/IntuitTable";
 import ProductInfo from "./components/ProductInfo";
 import MicrosoftFieldSelection from "./components/Field_Selectors/MicorsoftFieldSelection";
@@ -474,6 +476,8 @@ export default function ScraperApp() {
           <option value="oracle">Oracle</option>
           <option value="shopify">Shopify</option>
           <option value="microsoft">Microsoft</option>
+          <option value="sap">SAP</option>
+          <option value="netsuite">Netsuite</option>
           <option value="intuit">Intuit</option>
         </select>
 
@@ -540,6 +544,8 @@ export default function ScraperApp() {
         )}
         {data.length > 0 && url === "oracle" && <OracleTable data={data} />}
         {data.length > 0 && url === "shopify" && <ShopifyTable data={data} />}
+        {data.length > 0 && url === "sap" && <SAPTable data={data} />}
+        {data.length > 0 && url === "netsuite" && <NetsuiteTable data={data} />}
         {data.length > 0 && url === "microsoft" && (
           <MicrosoftTable
             data={data}

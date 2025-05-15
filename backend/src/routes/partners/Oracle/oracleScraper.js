@@ -8,6 +8,7 @@ const https = require('https');
 
 // ----- Configuration -----
 const ORACLE_API_URL = 'https://partner-finder.oracle.com/catalog/opf/partnerList';
+
 const CONCURRENCY = process.env.ORACLE_SCRAPER_CONCURRENCY
   ? Number(process.env.ORACLE_SCRAPER_CONCURRENCY)
   : 5;  // Lower concurrency to limit burst rate
@@ -16,22 +17,27 @@ const RESULT_COUNT = process.env.ORACLE_SCRAPER_RESULT_COUNT
   : 200;
 const WAIT_MS = process.env.ORACLE_SCRAPER_WAIT_MS
   ? Number(process.env.ORACLE_SCRAPER_WAIT_MS)
-  : 500; // Default 500ms between Level-4 tasks
+  : 250; // Default 500ms between Level-4 tasks
+
 const limit = pLimit(CONCURRENCY);
+
 // keep-alive agents for HTTP/HTTPS
 const keepAliveHttpAgent = new http.Agent({ keepAlive: true });
 const keepAliveHttpsAgent = new https.Agent({ keepAlive: true });
 const agent = parsedURL =>
   parsedURL.protocol === 'http:' ? keepAliveHttpAgent : keepAliveHttpsAgent;
+
 const headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json, text/javascript, */*; q=0.01',
   'X-Requested-With': 'XMLHttpRequest',
 };
+
 const ORACLE_FILE = path.resolve(
   __dirname,
   '../../../../../frontend/public/data/oracle-partners.json'
 );
+
 const payloadTemplate = {
   keyword: '',
   pageNumber: '1',
@@ -45,10 +51,12 @@ const payloadTemplate = {
   },
   xscProfileType: 'Partner Profile',
 };
+
 // simple sleep helper
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 async function storeOracleDataAsJson(scrapedMap) {
   try {
     await fs.mkdir(path.dirname(ORACLE_FILE), { recursive: true });
@@ -61,6 +69,7 @@ async function storeOracleDataAsJson(scrapedMap) {
     console.error('❌  Cannot write JSON:', err);
   }
 }
+
 async function scrapeData() {
   console.log('🔄  Starting Oracle scrape…');
   const [expertiseHierarchy, apacCountries] = await Promise.all([

@@ -364,7 +364,7 @@ const SalesforceTable = ({ selectedFields = [], onFilterChange }) => {
     return columns;
   };
 
-  const visibleColumns = getVisibleColumns();
+    const visibleColumns = getVisibleColumns();
 
   const searchedData = useMemo(() => {
     if (!tableSearchTerm.trim()) {

@@ -1,10 +1,11 @@
-import React, { useState, useMemo, useEffect } from 'react';
+ //shopifyTable.jsx
+ import React, { useState, useMemo, useEffect } from 'react';
 
-const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChange }) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [isLanguagesOpen, setIsLanguagesOpen] = useState(false);
-    const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
-    const [isLocationsOpen, setIsLocationsOpen] = useState(false);
+ const ShopifySidebar = ({ data, selectedFilters, setSelectedFilters, onFilterChange }) => {
+     const [searchTerm, setSearchTerm] = useState('');
+     const [isLanguagesOpen, setIsLanguagesOpen] = useState(false);
+     const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
+     const [isLocationsOpen, setIsLocationsOpen] = useState(false);
 
     /* ───────────── derive unique filter lists ───────────── */
     const uniqueLanguages = useMemo(() => {
@@ -231,7 +232,7 @@ const ShopifyTable = ({ data }) => {
         return val && val !== 'N/A' ? String(val).trim() : '-';
     };
 
-    if (!data || data.length === 0) return null;
+     if (!data || data.length === 0) return null;
 
     return (
         <div className="flex h-screen pt-4">
@@ -301,4 +302,5 @@ const ShopifyTable = ({ data }) => {
     );
 };
 
-export default ShopifyTable;
+ export default ShopifyTable;
+
