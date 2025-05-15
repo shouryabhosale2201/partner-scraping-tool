@@ -5386,13 +5386,10 @@
     "tiers": [],
     "fieldValues": [
       {
-        "id": "8a99978e9046b82301905167536750e2",
+        "id": "8a99978e9046b82301905167537150ec",
         "name": "Industry Focus",
         "values": [
-          "Finance",
-          "eCommerce",
-          "Food & Beverage",
-          "Healthcare",
+          "Wholesale",
           "Legal",
           "Manufacturing",
           "Nonprofit",
@@ -5400,9 +5397,12 @@
           "Real Estate",
           "Retail",
           "Telecommunications",
-          "Wholesale",
+          "Food & Beverage",
+          "Healthcare",
           "Accounting",
-          "Construction"
+          "Construction",
+          "eCommerce",
+          "Finance"
         ],
         "customFieldDefinitionId": "8a9982e081a19e270181af94825c0873",
         "displayName": "Industry Focus",
@@ -5433,8 +5433,8 @@
           "Set Up and Training",
           "Implementation",
           "Data Migration",
-          "App Integration",
           "Business Process Development",
+          "App Integration",
           "Business Productivity",
           "Cleanup of books",
           "Custom app development",
@@ -5445,29 +5445,29 @@
         "fieldIndex": 10
       },
       {
-        "id": "8a99978e9046b82301905167533250d6",
+        "id": "8a99978e9046b82301905167533350d7",
         "name": "Application Expertise",
         "values": [
-          "Avalara",
           "Bill.com",
           "Field Service apps",
           "Fishbowl",
           "Method",
           "QuickBooks",
           "Webgility",
-          "Other"
+          "Other",
+          "Avalara"
         ],
         "customFieldDefinitionId": "8a9982e081a19e270181af90bf3b085b",
         "displayName": "Application Expertise",
         "fieldIndex": 8
       },
       {
-        "id": "8a99978e9046b82301905167531d50d5",
+        "id": "8a99978e9046b82301905167531b50d3",
         "name": "Certifications",
         "values": [
-          "QuickBooks Point of Sale",
           "QuickBooks Enterprise",
-          "Field Service Mgmt"
+          "Field Service Mgmt",
+          "QuickBooks Point of Sale"
         ],
         "customFieldDefinitionId": "ff8081816366dbfc016384887b9c02ef",
         "displayName": "Certifications",
