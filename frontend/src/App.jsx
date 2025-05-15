@@ -5,6 +5,7 @@ import SalesforceFieldSelector from "./components/Field_Selectors/SalesforceFiel
 import OracleTable from "./components/Tables/OracleTable";
 import ShopifyTable from "./components/Tables/ShopifyTable";
 import MicrosoftTable from "./components/Tables/MicrosoftTable";
+import IntuitTable from "./components/Tables/IntuitTable";
 import ProductInfo from "./components/ProductInfo";
 import MicrosoftFieldSelection from "./components/Field_Selectors/MicorsoftFieldSelection";
 import * as XLSX from "xlsx";
@@ -128,20 +129,20 @@ export default function ScraperApp() {
   const handleFetch = async (selectedFilters = {}) => {
     setFetching(true);
     setError(null);
-  
+
     try {
       // Construct file path based on url variable
       const filePath = `/data/${url}-partners.json`;
       console.log(`Fetching from local file: ${filePath}`);
-      
+
       const response = await fetch(filePath);
       if (!response.ok) {
         throw new Error(`Failed to load file: ${filePath}`);
       }
-      
+
       const jsonData = await response.json();
       let filteredData = [...jsonData]; // Create a copy to avoid mutation issues
-      
+
       // MICROSOFT DATA HANDLING
       if (url === "microsoft") {
         // Helper function to apply filters with EVERY logic (matches server implementation)
@@ -152,64 +153,64 @@ export default function ScraperApp() {
             return selectedValues.some(val => itemField.includes(val));
           });
         };
-        
+
         // Apply each filter using the helper function - this matches the server implementation
         if (selectedFilters.industry?.length > 0) {
           applyFilter('industryFocus', selectedFilters.industry);
         }
-        
+
         if (selectedFilters.product?.length > 0) {
           applyFilter('product', selectedFilters.product);
         }
-        
+
         if (selectedFilters.solution?.length > 0) {
           applyFilter('solutions', selectedFilters.solution);
         }
-        
+
         if (selectedFilters.services?.length > 0) {
           applyFilter('serviceType', selectedFilters.services);
         }
-        
+
         if (selectedFilters.country?.length > 0) {
           applyFilter('country', selectedFilters.country);
         }
-        
+
         // Get selected fields
         const selectedFieldKeys = Object.keys(microsoftFields).filter(key => microsoftFields[key]);
-        
+
         // Apply field selection (matches server implementation)
         if (selectedFieldKeys && selectedFieldKeys.length > 0) {
           filteredData = filteredData.map(item => {
             // Always include these core fields
-            const newItem = { 
-              id: item.id, 
+            const newItem = {
+              id: item.id,
               name: item.name || '',
               link: item.link || ''
             };
-            
+
             // Add selected fields
             selectedFieldKeys.forEach(field => {
               if (item[field] !== undefined) {
                 newItem[field] = item[field];
               }
             });
-            
+
             return newItem;
           });
         }
       }
-      
+
       // SALESFORCE DATA HANDLING
       else if (url === "salesforce") {
         // Update the Salesforce fields in state
         setSalesforceFields(pendingSalesforceFields);
-        
+
         // Extract filters
         const salesforceExpertise = selectedFilters.salesforceExpertise || [];
         const industryExpertise = selectedFilters.industryExpertise || [];
         const regionFilters = selectedFilters.region || [];
         const countryFilters = selectedFilters.country || [];
-        
+
         // Helper function to match expertise filters - matches server implementation
         const matchesFilters = (foundIn, section, filters) => {
           if (!filters || filters.length === 0) return true;
@@ -217,39 +218,39 @@ export default function ScraperApp() {
           if (!entry) return false;
           return filters.every(f => entry.filters.includes(f));
         };
-        
+
         // Filter partners based on all conditions (AND logic)
         filteredData = filteredData.filter(partner => {
           const foundIn = partner.foundIn || [];
           const countries = partner.countries || {};
-          
+
           // Check Salesforce Expertise
           const matchesSalesforce = salesforceExpertise.length === 0 ||
             matchesFilters(foundIn, "Salesforce Expertise", salesforceExpertise);
-          
+
           // Check Industry Expertise
           const matchesIndustry = industryExpertise.length === 0 ||
             matchesFilters(foundIn, "Industry Expertise", industryExpertise);
-          
+
           // Region filtering - use Every logic as per server
           let matchesRegions = true;
           if (regionFilters.length > 0) {
             const allRegions = Object.values(countries).flat(); // Get all regions regardless of country
             matchesRegions = regionFilters.every(region => allRegions.includes(region));
           }
-          
+
           // Country filtering
           let matchesCountries = true;
           if (countryFilters.length > 0) {
-            matchesCountries = countryFilters.some(country => 
+            matchesCountries = countryFilters.some(country =>
               Object.keys(countries).includes(country)
             );
           }
-          
+
           // Apply AND logic to all filter categories
           return matchesSalesforce && matchesIndustry && matchesRegions && matchesCountries;
         });
-        
+
         // Apply field selection
         if (pendingSalesforceFields.length > 0) {
           filteredData = filteredData.map(partner => {
@@ -259,14 +260,14 @@ export default function ScraperApp() {
               name: partner.name || '',
               link: partner.link || ''
             };
-            
+
             // Add selected fields
             pendingSalesforceFields.forEach(field => {
               if (partner[field] !== undefined) {
                 partial[field] = partner[field];
               }
             });
-            
+
             return partial;
           });
         } else {
@@ -278,10 +279,10 @@ export default function ScraperApp() {
           }));
         }
       }
-      
+
       console.log(`Filtered data count: ${filteredData.length}`);
       setData(filteredData);
-      
+
     } catch (err) {
       console.error("Error fetching data:", err);
       setError(err.message || "An unknown error occurred");
@@ -403,7 +404,32 @@ export default function ScraperApp() {
           });
           return out;
         });
-      } else {
+      } else if (url === "intuit") {
+        /* helper: extract plain-text “Who We Are” paragraph */
+        const whoWeAre = html => {
+          const m = html?.match(/<b[^>]*>\s*Who\s+We\s+Are\s*<\/b>([\s\S]*?)(<b|$)/i);
+          return m ? m[1].replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() : "";
+        };
+        /* helper: grab & join a custom field */
+        const grabField = (item, displayName) => {
+          const fv = item.fieldValues?.find(f => f.displayName === displayName);
+          return fv?.values ? [...new Set(fv.values)].join(", ") : "";
+        };
+
+        processed = data.map(item => ({
+          id: item.serialNumber || item.id,
+          name: item.name || "",
+          city: item.addresses?.[0]?.city || "",
+          whoWeAre: whoWeAre(item.profileDescription || item.description || ""),
+          industryFocus: grabField(item, "Industry Focus"),
+          productFocus: grabField(item, "Product Focus"),
+          specializedServices: grabField(item, "Specialized Services"),
+          website: item.website || ""
+        }));
+
+        /* ───── default: flatten any arrays */
+      }
+      else {
         processed = data.map(row => {
           const out = {};
           Object.entries(row).forEach(([k, v]) => {
@@ -448,6 +474,7 @@ export default function ScraperApp() {
           <option value="oracle">Oracle</option>
           <option value="shopify">Shopify</option>
           <option value="microsoft">Microsoft</option>
+          <option value="intuit">Intuit</option>
         </select>
 
         {url === "salesforce" && (
@@ -518,6 +545,9 @@ export default function ScraperApp() {
             data={data}
             onFilterChange={handleMicrosoftFilterChange}
           />
+        )}
+        {data.length > 0 && url === "intuit" && (
+          <IntuitTable data={data} />
         )}
       </div>
     </div>
