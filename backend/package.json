@@ -17,9 +17,15 @@
     "dotenv": "^16.5.0",
     "exceljs": "^4.4.0",
     "express": "^4.21.2",
+    "file-saver": "^2.0.5",
+    "i": "^0.3.7",
     "mysql2": "^3.14.0",
     "nodemon": "^3.1.9",
-    "playwright": "^1.51.1",
+    "p-limit": "^6.2.0",
+    "p-map": "^7.0.3",
+    "playwright": "^1.52.0",
+    "playwright-cluster": "^1.0.7",
+    "react-select": "^5.10.1",
     "xlsx": "^0.18.5"
   }
 }

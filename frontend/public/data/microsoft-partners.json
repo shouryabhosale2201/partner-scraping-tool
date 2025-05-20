@@ -1,0 +1,1907 @@
+[
+  {
+    "id": 1,
+    "name": "Inova Solutions",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "TT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/57f42b34-1699-488b-99de-086f4f947a95/overview"
+  },
+  {
+    "id": 2,
+    "name": "Terrabit GmbH",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Professional services",
+      "Transportation",
+      "Retail & Consumer Goods",
+      "Distribution"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/3064c8d4-9487-4617-849e-38ebb5b24ab9/overview"
+  },
+  {
+    "id": 3,
+    "name": "Credera",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/780a38ce-43be-4c57-ad79-22391ed2d333/overview"
+  },
+  {
+    "id": 4,
+    "name": "Nomentia Oy",
+    "industryFocus": [
+      "Distribution",
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services"
+    ],
+    "country": "GI",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/e48d4b1f-2fa3-4365-b225-a1a3cd747266/overview"
+  },
+  {
+    "id": 5,
+    "name": "True Cloud ltd",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "AT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/7f97f78e-41d8-46d8-bce0-8b5998af3d63/overview"
+  },
+  {
+    "id": 6,
+    "name": "Krome Technologies Ltd",
+    "industryFocus": [
+      "Healthcare",
+      "Financial Services",
+      "Retail & Consumer Goods",
+      "Media & Communications",
+      "Distribution",
+      "Agriculture",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Professional services",
+      "Transportation"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0c77e6ff-9bf7-42fc-915e-0fb7426bd1cc/overview"
+  },
+  {
+    "id": 7,
+    "name": "Sopra Steria",
+    "industryFocus": [
+      "Media & Communications",
+      "Government",
+      "Education",
+      "Financial Services",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/8b87af7d-8647-4dc7-8df4-5f69a2011bb5/overview"
+  },
+  {
+    "id": 8,
+    "name": "iFour Technolab Private Limited",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Government",
+      "Healthcare",
+      "Financial Services",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Distribution",
+      "Transportation",
+      "Manufacturing & Resources",
+      "Hospitality  & Travel"
+    ],
+    "country": "SE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/298afb87-57e4-4c7c-a511-ba176c2e201f/overview"
+  },
+  {
+    "id": 9,
+    "name": "Vistas Cloud LLC",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Government",
+      "Financial Services",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/9ea8565d-b54c-4824-aa7b-3248e9d2d8ec/overview"
+  },
+  {
+    "id": 10,
+    "name": "Eunoia Ltd",
+    "industryFocus": [
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Professional services",
+      "Distribution",
+      "Education",
+      "Retail & Consumer Goods",
+      "Media & Communications",
+      "Manufacturing & Resources",
+      "Transportation",
+      "Power and utilities"
+    ],
+    "country": "AE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/3b064101-79cf-447a-b2b1-b511b732c658/overview"
+  },
+  {
+    "id": 11,
+    "name": "Marco Technologies LLC",
+    "industryFocus": [
+      "Education",
+      "Healthcare",
+      "Media & Communications",
+      "Transportation",
+      "Public Safety and National Security",
+      "Financial Services",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Power and utilities",
+      "Manufacturing & Resources",
+      "Agriculture",
+      "Government",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Distribution"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/529b1af7-137b-4622-9d7d-3a68b6abbf33/overview"
+  },
+  {
+    "id": 12,
+    "name": "q.beyond AG",
+    "industryFocus": [
+      "Distribution",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Financial Services",
+      "Media & Communications",
+      "Healthcare",
+      "Professional services",
+      "Transportation",
+      "Hospitality  & Travel",
+      "Agriculture"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/8ab860c4-fca0-44ab-8704-faf34748c6a3/overview"
+  },
+  {
+    "id": 13,
+    "name": "Brillio",
+    "industryFocus": [
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/51b8e905-1955-4515-8b24-d8d569539b07/overview"
+  },
+  {
+    "id": 14,
+    "name": "Zuehlke Engineering AG",
+    "industryFocus": [
+      "Financial Services",
+      "Media & Communications",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/ccce7f5e-a35f-4bc3-8e63-b2215e7d14f9/overview"
+  },
+  {
+    "id": 15,
+    "name": "ITSECTOR - SISTEMAS DE INFORMAÇÃO, S.A.",
+    "industryFocus": [
+      "Healthcare",
+      "Financial Services"
+    ],
+    "country": "RO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/2160ea66-19ee-4e0d-a980-3ae6a59af90d/overview"
+  },
+  {
+    "id": 16,
+    "name": "Cronos",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "BE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/49c3d703-3579-47bf-a888-7c913fbdced9/overview"
+  },
+  {
+    "id": 17,
+    "name": "SOLUTION BI",
+    "industryFocus": [
+      "Professional services",
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Healthcare",
+      "Nonprofit & IGO",
+      "Retail & Consumer Goods",
+      "Transportation",
+      "Government",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Distribution"
+    ],
+    "country": "GQ",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/a5264962-b6be-4fe2-a976-7875cb70dcf1/overview"
+  },
+  {
+    "id": 18,
+    "name": "LarcAI",
+    "industryFocus": [
+      "Financial Services",
+      "Healthcare",
+      "Retail & Consumer Goods",
+      "Transportation"
+    ],
+    "country": "AG",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/467fe145-ea46-4bb7-8af0-25400004d877/overview"
+  },
+  {
+    "id": 19,
+    "name": "TDI SERVICES",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Government",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Financial Services",
+      "Media & Communications",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Transportation",
+      "Distribution",
+      "Agriculture",
+      "Healthcare"
+    ],
+    "country": "FR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/619c8012-479f-41fb-bcc7-ad29f4b960d4/overview"
+  },
+  {
+    "id": 20,
+    "name": "SYSTEMS AXIS LTD",
+    "industryFocus": [
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Professional services",
+      "Distribution",
+      "Transportation"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/01a8dce1-9c11-41b5-93c9-de121c2c9c72/overview"
+  },
+  {
+    "id": 21,
+    "name": "Softchoice",
+    "industryFocus": [
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution",
+      "Manufacturing & Resources",
+      "Media & Communications",
+      "Agriculture",
+      "Nonprofit & IGO"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/9cfbedc9-c7e4-46e2-be3e-d7fa81d0798a/overview"
+  },
+  {
+    "id": 22,
+    "name": "Evozon Systems",
+    "industryFocus": [
+      "Financial Services",
+      "Media & Communications",
+      "Government",
+      "Professional services"
+    ],
+    "country": "RO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/fa55200e-150c-4420-8e00-6551ab03d6ba/overview"
+  },
+  {
+    "id": 23,
+    "name": "IT Partner LLC (Office 365 Solutions) - Austin TX",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "GP",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/4ed6ea8d-6f86-411d-b7e0-37401bdb9b68/overview"
+  },
+  {
+    "id": 24,
+    "name": "TD SYNNEX Austria GmbH",
+    "industryFocus": [
+      "Distribution",
+      "Professional services",
+      "Financial Services"
+    ],
+    "country": "AT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/3435fe8c-df61-4a57-b398-f87b279b27ba/overview"
+  },
+  {
+    "id": 25,
+    "name": "Public Cloud Group GmbH",
+    "industryFocus": [
+      "Distribution",
+      "Transportation",
+      "Professional services",
+      "Retail & Consumer Goods",
+      "Power and utilities",
+      "Nonprofit & IGO",
+      "Manufacturing & Resources",
+      "Hospitality  & Travel",
+      "Healthcare",
+      "Financial Services",
+      "Education",
+      "Media & Communications"
+    ],
+    "country": "GR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/4463431d-5368-4de7-a79d-23c6693e1be7/overview"
+  },
+  {
+    "id": 26,
+    "name": "Engage Squared Pty Ltd",
+    "industryFocus": [
+      "Government",
+      "Education",
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution",
+      "Media & Communications",
+      "Healthcare",
+      "Nonprofit & IGO",
+      "Hospitality  & Travel"
+    ],
+    "country": "AU",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/4623aa6f-4e58-4a9a-b765-ea2f8fae58d6/overview"
+  },
+  {
+    "id": 27,
+    "name": "KINETIC IT PTY LTD",
+    "industryFocus": [
+      "Education",
+      "Government",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Professional services",
+      "Transportation"
+    ],
+    "country": "AU",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/61a3c4cb-f532-41c6-b0fd-d2ac6f6be9ee/overview"
+  },
+  {
+    "id": 28,
+    "name": "Sopra Steria",
+    "industryFocus": [
+      "Media & Communications",
+      "Government",
+      "Education",
+      "Financial Services",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/8b87af7d-8647-4dc7-8df4-5f69a2011bb5/overview"
+  },
+  {
+    "id": 29,
+    "name": "Inova Solutions",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "TT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/57f42b34-1699-488b-99de-086f4f947a95/overview"
+  },
+  {
+    "id": 30,
+    "name": "QUALIA Technik GmbH",
+    "industryFocus": [
+      "Agriculture",
+      "Financial Services",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Retail & Consumer Goods",
+      "Distribution"
+    ],
+    "country": "YT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/2a6fe7da-59a1-4d8e-9bc9-558e7bf9733a/overview"
+  },
+  {
+    "id": 31,
+    "name": "Crayon AS",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "AU",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/c669bf81-a138-44ab-bacb-2c860f22df2c/overview"
+  },
+  {
+    "id": 32,
+    "name": "Ernst & Young LLP",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Government",
+      "Financial Services",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "NO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/5b973f99-77df-4beb-b27d-aa0c70b8482c/overview"
+  },
+  {
+    "id": 33,
+    "name": "Alesca Productividad S de RL de CV",
+    "industryFocus": [
+      "Financial Services",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Professional services",
+      "Media & Communications",
+      "Transportation",
+      "Retail & Consumer Goods",
+      "Healthcare",
+      "Agriculture"
+    ],
+    "country": "MX",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/51e5578a-32e8-4ffc-a720-49ce0f6f930a/overview"
+  },
+  {
+    "id": 34,
+    "name": "Promaks A.Ş.",
+    "industryFocus": [
+      "Retail & Consumer Goods"
+    ],
+    "country": "TR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/045f0770-fea9-477e-8446-7bcf63042b3f/overview"
+  },
+  {
+    "id": 35,
+    "name": "PAX8",
+    "industryFocus": [
+      "Distribution",
+      "Professional services"
+    ],
+    "country": "ES",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/461f18ea-bdcf-49ea-b647-8133695fe420/overview"
+  },
+  {
+    "id": 36,
+    "name": "Brillio",
+    "industryFocus": [
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/51b8e905-1955-4515-8b24-d8d569539b07/overview"
+  },
+  {
+    "id": 37,
+    "name": "On Business Consulting SAS",
+    "industryFocus": [
+      "Financial Services",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Agriculture",
+      "Professional services",
+      "Manufacturing & Resources",
+      "Healthcare",
+      "Transportation"
+    ],
+    "country": "CO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/b8ab5ba8-4400-4982-a501-e593f2374979/overview"
+  },
+  {
+    "id": 38,
+    "name": "acer Incorporated",
+    "industryFocus": [
+      "Education",
+      "Government",
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Professional services",
+      "Retail & Consumer Goods",
+      "Media & Communications"
+    ],
+    "country": "TW",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0f335a96-d302-4df3-b76b-4ae0c7d349d0/overview"
+  },
+  {
+    "id": 39,
+    "name": "LarcAI",
+    "industryFocus": [
+      "Financial Services",
+      "Healthcare",
+      "Retail & Consumer Goods",
+      "Transportation"
+    ],
+    "country": "PN",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/467fe145-ea46-4bb7-8af0-25400004d877/overview"
+  },
+  {
+    "id": 40,
+    "name": "NOVENTIQ HOLDINGS PLC",
+    "industryFocus": [
+      "Transportation",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Hospitality  & Travel",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Distribution"
+    ],
+    "country": "AE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/58b56c8e-7bb7-4eb8-8ca5-cba4ece4a273/overview"
+  },
+  {
+    "id": 41,
+    "name": "GULF FUTURE BUSINESS W.L.L",
+    "industryFocus": [
+      "Government",
+      "Media & Communications",
+      "Financial Services",
+      "Healthcare",
+      "Nonprofit & IGO",
+      "Professional services"
+    ],
+    "country": "BH",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/4fd1889c-08d5-4339-8c6f-a02bda15a3c5/overview"
+  },
+  {
+    "id": 42,
+    "name": "Reliance Infosystems Limited",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "NG",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0b60fed4-5fc9-409d-95f2-271114f4c86f/overview"
+  },
+  {
+    "id": 43,
+    "name": "天津市天翼博雅科技发展有限公司",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods"
+    ],
+    "country": "CN",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/6280e010-c361-4939-95ae-344b0b3f1e00/overview"
+  },
+  {
+    "id": 44,
+    "name": "CLOUD SERVICES LLC",
+    "industryFocus": [
+      "Agriculture",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution",
+      "Media & Communications",
+      "Financial Services",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Healthcare",
+      "Education",
+      "Government"
+    ],
+    "country": "NL",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/34dc28c5-dc28-4279-a75b-e03b669f6521/overview"
+  },
+  {
+    "id": 45,
+    "name": "Verticomm Technologies",
+    "industryFocus": [
+      "Professional services",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Financial Services",
+      "Education",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/edc60860-84c4-4b0f-8943-2eef1d538a2a/overview"
+  },
+  {
+    "id": 46,
+    "name": "Avvale S.p.A.",
+    "industryFocus": [
+      "Manufacturing & Resources",
+      "Media & Communications",
+      "Financial Services",
+      "Government",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Distribution",
+      "Healthcare",
+      "Transportation"
+    ],
+    "country": "IT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/a42e5409-0ade-4beb-8099-84afd4e0f1ec/overview"
+  },
+  {
+    "id": 47,
+    "name": "SGA Tecnologia Inteligente",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Healthcare",
+      "Transportation",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Agriculture",
+      "Power and utilities",
+      "Hospitality  & Travel",
+      "Financial Services",
+      "Media & Communications"
+    ],
+    "country": "BR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0a33f6ee-f2d8-450c-b5da-013bf651fdb2/overview"
+  },
+  {
+    "id": 48,
+    "name": "ITSECTOR - SISTEMAS DE INFORMAÇÃO, S.A.",
+    "industryFocus": [
+      "Financial Services",
+      "Healthcare"
+    ],
+    "country": "PT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/2160ea66-19ee-4e0d-a980-3ae6a59af90d/overview"
+  },
+  {
+    "id": 49,
+    "name": "Congruent Solutions Private Limited",
+    "industryFocus": [
+      "Financial Services"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/f9021fbc-3548-4c9f-a810-38c5091c44d6/overview"
+  },
+  {
+    "id": 50,
+    "name": "Fellowmind Sweden AB",
+    "industryFocus": [
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Professional services",
+      "Agriculture"
+    ],
+    "country": "SE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/60b0a952-7f7e-49b4-a492-7cfab221ef42/overview"
+  },
+  {
+    "id": 51,
+    "name": "DXC Technology Services LLC.",
+    "industryFocus": [
+      "Media & Communications",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Education",
+      "Government",
+      "Transportation",
+      "Retail & Consumer Goods",
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Professional services",
+      "Healthcare"
+    ],
+    "country": "NZ",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/93f33571-550f-43cf-b09f-cd331338d086/overview"
+  },
+  {
+    "id": 52,
+    "name": "LTIMindtree Limited",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Professional services",
+      "Distribution"
+    ],
+    "country": "PL",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/02aa9fc1-18bc-4798-a020-e01c854dd434/overview"
+  },
+  {
+    "id": 53,
+    "name": "Cofomo",
+    "industryFocus": [
+      "Government",
+      "Financial Services",
+      "Power and utilities",
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Public Safety and National Security",
+      "Professional services",
+      "Transportation",
+      "Retail & Consumer Goods",
+      "Distribution"
+    ],
+    "country": "CA",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/49d5adc2-a590-4f9d-a49d-a31a615db1d1/overview"
+  },
+  {
+    "id": 54,
+    "name": "IMV Informatik GmbH",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Government",
+      "Manufacturing & Resources",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Nonprofit & IGO"
+    ],
+    "country": "LI",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/6f51dcf4-8038-4800-b592-17ed2471f762/overview"
+  },
+  {
+    "id": 55,
+    "name": "衛武資訊股份有限公司",
+    "industryFocus": [
+      "Professional services",
+      "Retail & Consumer Goods",
+      "Manufacturing & Resources"
+    ],
+    "country": "TW",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/ce4d7f48-4562-42b4-9ca1-57e0e37438b9/overview"
+  },
+  {
+    "id": 56,
+    "name": "Seyfor Slovensko, a.s.",
+    "industryFocus": [
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Professional services",
+      "Transportation",
+      "Distribution",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Power and utilities"
+    ],
+    "country": "SK",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/db213f5c-ca60-414a-95ab-229fd4998ce4/overview"
+  },
+  {
+    "id": 57,
+    "name": "True.org Cloud",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Financial Services",
+      "Education",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "ZA",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/099728f1-b2ea-4f69-9a95-a34d31bf5bf8/overview"
+  },
+  {
+    "id": 58,
+    "name": "Advania UK Limited",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Government",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Manufacturing & Resources",
+      "Healthcare",
+      "Transportation",
+      "Distribution",
+      "Hospitality  & Travel",
+      "Agriculture",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Education"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/33e83732-46c5-42e8-b3f0-5b95e453214c/overview"
+  },
+  {
+    "id": 59,
+    "name": "AMC Technology, LLC",
+    "industryFocus": [
+      "Financial Services",
+      "Government",
+      "Retail & Consumer Goods",
+      "Healthcare",
+      "Power and utilities",
+      "Professional services"
+    ],
+    "country": "PE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/787f4f0d-7ed1-498d-b498-04298a1eb1c4/overview"
+  },
+  {
+    "id": 60,
+    "name": "ECF Data LLC",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Media & Communications",
+      "Hospitality  & Travel",
+      "Government",
+      "Financial Services",
+      "Healthcare",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Manufacturing & Resources",
+      "Public Safety and National Security",
+      "Transportation",
+      "Nonprofit & IGO"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/05e03292-6ca6-4f26-8c66-4b1e0ce68037/overview"
+  },
+  {
+    "id": 61,
+    "name": "Medalsoft",
+    "industryFocus": [
+      "Retail & Consumer Goods",
+      "Manufacturing & Resources",
+      "Healthcare",
+      "Financial Services",
+      "Transportation",
+      "Power and utilities",
+      "Education",
+      "Hospitality  & Travel",
+      "Professional services"
+    ],
+    "country": "CN",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/f4c874aa-07c8-4b4b-a94e-5075de1f4106/overview"
+  },
+  {
+    "id": 62,
+    "name": "Bridgeall Limited",
+    "industryFocus": [
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Professional services",
+      "Transportation",
+      "Nonprofit & IGO",
+      "Retail & Consumer Goods",
+      "Distribution"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/f80ea89e-05c7-48fd-bdf4-9268d911335f/overview"
+  },
+  {
+    "id": 63,
+    "name": "mnemonic AS",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution",
+      "Nonprofit & IGO"
+    ],
+    "country": "IM",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/b72ef580-fc0d-4eb2-951d-b8266b639339/overview"
+  },
+  {
+    "id": 64,
+    "name": "COMPUTACENTER FRANCE",
+    "industryFocus": [
+      "Professional services"
+    ],
+    "country": "FR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/2d193ffc-7794-4b10-ae94-535543d19329/overview"
+  },
+  {
+    "id": 65,
+    "name": "ASESOFTWARE",
+    "industryFocus": [
+      "Professional services"
+    ],
+    "country": "CR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/bf208dcb-97e8-4d43-bd72-323680bef25c/overview"
+  },
+  {
+    "id": 66,
+    "name": "Online24x7 India Pvt. Ltd.",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "GT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/b66640d2-cc05-4666-b7cb-3b0a69c859c9/overview"
+  },
+  {
+    "id": 67,
+    "name": "Ecuiti",
+    "industryFocus": [
+      "Media & Communications",
+      "Retail & Consumer Goods",
+      "Transportation",
+      "Professional services"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/73fe8bc1-ecb2-4e6a-b7ae-40c856bf48d6/overview"
+  },
+  {
+    "id": 68,
+    "name": "Upland Software Inc.",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation"
+    ],
+    "country": "NO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/dd02d1e4-d2a8-4628-92c8-1f4b5de6419b/overview"
+  },
+  {
+    "id": 69,
+    "name": "BC Soft S.r.l.",
+    "industryFocus": [
+      "Agriculture",
+      "Education",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Nonprofit & IGO",
+      "Professional services",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Transportation",
+      "Media & Communications"
+    ],
+    "country": "CH",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/ff855a60-a70e-41c6-951b-1928ddc58212/overview"
+  },
+  {
+    "id": 70,
+    "name": "Supremo Sp. z o.o.",
+    "industryFocus": [
+      "Professional services",
+      "Media & Communications",
+      "Manufacturing & Resources",
+      "Transportation",
+      "Distribution",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Healthcare",
+      "Power and utilities",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO"
+    ],
+    "country": "PL",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/d18222d8-86ce-4e4b-acbf-63e3e83270e5/overview"
+  },
+  {
+    "id": 71,
+    "name": "Be Digital",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "NZ",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/184c0258-4efc-4be8-9291-2ddb798f44b3/overview"
+  },
+  {
+    "id": 72,
+    "name": "SATORI ANALYTICS Ι.Κ.Ε.",
+    "industryFocus": [
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods"
+    ],
+    "country": "RO",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/bbe8bd84-9dbe-4d29-8daa-30ab965ed69b/overview"
+  },
+  {
+    "id": 73,
+    "name": "Brickclay LLC",
+    "industryFocus": [
+      "Retail & Consumer Goods",
+      "Financial Services",
+      "Transportation",
+      "Manufacturing & Resources",
+      "Hospitality  & Travel",
+      "Professional services",
+      "Healthcare"
+    ],
+    "country": "PK",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/4f20b841-60a7-44f8-9a21-361ab96e7864/overview"
+  },
+  {
+    "id": 74,
+    "name": "ABELSoft Inc.",
+    "industryFocus": [
+      "Healthcare"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/5a9dd8c4-2e11-4419-95da-788229f4afbf/overview"
+  },
+  {
+    "id": 75,
+    "name": "QUIBIQ GmbH",
+    "industryFocus": [
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Manufacturing & Resources"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/5842708c-024d-4e2b-afe2-a803f3cb25dd/overview"
+  },
+  {
+    "id": 76,
+    "name": "Trintech AS",
+    "industryFocus": [
+      "Financial Services",
+      "Retail & Consumer Goods",
+      "Hospitality  & Travel",
+      "Transportation",
+      "Government"
+    ],
+    "country": "MP",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/2c7f7942-1721-4753-8447-6a9f8ddb0c4e/overview"
+  },
+  {
+    "id": 77,
+    "name": "Fully Managed",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Media & Communications",
+      "Healthcare",
+      "Financial Services",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "CA",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/fdbed544-ceda-45d7-a763-dc682504df17/overview"
+  },
+  {
+    "id": 78,
+    "name": "Dataprise",
+    "industryFocus": [
+      "Professional services",
+      "Media & Communications",
+      "Retail & Consumer Goods",
+      "Financial Services"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/3a09a4a9-680d-4380-9e72-4c9181e648b6/overview"
+  },
+  {
+    "id": 79,
+    "name": "Rogers Communications Canada Inc.",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Retail & Consumer Goods",
+      "Professional services"
+    ],
+    "country": "CA",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/e187f235-7909-475f-8076-e321a91a965b/overview"
+  },
+  {
+    "id": 80,
+    "name": "Avanade Inc",
+    "industryFocus": [
+      "Education",
+      "Media & Communications",
+      "Financial Services",
+      "Government",
+      "Hospitality  & Travel",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "CR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/cf36141c-ddd7-45a7-b073-111f66d0b30c/overview"
+  },
+  {
+    "id": 81,
+    "name": "readymind",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Transportation",
+      "Professional services",
+      "Power and utilities",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Agriculture"
+    ],
+    "country": "ES",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/08c7a78d-587d-4487-962e-93c5fb54c7bf/overview"
+  },
+  {
+    "id": 82,
+    "name": "SPSoft Co.,Ltd",
+    "industryFocus": [
+      "Professional services",
+      "Media & Communications",
+      "Distribution"
+    ],
+    "country": "KR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/52eddfda-5c8f-4c5e-9127-8c08d6a7762c/overview"
+  },
+  {
+    "id": 83,
+    "name": "Prodware Georgia LLC",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "BV",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/468befc6-d0dc-43ca-8318-279d9af305aa/overview"
+  },
+  {
+    "id": 84,
+    "name": "Fujitsu Limited",
+    "industryFocus": [
+      "Professional services",
+      "Financial Services",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Public Safety and National Security",
+      "Government",
+      "Healthcare",
+      "Manufacturing & Resources"
+    ],
+    "country": "FI",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/87fc9aba-de47-425e-b0ac-712471cbb34f/overview"
+  },
+  {
+    "id": 85,
+    "name": "Collective Insights Consulting",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Agriculture",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Professional services",
+      "Transportation",
+      "Education",
+      "Government"
+    ],
+    "country": "KH",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/33ca18f2-4d84-430c-bc62-3155d7fbcc83/overview"
+  },
+  {
+    "id": 86,
+    "name": "unique projects GmbH & Co. KG",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/7c71f1cd-fc55-4a2a-be2e-3d2aa4958857/overview"
+  },
+  {
+    "id": 87,
+    "name": "DevRain LLC",
+    "industryFocus": [
+      "Healthcare",
+      "Education",
+      "Nonprofit & IGO",
+      "Professional services",
+      "Government",
+      "Power and utilities",
+      "Transportation"
+    ],
+    "country": "LC",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/d08f90d2-13b2-4f59-94c3-8ff57cd1ea7f/overview"
+  },
+  {
+    "id": 88,
+    "name": "Omni Logic Solutions",
+    "industryFocus": [
+      "Media & Communications",
+      "Agriculture",
+      "Education",
+      "Financial Services",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "PG",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0c043bb9-2b81-4487-9633-c043b885b128/overview"
+  },
+  {
+    "id": 89,
+    "name": "Fonicom Limited",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Education",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "MT",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/a2cb8fc5-b147-4f3d-bec8-e835ef59cf17/overview"
+  },
+  {
+    "id": 90,
+    "name": "innovis GmbH",
+    "industryFocus": [
+      "Professional services",
+      "Financial Services",
+      "Distribution"
+    ],
+    "country": "DE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/8f9e99ea-b46c-46e4-8a28-141d3126c9d0/overview"
+  },
+  {
+    "id": 91,
+    "name": "Inspirisys Solutions Limited",
+    "industryFocus": [
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Government",
+      "Professional services"
+    ],
+    "country": "AE",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/e7680f84-fc2c-4e3f-827a-99d097436c21/overview"
+  },
+  {
+    "id": 92,
+    "name": "Infopulse Europe GmbH",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Financial Services",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution",
+      "Hospitality  & Travel"
+    ],
+    "country": "CA",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/913e459f-c528-459e-bcdb-8d20021b737e/overview"
+  },
+  {
+    "id": 93,
+    "name": "Olivia Consultoría S.A.",
+    "industryFocus": [
+      "Healthcare",
+      "Financial Services",
+      "Media & Communications",
+      "Government",
+      "Power and utilities",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Distribution"
+    ],
+    "country": "ES",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/6fd76614-fa90-4f39-bbf7-c853835b8695/overview"
+  },
+  {
+    "id": 94,
+    "name": "Calligo Limited",
+    "industryFocus": [
+      "Financial Services",
+      "Agriculture",
+      "Media & Communications",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Distribution"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/a9fdad67-3636-4e2a-9918-53edc35fb474/overview"
+  },
+  {
+    "id": 95,
+    "name": "Epsilon, Inc.",
+    "industryFocus": [
+      "Healthcare",
+      "Government",
+      "Manufacturing & Resources",
+      "Financial Services",
+      "Power and utilities",
+      "Education",
+      "Hospitality  & Travel",
+      "Public Safety and National Security",
+      "Professional services",
+      "Nonprofit & IGO"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/824284b2-49e4-4ced-801e-b59a0022f09b/overview"
+  },
+  {
+    "id": 96,
+    "name": "Web Synergies (India) Private Ltd",
+    "industryFocus": [
+      "Professional services",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Nonprofit & IGO",
+      "Power and utilities",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "IN",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/e49a13c8-aa61-48bc-8254-c40f279035ea/overview"
+  },
+  {
+    "id": 97,
+    "name": "株式会社　ジール",
+    "industryFocus": [
+      "Professional services"
+    ],
+    "country": "JP",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/49733b90-ba1b-4675-b10c-973b616e9872/overview"
+  },
+  {
+    "id": 98,
+    "name": "Signal Alliance Technology Holding",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Professional services",
+      "Transportation",
+      "Agriculture",
+      "Nonprofit & IGO",
+      "Retail & Consumer Goods",
+      "Distribution"
+    ],
+    "country": "NA",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/47a5a918-b4ec-470f-86ca-c67e821ce45b/overview"
+  },
+  {
+    "id": 99,
+    "name": "CiberSQL",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Nonprofit & IGO",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "US",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/903cd679-d147-4a55-abc1-4b384df9a2f9/overview"
+  },
+  {
+    "id": 100,
+    "name": "THILLET DATA SYSTEMS INC.",
+    "industryFocus": [
+      "Healthcare",
+      "Professional services",
+      "Government",
+      "Financial Services",
+      "Retail & Consumer Goods"
+    ],
+    "country": "PR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/ad5bee72-2226-44e0-9b69-1bfb69416f2e/overview"
+  },
+  {
+    "id": 101,
+    "name": "Futuresoft",
+    "industryFocus": [
+      "Professional services",
+      "Financial Services",
+      "Media & Communications",
+      "Manufacturing & Resources",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Transportation"
+    ],
+    "country": "IN",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/4db6707d-3ff8-426b-91ef-c897114d47ef/overview"
+  },
+  {
+    "id": 102,
+    "name": "Collective Insights Consulting",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Agriculture",
+      "Hospitality  & Travel",
+      "Nonprofit & IGO",
+      "Professional services",
+      "Transportation",
+      "Education",
+      "Government"
+    ],
+    "country": "KH",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/33ca18f2-4d84-430c-bc62-3155d7fbcc83/overview"
+  },
+  {
+    "id": 103,
+    "name": "Applaudo Studios S.A. de C.V.",
+    "industryFocus": [
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Healthcare",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Government",
+      "Manufacturing & Resources",
+      "Distribution"
+    ],
+    "country": "CR",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/0e6427af-ab9e-4af6-9f6f-bc098f470d75/overview"
+  },
+  {
+    "id": 104,
+    "name": "ClickDimensions",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Nonprofit & IGO",
+      "Manufacturing & Resources",
+      "Education",
+      "Professional services",
+      "Distribution",
+      "Hospitality  & Travel"
+    ],
+    "country": "LK",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/59b9f3cc-02d9-4e10-a78a-a6e4a62ac232/overview"
+  },
+  {
+    "id": 105,
+    "name": "MIDDLEWAY",
+    "industryFocus": [
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Transportation",
+      "Retail & Consumer Goods",
+      "Distribution",
+      "Power and utilities",
+      "Financial Services",
+      "Media & Communications",
+      "Professional services"
+    ],
+    "country": "MC",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/b5acc82b-3e61-406e-a594-16d01c2d5bbc/overview"
+  },
+  {
+    "id": 106,
+    "name": "Atos Group",
+    "industryFocus": [
+      "Agriculture",
+      "Media & Communications",
+      "Education",
+      "Financial Services",
+      "Healthcare",
+      "Government",
+      "Hospitality  & Travel",
+      "Manufacturing & Resources",
+      "Power and utilities",
+      "Public Safety and National Security",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "DZ",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/33440fc6-b7c7-412c-bb73-0e70b0198d5a/overview"
+  },
+  {
+    "id": 107,
+    "name": "Softcom Technologies SA",
+    "industryFocus": [
+      "Government",
+      "Power and utilities",
+      "Professional services",
+      "Transportation",
+      "Education",
+      "Public Safety and National Security"
+    ],
+    "country": "CH",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/060b3611-8752-4e32-b272-8c63dc67e9f2/overview"
+  },
+  {
+    "id": 108,
+    "name": "TRANSITION TECHNOLOGIES PSC S.A.",
+    "industryFocus": [
+      "Manufacturing & Resources",
+      "Media & Communications",
+      "Professional services",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Financial Services",
+      "Healthcare"
+    ],
+    "country": "PL",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/d45aa837-ddf8-4961-8af6-240f41de1976/overview"
+  },
+  {
+    "id": 109,
+    "name": "Prodware Georgia LLC",
+    "industryFocus": [
+      "Media & Communications",
+      "Financial Services",
+      "Healthcare",
+      "Hospitality  & Travel",
+      "Power and utilities",
+      "Retail & Consumer Goods",
+      "Professional services",
+      "Transportation",
+      "Distribution"
+    ],
+    "country": "BV",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/468befc6-d0dc-43ca-8318-279d9af305aa/overview"
+  },
+  {
+    "id": 110,
+    "name": "TPXIMPACT HOLDINGS PLC",
+    "industryFocus": [
+      "Financial Services",
+      "Education",
+      "Retail & Consumer Goods",
+      "Power and utilities",
+      "Government",
+      "Transportation",
+      "Distribution",
+      "Media & Communications",
+      "Public Safety and National Security",
+      "Healthcare",
+      "Manufacturing & Resources",
+      "Nonprofit & IGO"
+    ],
+    "country": "GB",
+    "link": "https://appsource.microsoft.com/en-us/marketplace/partner-dir/168c1fe3-a841-49b5-b692-7b3132c0a997/overview"
+  }
+]

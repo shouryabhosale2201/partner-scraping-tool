@@ -1,123 +1,139 @@
+// microsoftScraper.js
 const axios = require('axios');
-const {db, initializeDatabase} = require("../../../db");
+const fs = require('fs').promises;
+const path = require('path');
 
-const scrapeData = async (selectedFields = ['name', 'industryFocus']) => {
-  const pageOffsets = [0, 18, 36, 54, 72, 90];  // You can extend this later for pagination
-  const extractedDetails = [];  
-  initializeDatabase();
-  
-  // Always include 'name' in selectedFields as it's required
+// File paths for our JSON "tables"
+const MICROSOFT_FILE = path.resolve(__dirname, '../../../../../frontend/public/data/microsoft-partners.json');
+async function storeMicrosoftDataAsJson(filepath, scrapedArray) {
+  try {
+    await fs.writeFile(filepath, JSON.stringify([]), 'utf8'); // This clears the file
+    // Step 2: Stringify the array
+    const jsonData = JSON.stringify(scrapedArray, null, 2); // Pretty print with 2 spaces
+    // Step 3: Write to a file
+    await fs.writeFile(filepath, jsonData, 'utf8');
+    console.log(':white_check_mark: Successfully stored scraped data to microsoft.json');
+  } catch (error) {
+    console.error(':x: Error saving JSON file:', error);
+  }
+}
+// Initialize the JSON files if they don't exist
+const initializeJsonFiles = async () => {
+  try {
+    // Create the resources directory if it doesn't exist
+    const resourceDir = path.dirname(MICROSOFT_FILE);
+    await fs.mkdir(resourceDir, { recursive: true });
+    try {
+      // Check if the file exists
+      await fs.access(MICROSOFT_FILE);
+    } catch (err) {
+      // File doesn't exist, create it with empty array
+      await fs.writeFile(MICROSOFT_FILE, JSON.stringify([]));
+      console.log(`Created empty JSON file: ${MICROSOFT_FILE}`);
+    }
+    console.log('JSON files initialized successfully');
+  } catch (error) {
+    console.error('Error initializing JSON files:', error);
+    throw error;
+  }
+};
+
+function safeField(value) {
+  if (value === null || value === undefined) return "N/A";
+  if (Array.isArray(value) && value.length === 0) return "N/A";
+  if (typeof value === 'string' && value.trim() === '') return "N/A";
+  return value;
+}
+
+const scrapeData = async (selectedFields = ['name', 'industryFocus', 'country']) => {
+  console.log(`Starting scrape with fields: ${selectedFields.join(', ')}`);
+  const pageOffsets = [0, 18, 36, 54, 72, 90];
+  const extractedDetails = [];
+
+  await initializeJsonFiles();
+
   if (!selectedFields.includes('name')) {
     selectedFields.push('name');
   }
-  
+
+  let microsoftData = [];
+
   for (const pageOffset of pageOffsets) {
     try {
+      console.log(`Fetching page offset: ${pageOffset}`);
       const response = await axios.get(
         `https://main.prod.marketplacepartnerdirectory.azure.com/api/partners?filter=sort%3D0%3BpageSize%3D36%3BpageOffset%3D${pageOffset}%3Bradius%3D100%3BlocationNotRequired%3Dtrue`,
         {
           headers: {
             'accept': 'application/json, text/plain, */*',
             'referer': 'https://main.prod.marketplacepartnerdirectory.azure.com/en-us/partners',
-            'sec-ch-ua': '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36'
-          }
+          },
+          timeout: 10000
         }
       );
-      console.log("Response received!!");
-      
+
+      console.log(`✅ Response received for page ${pageOffset}!`);
       const partners = response.data?.matchingPartners?.items || [];
+      console.log(`Found ${partners.length} partners on page ${pageOffset}`);
+
       for (const partner of partners) {
-        // Initialize details object with only selected fields
-        const details = {
-          name: partner.name || "No name",
-        };
-        
-        // Add other selected fields
-        if (selectedFields.includes('description')) {
-          details.description = partner.description || "No description";
-        }
-        
-        if (selectedFields.includes('industryFocus')) {
-          details.industryFocus = partner.industryFocus || [];
-        }
-        
-        if (selectedFields.includes('product')) {
-          details.product = partner.product || [];
-        }
-        
-        if (selectedFields.includes('solutions')) {
-          details.solutions = partner.solutions || [];
-        }
-        
-        if (selectedFields.includes('serviceType')) {
-          details.serviceType = partner.serviceType || [];
-        }
-        
         try {
-          // Step 1: Insert into 'microsoft' to get the generated ID
-          const [result] = await db.execute(
-            `INSERT INTO microsoft (name) VALUES (?)`,
-            [details.name]
-          );
-          const insertedId = result.insertId;  // Auto-generated ID from the first insert
-          
-          // Step 2: Prepare details for microsoft_details table
-          // Build the column and parameter lists dynamically based on selected fields
-          const detailsColumns = ['id'];
-          const detailsParams = [insertedId];
-          const detailsPlaceholders = ['?'];
-          
-          // Add selected fields to the columns and parameters
-          const fieldMapping = {
-            'description': details.description,
-            'product': details.product,
-            'solutions': details.solutions,
-            'serviceType': details.serviceType,
-            'industryFocus': details.industryFocus
-          };
-          
-          Object.entries(fieldMapping).forEach(([field, value]) => {
-            if (selectedFields.includes(field)) {
-              detailsColumns.push(field);
-              detailsParams.push(Array.isArray(value) ? JSON.stringify(value) : value);
-              detailsPlaceholders.push('?');
-            }
-          });
-          
-          // Insert into microsoft_details if we have any fields beyond just the ID
-          if (detailsColumns.length > 1) {
-            const insertDetailsQuery = `INSERT INTO microsoft_details (${detailsColumns.join(', ')}) VALUES (${detailsPlaceholders.join(', ')})`;
-            await db.execute(insertDetailsQuery, detailsParams);
-          }
-          
-          // Step 3: Insert into microsoft_filters for industry data if it was selected
-          if (selectedFields.includes('industryFocus')) {
-            await db.execute(
-              `INSERT INTO microsoft_filters (id, industry) VALUES (?,?)`,
-              [
-                insertedId,
-                JSON.stringify(details.industryFocus || [])
-              ]
-            );
-          }
-          
-          console.log(`✅ Inserted into DB: ${details.name} (ID: ${insertedId})`);
-          
-          // Add to extracted details for the response
-          extractedDetails.push(details);
-        } catch (dbError) {
-          console.error(`❌ DB Insert Error for ${details.name}:`, dbError.message);
+          const newId = extractedDetails.length + 1;
+
+          const partnerEntry = { id: newId };
+
+          // Always include name
+          partnerEntry.name = partner.name || "N/A";
+          // Add selected fields
+          partnerEntry.description = selectedFields.includes('description')
+            ? safeField(partner.description)
+            : undefined;
+          partnerEntry.industryFocus = selectedFields.includes('industryFocus')
+            ? safeField(partner.industryFocus)
+            : undefined;
+
+          partnerEntry.product = selectedFields.includes('product')
+            ? safeField(partner.product)
+            : undefined;
+
+          partnerEntry.solutions = selectedFields.includes('solutions')
+            ? safeField(partner.solutions)
+            : undefined;
+
+          partnerEntry.serviceType = selectedFields.includes('serviceType')
+            ? safeField(partner.serviceType)
+            : undefined;
+
+          partnerEntry.country = selectedFields.includes('country')
+            ? safeField(partner.location?.address?.country)
+            : undefined;
+
+          // Add partner URL based on partnerId
+          partnerEntry.link = `https://appsource.microsoft.com/en-us/marketplace/partner-dir/${partner.partnerId}/overview`;
+
+          microsoftData.push(partnerEntry);
+          extractedDetails.push(partnerEntry);
+
+        } catch (error) {
+          console.error(`❌ JSON Processing Error for ${partner.name}:`, error.message);
         }
       }
     } catch (error) {
-      if (error.response) {
-        console.error(`❌ HTTP Error [${pageOffset}]:`, error.response.status, error.response.statusText);
-      } else {
-        console.error(`❌ Request Failed [${pageOffset}]:`, error.message);
-      }
+      console.error(`❌ Error fetching page ${pageOffset}:`, error.message);
     }
   }
+
+  console.log(`Writing ${microsoftData.length} entries to microsoft.json`);
+
+  try {
+    await storeMicrosoftDataAsJson(MICROSOFT_FILE, microsoftData);
+    console.log("✅ Successfully wrote all data to microsoft.json");
+  } catch (writeError) {
+    console.error("❌ Error writing to microsoft.json:", writeError);
+    throw new Error(`Failed to write data: ${writeError.message}`);
+  }
+
   return extractedDetails;
 };
 
